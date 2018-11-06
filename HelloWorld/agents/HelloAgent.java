@@ -48,19 +48,19 @@ public class HelloAgent extends GuiAgent {
   
 	}
 
-	private void sendHello() {
+	private void sendHello(String text) {
 		neighbourgs = AgentToolsEA.searchAgents(this, "cordialite", null);
 		ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
 		for (AID other : neighbourgs)
 			msg.addReceiver(other);
-		msg.setContent("vous avez le bonjour de " + this.getLocalName());
+		msg.setContent(text);
 		send(msg);
 	}
 
 	protected void onGuiEvent(GuiEvent ev) {
 		switch (ev.getType()) {
 		case SimpleGui4Agent.SENDCODE:
-			sendHello();
+			sendHello(window.lowTextArea.getText());
 			break;
 		case SimpleGui4Agent.QUITCODE:
 			window.dispose();
