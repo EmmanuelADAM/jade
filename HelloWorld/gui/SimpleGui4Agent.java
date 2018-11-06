@@ -29,7 +29,7 @@ public class SimpleGui4Agent extends JFrame implements ActionListener {
 	JTextArea mainTextArea;
 
 	/** Low Text area */
-	JTextArea lowTextArea;
+	public JTextField lowTextArea;
 
 	/** monAgent linked to this frame */
 	GuiAgent myAgent;
@@ -84,8 +84,7 @@ public class SimpleGui4Agent extends JFrame implements ActionListener {
 		mainTextArea.setRows(5);
 		JScrollPane jScrollPane = new JScrollPane(mainTextArea);
 		getContentPane().add(BorderLayout.CENTER, jScrollPane);
-		lowTextArea = new JTextArea();
-		lowTextArea.setRows(5);
+		lowTextArea = new JTextField();
 		jScrollPane = new JScrollPane(lowTextArea);
 		getContentPane().add(BorderLayout.SOUTH, jScrollPane);
 
@@ -112,19 +111,12 @@ public class SimpleGui4Agent extends JFrame implements ActionListener {
 		lowTextArea.setCaretPosition(texte.length());
 	}
 
-	/** add a string to the low text area */
+	/** add a string to the low text area  (main parameter is no more used)*/
 	public void println(final String chaine, final boolean main) {
-		if (main) {
 			String texte = mainTextArea.getText();
 			texte = texte + chaine + "\n";
 			mainTextArea.setText(texte);
 			mainTextArea.setCaretPosition(texte.length());
-		} else {
-			String texte = lowTextArea.getText();
-			texte = texte + chaine + "\n";
-			lowTextArea.setText(texte);
-			lowTextArea.setCaretPosition(texte.length());
-		}
 	}
 
 	/** reaction to the button event and communication with the agent */
