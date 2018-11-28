@@ -20,8 +20,11 @@ public class JourneysList implements Serializable {
 	Hashtable<String, ArrayList<Journey>> catalog;
 
 	public JourneysList() {
-		catalog = new Hashtable<String, ArrayList<Journey>>();
+		catalog = new Hashtable<>();
 	}
+
+	/**@return the catalog of journeys in a HashMap (Town, Journeys from Town)*/
+	public Hashtable<String, ArrayList<Journey>> getCatalog() {return catalog;}
 
 	/**
 	 * add a journey into the catalog
@@ -40,7 +43,7 @@ public class JourneysList implements Serializable {
 	public void addJourney(String _start, String _stop, String _means, int _departureDate, int _duration) {
 		ArrayList<Journey> list = catalog.get(_start.toUpperCase());
 		if (list == null) {
-			list = new ArrayList<Journey>();
+			list = new ArrayList<>();
 			list.add(new Journey(_start.toUpperCase(), _stop.toUpperCase(), _means.toUpperCase(), _departureDate,
 					_duration));
 			catalog.put(_start.toUpperCase(), list);
@@ -67,7 +70,7 @@ public class JourneysList implements Serializable {
 			int _co2, int _confort) {
 		ArrayList<Journey> list = catalog.get(_start.toUpperCase());
 		if (list == null) {
-			list = new ArrayList<Journey>();
+			list = new ArrayList<>();
 			list.add(new Journey(_start.toUpperCase(), _stop.toUpperCase(), _means.toUpperCase(), _departureDate,
 					_duration, _cost, _co2, _confort));
 			catalog.put(_start.toUpperCase(), list);
@@ -108,7 +111,7 @@ public class JourneysList implements Serializable {
 	 * @return list of all the direct journeys between start and stop
 	 */
 	ArrayList<Journey> findDirectJourneys(String start, String stop) {
-		ArrayList<Journey> result = new ArrayList<Journey>();
+		ArrayList<Journey> result = new ArrayList<>();
 		ArrayList<Journey> list = catalog.get(start.toUpperCase());
 		if (list != null) {
 			for (Journey j : list) {
@@ -186,7 +189,7 @@ public class JourneysList implements Serializable {
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		Collection<ArrayList<Journey>> lists = catalog.values();
-		ArrayList<Journey> list = new ArrayList<Journey>();
+		ArrayList<Journey> list = new ArrayList<>();
 		for (ArrayList<Journey> l : lists)
 			list.addAll(l);
 		for (Journey j : list) {
