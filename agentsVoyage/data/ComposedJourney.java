@@ -207,23 +207,8 @@ public class ComposedJourney implements Serializable {
 	public void setNormDuration(double _normDuration) {
 		normDuration = _normDuration;
 	}
-	public static void main(String[] args) {
-		JourneysList journeysList = new JourneysList();
-		journeysList.addJourney(new Journey("Val", "Lille", "car", 1440, 30, 10));
-		journeysList.addJourney(new Journey("Val", "Lille", "train", 1440, 40, 10));
-		journeysList.addJourney(new Journey("Val", "Lille", "car", 1510, 30, 10));
-		journeysList.addJourney(new Journey("Lille", "Dunkerque", "car", 1500, 40, 10));
-		journeysList.addJourney(new Journey("Lille", "Dunkerque", "car", 1600, 40, 10));
-		journeysList.addJourney(new Journey("Lille", "Dunkerque", "car", 1630, 40, 10));
-		journeysList.addJourney(new Journey("Dunkerque", "Bray-Dunes", "car", 1700, 10, 10));
-		journeysList.addJourney(new Journey("Dunkerque", "Bray-Dunes", "car", 1710, 20, 10));
-		System.out.println(journeysList);
-		List<ComposedJourney> journeys = new ArrayList<>();
-		journeysList.findIndirectJourney("val", "bray-dunes", 1400, 60, new ArrayList<Journey>(),
-				new ArrayList<String>(), journeys);
-		System.out.println(journeys);
-		// ComposedJourney cj = new ComposedJourney();
-		// cj.addJourneys(journeys.get(0));
-		// System.out.println(cj);
+	
+	public List<Journey> getJourneys() {
+		return journeys;
 	}
 }
