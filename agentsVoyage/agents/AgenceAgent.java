@@ -105,7 +105,7 @@ public class AgenceAgent extends GuiAgent {
 				final int nbRepetitions = (nextLine.length == 9) ? 0 : Integer.parseInt(nextLine[8].trim());
 				final int frequence = (nbRepetitions == 0) ? 0 : Integer.parseInt(nextLine[9].trim());
 				final Journey firstJourney = new Journey(origine, destination, means, departureDate, duration, cost,
-						co2, confort);
+						co2, confort, this.getLocalName());
 				window.println(firstJourney.toString());
 				catalog.addJourney(firstJourney);
 				if (nbRepetitions > 0) {
