@@ -1,0 +1,15 @@
+origine, destination,means,departureTime,duration,financial cost, co2, confort, nbRepetitions(optional),frequence(optional)
+a,b,bus,600,10,1,30,1,64,15
+b,c,bus,610,10,1,30,1,64,15
+b,d,bus,610,15,1,30,1,64,15
+c,d,bus,620,10,1,30,1,64,15
+c,e,bus,620,15,1,30,1,64,15
+d,e,bus,625,15,1,30,1,64,15
+e,f,bus,635,15,1,30,1,64,15
+b,a,bus,600,10,1,30,1,64,15
+c,b,bus,610,10,1,30,1,64,15
+d,b,bus,610,15,1,30,1,64,15
+d,c,bus,620,10,1,30,1,64,15
+e,c,bus,620,15,1,30,1,64,15
+e,d,bus,625,15,1,30,1,64,15
+f,e,bus,635,15,1,30,1,64,15
