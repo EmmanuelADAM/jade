@@ -61,9 +61,15 @@ public class Journey implements Cloneable, Serializable, Comparable<Journey> {
 		confort = _confort;
 	}
 
+	public Journey(final String _start, final String _stop, final String _means, final int _departureDate,
+		       final int _duration, final double _cost, final int _co2, final int _confort, final String _proposedBy) {
+		this(_start, _stop, _means, _departureDate, _duration, _cost, _co2, _confort);
+		proposedBy = _proposedBy;
+	}
+
 	public Journey(Journey original) {
 		this(original.start, original.stop, original.means, original.departureDate, original.duration, original.cost,
-				original.co2, original.confort);
+				original.co2, original.confort, original.proposedBy);
 	}
 
 	@Override
@@ -183,7 +189,7 @@ public class Journey implements Cloneable, Serializable, Comparable<Journey> {
 	@Override
 	public String toString() {
 		return "traject from " + start + " to " + stop + " by " + means + ", departure: " + departureDate + ", arrival:"
-				+ arrivalDate + ", cost = " + cost;
+				+ arrivalDate + ", cost = " + cost+ ", proposed by = " + proposedBy;
 	}
 
 	public int getPlaces() {
@@ -199,8 +205,4 @@ public class Journey implements Cloneable, Serializable, Comparable<Journey> {
 		return (int) (cost - o.cost);
 	}
 
-	public static void main(final String... args) {
-		final Journey test = new Journey("Val", "Lille", "car", 1440, 90);
-		System.out.println(test);
-	}
 }
