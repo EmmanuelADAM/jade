@@ -3,7 +3,8 @@ package data;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 
 /**
@@ -17,67 +18,15 @@ import java.util.List;
 @SuppressWarnings("serial")
 public class JourneysList implements Serializable {
 	/** catalog of journeys from a departure (the key of the hashtable) */
-	Hashtable<String, ArrayList<Journey>> catalog;
+	Map<String, ArrayList<Journey>> catalog;
 
 	public JourneysList() {
-		catalog = new Hashtable<>();
+		catalog = new HashMap<>();
 	}
 
 	/**@return the catalog of journeys in a HashMap (Town, Journeys from Town)*/
-	public Hashtable<String, ArrayList<Journey>> getCatalog() {return catalog;}
+	public Map<String, ArrayList<Journey>> getCatalog() {return catalog;}
 
-	/**
-	 * add a journey into the catalog
-	 * 
-	 * @param _start
-	 *            departure
-	 * @param _stop
-	 *            arrival
-	 * @param _means
-	 *            car, bus, train, ....
-	 * @param _departureDate
-	 *            departure date of the journey
-	 * @param _duration
-	 *            duration of the journey
-	 */
-	public void addJourney(String _start, String _stop, String _means, int _departureDate, int _duration) {
-		ArrayList<Journey> list = catalog.get(_start.toUpperCase());
-		if (list == null) {
-			list = new ArrayList<>();
-			list.add(new Journey(_start.toUpperCase(), _stop.toUpperCase(), _means.toUpperCase(), _departureDate,
-					_duration));
-			catalog.put(_start.toUpperCase(), list);
-		} else
-			list.add(new Journey(_start.toUpperCase(), _stop.toUpperCase(), _means.toUpperCase(), _departureDate,
-					_duration));
-	}
-
-	/**
-	 * add a journey into the catalog
-	 * 
-	 * @param _start
-	 *            departure
-	 * @param _stop
-	 *            arrival
-	 * @param _means
-	 *            car, bus, train, ....
-	 * @param _departureDate
-	 *            departure date of the journey
-	 * @param _duration
-	 *            duration of the journey
-	 */
-	public void addJourney(String _start, String _stop, String _means, int _departureDate, int _duration, double _cost,
-			int _co2, int _confort) {
-		ArrayList<Journey> list = catalog.get(_start.toUpperCase());
-		if (list == null) {
-			list = new ArrayList<>();
-			list.add(new Journey(_start.toUpperCase(), _stop.toUpperCase(), _means.toUpperCase(), _departureDate,
-					_duration, _cost, _co2, _confort));
-			catalog.put(_start.toUpperCase(), list);
-		} else
-			list.add(new Journey(_start.toUpperCase(), _stop.toUpperCase(), _means.toUpperCase(), _departureDate,
-					_duration, _cost, _co2, _confort));
-	}
 
 	/**
 	 * add a journey into the catalog
@@ -86,7 +35,9 @@ public class JourneysList implements Serializable {
 	 *            the journey to add
 	 */
 	public void addJourney(Journey j) {
-		addJourney(j.start, j.stop, j.means, j.departureDate, j.duration, j.cost, j.co2, j.confort);
+	   catalog.compute(j.getStart(), 
+	         (k,v)-> { if(v==null) {v= new ArrayList<>();}
+	         v.add(new Journey(j)); return v;});
 	}
 
 	/**
@@ -96,9 +47,8 @@ public class JourneysList implements Serializable {
 	 *            catalog of journeys to add
 	 */
 	public void addJourneys(JourneysList _list) {
-		for (ArrayList<Journey> l : _list.catalog.values())
-			for (Journey j : l)
-				addJourney(j.start, j.stop, j.means, j.departureDate, j.duration, j.cost, j.co2, j.confort);
+		for (List<Journey> l : _list.catalog.values())
+			for (Journey j : l) addJourney(j);
 	}
 
 	/**
@@ -110,9 +60,9 @@ public class JourneysList implements Serializable {
 	 *            arrival
 	 * @return list of all the direct journeys between start and stop
 	 */
-	ArrayList<Journey> findDirectJourneys(String start, String stop) {
-		ArrayList<Journey> result = new ArrayList<>();
-		ArrayList<Journey> list = catalog.get(start.toUpperCase());
+	List<Journey> findDirectJourneys(String start, String stop) {
+		List<Journey> result = new ArrayList<>();
+		List<Journey> list = catalog.get(start.toUpperCase());
 		if (list != null) {
 			for (Journey j : list) {
 				if (j.start.equalsIgnoreCase(start) && j.stop.equalsIgnoreCase(stop))
@@ -197,30 +147,6 @@ public class JourneysList implements Serializable {
 		}
 		sb.append("---end---");
 		return "list of journeys:\n" + sb.toString();
-	}
-
-	public static void main(String[] args) {
-		JourneysList journeysList = new JourneysList();
-		journeysList.addJourney("Val", "Lille", "car", 1440, 30);
-		journeysList.addJourney("Val", "Lille", "train", 1440, 40);
-		journeysList.addJourney("Val", "Lille", "car", 1510, 30);
-		journeysList.addJourney("Lille", "Dunkerque", "car", 1500, 40);
-		journeysList.addJourney("Lille", "Dunkerque", "car", 1600, 40);
-		journeysList.addJourney("Lille", "Dunkerque", "car", 1630, 40);
-		journeysList.addJourney("Dunkerque", "Bray-Dunes", "car", 1700, 10);
-		journeysList.addJourney("Dunkerque", "Bray-Dunes", "car", 1710, 20);
-		System.out.println(journeysList);
-		ArrayList<Journey> search = journeysList.findDirectJourneys("val", "lille");
-		System.out.println(search);
-		System.out.println("----");
-		// search = journeysList.findIndirectJourney("val", "dunkerque", 1450);
-		// System.out.println(search);
-		System.out.println("----");
-		ArrayList<ComposedJourney> journeys = new ArrayList<ComposedJourney>();
-		journeysList.findIndirectJourney("val", "dunkerque", 1400, 90, new ArrayList<Journey>(),
-				new ArrayList<String>(), journeys);
-		System.out.println(journeys);
-
 	}
 
 }
