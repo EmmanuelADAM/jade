@@ -156,7 +156,7 @@ public class JourneysList implements Serializable {
 	public boolean findIndirectJourney(String start, String stop, int date, int late, ArrayList<Journey> currentJourney,
 			List<String> via, List<ComposedJourney> results) {
 		boolean result;
-		via.add(start);
+		via.add(start.toUpperCase());
 		ArrayList<Journey> list = catalog.get(start.toUpperCase());
 		if (list == null)
 			return false;
