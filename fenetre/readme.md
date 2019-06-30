@@ -1,4 +1,4 @@
-#Jade, agents et fenêtre
+# Jade, agents et fenêtre
 
 Les agents liés à des fenêtres héritent de la classe GuiAgent qui leurs permettent de recevoir des événements lancés par les interfaces graphiques.
 
