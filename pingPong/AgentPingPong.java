@@ -63,12 +63,16 @@ public class AgentPingPong extends Agent {
     }
 
     public static void main(String[] args) {
-        String[] jadeArgs = new String[2];
-        StringBuilder sbAgents = new StringBuilder();
-        sbAgents.append("ping:pingPong.AgentPingPong").append(";");
-        sbAgents.append("pong:pingPong.AgentPingPong").append(";");
-        jadeArgs[0] = "-gui";
-        jadeArgs[1] = sbAgents.toString();
-        jade.Boot.main(jadeArgs);
+        // preparer les arguments pout le conteneur JADE
+        Properties prop = new ExtendedProperties();
+        // demander la fenetre de controle
+        prop.setProperty(Profile.GUI, "true");
+        // nommer les agents
+        prop.setProperty(Profile.AGENTS, "ping:pingPong.AgentPingPong;pong:pingPong.AgentPingPong");
+        // creer le profile pour le conteneur principal
+        ProfileImpl profMain = new ProfileImpl(prop);
+        // lancer le conteneur principal
+        Runtime rt = Runtime.instance();
+        rt.createMainContainer(profMain);
     }
 }
