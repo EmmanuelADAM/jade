@@ -20,4 +20,5 @@ liste de supports pour le cours de programmation orientée agent en Jade
 - [HelloWorld](https://github.com/EmmanuelADAM/jade/tree/master/HelloWorld) : codes pour des agents liés chacun à une fenêtre. Ces agents se découvrent par reherche de services, et s'envoient des messages simples
 
 ## Protocoles d'interactions entre agents
+- [AchieveRE](https://github.com/EmmanuelADAM/jade/tree/master/protocoles) : codes illustrant la communication entre agents par le protocoles AchieveRE. Un agent soumet un requête à un agent par ce protocole et attend sa réponse.
 - [agentsVoyage](https://github.com/EmmanuelADAM/jade/tree/master/agentsVoyage) : codes pour des agents simulant des agences de voyages
