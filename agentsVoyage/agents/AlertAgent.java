@@ -26,15 +26,6 @@ public class AlertAgent extends GuiAgent {
 	/** liste des vendeurs */
 	protected AID[] vendeurs;
 
-	/**
-	 * preference between journeys -, cost, co2, duration or confort ("-" = cost
-	 * by defaul)}
-	 */
-	private String sortMode;
-
-	/** catalog received by the sellers */
-	protected JourneysList catalogs;
-
 	/** topic on which the alert will be send */
 	AID topic;
 
@@ -90,26 +81,6 @@ public class AlertAgent extends GuiAgent {
 	}
 
 	/**
-	 * @return the vendeurs
-	 */
-	public AID[] getVendeurs() {
-		return vendeurs.clone();
-	}
-
-	/**
-	 * @param vendeurs
-	 *            the vendeurs to set
-	 */
-	public void setVendeurs(final AID... vendeurs) {
-		this.vendeurs = vendeurs;
-	}
-
-	/** -, cost, co2, duration or confort */
-	public String getSortMode() {
-		return sortMode;
-	}
-
-	/**
 	 * print a message on the window lined to the agent
 	 * 
 	 * @param msg
@@ -119,14 +90,5 @@ public class AlertAgent extends GuiAgent {
 		window.println(msg);
 	}
 
-	/** @return the list of journeys */
-	public JourneysList getCatalogs() {
-		return catalogs;
-	}
-
-	/** set the list of journeys */
-	public void setCatalogs(final JourneysList catalogs) {
-		this.catalogs = catalogs;
-	}
 
 }
