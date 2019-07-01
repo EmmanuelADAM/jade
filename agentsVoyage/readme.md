@@ -29,8 +29,9 @@ Le code s'exécute tel quel, mais le client ne peut effectuer qu'un choix par du
 - multiplication d'agences, et gestion de la renommée
 - création d'agence virtuelle : ne possédant pas les voyages, mais dotés d'une bonne renomée et faisant office de passerelle entre les clients et les vendeurs de voyage.
 
-* Pour information, les trajets possibles sont les suivants : 
+
+Pour information, les trajets possibles sont les suivants : 
 - en bus, entre les villes a<->b, b<->c, b<->d, c<->d, c<>-e, d<->e, e<->f, 
 - en train, entre les villes a<->d, d<->f, 
 - en voiture (covoiturage), entre les villes a<->f, c<->f
-- les coûts, vitesses, émissions de co2, confort ... dépendent du moyen utilisé *
+- les coûts, vitesses, émissions de co2, confort ... dépendent du moyen utilisé
