@@ -24,13 +24,13 @@ Le code s'exécute tel quel, mais le client ne peut effectuer qu'un choix par du
 - **Proposez et codez** d'autres critères de choix
 - **Proposez et codez** le comportement d'adaptation suite à la réception d'un message d'alerte sur un tronçon donné; pour le client, pour les agences.
 
-Beaucoup d'autres extensions sont possibles : 
+**Beaucoup d'autres extensions sont possibles** : 
 - négociations,
 - multiplication d'agences, et gestion de la renommée
 - création d'agence virtuelle : ne possédant pas les voyages, mais dotés d'une bonne renomée et faisant office de passerelle entre les clients et les vendeurs de voyage.
 
-- Pour information, les trajets possibles sont les suivants : 
-    - en bus, entre les villes a<->b, b<->c, b<->d, c<->d, c<>-e, d<->e, e<->f, 
-    - en train, entre les villes a<->d, d<->f, 
-    - en voiture (covoiturage), entre les villes a<->f, c<->f
-    - les coûts, vitesses, émissions de co2, confort ... dépendent du moyen utilisé 
+*Pour information, les trajets possibles sont les suivants : 
+- en bus, entre les villes a<->b, b<->c, b<->d, c<->d, c<>-e, d<->e, e<->f, 
+- en train, entre les villes a<->d, d<->f, 
+- en voiture (covoiturage), entre les villes a<->f, c<->f
+- les coûts, vitesses, émissions de co2, confort ... dépendent du moyen utilisé*
