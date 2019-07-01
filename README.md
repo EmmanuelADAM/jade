@@ -13,9 +13,10 @@ liste de supports pour le cours de programmation orientée agent en Jade
 ### Agents communiquant
 - Exemple classique de test de communication entre 2 agents : le ping-pong
     - [AgentPingPong](https://github.com/EmmanuelADAM/jade/blob/master/pingPong/AgentPingPong.java) : code pour qui permet de lancer deux agents qui communiquent entre eux. L'agent ping envoie un balle à l'agent pong qui la retourne à ping qui la renvoie à son tour, ...
-### Agents interactifs
+### Agents interactifs et communicants
 - Ajout d'une petite interface graphique pour faciliter le dialogue avec l'utilisateur
     - [fenetre](https://github.com/EmmanuelADAM/jade/tree/master/fenetre) : codes pour des agents liés à des fenêtres
+    - [radio](https://github.com/EmmanuelADAM/jade/tree/master/radio) : codes qui ilustrent la communication par broadcast. Un agent ne cible plus des destinataires, mais un canal qu'écoutent d'autres agents
 ## Gestion de services : déclaration et recherche
 - [HelloWorld](https://github.com/EmmanuelADAM/jade/tree/master/HelloWorld) : codes pour des agents liés chacun à une fenêtre. Ces agents se découvrent par reherche de services, et s'envoient des messages simples
 
