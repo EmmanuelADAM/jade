@@ -23,6 +23,8 @@ public class AgentEmissionARE extends AgentWindowed{
         msg.setConversationId("123");
         msg.setContent("sum 4,5,6");
         msg.addReceiver(new AID("b", false));
+        msg.addReceiver(new AID("c", false));
+        msg.addReceiver(new AID("d", false));
 
         window.println("j'envoie une requete sur " + msg.getContent());
         AchieveREInitiator init = new AchieveREInitiator(this, msg){
@@ -34,7 +36,18 @@ public class AgentEmissionARE extends AgentWindowed{
             protected void handleInform(ACLMessage inform){
                 window.println("recu  de " + inform.getSender().getLocalName() +
                         ", ce resultat " + inform.getContent());
-            }};
+            }
+            //fonction lancée dès que toutes les réponses ont été reçues
+            protected void handleAllResultNotifications(java.util.Vector responses)
+            {
+                window.println("c'est bon, j'ai toutes les réponses. Pour rappel : ");
+                for(int i=0; i<responses.size(); i++)
+                {
+                    var msg = (ACLMessage)responses.get(i);
+                    window.println("---de " + msg.getSender().getLocalName() + " : " + msg.getContent());
+                }
+            }
+        };
 
         addBehaviour(new WakerBehaviour(this, 0) {
             public void  onWake() {addBehaviour(init);}});
