@@ -13,7 +13,8 @@ public class LaunchAgents {
         // demander la fenetre de controle
         prop.setProperty(Profile.GUI, "true");
         // nommer les agents
-        prop.setProperty(Profile.AGENTS, "a:protocoles.agents.AgentEmissionARE;b:protocoles.agents.AgentReceptionARE");
+        prop.setProperty(Profile.AGENTS, "a:protocoles.agents.AgentEmissionARE;" +
+                "b:protocoles.agents.AgentReceptionARE;c:protocoles.agents.AgentReceptionARE;d:protocoles.agents.AgentReceptionARE");
         // creer le profile pour le conteneur principal
         ProfileImpl profMain = new ProfileImpl(prop);
         // lancer le conteneur principal
