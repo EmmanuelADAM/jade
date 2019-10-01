@@ -67,19 +67,11 @@ public class TravellerAgent extends GuiAgent {
 		window.setColor(Color.cyan);
 		window.println("Hello! AgentAcheteurCN " + this.getLocalName() + " est pret. ");
 		window.setVisible(true);
-
-		TopicManagementHelper topicHelper = null;
-		try {
-			topicHelper = (TopicManagementHelper) getHelper(TopicManagementHelper.SERVICE_NAME);
-			topic = topicHelper.createTopic("TRAFFIC NEWS");
-			topicHelper.register(topic);
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		}
 		
 		vendeurs = new ArrayList<>();
 		detectAgences();
 
+		topic = AgentToolsEA.generateTopicAID(this,"TRAFFIC NEWS");
 		addBehaviour(new CyclicBehaviour() {
 			@Override
 			public void action() {
@@ -98,15 +90,8 @@ public class TravellerAgent extends GuiAgent {
 	/**ecoute des evenement de type enregistrement en tant qu'agence aupres des pages jaunes*/
 	private void detectAgences()
 	{
-		// Build the description used as template for the subscription
-		final DFAgentDescription template = new DFAgentDescription();
-		ServiceDescription templateSd = new ServiceDescription();
-		String type = "travel agency";
-		String name = "seller";
-		templateSd.setType(type); templateSd.setName(name);
-		template.addServices(templateSd);
-		
-		ACLMessage msg = DFService.createSubscriptionMessage(this, getDefaultDF(), template, null);
+		var model = AgentToolsEA.createAgentDescription("travel agency", "seller");
+		var msg = DFService.createSubscriptionMessage(this, getDefaultDF(), model, null);
 
 		vendeurs = new ArrayList<>();
 		addBehaviour(new SubscriptionInitiator(this, msg) {
@@ -114,7 +99,7 @@ public class TravellerAgent extends GuiAgent {
 			protected void handleInform(ACLMessage inform) {
 				window.println("Agent "+getLocalName()+": information recues de DF");
 				try {
-					DFAgentDescription[] results = DFService.decodeNotification(inform.getContent());
+					var results = DFService.decodeNotification(inform.getContent());
 					if (results.length > 0) {
 						for (DFAgentDescription dfd:results) {
 							vendeurs.add(dfd.getName());
