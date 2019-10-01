@@ -50,6 +50,23 @@ public class AgenceAgent extends GuiAgent {
 
 		AgentToolsEA.register(this, "travel agency", "seller");
 
+		//REGLAGE ECOUTE DE LA RADIO
+		topic = AgentToolsEA.generateTopicAID(this, "TRAFFIC NEWS");
+		//ecoute des messages radio
+		addBehaviour(new CyclicBehaviour() {
+		    @Override
+		    public void action() {
+			var msg = myAgent.receive(MessageTemplate.MatchTopic(topic));
+			if (msg != null) {
+			    println("Message recu sur le topic " + topic.getLocalName() + ". Contenu " + msg.getContent()
+				    + " émis par " + msg.getSender().getLocalName());
+			} else {
+			    block();
+			}
+		    }
+		});
+		//FIN REGLAGE ECOUTE DE LA RADIO
+
 		// attendre une demande de catalogue
 		MessageTemplate template = MessageTemplate.and(
 				MessageTemplate.MatchProtocol(FIPANames.InteractionProtocol.FIPA_CONTRACT_NET),
@@ -142,6 +159,11 @@ public class AgenceAgent extends GuiAgent {
 	///// GETTERS AND SETTERS
 	public gui.AgenceGui getWindow() {
 		return window;
+	}
+	
+	/**display a msg on the window*/
+	public void println(String msg) {
+		window.println(msg);
 	}
 
 	/**
