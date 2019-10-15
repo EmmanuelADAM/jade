@@ -50,6 +50,40 @@ public class JourneysList implements Serializable {
 		for (List<Journey> l : _list.catalog.values())
 			for (Journey j : l) addJourney(j);
 	}
+	/**
+	 * add a journey into the catalog
+	 *
+	 * @param _start
+	 *            departure
+	 * @param _stop
+	 *            arrival
+	 * @param _means
+	 *            car, bus, train, ....
+	 * @param _departureDate
+	 *            departure date of the journey
+	 * @param _duration
+	 *            duration of the journey 
+	 * @param _cost 
+	 *            cost of the journey 
+	 * @param _co2 
+	 *            cost in co2 for the journey 
+	 * @param _confort 
+	 *            confort of the journey 
+	 * @param _proposedBy 
+	 *            name of the agent that proposes the journey 
+	 */
+	public void addJourney(String _start, String _stop, String _means, int _departureDate, int _duration, double _cost,
+						   int _co2, int _confort, String _proposedBy) {
+		ArrayList<Journey> list = catalog.get(_start.toUpperCase());
+		if (list == null) {
+			list = new ArrayList<Journey>();
+			list.add(new Journey(_start.toUpperCase(), _stop.toUpperCase(), _means.toUpperCase(), _departureDate,
+					_duration, _cost, _co2, _confort, _proposedBy));
+			catalog.put(_start.toUpperCase(), list);
+		} else
+			list.add(new Journey(_start.toUpperCase(), _stop.toUpperCase(), _means.toUpperCase(), _departureDate,
+					_duration, _cost, _co2, _confort, _proposedBy));
+	}
 
 	/**
 	 * find all the existing direct journeys between 'start' and 'stop'
