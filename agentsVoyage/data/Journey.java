@@ -67,12 +67,6 @@ public class Journey implements Cloneable, Serializable, Comparable<Journey> {
 		proposedBy = _proposedBy;
 	}
 
-	public Journey(final String _start, final String _stop, final String _means, final int _departureDate,
-		       final int _duration, final double _cost, final int _co2, final int _confort, final String _proposedBy) {
-		this(_start, _stop, _means, _departureDate, _duration, _cost, _co2, _confort);
-		proposedBy = _proposedBy;
-	}
-
 	public Journey(Journey original) {
 		this(original.start, original.stop, original.means, original.departureDate, original.duration, original.cost,
 				original.co2, original.confort, original.proposedBy);
@@ -192,11 +186,21 @@ public class Journey implements Cloneable, Serializable, Comparable<Journey> {
 		this.proposedBy = proposedBy;
 	}
 
+    /**some fields to improve the memory management*/
+    private static String TO = " to ";
+    private static String TRAJECTFROM = "traject from ";
+    private static String BY = " by ";
+    private static String DEPARTURE = ", departure: ";
+    private static String ARRIVAL = ", arrival:";
+    private static String COST = ", cost = ";
+    private static String PROPOSEDBY = ", proposed by ";
 	@Override
 	public String toString() {
-		return "traject from " + start + " to " + stop + " by " + means + ", departure: " + departureDate + ", arrival:"
-				+ arrivalDate + ", cost = " + cost + ", proposed by " + proposedBy;
-	}
+	    return new StringBuilder(TRAJECTFROM).append(start).append(TO).
+                append(stop).append(BY).append(means).append(DEPARTURE).
+                append(departureDate).append(ARRIVAL).append(arrivalDate).
+                append(COST).append(cost).append(PROPOSEDBY).append(proposedBy).toString();
+@	}
 
 	public int getPlaces() {
 		return places;
