@@ -67,15 +67,13 @@ public class Journey implements Cloneable, Serializable, Comparable<Journey> {
 		proposedBy = _proposedBy;
 	}
 
-	public Journey(Journey original) {
-		this(original.start, original.stop, original.means, original.departureDate, original.duration, original.cost,
-				original.co2, original.confort, original.proposedBy);
+	public Journey clone() {
+		Journey clone = null;
+		try { clone = (Journey) super.clone(); }
+		catch (Exception e){e.printStackTrace();}
+		return clone;
 	}
 
-	@Override
-	public Journey clone() {
-		return new Journey(this);
-	}
 
 	/**
 	 * @param time
