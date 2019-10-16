@@ -148,7 +148,7 @@ public class AgenceAgent extends GuiAgent {
 			final Journey journey) {
 		int nextDeparture = departureDate;
 		for (int i = 0; i < nbRepetitions; i++) {
-			final Journey cloneJ = new Journey(journey);
+			final Journey cloneJ = journey.clone();
 			nextDeparture = Journey.addTime(nextDeparture, frequence);
 			cloneJ.setDepartureDate(nextDeparture);
 			window.println(cloneJ.toString());
