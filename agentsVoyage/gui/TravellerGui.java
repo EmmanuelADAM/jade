@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -29,14 +28,9 @@ import jade.gui.GuiEvent;
 @SuppressWarnings("serial")
 public class TravellerGui extends JFrame {
 
-	private static int nbTravellerGui = 0;
-	private int noTravellerGui;
-
 	/** Text area */
-	JTextArea jTextArea;
+	private JTextArea jTextArea;
 
-	/** window color */
-	Color color;
 
 	private TravellerAgent myAgent;
 	private JLabel lblPrice;
@@ -48,11 +42,9 @@ public class TravellerGui extends JFrame {
 	private String departure;
 	private String arrival;
 	private int time;
-	private int nbElements;
 
 	public TravellerGui(TravellerAgent a) {
 		this.setBounds(10, 10, 600, 200);
-		noTravellerGui = ++nbTravellerGui;
 
 		myAgent = a;
 		if (a != null)
@@ -84,7 +76,6 @@ public class TravellerGui extends JFrame {
 				departure = (String) jListFrom.getSelectedItem();
 				arrival = (String) jListTo.getSelectedItem();
 				time = sliderTimeDeparture.getValue();
-				nbElements = 1;
 				// SEND AN GUI EVENT TO THE AGENT !!!
 				GuiEvent guiEv = new GuiEvent(this, TravellerAgent.BUY_TRAVEL);
 				guiEv.addParameter(departure);
@@ -147,17 +138,7 @@ public class TravellerGui extends JFrame {
 		setResizable(true);
 	}
 
-	public void display() {
-		pack();
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		int screenWidth = (int) screenSize.getWidth();
-		int width = this.getWidth();
-		int xx = (noTravellerGui * width) % screenWidth;
-		int yy = ((noTravellerGui * width) / screenWidth) * getHeight();
-		setLocation(xx, yy);
-		setTitle(myAgent.getLocalName());
-		setVisible(true);
-	}
+
 
 	/** add a string to the text area */
 	public void println(String chaine) {
@@ -167,35 +148,11 @@ public class TravellerGui extends JFrame {
 		jTextArea.setCaretPosition(texte.length());
 	}
 
-	public Color getColor() {
-		return color;
-	}
 
 	public void setColor(Color color) {
-		this.color = color;
 		jTextArea.setBackground(color);
 	}
 
-	/**
-	 * @return the bookName
-	 */
-	public String getBookName() {
-		return arrival;
-	}
-
-	/**
-	 * @return the price
-	 */
-	public int getPrice() {
-		return time;
-	}
-
-	/**
-	 * @return the nbElements
-	 */
-	public int getNbElements() {
-		return nbElements;
-	}
 
 	public static void main(String[] args) {
 		TravellerGui test = new TravellerGui(null);
