@@ -2,17 +2,22 @@ package agents;
 
 import jade.core.AID;
 import jade.core.Agent;
+import jade.core.ServiceException;
+import jade.core.messaging.TopicManagementHelper;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * tools to help the use of the JAde platform : <br>
  * - registration to a service, find agents that have declared a service<br>
  * - generetaion of a topic
  * @author revised by Emmanuel ADAM
- * @version 191001, works with Java10
+ * @version 191016
  */
 public final class AgentToolsEA {
 
@@ -33,7 +38,7 @@ public final class AgentToolsEA {
 		model.addServices(service);
 		return model;
 	}
-	
+
 	/**
 	 * register an agent to a service with the Directory Facilitator
 	 * 
@@ -47,11 +52,8 @@ public final class AgentToolsEA {
 	 */
 	public static void register(final Agent myAgent, final String typeService, final String nameService) {
 		var model = createAgentDescription(typeService, nameService);
-		try {
-			DFService.register(myAgent, model);
-		} catch (FIPAException fe) {
-			fe.printStackTrace();
-		}
+		try { DFService.register(myAgent, model); }
+		catch (FIPAException fe) { fe.printStackTrace(); }
 	}
 
 	/***
@@ -69,27 +71,22 @@ public final class AgentToolsEA {
 	 */
 	public static AID[] searchAgents(final Agent myAgent, final String typeService, final String nameService) {
 		var model = createAgentDescription(typeService, nameService);
-		int nbOthers = 0;
 		AID[] result = null;
-		try { 
-			var agentsDescription = DFService.search(myAgent, model);
+		try {
+            var agentsDescription = DFService.search(myAgent, model);
 			if (agentsDescription != null) {
-				result = new AID[agentsDescription.length];
-				for (int i = 0; i < agentsDescription.length; i++) {
-					final AID otherAID = agentsDescription[i].getName();
-					if (!otherAID.equals(myAgent.getAID())) {
-						result[nbOthers++] = otherAID;
-					}
-				}
+			    var list = new ArrayList<>(Arrays.asList(agentsDescription));
+			    AID myAID = myAgent.getAID();
+			    list.removeIf(e->e.getName().equals(myAID));
+                result = list.stream().map(DFAgentDescription::getName).toArray(AID[]::new);
 			}
-		} catch (FIPAException fe) {
-			fe.printStackTrace();
 		}
-
+		catch (FIPAException fe) {  fe.printStackTrace(); }
 		return result;
 	}
 
-		/**create a topic base on a name
+
+	/**create a topic base on a name
 	 * @param agent agent that ask for the creation or access to the topic
 	 * @param topicName name of the topic
 	 * @return AID of the topic*/
