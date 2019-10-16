@@ -1,11 +1,6 @@
-/*
- * Created on 12 avr. 2005
- *
- * To change the template for this generated file go to
- * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
- */
 package comportements;
 
+import data.Journey;
 import gui.AgenceGui;
 import jade.core.Agent;
 import jade.domain.FIPAAgentManagement.FailureException;
@@ -13,16 +8,19 @@ import jade.domain.FIPAAgentManagement.NotUnderstoodException;
 import jade.domain.FIPAAgentManagement.RefuseException;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
+import jade.lang.acl.UnreadableException;
 import jade.proto.ContractNetResponder;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import agents.AgenceAgent;
-import data.JourneysList;;
+import data.JourneysList;
 
 /**
- * Comportement de reponse a appels d'offres pour les agences de voyage
- * @author Emmanuel ADAM
+ * Journeys Seller Behaviour by contract net
+ * @author revised by Emmanuel ADAM
+ * @version 191017
  */
 @SuppressWarnings("serial")
 public class ContractNetVente extends  ContractNetResponder
@@ -32,34 +30,32 @@ public class ContractNetVente extends  ContractNetResponder
 	private JourneysList catalog;
 
 	/** agent gui*/
-	AgenceGui window;
-
-	/**agent lie au comportement*/
-	AgenceAgent monAgent;
+	private AgenceGui window;
 
 	/**
 	 * Initialisation du contract net
-	 * @param agent agent vendeur lie
+	 * @param agent agent agence lie
 	 * @param template modele de message a attendre
-	 * @param _catalogue catalogue trajets simples proposes
+	 * @param _catalog catalogue des voyages
 	 */
 	public ContractNetVente(Agent agent, MessageTemplate template, JourneysList _catalog)
 	{
 		super(agent, template);
-		monAgent = (AgenceAgent)agent;
+		var monAgent = (AgenceAgent)agent;
 		window = monAgent.getWindow();
 		catalog = _catalog;
 	}
 
 	/** methode lancee a la reception d'un appel d'offre
-	 * @see jade.proto.ContractNetResponder#prepareResponse(jade.lang.acl.ACLMessage)
+	 * @see ContractNetResponder#handleCfp(ACLMessage)
 	 * @param cfp l'appel recu
 	 * @throws NotUnderstoodException si le message n'est pas compris
-	 * @throws RefuseException si le trajet demande n'est pas en catalogue
+	 * @throws RefuseException s'il n'y a pas de trajet en catalogue
 	 */
 	protected ACLMessage handleCfp(ACLMessage cfp) throws NotUnderstoodException, RefuseException {
 		window.println("Agent "+myAgent.getLocalName()+": CFP recu de "+cfp.getSender().getLocalName() );
-		ACLMessage propose = cfp.createReply();
+		if(catalog.isEmpty()) throw new RefuseException("no journey !");
+		var propose = cfp.createReply();
 		propose.setPerformative(ACLMessage.PROPOSE);
 		try { propose.setContentObject(catalog); } 
 		catch (IOException e) { e.printStackTrace(); }
@@ -69,7 +65,7 @@ public class ContractNetVente extends  ContractNetResponder
 
 
 	/** methode lancee suite a la reception d'une acceptation de l'offre par l'acheteur
-	 * @see jade.proto.ContractNetResponder#prepareResultNotification(jade.lang.acl.ACLMessage, jade.lang.acl.ACLMessage, jade.lang.acl.ACLMessage)
+	 * @see ContractNetResponder#handleAcceptProposal(ACLMessage cfp, ACLMessage propose,ACLMessage accept)
 	 * @param cfp l'appel a proposition initial
 	 * @param propose la proposition retourne par l'agent
 	 * @param accept le message d'acceptation de l'offre
@@ -80,12 +76,22 @@ public class ContractNetVente extends  ContractNetResponder
 	{
 		ACLMessage inform = accept.createReply();
 		inform.setPerformative(ACLMessage.INFORM);
-		//TODO: devrementer le nb de trajets disponibles suite a la vente
+		window.println(" RECU UN ACCORD DE "+accept.getSender().getLocalName() +" !!!" );
+		ArrayList<Journey> liste = null;
+		try { liste = (ArrayList<Journey>)accept.getContentObject(); }
+		catch (UnreadableException e) { e.printStackTrace(); }
+		if(liste!=null)
+		{
+			window.println("Il veut " );
+			liste.forEach(j->window.println(j.toString()));
+			window.println("  !!!!" );
+			inform.setContent("ok pour ces "+liste.size()+" tickets...");
+		}
 		return inform;
 	}
 
 	/** methode lancee suite a la reception d'un refus de l'offre par l'acheteur
-	 * @see jade.proto.SSContractNetResponder#handleRejectProposal(jade.lang.acl.ACLMessage, jade.lang.acl.ACLMessage, jade.lang.acl.ACLMessage)
+	 * @see jade.proto.ContractNetResponder#handleRejectProposal(ACLMessage, ACLMessage, ACLMessage)
 	 * @param cfp l'appel a proposition initial
 	 * @param propose la proposition retourne par l'agent
 	 * @param reject le message de refus de l'offre
