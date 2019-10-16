@@ -14,44 +14,41 @@ import jade.core.AID;
  */
 @SuppressWarnings("serial")
 public class ComposedJourney implements Serializable {
-	ArrayList<Journey> journeys;
+	private List<Journey> journeys;
 	/** origin */
-	protected String start;
+	private String start;
 	/** destination */
-	protected String stop;
-	/** transport means */
-	protected String means;
+	private String stop;
 	/** duration of the journey, in minutes */
-	protected int duration;
+	private int duration;
 	/** duration of the journey(normalized) */
-	protected double normDuration;
+	private double normDuration;
 	/** date of departure, format hhmm */
-	protected int departureDate;
+	private int departureDate;
 	/** date of arrival, format hhmm */
-	protected int arrivalDate;
+	private int arrivalDate;
 	/** cost in money */
-	protected double cost;
+	private double cost;
 	/** cost in money (normalized) */
-	protected double normCost;
+	private double normCost;
 	/** cost in co2 */
-	protected int co2;
+	private int co2;
 	/** cost in co2 (normalized) */
-	protected double normCo2;
+	private double normCo2;
 	/** level of confort (0 = worst) */
-	protected int confort;
+	private int confort;
 	/** level of confort (0 = worst) (normalized) */
-	protected double normConfort;
+	private double normConfort;
 
 	/** nb of journeys */
-	int nbVia = -1;
-	/** list of proposers */
-	ArrayList<String> proposedBy;
-	/** responsible of the composed journey */
-	AID proposer;
+	private int nbVia = -1;
 
-	public ComposedJourney() {
+	/** responsible of the composed journey */
+	private AID proposer;
+
+
+    public ComposedJourney() {
 		journeys = new ArrayList<>();
-		proposedBy = new ArrayList<>();
 	}
 
 	/**
@@ -67,8 +64,6 @@ public class ComposedJourney implements Serializable {
 		nbVia++;
 		cost += oneJourney.getCost();
 		co2 += oneJourney.getCo2();
-		proposedBy.add(oneJourney.proposedBy);
-
 		confort *= (nbVia - 1);
 		confort += oneJourney.getConfort();
 		confort /= nbVia;
@@ -96,7 +91,6 @@ public class ComposedJourney implements Serializable {
 			cost += j.getCost();
 			co2 += j.getCo2();
 			confort += j.getConfort();
-			proposedBy.add(j.proposedBy);
 			nbVia++;
 		}
 		confort = confort / nb;
@@ -107,14 +101,24 @@ public class ComposedJourney implements Serializable {
 		duration = ((arrivalDate / 100) * 60 + arrivalDate % 100) - ((departureDate / 100) * 60 + departureDate % 100);
 	}
 
-	@Override
+	//some String constants to improve the memory management
+	private static String JOURNEYFROM = "journey from ";
+	private static String TO = " to ";
+	private static String DURATION = ", duration  ";
+	private static String DEPARTURE = " mn, departure: ";
+	private static String ARRIVAL = ", arrival:";
+	private static String COST = ", cost = ";
+	private static String LINE = "\n";
+	private static String SEP = "--";
+    @Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("journey from ").append(start).append(" to ").append(stop).append(", duration  ").append(duration);
-		sb.append(" mn, departure: ").append(departureDate).append(", arrival:").append(arrivalDate);
-		sb.append(", cost = ").append(cost).append("\n");
+		sb.append(ComposedJourney.JOURNEYFROM).append(start).append(ComposedJourney.TO).append(stop).
+				append(ComposedJourney.DURATION).append(duration).append(ComposedJourney.DEPARTURE).
+				append(departureDate).append(ComposedJourney.ARRIVAL).append(arrivalDate).
+				append(ComposedJourney.COST).append(cost).append(ComposedJourney.LINE);
 		for (Journey j : journeys)
-			sb.append("-- ").append(j).append("\n");
+			sb.append(ComposedJourney.SEP).append(j).append(ComposedJourney.LINE);
 		return sb.toString();
 	}
 
@@ -201,14 +205,34 @@ public class ComposedJourney implements Serializable {
 	}
 
 	/**
+	 * @return the normDuration
+	 */
+	public List<Journey> getJourneys() {
+		return journeys;
+	}
+
+
+	/**
 	 * @param _normDuration
 	 *            the normDuration to set
 	 */
 	public void setNormDuration(double _normDuration) {
 		normDuration = _normDuration;
 	}
-	
-	public List<Journey> getJourneys() {
-		return journeys;
+	public static void main(String[] args) {
+		JourneysList journeysList = new JourneysList();
+		journeysList.addJourney(new Journey("Val", "Lille", "car", 1440, 30, 10));
+		journeysList.addJourney(new Journey("Val", "Lille", "train", 1440, 40, 10));
+		journeysList.addJourney(new Journey("Val", "Lille", "car", 1510, 30, 10));
+		journeysList.addJourney(new Journey("Lille", "Dunkerque", "car", 1500, 40, 10));
+		journeysList.addJourney(new Journey("Lille", "Dunkerque", "car", 1600, 40, 10));
+		journeysList.addJourney(new Journey("Lille", "Dunkerque", "car", 1630, 40, 10));
+		journeysList.addJourney(new Journey("Dunkerque", "Bray-Dunes", "car", 1700, 10, 10));
+		journeysList.addJourney(new Journey("Dunkerque", "Bray-Dunes", "car", 1710, 20, 10));
+		System.out.println(journeysList);
+		List<ComposedJourney> journeys = new ArrayList<>();
+		journeysList.findIndirectJourney("val", "bray-dunes", 1400, 60, new ArrayList<>(),
+				new ArrayList<>(), journeys);
+		System.out.println(journeys);
 	}
 }
