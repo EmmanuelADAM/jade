@@ -12,7 +12,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import agents.AgenceAgent;
-import data.JourneysList;
 import jade.gui.GuiEvent;
 
 /**
@@ -27,10 +26,7 @@ public class AgenceGui extends JFrame {
 	private int noAgenceGui;
 
 	/** Text area */
-	JTextArea jTextArea;
-
-	/** window color */
-	Color color;
+	private JTextArea jTextArea;
 
 	private AgenceAgent myAgent;
 
@@ -83,18 +79,5 @@ public class AgenceGui extends JFrame {
 		jTextArea.setCaretPosition(texte.length());
 	}
 
-	public Color getColor() {
-		return color;
-	}
-
-	public void setColor(Color color) {
-		this.color = color;
-		jTextArea.setBackground(color);
-	}
-
-	public void displayCatalogue() {
-		JourneysList catalog = myAgent.getCatalog();
-		println(catalog.toString());
-	}
 
 }
