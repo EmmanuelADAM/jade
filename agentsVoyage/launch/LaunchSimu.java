@@ -37,13 +37,13 @@ public class LaunchSimu {
 		// ******************JADE******************
 		
 		// allow to send arguments to the JADE launcher
-		Properties pp = new ExtendedProperties();		 
+		var pp = new ExtendedProperties();
 		// add the gui
 		pp.setProperty(Profile.GUI, "true");
 		// add the Topic Management Service
 		pp.setProperty(Profile.SERVICES, "jade.core.messaging.TopicManagementService;jade.core.event.NotificationService");		 
 		
-		StringBuilder lesAgents = new StringBuilder();
+		var lesAgents = new StringBuilder();
 		lesAgents.append("client1:agents.TravellerAgent;");
 		lesAgents.append("agentCar:agents.AgenceAgent(car.csv);");
 		lesAgents.append("agentBus:agents.AgenceAgent(bus.csv);");
@@ -51,7 +51,7 @@ public class LaunchSimu {
 		lesAgents.append("alert1:agents.AlertAgent");
 		pp.setProperty(Profile.AGENTS, lesAgents.toString());
 		// create a default Profile
-		ProfileImpl pMain = new ProfileImpl(pp);
+		var pMain = new ProfileImpl(pp);
 
 		// launch the main jade container
 		Runtime.instance().createMainContainer(pMain);
