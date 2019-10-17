@@ -2,7 +2,6 @@ package agents;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.OptionalDouble;
@@ -10,17 +9,13 @@ import java.util.stream.Stream;
 
 import comportements.ContractNetAchat;
 import data.ComposedJourney;
-import data.Journey;
 import data.JourneysList;
 import gui.TravellerGui;
 import jade.core.AID;
-import jade.core.ServiceException;
 import jade.core.behaviours.CyclicBehaviour;
-import jade.core.messaging.TopicManagementHelper;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
-import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.gui.GuiAgent;
 import jade.gui.GuiEvent;
 import jade.lang.acl.ACLMessage;
@@ -29,7 +24,7 @@ import jade.proto.SubscriptionInitiator;
 
 /**
  * Journey searcher
- * Agent that support the user to choose the best journey
+ * 
  * @author Emmanuel ADAM
  */
 @SuppressWarnings("serial")
@@ -40,22 +35,16 @@ public class TravellerAgent extends GuiAgent {
 	public static final int BUY_TRAVEL = 1;
 
 	/** liste des vendeurs */
-	protected ArrayList<AID> vendeurs;
-
-	/**
-	 * preference between journeys -, cost, co2, duration or confort ("-" = cost
-	 * by defaul)}
-	 */
-	private String sortMode;
+	private ArrayList<AID> vendeurs;
 
 	/** catalog received by the sellers */
-	protected JourneysList catalogs;
+	private JourneysList catalogs;
 
 	/** the journey chosen by the agent*/
-	ComposedJourney myJourney;
+	private ComposedJourney myJourney;
 
 	/** topic from which the alert will be received */
-	AID topic;
+	private AID topic;
 
 	/** gui */
 	private TravellerGui window;
@@ -67,32 +56,33 @@ public class TravellerAgent extends GuiAgent {
 		window.setColor(Color.cyan);
 		window.println("Hello! AgentAcheteurCN " + this.getLocalName() + " est pret. ");
 		window.setVisible(true);
-		
+
 		vendeurs = new ArrayList<>();
 		detectAgences();
 
 		topic = AgentToolsEA.generateTopicAID(this,"TRAFFIC NEWS");
+		//ecoute des messages radio
 		addBehaviour(new CyclicBehaviour() {
 			@Override
 			public void action() {
-				ACLMessage msg = myAgent.receive(MessageTemplate.MatchTopic(topic));
+				var msg = myAgent.receive(MessageTemplate.MatchTopic(topic));
 				if (msg != null) {
 					println("Message recu sur le topic " + topic.getLocalName() + ". Contenu " + msg.getContent()
 							+ " émis par " + msg.getSender().getLocalName());
-					//TODO: verifier si l'info ne perturbe pas le voyage !! et agir en fonction !!
 				} else { block();}
 			}
 		});
 		
 	}
-	
+
+
+
 
 	/**ecoute des evenement de type enregistrement en tant qu'agence aupres des pages jaunes*/
 	private void detectAgences()
 	{
 		var model = AgentToolsEA.createAgentDescription("travel agency", "seller");
 		var msg = DFService.createSubscriptionMessage(this, getDefaultDF(), model, null);
-
 		vendeurs = new ArrayList<>();
 		addBehaviour(new SubscriptionInitiator(this, msg) {
 			@Override
@@ -103,7 +93,7 @@ public class TravellerAgent extends GuiAgent {
 					if (results.length > 0) {
 						for (DFAgentDescription dfd:results) {
 							vendeurs.add(dfd.getName());
-							window.println(dfd.getName().getName() + " s'est inscrit au service "+type+", en tant que "+name);
+							window.println(dfd.getName().getName() + " s'est inscrit en tant qu'agence");
 						}
 					}	
 				}
@@ -128,58 +118,43 @@ public class TravellerAgent extends GuiAgent {
 		return window;
 	}
 
-
-	/**calcule un voyage compose de trajets directs 
-	 * @param from ville de depart
-	 * @param to ville d'arrivee
-	 * @param departure heure de depart (hhmm)
-	 * @param preference type de tri (confort, duree, ...)
-	 */
 	public void computeComposedJourney(final String from, final String to, final int departure,
 			final String preference) {
 		final List<ComposedJourney> journeys = new ArrayList<>();
-		final boolean result = catalogs.findIndirectJourney(from, to, departure, 120, new ArrayList<Journey>(),
-				new ArrayList<String>(), journeys);
+		final boolean result = catalogs.findIndirectJourney(from, to, departure, 120, new ArrayList<>(),
+				new ArrayList<>(), journeys);
 
 		if (!result) {
 			println("no journey found !!!");
 		}
 		if (result) {
-			println("here is my results : ");
-         Stream<ComposedJourney> strCJ = journeys.stream();
-         OptionalDouble moy = strCJ.mapToInt(ComposedJourney::getDuration).average();
-         final double avg = moy.getAsDouble();
-         println("duree moyenne = " + avg );
-			journeys.forEach(j -> window.println(j.toString()));
-			//TODO: complete the switch with the appropriate codes
+			// println("here is my results : ");
+			// journeys.forEach(j -> window.println(j.toString()));
 			switch (preference) {
 			case "duration":
-				Collections.sort(journeys, Comparator.comparingInt(ComposedJourney::getDuration));
+				Stream<ComposedJourney> strCJ = journeys.stream();
+				OptionalDouble moy = strCJ.mapToInt(ComposedJourney::getDuration).average();
+				final double avg = moy.getAsDouble();
+				println("duree moyenne = " + avg );//+ ", moy au carre = " + avg * avg);
+				journeys.sort(Comparator.comparingInt(ComposedJourney::getDuration));
 				break;
 			case "confort":
-			   //TODO: complete
+				journeys.sort(Comparator.comparingInt(ComposedJourney::getConfort).reversed());
 				break;
 			case "cost":
-            //TODO: complete
+				journeys.sort(Comparator.comparingDouble(ComposedJourney::getCost));
 				break;
 			case "duration-cost":
-            //TODO: complete
+				//TODO: replace below to make a compromise between cost and confort...
+				journeys.sort(Comparator.comparingDouble(ComposedJourney::getCost));
 				break;
 			default:
-				Collections.sort(journeys, this::sortbyCostAndConfort);
+				journeys.sort(Comparator.comparingDouble(ComposedJourney::getCost));
 				break;
 			}
 			myJourney = journeys.get(0);
 			println("I choose this journey : " + myJourney);
 		}
-	}
-
-	/** a comparator based equitably on the cost and the confort */
-	private int sortbyCostAndConfort(ComposedJourney journeyToSort, ComposedJourney otherJourney) {
-	   //TODO:complete the code
-      double deltaCost = 0d;
-      double deltaConfort = 0d;
-		return (int) (deltaCost + deltaConfort);
 	}
 
 	/** get event from the GUI */
@@ -189,7 +164,9 @@ public class TravellerAgent extends GuiAgent {
 			doDelete();
 		}
 		if (eventFromGui.getType() == TravellerAgent.BUY_TRAVEL) {
-			addBehaviour(new ContractNetAchat(this, new ACLMessage(ACLMessage.CFP),  (String) eventFromGui.getParameter(0), (String) eventFromGui.getParameter(1), (Integer) eventFromGui.getParameter(2), (String) eventFromGui.getParameter(3)));
+			addBehaviour(new ContractNetAchat(this, new ACLMessage(ACLMessage.CFP),
+					(String) eventFromGui.getParameter(0), (String) eventFromGui.getParameter(1),
+					(Integer) eventFromGui.getParameter(2), (String) eventFromGui.getParameter(3)));
 		}
 	}
 
@@ -200,19 +177,6 @@ public class TravellerAgent extends GuiAgent {
 		return (ArrayList<AID>)vendeurs.clone();
 	}
 
-	/**
-	 * @param vendeurs
-	 *            the vendeurs to set
-	 */
-	public void setVendeurs(final List<AID> _vendeurs) {
-		vendeurs.clear();
-		vendeurs.addAll(_vendeurs);
-	}
-
-	/** -, cost, co2, duration or confort */
-	public String getSortMode() {
-		return sortMode;
-	}
 
 	/**
 	 * print a message on the window lined to the agent
@@ -224,11 +188,6 @@ public class TravellerAgent extends GuiAgent {
 		window.println(msg);
 	}
 
-	/** @return the list of journeys */
-	public JourneysList getCatalogs() {
-		return catalogs;
-	}
-
 	/** set the list of journeys */
 	public void setCatalogs(final JourneysList catalogs) {
 		this.catalogs = catalogs;
@@ -237,11 +196,6 @@ public class TravellerAgent extends GuiAgent {
 
 	public ComposedJourney getMyJourney() {
 		return myJourney;
-	}
-
-
-	public void setMyJourney(ComposedJourney myJourney) {
-		this.myJourney = myJourney;
 	}
 
 }
