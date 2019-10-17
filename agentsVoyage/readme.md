@@ -21,7 +21,8 @@ Un voyageur souhaite aller d'un point `a` à un point `b` :
 - Dans le package [gui](https://github.com/EmmanuelADAM/jade/tree/master/agentsVoyage/gui) se trouvent les classes qui consruisent les feneêtre de dialogue avec les agents.
 
 Le code s'exécute tel quel, mais le client ne peut effectuer qu'un choix par durée la plus courte parmi les voyages proposées.  
-- **Proposez et codez** d'autres critères de choix
+- **Proposez et codez** d'autres critères de choix,
+- **Proposez et codez** la décrémentation du nb de places par voyage (on pose 3 places par trajet en voiture, 50 en bus, et 200 places par trajet en train),
 - **Proposez et codez** le comportement d'adaptation suite à la réception d'un message d'alerte sur un tronçon donné; pour le client, pour les agences.
 
 **Beaucoup d'autres extensions sont possibles** : 
