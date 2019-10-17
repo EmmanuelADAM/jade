@@ -16,7 +16,7 @@ import java.util.*;
 
 
 /**
- * Books Buyer Behaviour by contract net, inspired from JADE tutorial (see Jade Doc for original file)
+ * Journey Buyer Behaviour by contract net
  *
  * @author revised by Emmanuel ADAM
  * @version 191017
@@ -104,7 +104,9 @@ public class ContractNetAchat extends ContractNetInitiator {
     @SuppressWarnings({"rawtypes"})
     @Override
     protected void handleAllResponses(Vector responses, Vector acceptances) {
+        //catalog of journeys built from answers
         var catalogs = new JourneysList();
+        //map <name to the agent (agence), Msg built to answer to it>
         Map<String, ACLMessage> reponses = new HashMap<>();
         for (Object respons : responses) {
             var ans = (ACLMessage) respons;
@@ -132,21 +134,22 @@ public class ContractNetAchat extends ContractNetInitiator {
         monAgent.println(catalogs.toString());
         monAgent.println("je fais mon choix...");
         monAgent.computeComposedJourney(from, to, departure, preference);
+        //map <name to the agent (agence), list of journeys to buy to it>
         Map<String, ArrayList<Journey>> voyagesAAcheter = new HashMap<>();
         var journey = monAgent.getMyJourney();
-        journey.getJourneys().forEach(j -> voyagesAAcheter.compute(j.getProposedBy(),
-                (k, v) -> {
-                    if (v == null) v = new ArrayList<>();
-                    v.add(j);
-                    return v;
-                }));
-        journey.getJourneys().forEach(j -> {
-            var agence = j.getProposedBy();
-            var msg = reponses.get(agence);
-            msg.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
-			try { msg.setContentObject(voyagesAAcheter.get(agence)); }
-			catch (IOException e) { e.printStackTrace(); }
-		});
+        journey.getJourneys().forEach(j ->
+                voyagesAAcheter.compute(j.getProposedBy(),
+                    (agence, list) -> {
+                        if (list == null) list = new ArrayList<>();
+                        list.add(j);
+                        return list;
+                    }));
+        voyagesAAcheter.forEach((agence,journeys)->{
+                    var msg = reponses.get(agence);
+                    msg.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
+                    try { msg.setContentObject(journeys); }
+                    catch (IOException e) { e.printStackTrace(); }
+                } );
     }
 
     /**
