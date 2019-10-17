@@ -13,30 +13,35 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class Journey implements Cloneable, Serializable, Comparable<Journey> {
 	/** origin */
-	protected String start;
+	String start;
 	/** destination */
-	protected String stop;
+	String stop;
 	/** transport means */
-	protected String means;
+	String means;
 	/** duration of the journey, in minutes */
-	protected int duration;
+	int duration;
 	/** date of departure, format hhmm */
-	protected int departureDate;
+	int departureDate;
 	/** date of arrival, format hhmm */
-	protected int arrivalDate;
+	int arrivalDate;
 	/** cost in money */
-	protected double cost;
+	double cost;
 	/** cost in co2 */
-	protected int co2;
+	int co2;
 	/** level of confort (0 = worst) */
-	protected int confort;
+	int confort;
 	/** name of the service that propose the journey */
-	protected String proposedBy;
+	String proposedBy;
 	/** nb of remaining places (not used) */
-	protected int places = 1;
-
-	Journey() {
-	}
+	private int places = 1;
+    /**some fields to improve the memory management*/
+    private static String TO = " to ";
+    private static String TRAJECTFROM = "traject from ";
+    private static String BY = " by ";
+    private static String DEPARTURE = ", departure: ";
+    private static String ARRIVAL = ", arrival:";
+    private static String COST = ", cost = ";
+    private static String PROPOSEDBY = ", proposed by ";
 
 	public Journey(final String _start, final String _stop, final String _means, final int _departureDate,
 			final int _duration) {
@@ -60,9 +65,8 @@ public class Journey implements Cloneable, Serializable, Comparable<Journey> {
 		co2 = _co2;
 		confort = _confort;
 	}
-
 	public Journey(final String _start, final String _stop, final String _means, final int _departureDate,
-		       final int _duration, final double _cost, final int _co2, final int _confort, String _proposedBy) {
+				   final int _duration, final double _cost, final int _co2, final int _confort, String _proposedBy) {
 		this(_start, _stop, _means, _departureDate, _duration, _cost, _co2, _confort);
 		proposedBy = _proposedBy;
 	}
@@ -73,7 +77,6 @@ public class Journey implements Cloneable, Serializable, Comparable<Journey> {
 		catch (Exception e){e.printStackTrace();}
 		return clone;
 	}
-
 
 	/**
 	 * @param time
@@ -184,21 +187,13 @@ public class Journey implements Cloneable, Serializable, Comparable<Journey> {
 		this.proposedBy = proposedBy;
 	}
 
-    /**some fields to improve the memory management*/
-    private static String TO = " to ";
-    private static String TRAJECTFROM = "traject from ";
-    private static String BY = " by ";
-    private static String DEPARTURE = ", departure: ";
-    private static String ARRIVAL = ", arrival:";
-    private static String COST = ", cost = ";
-    private static String PROPOSEDBY = ", proposed by ";
 	@Override
 	public String toString() {
-	    return new StringBuilder(TRAJECTFROM).append(start).append(TO).
-                append(stop).append(BY).append(means).append(DEPARTURE).
-                append(departureDate).append(ARRIVAL).append(arrivalDate).
-                append(COST).append(cost).append(PROPOSEDBY).append(proposedBy).toString();
-@	}
+	    return new StringBuilder(Journey.TRAJECTFROM).append(start).append(Journey.TO).
+                append(stop).append(Journey.BY).append(means).append(Journey.DEPARTURE).
+                append(departureDate).append(Journey.ARRIVAL).append(arrivalDate).
+                append(Journey.COST).append(cost).append(Journey.PROPOSEDBY).append(proposedBy).toString();
+	}
 
 	public int getPlaces() {
 		return places;
@@ -213,4 +208,8 @@ public class Journey implements Cloneable, Serializable, Comparable<Journey> {
 		return (int) (cost - o.cost);
 	}
 
+	public static void main(final String... args) {
+		final Journey test = new Journey("Val", "Lille", "car", 1440, 90);
+		System.out.println(test);
+	}
 }
