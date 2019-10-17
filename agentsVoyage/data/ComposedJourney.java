@@ -234,5 +234,8 @@ public class ComposedJourney implements Serializable {
 		journeysList.findIndirectJourney("val", "bray-dunes", 1400, 60, new ArrayList<>(),
 				new ArrayList<>(), journeys);
 		System.out.println(journeys);
+		// ComposedJourney cj = new ComposedJourney();
+		// cj.addJourneys(journeys.get(0));
+		// System.out.println(cj);
 	}
 }
