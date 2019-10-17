@@ -158,7 +158,7 @@ public class JourneysList implements Serializable {
 		// System.out.println(search);
 		System.out.println("----");
 		ArrayList<ComposedJourney> journeys = new ArrayList<>();
-		journeysList.findIndirectJourney("val", "dunkerque", 1400, 90, new ArrayList<>(),
+		journeysList.findIndirectJourney("val", "Bray-Dunes", 1400, 90, new ArrayList<>(),
 				new ArrayList<>(), journeys);
 		System.out.println(journeys);
 
