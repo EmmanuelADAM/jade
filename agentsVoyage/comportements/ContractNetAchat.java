@@ -16,7 +16,8 @@ import java.util.*;
 
 
 /**
- * Journeys Buyer Behaviour by contract net
+ * Books Buyer Behaviour by contract net, inspired from JADE tutorial (see Jade Doc for original file)
+ *
  * @author revised by Emmanuel ADAM
  * @version 191017
  */
