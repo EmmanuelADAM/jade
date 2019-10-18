@@ -128,6 +128,12 @@ public class JourneysList implements Serializable {
 		empty = empty || catalog.keySet().isEmpty();
 		return empty;
 	}
+	
+	/**@return the journeys from a city*/
+	public ArrayList<Journey> getJourneysFrom(String from)
+	{
+		return catalog.get(from);
+	}
 
 	@Override
 	public String toString() {
