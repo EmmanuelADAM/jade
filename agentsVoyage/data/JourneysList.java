@@ -96,7 +96,7 @@ public class JourneysList implements Serializable {
 	public boolean findIndirectJourney(String start, String stop, int date, int late, ArrayList<Journey> currentJourney,
 			List<String> via, List<ComposedJourney> results) {
 		boolean result;
-		via.add(start);
+		via.add(start.toUpperCase());
 		var list = catalog.get(start.toUpperCase());
 		if (list == null) return false;
 		for (Journey j : list) {
@@ -109,10 +109,10 @@ public class JourneysList implements Serializable {
 					results.add(compo);
 					currentJourney.remove(currentJourney.size() - 1);
 				} else {
-					if (!via.contains(j.stop)) {
+					if (!via.contains(j.stop.toUpperCase())) {
 						currentJourney.add(j);
-						findIndirectJourney(j.stop, stop, j.arrivalDate, late, currentJourney, via, results);
-						via.remove(j.stop);
+						findIndirectJourney(j.stop.toUpperCase(), stop.toUpperCase(), j.arrivalDate, late, currentJourney, via, results);
+						via.remove(j.stop.toUpperCase());
 						currentJourney.remove(j);
 					}
 				}
