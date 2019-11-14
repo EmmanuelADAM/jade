@@ -2,6 +2,7 @@ package data;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * class that represents a catalog of journeys<br>
@@ -135,6 +136,14 @@ public class JourneysList implements Serializable {
 		return catalog.get(from);
 	}
 
+	/**remove from all the journeys of the map, those which respect the predicate
+	 * @param p predicate used to filter the journey*/
+	public void removeIf(Predicate<Journey> p)
+	{
+		catalog.values().forEach(l->l.removeIf(p));
+	}
+
+	
 	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
