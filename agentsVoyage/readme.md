@@ -21,7 +21,7 @@ Un voyageur souhaite aller d'un point `a` à un point `b` :
 - Dans le package [gui](https://github.com/EmmanuelADAM/jade/tree/master/agentsVoyage/gui) se trouvent les classes qui consruisent les feneêtre de dialogue avec les agents.
 
 Le code utilise 
- - la librairie opencsv ([http://opencsv.sourceforge.net](http://opencsv.sourceforge.net)) version 3.9 attaché à ce dossier.
+ - la librairie opencsv ([http://opencsv.sourceforge.net](http://opencsv.sourceforge.net)) version 3.9 attachée à ce dossier.
  - la librairie jade.jar à télécharger sur le site de [jade](https://jade.tilab.com).
 -----
 Le code s'exécute tel quel, mais le client ne peut effectuer qu'un choix par durée la plus courte parmi les voyages proposées.  
