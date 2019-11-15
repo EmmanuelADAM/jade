@@ -20,10 +20,15 @@ Un voyageur souhaite aller d'un point `a` à un point `b` :
 - Dans le package [data](https://github.com/EmmanuelADAM/jade/tree/master/agentsVoyage/data) se trouvent les classes qui consruisent les chemins possibles.
 - Dans le package [gui](https://github.com/EmmanuelADAM/jade/tree/master/agentsVoyage/gui) se trouvent les classes qui consruisent les feneêtre de dialogue avec les agents.
 
+Le code utilise 
+ - la librairie opencsv ([http://opencsv.sourceforge.net](http://opencsv.sourceforge.net)) version 3.9 attaché à ce dossier.
+ - la librairie jade.jar à télécharger sur le site de [jade](https://jade.tilab.com).
+-----
 Le code s'exécute tel quel, mais le client ne peut effectuer qu'un choix par durée la plus courte parmi les voyages proposées.  
-- **Proposez et codez** d'autres critères de choix,
 - **Proposez et codez** la décrémentation du nb de places par voyage (on pose 3 places par trajet en voiture, 50 en bus, et 200 places par trajet en train),
-- **Proposez et codez** le comportement d'adaptation suite à la réception d'un message d'alerte sur un tronçon donné; pour le client, pour les agences.
+- **Proposez et codez** le comportement d'adaptation suite à la réception d'un message d'alerte sur un tronçon donné; pour le client, pour les agences,
+- **Proposez et codez** des critères de choix multiples (faire un compromis entre durée et cout par exemple).
+-----
 
 **Beaucoup d'autres extensions sont possibles** : 
 - négociations,
