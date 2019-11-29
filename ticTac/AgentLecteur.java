@@ -2,10 +2,7 @@ package ticTac;
 
 import jade.core.Runtime;
 import jade.core.*;
-import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.CyclicBehaviour;
-import jade.core.behaviours.WakerBehaviour;
-import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.util.ExtendedProperties;
 import jade.util.leap.Properties;
@@ -52,5 +49,4 @@ public class AgentLecteur extends Agent {
             }
         });
     }
-
 }
