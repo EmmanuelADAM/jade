@@ -121,15 +121,16 @@ public class TravellerAgent extends GuiAgent {
 	public void computeComposedJourney(final String from, final String to, final int departure,
 			final String preference) {
 		final List<ComposedJourney> journeys = new ArrayList<>();
-		final boolean result = catalogs.findIndirectJourney(from, to, departure, 120, new ArrayList<>(),
+		//recherche de trajets ac tps d'attentes entre via = 60mn
+		final boolean result = catalogs.findIndirectJourney(from, to, departure, 60, new ArrayList<>(),
 				new ArrayList<>(), journeys);
 
 		if (!result) {
 			println("no journey found !!!");
 		}
 		if (result) {
-			// println("here is my results : ");
-			// journeys.forEach(j -> window.println(j.toString()));
+			//oter les voyages demarrant trop tard (1h30 apres la date de depart souhaitee)
+			journeys.removeIf(j->j.getJourneys().get(0).getDepartureDate()-departure>90);
 			switch (preference) {
 			case "duration":
 				Stream<ComposedJourney> strCJ = journeys.stream();
