@@ -1,8 +1,9 @@
 # jade
 
-[voir la version site web](https://emmanueladam.github.io/jade/)
+[(version web)](https://emmanueladam.github.io/jade/)
 
-Liste de supports pour le cours de programmation orientée agent en Jade
+Liste de supports pour le cours de programmation orientée agent en [Jade](https://jade.tilab.com).
+Pour l'ensemble de ces codes, il est nécessaire de disposer dans vos projet de la librairie `jade.jar`..
 
 ## Eléments de base : agent, comportement et envoi de messages
 
