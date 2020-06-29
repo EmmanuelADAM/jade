@@ -19,9 +19,14 @@ public class AgentEmissionARE extends AgentWindowed{
         window.println("Hello! Agent  " +  getLocalName() + " is ready, my address is " + this.getAID().getName());
 
 
+        createRequest("123", "sum 4,5,6");
+    }
+
+    /**add a AchieveREInitiator protocol to send a request */
+    private void createRequest(String id, String computation) {
         ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
-        msg.setConversationId("123");
-        msg.setContent("sum 4,5,6");
+        msg.setConversationId(id);
+        msg.setContent(computation);
         msg.addReceiver(new AID("b", false));
         msg.addReceiver(new AID("c", false));
         msg.addReceiver(new AID("d", false));
@@ -49,7 +54,7 @@ public class AgentEmissionARE extends AgentWindowed{
             }
         };
 
-        addBehaviour(new WakerBehaviour(this, 0) {
+        addBehaviour(new WakerBehaviour(this, 1000) {
             public void  onWake() {addBehaviour(init);}});
     }
 }

@@ -4,6 +4,12 @@
 
 Liste de supports pour le cours de programmation orientée agent en [Jade](https://jade.tilab.com).
 Pour l'ensemble de ces codes, il est nécessaire de disposer dans vos projet de la librairie "jade.jar"..
+Si le site de Jade est inaccessible, voici des liens pour télécharger la librairie :
+  - [jade.jar](http://emmanuel.adam.free.fr/jade/lib/jade.jar) : librairie principale,
+  - [commons-codec-1.3.jar](http://emmanuel.adam.free.fr/jade/lib/commons-codec/commons-codec-1.3.jar) : librairie à utiliser lors d ela manipulation d'ontologie,
+  - [jadeExamples.jar](http://emmanuel.adam.free.fr/jade/lib/jadeExamples.jar) : librairie contenant les exemples de la documentation Jade.
+  
+La documentation et l'API sont également accessibles [http://emmanuel.adam.free.fr/jade/doc/index.html](sur le lien).
 
 ## Eléments de base : agent, comportement et envoi de messages
 

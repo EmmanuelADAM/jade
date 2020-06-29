@@ -1,10 +1,16 @@
 package pingPong;
 
 import jade.core.AID;
+import jade.core.Runtime;
 import jade.core.Agent;
+import jade.core.Profile;
+import jade.core.ProfileImpl;
 import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.WakerBehaviour;
 import jade.lang.acl.ACLMessage;
+import jade.util.ExtendedProperties;
+import jade.util.leap.Properties;
+
 
 import static java.lang.System.out;
 

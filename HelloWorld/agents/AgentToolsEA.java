@@ -1,4 +1,4 @@
-package agents;
+package HelloWorld.agents;
 
 import jade.core.AID;
 import jade.core.Agent;
@@ -6,6 +6,9 @@ import jade.domain.DFService;
 import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * tools to help the use of the Directory Facilitator (registration to a

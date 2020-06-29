@@ -2,6 +2,8 @@ package testComp01;
 
 import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
+import jade.core.behaviours.CyclicBehaviour;
+import jade.core.behaviours.TickerBehaviour;
 import jade.core.behaviours.WakerBehaviour;
 
 import static java.lang.System.out;
@@ -21,7 +23,7 @@ public class AgentHelloSalut extends Agent {
 		addBehaviour(new Behaviour(this) {
 			public void action() {
 				out.println("De l'agent " + getLocalName() + " : Bonjour à toutezétatousse");
-				myAgent.doWait(10);
+				myAgent.doWait(200);
 			}
 
 			public boolean done() {
@@ -29,16 +31,13 @@ public class AgentHelloSalut extends Agent {
 			}
 		});
 
-		// ajout d'un comportement cyclique qui, à chaque passage, affiche salut et fait une pause de 10 ms
-		addBehaviour(new Behaviour(this) {
-			public void action() {
+		// ajout d'un comportement cyclique qui, à chaque passage, affiche salut et fait une pause de 15 ms
+		addBehaviour(new TickerBehaviour(this, 100) {
+			public void onTick() {
 				out.println("De l'agent " + getLocalName() + " : Salut à toutezétatousse");
-				myAgent.doWait(10);
+				myAgent.doWait(300);
 			}
 
-			public boolean done() {
-				return false;
-			}
 		});
 
 		// ajout d'un comportement qui retire l'agent dans 1000 ms

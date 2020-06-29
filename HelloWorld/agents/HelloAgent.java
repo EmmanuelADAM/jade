@@ -33,7 +33,7 @@ public class HelloAgent extends GuiAgent {
 		helloMsg = ((args != null && args.length > 0) ? args[0] : "Hello");
 		window = new SimpleGui4Agent(this);
 		window.println(helloMsg);
-		AgentToolsEA.register(this, "cordialite", "accueil");
+		HelloWorld.agents.AgentToolsEA.register(this, "cordialite", "accueil");
 
 		addBehaviour(new CyclicBehaviour(this) {
 			@Override
@@ -49,7 +49,7 @@ public class HelloAgent extends GuiAgent {
 	}
 
 	private void sendHello(String text) {
-		neighbourgs = AgentToolsEA.searchAgents(this, "cordialite", null);
+		neighbourgs = HelloWorld.agents.AgentToolsEA.searchAgents(this, "cordialite", null);
 		ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
 		for (AID other : neighbourgs)
 			msg.addReceiver(other);
