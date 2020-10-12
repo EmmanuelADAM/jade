@@ -57,7 +57,7 @@ public class AgenceAgent extends GuiAgent {
             fromCSV2Catalog((String) args[0]);
         }
 
-        HelloWorld.agents.AgentToolsEA.register(this, "travel agency", "seller");
+        AgentToolsEA.register(this, "travel agency", "seller");
 
         //REGLAGE ECOUTE DE LA RADIO
         topic = AgentToolsEA.generateTopicAID(this, "TRAFFIC NEWS");
