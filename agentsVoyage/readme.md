@@ -29,15 +29,17 @@ Le code utilise
  - la librairie jade.jar à télécharger sur le site de [jade](https://jade.tilab.com).
 -----
 Le code s'exécute tel quel, mais le client ne peut effectuer qu'un choix par durée la plus courte parmi les voyages proposées.  
-- **Proposez et codez** la décrémentation du nb de places par voyage (on pose 3 places par trajet en voiture, 50 en bus, et 200 places par trajet en train),
-- **Proposez et codez** le comportement d'adaptation suite à la réception d'un message d'alerte sur un tronçon donné; pour le client, pour les agences,
-- **Proposez et codez** des critères de choix multiples (faire un compromis entre durée et cout par exemple).
+- <span style='color:red'> **Proposez et codez** la décrémentation du nb de places par voyage (on pose 3 places par trajet en voiture, 50 en bus, et 200 places par trajet en train),</span>
+- <span style='color:red'>  **Proposez et codez** le comportement de réaction suite à la réception d'un message d'alerte sur un tronçon donné; 
+  - pour les agences (disparition des trajets impactés), 
+  - pour le client (relance d'une demande de trajet si impacté, achat des billets permettant de compléter le trajet). </span>
+
 -----
 
-**Beaucoup d'autres extensions sont possibles** : 
-- négociations,
-- multiplication d'agences, et gestion de la renommée
-- création d'agence virtuelle : ne possédant pas les voyages, mais dotés d'une bonne renomée et faisant office de passerelle entre les clients et les vendeurs de voyage.
+<span style='color:red'>**Enchères, choix** : </span>
+- **enchères** : un client impacté par un événement peut se retrouver avec des tickets achetés non remoursables.
+  - pour chaque billet acheté, il lance une enchère hollandaise; partant du prix d'achat; diminuant jusqu'à 1€. Si aucun acheteur, le billet est abandonné.
+
 
 
 Pour information, les trajets possibles sont les suivants : 
