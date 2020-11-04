@@ -37,10 +37,16 @@ Le code s'exécute tel quel, mais le client ne peut effectuer qu'un choix par du
 -----
 
 <span style='color:red'>**Enchères, choix** : </span>
-- **enchères** : un client impacté par un événement peut se retrouver avec des tickets achetés non remoursables.
+- **enchères** : un client impacté par une route bloquée peut se retrouver avec des tickets achetés non remoursables.
   - pour chaque billet acheté, il lance une enchère hollandaise; partant du prix d'achat; diminuant jusqu'à 1€. Si aucun acheteur, le billet est abandonné.
+  - un voyageur peut également devoir abandonner son déplacement. Proposez une adaptation de sa fenêtre afin de lui permettre de lancer des enchèses.
+    - un trajet peut subitement devenir très prisé. Un voyageur peut décider de revendre un trajet plutôt que de le réalliser en faisant un bénéfice. Implémentez une enchère ascendante en un tour (cf. enchère de Vikrey)
 
+---
 
+Pour l'instant les agents sont activés manuellement.
+
+---
 
 Pour information, les trajets possibles sont les suivants : 
 - en bus, entre les villes a<->b, b<->c, b<->d, c<->d, c<>-e, d<->e, e<->f, 
