@@ -50,6 +50,23 @@ Pour information, les trajets possibles sont les suivants :
 - en voiture (covoiturage), entre les villes a<->f, c<->f
 - les coûts, vitesses, émissions de co2, confort ... dépendent du moyen utilisé
 
+``
+A-------B
+*\\\   /|         -- : bus
+* \ \\/ |         == : train
+*  \ /\\|         ** : voiture
+*   C   D\\
+*   *\  | ||
+*   * \ | ||
+*   *  \| || 
+ *  *   E ||
+ *  *  /  //
+ *  * /  //
+  * */  //
+   *F==//
+``
+
+
 ---
 
 ## Autres agences 
