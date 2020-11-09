@@ -44,12 +44,19 @@ Le code s'exécute tel quel, mais le client ne peut effectuer qu'un choix par du
 
 ---
 
-Pour l'instant les agents sont activés manuellement.
-
----
-
 Pour information, les trajets possibles sont les suivants : 
 - en bus, entre les villes a<->b, b<->c, b<->d, c<->d, c<>-e, d<->e, e<->f, 
 - en train, entre les villes a<->d, d<->f, 
 - en voiture (covoiturage), entre les villes a<->f, c<->f
 - les coûts, vitesses, émissions de co2, confort ... dépendent du moyen utilisé
+
+---
+
+## Autres agences 
+- Ajoutez 2 autres agences : l'une pour les bus utilisant les voyages de busAutre.csv, l'autre pour les voitures utilisant le fichier carAutre.csv
+- Créez une classe PortailAgence. Une classe portail agence se comporte comme une agence mais ne dispose pas de moyens de locomotion. Le client n'envoie plus de demande auprès des agences mais auprès des portails.
+-- Créez un agent PortailBus qui sert d'intermédiaire entre les clients et les bus, et un agent PortailCar qui fait de même pour les agences de voiture. L'agent agence de train, se définit lui même commu une agence..
+
+- un achat auprès d'un portail est répercuté au niveau de l'agence.
+
+
