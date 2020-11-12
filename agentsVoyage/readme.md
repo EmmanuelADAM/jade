@@ -52,9 +52,9 @@ Pour information, les trajets possibles sont les suivants :
 
 ```
 A-------B
-*\\\   /|         -- : bus
-* \ \\/ |         == : train
-*  \ /\\|         ** : voiture
+* \\   /|         -- : bus
+*   \\/ |         == : train
+*    /\\|         ** : voiture
 *   C---D\\
 *   *\  | ||
 *   * \ | ||
