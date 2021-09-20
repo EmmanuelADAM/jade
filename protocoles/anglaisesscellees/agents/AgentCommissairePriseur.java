@@ -57,6 +57,12 @@ public class AgentCommissairePriseur extends AgentWindowed {
                 println(String.format("l'agent %s propose %s ", propose.getSender().getLocalName(), propose.getContent()) );
             }
 
+            /**fonction lancee quand un participant refuse de continuer*/
+            @Override
+            protected void handleRefuse(ACLMessage refuse) {
+                println("REFUS ! j'ai recu un refus  de " + refuse.getSender().getLocalName());
+            }
+
             /**fonction lancee quand toutes les reponses ont ete recues*/
             @Override
             protected void handleAllResponses(Vector leursOffres, Vector mesRetours) {
@@ -67,6 +73,7 @@ public class AgentCommissairePriseur extends AgentWindowed {
                     if (offre.getPerformative() == ACLMessage.PROPOSE) {
                         var retour = offre.createReply();
                         retour.setPerformative(ACLMessage.REJECT_PROPOSAL);
+                        retour.setContent("Offre rejetee, dsl");
                         mesRetours.add(retour);
                         int valeurProposition = Integer.parseInt(offre.getContent());
                         window.println("recu cette proposition de " + offre.getSender().getLocalName() + " :: " + valeurProposition);
