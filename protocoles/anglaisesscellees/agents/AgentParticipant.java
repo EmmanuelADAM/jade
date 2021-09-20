@@ -39,11 +39,16 @@ public class AgentParticipant extends AgentWindowed {
             /**fonction lancee a la reception d'un appel d'offre*/
             @Override
             protected ACLMessage handleCfp(ACLMessage cfp) throws RefuseException, FailureException, NotUnderstoodException {
-                int offre = hasard.nextInt(0, 100);
-                println(String.format("je propose %d pour acheter %s a l'agent : %s", offre, cfp.getContent(), cfp.getSender().getLocalName()));
                 ACLMessage reponse = cfp.createReply();
-                reponse.setPerformative(ACLMessage.PROPOSE);
-                reponse.setContent(String.valueOf(offre));
+                int offre = hasard.nextInt(0, 100);
+                if(offre<33){
+                    reponse.setPerformative(ACLMessage.REFUSE);
+                }
+                else {
+                    println(String.format("je propose %d pour acheter %s a l'agent : %s", offre, cfp.getContent(), cfp.getSender().getLocalName()));
+                    reponse.setPerformative(ACLMessage.PROPOSE);
+                    reponse.setContent(String.valueOf(offre));
+                }
                 return reponse;
             }
 
@@ -59,6 +64,19 @@ public class AgentParticipant extends AgentWindowed {
                 msg.setContent("ok !");
                 return msg;
             }
+
+            /**prise en compte du refus*/
+            @Override
+            protected void handleRejectProposal(ACLMessage cfp, ACLMessage propose, ACLMessage reject) {
+                println("=".repeat(10));
+                println("OFFRE REJETEE");
+                println(cfp.getSender().getLocalName() + " a lance une enchere pour " + cfp.getContent());
+                println(" j'ai propose " + propose.getContent());
+                println(cfp.getSender().getLocalName() + " a refuse ! avec ce message " + reject.getContent());
+            }
+
+
+
         };
 
         addBehaviour(encherissement);
