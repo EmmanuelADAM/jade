@@ -1,4 +1,4 @@
-package encheres.anglaisesscellees.agents;
+package protocoles.anglaisesscellees.agents;
 
 import jade.core.AID;
 import jade.core.Agent;
@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 /**
  * tools to help the use of the Directory Facilitator (registration to a
- * service, find agents that have declared a service)
+ * service, find agencesVoyages.agents that have declared a service)
  * 
  * @author revised by Emmanuel ADAM
  */
@@ -54,7 +54,7 @@ public final class AgentToolsEA {
 	}
 
 	/***
-	 * search agents that are registered to a typical service
+	 * search agencesVoyages.agents that are registered to a typical service
 	 * 
 	 * @param myAgent
 	 *            agent that asks for the search (it will be omitted from the
@@ -63,7 +63,7 @@ public final class AgentToolsEA {
 	 *            type of the service
 	 * @param nameService
 	 *            name of the service (can be null)
-	 * @return AIDs of the agents that are registered to (_typeService, _nameService), 
+	 * @return AIDs of the agencesVoyages.agents that are registered to (_typeService, _nameService),
 	 *			do not include the AID of myAgent
 	 */
 	public static AID[] searchAgents(final Agent myAgent, final String typeService, final String nameService) {

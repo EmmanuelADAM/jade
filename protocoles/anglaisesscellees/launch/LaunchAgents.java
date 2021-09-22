@@ -1,4 +1,4 @@
-package encheres.anglaisesscellees.launch;
+package protocoles.anglaisesscellees.launch;
 
 import jade.core.Profile;
 import jade.core.ProfileImpl;
@@ -12,10 +12,10 @@ public class LaunchAgents {
         Properties prop = new ExtendedProperties();
         // demander la fenetre de controle
         prop.setProperty(Profile.GUI, "true");
-        // nommer les agents
-        StringBuilder sb = new StringBuilder("a:encheres.anglaisesscellees.agents.AgentCommissairePriseur;");
+        // nommer les agencesVoyages.agents
+        StringBuilder sb = new StringBuilder("a:protocoles.anglaisesscellees.agencesVoyages.agents.AgentCommissairePriseur;");
         for(int i=0; i<10; i++)
-            sb.append("encherisseur_").append(i).append(":encheres.anglaisesscellees.agents.AgentParticipant;");
+            sb.append("encherisseur_").append(i).append(":protocoles.anglaisesscellees.agencesVoyages.agents.AgentParticipant;");
         prop.setProperty(Profile.AGENTS, sb.toString());
         // creer le profile pour le conteneur principal
         ProfileImpl profMain = new ProfileImpl(prop);

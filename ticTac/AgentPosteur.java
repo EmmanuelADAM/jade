@@ -9,13 +9,13 @@ import jade.util.ExtendedProperties;
 import jade.util.leap.Properties;
 
 /**
- * classe d'agents pour échange entre 1 agents de cette classe et 1 autre<br>
+ * classe d'agencesVoyages.agents pour échange entre 1 agencesVoyages.agents de cette classe et 1 autre<br>
  *     2 msg de type differents sont envoyes
  * @author emmanueladam
  * */
 public class AgentPosteur extends Agent {
     /**
-     * Initialisation de l'agents
+     * Initialisation de l'agencesVoyages.agents
      */
     @Override
     protected void setup() {

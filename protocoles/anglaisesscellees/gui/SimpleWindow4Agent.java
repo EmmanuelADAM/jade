@@ -1,7 +1,7 @@
-package encheres.anglaisesscellees.gui;
+package protocoles.anglaisesscellees.gui;
 
 
-import encheres.anglaisesscellees.agents.AgentWindowed;
+import protocoles.anglaisesscellees.agents.AgentWindowed;
 import jade.gui.GuiEvent;
 
 import javax.swing.*;
@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 
 /** a simple window with a text area to display informations
  * @author emmanueladam */
-@SuppressWarnings("serial")
 public class SimpleWindow4Agent extends JFrame  implements ActionListener{
     static int nb=0;
     int no=0;
@@ -54,7 +53,7 @@ public class SimpleWindow4Agent extends JFrame  implements ActionListener{
     }
 
 
-    /** build the gui : a text area in the center of the window, with scroll bars*/
+    /** build the agencesVoyages.gui : a text area in the center of the window, with scroll bars*/
     private void buildGui()
     {
         getContentPane().setLayout(new BorderLayout());

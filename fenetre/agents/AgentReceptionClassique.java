@@ -16,7 +16,7 @@ public class AgentReceptionClassique extends AgentWindowed{
 
 	/**
 	 * initialize the agent <br>  
-	 * create the local dir to store data and roles <br>
+	 * create the local dir to store agencesVoyages.data and roles <br>
 	 * add the stack of behaviours (pileComportements)
 	 */
 	protected void setup() {  

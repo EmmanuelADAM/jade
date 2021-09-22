@@ -15,7 +15,7 @@ import jade.util.leap.Properties;
 import static java.lang.System.out;
 
 /**
- * classe d'agent pour échange entre 2 agents de cette classe. l'un s'appelle ping et initie un échange avec l'agent pong.
+ * classe d'agent pour échange entre 2 agencesVoyages.agents de cette classe. l'un s'appelle ping et initie un échange avec l'agent pong.
  *
  * @author emmanueladam
  * */
@@ -73,7 +73,7 @@ public class AgentPingPong extends Agent {
         Properties prop = new ExtendedProperties();
         // demander la fenetre de controle
         prop.setProperty(Profile.GUI, "true");
-        // nommer les agents
+        // nommer les agencesVoyages.agents
         prop.setProperty(Profile.AGENTS, "ping:pingPong.AgentPingPong;pong:pingPong.AgentPingPong");
         // creer le profile pour le conteneur principal
         ProfileImpl profMain = new ProfileImpl(prop);

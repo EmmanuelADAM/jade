@@ -8,7 +8,7 @@ import jade.util.ExtendedProperties;
 import jade.util.leap.Properties;
 
 /**
- * classe qui lance 2 agents pour illustrer le filtrage de messages.
+ * classe qui lance 2 agencesVoyages.agents pour illustrer le filtrage de messages.
  *
  * @author emmanueladam
  * */
@@ -19,7 +19,7 @@ public class LaunchAgents extends Agent {
         Properties prop = new ExtendedProperties();
         // demander la fenetre de controle
         prop.setProperty(Profile.GUI, "true");
-        // nommer les agents
+        // nommer les agencesVoyages.agents
         prop.setProperty(Profile.AGENTS, "agentDecompte:ticTac.AgentPosteur;agentPiege:ticTac.AgentLecteur");
         // creer le profile pour le conteneur principal
         ProfileImpl profMain = new ProfileImpl(prop);

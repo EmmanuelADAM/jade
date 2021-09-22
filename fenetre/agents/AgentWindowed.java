@@ -6,14 +6,14 @@ import jade.gui.GuiEvent;
 import fenetre.gui.SimpleWindow4Agent;
 
 /**
- * classe générique d'agents permettant une interaction avec une fenêtre
+ * classe générique d'agencesVoyages.agents permettant une interaction avec une fenêtre
  * 
  * @author revised by Emmanuel ADAM
  */
 @SuppressWarnings("serial")
 public  class AgentWindowed extends GuiAgent{
 
-	/**la fenetre liee a l'agents*/
+	/**la fenetre liee a l'agencesVoyages.agents*/
 	SimpleWindow4Agent window;
 
 	public  AgentWindowed() {

@@ -1,6 +1,6 @@
-package encheres.anglaisesscellees.agents;
+package protocoles.anglaisesscellees.agents;
 
-import encheres.anglaisesscellees.gui.SimpleWindow4Agent;
+import protocoles.anglaisesscellees.gui.SimpleWindow4Agent;
 import jade.gui.GuiAgent;
 import jade.gui.GuiEvent;
 
@@ -12,8 +12,7 @@ import javax.swing.*;
  *
  * @author revised by Emmanuel ADAM
  */
-@SuppressWarnings("serial")
-public  class AgentWindowed extends GuiAgent{
+public   class AgentWindowed extends GuiAgent{
 
 
     SimpleWindow4Agent window;
@@ -30,11 +29,9 @@ public  class AgentWindowed extends GuiAgent{
         SwingUtilities.invokeLater(() -> window.println(msg));
     }
 
+    /**fonction a remplir pour repondre aux evenements de la fenetre*/
     @Override
-    protected void onGuiEvent(GuiEvent arg0) {
-        // TODO Auto-generated method stub
-
-    }
+    protected  void onGuiEvent(GuiEvent arg0){}
 
     /**
      * @return the window

@@ -32,7 +32,7 @@ public class AgentHello extends Agent {
         String[] jadeArgs = new String[2];
         StringBuilder sbAgents = new StringBuilder();
         sbAgents.append("monPremierAgent:helloworldSolo.AgentHello").append(";");
-        jadeArgs[0] = "-gui";
+        jadeArgs[0] = "-agencesVoyages.gui";
         jadeArgs[1] = sbAgents.toString();
         jade.Boot.main(jadeArgs);
     }
