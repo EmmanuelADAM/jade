@@ -8,8 +8,8 @@ Ces codes illustrent un petit cas d'étude permettant de manipuler le protocole 
 
 Un voyageur souhaite aller d'un point `a` à un point `b` :
 - il lance un appel d'offre à plusieurs agences de voyages, 
-- certaines sont spécialisées dans les bus, les trains et.ou les voitures.
-- ces agences envoient leurs catalogues de voyages possible
+- certaines sont spécialisées dans les bus, les trains et/ou les voitures.
+- ces agences envoient leurs catalogues de voyages possibles
 - le client fait son choix, et peut combiner différentes offres selon ses critères (coûts, temps, émission de CO2, ...)
 
 

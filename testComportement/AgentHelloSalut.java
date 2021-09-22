@@ -60,9 +60,9 @@ public class AgentHelloSalut extends Agent {
 	{
 		String[] jadeArgs = new String[2];
 		StringBuilder sbAgents = new StringBuilder();
-		sbAgents.append("a1:testComp01.AgentHelloSalut").append(";");
-		sbAgents.append("a2:testComp01.AgentHelloSalut").append(";");
-		jadeArgs[0] = "-agencesVoyages.gui";
+		sbAgents.append("a1:testComportement.AgentHelloSalut").append(";");
+		sbAgents.append("a2:testComportement.AgentHelloSalut").append(";");
+		jadeArgs[0] = "-gui";
 		jadeArgs[1] = sbAgents.toString();
 		jade.Boot.main(jadeArgs);
 	}
