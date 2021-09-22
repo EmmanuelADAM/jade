@@ -20,7 +20,7 @@ La documentation et l'API sont également accessibles [sur le lien](http://emman
 
 ### Agents avec comportement
 - Ajout de agencesVoyages.comportements simples à un agent, exemple d'exécution
-    - [AgentHelloSalut](https://github.com/EmmanuelADAM/jade/blob/master/testComp01/AgentHelloSalut.java) : code pour un agent doté de agencesVoyages.comportements simples
+    - [AgentHelloSalut](https://github.com/EmmanuelADAM/jade/tree/master/testComportement) : code pour un agent doté de agencesVoyages.comportements simples
 
 ### Agents communiquant
 - Exemple classique de test de communication entre 2 agencesVoyages.agents : le ping-pong
