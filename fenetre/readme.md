@@ -13,5 +13,5 @@ Supports pour le cours de programmation orientée agent en Jade
 - [SimpleGui4Agent](https://github.com/EmmanuelADAM/jade/blob/master/HelloWorld/gui/SimpleGui4Agent.java) : une classe pour une fenêtre minimale, liée à un agent de type *GuiAgent*. 
   - Pour dialoguer avec son agent (codé comme processus), cette fenêtre (nécessairement un processus) lui poste un événement
 
-- au lancement, 4 agencesVoyages.agents sont lancés, "a" apte à émettre un message, "b", "c", "d" qui attendent des messages
+- Lancez la classe LaunchAgents; au lancement, 4 agencesVoyages.agents sont lancés, "a" apte à émettre un message, "b", "c", "d" qui attendent des messages
 ---
