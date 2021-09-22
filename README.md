@@ -24,7 +24,7 @@ La documentation et l'API sont également accessibles [sur le lien](http://emman
 
 ### Agents communiquant
 - Exemple classique de test de communication entre 2 agencesVoyages.agents : le ping-pong
-    - [AgentPingPong](https://github.com/EmmanuelADAM/jade/blob/master/pingPong/AgentPingPong.java) : code pour qui permet de lancer deux agencesVoyages.agents qui communiquent entre eux. L'agent ping envoie un balle à l'agent pong qui la retourne à ping qui la renvoie à son tour, ...
+    - [AgentPingPong](https://github.com/EmmanuelADAM/jade/tree/master/pingPong) : code pour qui permet de lancer deux agencesVoyages.agents qui communiquent entre eux. L'agent ping envoie un balle à l'agent pong qui la retourne à ping qui la renvoie à son tour, ...
 - Exemple avec filtrage de messages : 
     - [ticTac](https://github.com/EmmanuelADAM/jade/tree/master/ticTac) : un agent envoie des messages taggés avec 2 types différents; un agent les reçoit et les traite différement selon leurs types. agent "decompte" envoie des msgs "tictac" taggés "CLOCK" toutes les secondes, puis un msg taggé "BOOM" au bout de 10s à l'agent "agentPiege"
 
