@@ -1,10 +1,10 @@
 
 package agencesVoyages.agents;
 
-import com.opencsv.CSVReader;
 import agencesVoyages.comportements.ContractNetVente;
 import agencesVoyages.data.Journey;
 import agencesVoyages.data.JourneysList;
+import com.opencsv.CSVReader;
 import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.domain.DFService;
@@ -28,7 +28,7 @@ import java.util.logging.Level;
 @SuppressWarnings("serial")
 public class AgenceAgent extends GuiAgent {
     /**
-     * code shared with the agencesVoyages.gui to quit the agent
+     * code shared with the gui to quit the agent
      */
     public static final int EXIT = 0;
 
@@ -99,7 +99,7 @@ public class AgenceAgent extends GuiAgent {
     }
 
     /**
-     * methode invoquee par la agencesVoyages.gui
+     * methode invoquee par la gui
      */
     @Override
     protected void onGuiEvent(GuiEvent guiEvent) {

@@ -20,11 +20,11 @@ La documentation et l'API sont également accessibles [sur le lien](http://emman
 
 ### Agents avec comportement
 - Ajout de comportements simples à un agent, exemple d'exécution
-    - [AgentHelloSalut](https://github.com/EmmanuelADAM/jade/blob/master/testComp01/AgentHelloSalut.java) : code pour un agent doté de comportements simples
+    - [testComportement](https://github.com/EmmanuelADAM/jade/blob/master/testComportement) : code pour un agent doté de comportements simples
 
 ### Agents communiquant
 - Exemple classique de test de communication entre 2 agents : le ping-pong
-    - [AgentPingPong](https://github.com/EmmanuelADAM/jade/blob/master/pingPong/AgentPingPong.java) : code pour qui permet de lancer deux agents qui communiquent entre eux. L'agent ping envoie un balle à l'agent pong qui la retourne à ping qui la renvoie à son tour, ...
+    - [pingPong](https://github.com/EmmanuelADAM/jade/blob/master/pingPong) : code pour qui permet de lancer deux agents qui communiquent entre eux. L'agent ping envoie un balle à l'agent pong qui la retourne à ping qui la renvoie à son tour, ...
 - Exemple avec filtrage de messages : 
     - [ticTac](https://github.com/EmmanuelADAM/jade/tree/master/ticTac) : un agent envoie des messages taggés avec 2 types différents; un agent les reçoit et les traite différement selon leurs types. agent "decompte" envoie des msgs "tictac" taggés "CLOCK" toutes les secondes, puis un msg taggé "BOOM" au bout de 10s à l'agent "agentPiege"
 
@@ -34,8 +34,13 @@ La documentation et l'API sont également accessibles [sur le lien](http://emman
     - [radio](https://github.com/EmmanuelADAM/jade/tree/master/radio) : codes qui ilustrent la communication par broadcast. Un agent ne cible plus des destinataires, mais un canal qu'écoutent d'autres agents
 
 ## Gestion de services : déclaration et recherche
-- [HelloWorld](https://github.com/EmmanuelADAM/jade/tree/master/HelloWorld) : codes pour des agents liés chacun à une fenêtre. Ces agents se découvrent par reherche de services, et s'envoient des messages simples
+- [helloWorldService](https://github.com/EmmanuelADAM/jade/tree/master/helloWorldService) : codes pour des agents liés chacun à une fenêtre. Ces agents se découvrent par reherche de services, et s'envoient des messages simples
 
 ## Protocoles d'interactions entre agents
-- [AchieveRE](https://github.com/EmmanuelADAM/jade/tree/master/protocoles) : codes illustrant la communication entre agents par le protocoles AchieveRE. Un agent soumet un requête à des agents par ce protocole et attend leurs réponses.
+- [Requete](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/requetes) : codes illustrant la communication entre agents par le protocoles AchieveRE. 
+- [Enchere](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/anglaisesscellees) : codes illustrant la communication entre agents par le protocole ContractNet pour une enchère simple.
+- [Vote](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/voteBorda) : codes illustrant la communication entre agents par le protocoles protocole ContractNet pour un vote.
+
+
+##Exemple complet, support à développements : 
 - [agentsVoyage](https://github.com/EmmanuelADAM/jade/tree/master/agentsVoyage) : codes pour des agents simulant des agences de voyages
