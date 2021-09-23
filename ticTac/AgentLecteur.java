@@ -16,7 +16,7 @@ import static java.lang.System.out;
  * */
 public class AgentLecteur extends Agent {
     /**
-     * Initialisation de l'agencesVoyages.agents
+     * Initialisation de l'agent
      */
     @Override
     protected void setup() {

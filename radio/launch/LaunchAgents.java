@@ -14,7 +14,7 @@ public class LaunchAgents {
 	  prop.setProperty(Profile.GUI, "true");
 	  // add the Topic Management Service
 	  prop.setProperty(Profile.SERVICES, "jade.core.messaging.TopicManagementService;jade.core.event.NotificationService");
-	  // nommer les agencesVoyages.agents
+	  // nommer les agents
 	  prop.setProperty(Profile.AGENTS, "a:radio.agents.AgentDiffuseur;"
 	  		+ "b:radio.agents.AgentAuditeur;c:radio.agents.AgentAuditeur;d:radio.agents.AgentAuditeur");
 	  // creer le profile pour le conteneur principal

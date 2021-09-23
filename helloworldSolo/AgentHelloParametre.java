@@ -36,7 +36,7 @@ public class AgentHelloParametre extends Agent {
         StringBuilder sbAgents = new StringBuilder();
         sbAgents.append("agentA:helloworldSolo.AgentHelloParametre(coucou)").append(";");
         sbAgents.append("agentB:helloworldSolo.AgentHelloParametre(bonjour)").append(";");
-        jadeArgs[0] = "-agencesVoyages.gui";
+        jadeArgs[0] = "-gui";
         jadeArgs[1] = sbAgents.toString();
         jade.Boot.main(jadeArgs);
     }

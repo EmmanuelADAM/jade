@@ -9,13 +9,13 @@ import jade.util.ExtendedProperties;
 import jade.util.leap.Properties;
 
 /**
- * classe d'agencesVoyages.agents pour échange entre 1 agencesVoyages.agents de cette classe et 1 autre<br>
+ * classe d'agents pour échange entre 1 agent de cette classe et 1 autre<br>
  *     2 msg de type differents sont envoyes
  * @author emmanueladam
  * */
 public class AgentPosteur extends Agent {
     /**
-     * Initialisation de l'agencesVoyages.agents
+     * Initialisation de l'agents
      */
     @Override
     protected void setup() {
@@ -27,7 +27,7 @@ public class AgentPosteur extends Agent {
                 var msg = new ACLMessage(ACLMessage.INFORM);
                 //ajout d'un identifiant au msg
                 msg.setConversationId("CLOCK");
-                msg.addReceiver(new AID("agentPiege", AID.ISLOCALNAME));
+                msg.addReceiver(new AID("agentDemineur", AID.ISLOCALNAME));
                 msg.setContent("tictac");
                 myAgent.send(msg);
             }};
@@ -40,7 +40,7 @@ public class AgentPosteur extends Agent {
             protected void onWake() {
                     var msg = new ACLMessage(ACLMessage.INFORM);
                     msg.setConversationId("BOOM");
-                    msg.addReceiver(new AID("agentPiege", AID.ISLOCALNAME));
+                    msg.addReceiver(new AID("agentDemineur", AID.ISLOCALNAME));
                     msg.setContent("b o o m ! ! !");
                     myAgent.removeBehaviour(compTicTac);
                     myAgent.send(msg);

@@ -17,9 +17,9 @@ import jade.lang.acl.ACLMessage;
  */
 @SuppressWarnings("serial")
 public class AlertAgent extends GuiAgent {
-	/** code pour ajout de livre par la agencesVoyages.gui */
+	/** code pour ajout de livre par la gui */
 	public static final int EXIT = 0;
-	/** code pour achat de livre par la agencesVoyages.gui */
+	/** code pour achat de livre par la gui */
 	public static final int ALERT = 1;
 
 	/** liste des vendeurs */
@@ -28,7 +28,7 @@ public class AlertAgent extends GuiAgent {
 	/** topic on which the alert will be send */
 	AID topic;
 
-	/** agencesVoyages.gui */
+	/** gui */
 	private AlertGui window;
 
 	/** Initialisation de l'agent */
@@ -58,7 +58,7 @@ public class AlertAgent extends GuiAgent {
 
 	///// SETTERS AND GETTERS
 	/**
-	 * @return agent agencesVoyages.gui
+	 * @return agent gui
 	 */
 	public AlertGui getWindow() {
 		return window;

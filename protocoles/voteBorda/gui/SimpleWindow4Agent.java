@@ -27,8 +27,8 @@ public class SimpleWindow4Agent extends JFrame  implements ActionListener{
 
     public SimpleWindow4Agent() {
         no=nb++;
-        int widthJFrame = 400;
-        int heightJFrame = 100;
+        int widthJFrame = 450;
+        int heightJFrame = 200;
         Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         int xx = 10 + (int)((no* widthJFrame)%screen.getWidth());
         int yy = 10 + (heightJFrame * (int)(((no+1) * widthJFrame)/screen.getWidth()) ) ;
@@ -53,8 +53,12 @@ public class SimpleWindow4Agent extends JFrame  implements ActionListener{
         myAgent = _a;
     }
 
+    public void setBackgroundTextColor(Color c)
+    {
+        jTextArea.setBackground(c);
+    }
 
-    /** build the agencesVoyages.gui : a text area in the center of the window, with scroll bars*/
+    /** build the gui : a text area in the center of the window, with scroll bars*/
     private void buildGui()
     {
         getContentPane().setLayout(new BorderLayout());

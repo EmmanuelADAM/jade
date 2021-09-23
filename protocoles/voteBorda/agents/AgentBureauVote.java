@@ -9,11 +9,13 @@ import jade.lang.acl.ACLMessage;
 import jade.proto.ContractNetInitiator;
 import protocoles.voteBorda.gui.SimpleWindow4Agent;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * classe d'un agent qui soumet un appel au vote a d'autres agencesVoyages.agents  par le protocole ContractNet
+ * classe d'un agent qui soumet un appel au vote a d'autres agents  par le protocole ContractNet
  * @author eadam
  */
 public class AgentBureauVote extends AgentWindowed {
@@ -23,9 +25,10 @@ public class AgentBureauVote extends AgentWindowed {
         window = new SimpleWindow4Agent(getAID().getName(), this);
         window.println("Hello! Agent  " +  getLocalName() + " is ready, my address is " + this.getAID().getName());
         window.setButtonActivated(true);
+        window.setBackgroundTextColor(Color.CYAN);
     }
 
-    /**add a ContractNet protocol to agencesVoyages.launch a... */
+    /**add a ContractNet protocol to launch a vote */
     private void createVote(String id, String objet) {
 
         println("_/ \\".repeat(20));

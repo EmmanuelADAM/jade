@@ -29,9 +29,9 @@ import jade.proto.SubscriptionInitiator;
  */
 @SuppressWarnings("serial")
 public class TravellerAgent extends GuiAgent {
-	/** code pour ajout de livre par la agencesVoyages.gui */
+	/** code pour ajout de livre par la gui */
 	public static final int EXIT = 0;
-	/** code pour achat de livre par la agencesVoyages.gui */
+	/** code pour achat de livre par la gui */
 	public static final int BUY_TRAVEL = 1;
 
 	/** liste des vendeurs */
@@ -46,7 +46,7 @@ public class TravellerAgent extends GuiAgent {
 	/** topic from which the alert will be received */
 	private AID topic;
 
-	/** agencesVoyages.gui */
+	/** gui */
 	private TravellerGui window;
 
 	/** Initialisation de l'agent */
@@ -112,7 +112,7 @@ public class TravellerAgent extends GuiAgent {
 
 	///// SETTERS AND GETTERS
 	/**
-	 * @return agent agencesVoyages.gui
+	 * @return agent gui
 	 */
 	public TravellerGui getWindow() {
 		return window;

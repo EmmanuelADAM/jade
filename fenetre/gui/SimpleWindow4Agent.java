@@ -60,7 +60,7 @@ public class SimpleWindow4Agent extends JFrame  implements ActionListener{
 	}
 
 
-	/** build the agencesVoyages.gui : a text area in the center of the window, with scroll bars*/
+	/** build the gui : a text area in the center of the window, with scroll bars*/
 	private void buildGui()
 	{
 		getContentPane().setLayout(new BorderLayout());

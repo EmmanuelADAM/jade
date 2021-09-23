@@ -12,7 +12,7 @@ public class LaunchAgents {
         Properties prop = new ExtendedProperties();
         // demander la fenetre de controle
         prop.setProperty(Profile.GUI, "true");
-        // nommer les agencesVoyages.agents
+        // nommer les agents
         StringBuilder sb = new StringBuilder("a:protocoles.requetes.agents.AgentEmissionARE;");
         String typeAgent = ":protocoles.requetes.agents.AgentReceptionARE;";
         for(int i=0; i<10; i++)

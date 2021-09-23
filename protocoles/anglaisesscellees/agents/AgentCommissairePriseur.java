@@ -8,11 +8,13 @@ import jade.gui.GuiEvent;
 import jade.lang.acl.ACLMessage;
 import jade.proto.ContractNetInitiator;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 
 /**
- * classe d'un agent qui soumet un appel d'offres a d'autres agencesVoyages.agents  par le protocole ContractNet
+ * classe d'un agent qui soumet un appel d'offres a d'autres agents  par le protocole ContractNet
  * @author eadam
  */
 public class AgentCommissairePriseur extends AgentWindowed {
@@ -22,9 +24,10 @@ public class AgentCommissairePriseur extends AgentWindowed {
         window = new SimpleWindow4Agent(getAID().getName(), this);
         println("Hello! Agent  " +  getLocalName() + " is ready, my address is " + this.getAID().getName());
         window.setButtonActivated(true);
+        window.setBackgroundTextColor(Color.CYAN);
     }
 
-    /**add a ContractNet protocol to agencesVoyages.launch a... */
+    /**add a ContractNet protocol to launch a... */
     private void createOffer(String id, String objet) {
 
         ACLMessage msg = new ACLMessage(ACLMessage.CFP);

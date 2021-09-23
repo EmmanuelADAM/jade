@@ -21,7 +21,7 @@ public class SimpleWindow4Agent extends JFrame  implements ActionListener{
 	/**monAgent linked to this frame */
 	AgentWindowed myAgent;
 	private int widthJFrame=400;
-	private int heightJFrame=100;
+	private int heightJFrame=150;
 	private boolean buttonActivated;
 
 
@@ -52,7 +52,7 @@ public class SimpleWindow4Agent extends JFrame  implements ActionListener{
 	}
 
 
-	/** build the agencesVoyages.gui : a text area in the center of the window, with scroll bars*/
+	/** build the gui : a text area in the center of the window, with scroll bars*/
 	private void buildGui()
 	{
 		getContentPane().setLayout(new BorderLayout());

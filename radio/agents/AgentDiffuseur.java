@@ -8,7 +8,7 @@ import jade.lang.acl.ACLMessage;
 
 
 /**
- * agencesVoyages.agents associé à une fenêtre, envoie un message radio sur un canal
+ * agents associé à une fenêtre, envoie un message radio sur un canal
  * @author eadam
  */
 @SuppressWarnings("serial")
@@ -33,7 +33,7 @@ public class AgentDiffuseur extends AgentWindowed {
 		}
 	}
 
-	  /**reaction to a agencesVoyages.gui event*/
+	  /**reaction to a gui event*/
 	  protected void onGuiEvent(GuiEvent ev) {
 	    switch(ev.getType()) {
 	      case -1:  sendMessages(); break;

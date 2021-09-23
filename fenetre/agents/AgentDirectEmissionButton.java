@@ -7,15 +7,15 @@ import jade.lang.acl.ACLMessage;
 
 
 /**
- * agencesVoyages.agents associé à une fenêtre, envoie un message direct aux agencesVoyages.agents b,c,d lorsque la fenêtre lui informe que le bouton a été cliqué
+ * agents associé à une fenêtre, envoie un message direct aux agents b,c,d lorsque la fenêtre lui informe que le bouton a été cliqué
  * @author eadam
  */
 @SuppressWarnings("serial")
 public class AgentDirectEmissionButton extends AgentWindowed{
 
 	/**
-	 * initialize the agencesVoyages.agents <br>
-	 * create the local dir to store agencesVoyages.data and roles <br>
+	 * initialize the agents <br>
+	 * create the local dir to store data and roles <br>
 	 * add the stack of behaviours (pileComportements)
 	 */
 	protected void setup() {  
@@ -24,14 +24,14 @@ public class AgentDirectEmissionButton extends AgentWindowed{
 		window.setButtonActivated(true);
 	}
 	
-	  /**reaction to a agencesVoyages.gui event*/
+	  /**reaction to a gui event*/
 	  protected void onGuiEvent(GuiEvent ev) {
 	    switch(ev.getType()) {
 	      case -1:  sendMessages(); break;
 	    }
 	  }
 
-	  /**send messages to agencesVoyages.agents b, c & d*/
+	  /**send messages to agents b, c & d*/
 	private void sendMessages()
 	{
 		ACLMessage msg = new ACLMessage(ACLMessage.INFORM);

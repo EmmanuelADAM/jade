@@ -7,6 +7,7 @@ import jade.core.AID;
 import jade.lang.acl.ACLMessage;
 import jade.proto.AchieveREInitiator;
 
+import java.awt.*;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -21,6 +22,7 @@ public class AgentEmissionARE extends AgentWindowed{
         window = new SimpleWindow4Agent(getAID().getName(), this);
         window.println("Hello! Agent  " +  getLocalName() + " is ready, my address is " + this.getAID().getName());
         window.setButtonActivated(true);
+        window.setBackgroundTextColor(Color.CYAN);
     }
 
     /**add a AchieveREInitiator protocol to send a request */
@@ -31,7 +33,7 @@ public class AgentEmissionARE extends AgentWindowed{
 
         var adresses = AgentToolsEA.searchAgents(this, "calcul", "somme");
         for (AID dest : adresses) msg.addReceiver(dest);
-        println("agencesVoyages.agents calculateurs trouves : " + Arrays.stream(adresses).map(AID::getLocalName).toList().toString());
+        println("agents calculateurs trouves : " + Arrays.stream(adresses).map(AID::getLocalName).toList().toString());
 
         println("_".repeat(40));
         println("j'envoie une requete sur " + msg.getContent());

@@ -3,9 +3,7 @@ package protocoles.requetes.gui;
 
 import jade.gui.GuiEvent;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -31,7 +29,7 @@ public class SimpleWindow4Agent extends JFrame  implements ActionListener{
     /**monAgent linked to this frame */
     AgentWindowed myAgent;
     private int widthJFrame=400;
-    private int heightJFrame=100;
+    private int heightJFrame=300;
     private boolean buttonActivated;
 
 
@@ -62,7 +60,12 @@ public class SimpleWindow4Agent extends JFrame  implements ActionListener{
     }
 
 
-    /** build the agencesVoyages.gui : a text area in the center of the window, with scroll bars*/
+    public void setBackgroundTextColor(Color c)
+    {
+        jTextArea.setBackground(c);
+    }
+
+    /** build the gui : a text area in the center of the window, with scroll bars*/
     private void buildGui()
     {
         getContentPane().setLayout(new BorderLayout());

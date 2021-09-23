@@ -30,7 +30,7 @@ public class ContractNetAchat extends ContractNetInitiator {
     private String preference;
 
     /**
-     * agent agencesVoyages.gui
+     * agent gui
      */
     private TravellerGui window;
 

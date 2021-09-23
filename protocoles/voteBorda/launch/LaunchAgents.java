@@ -12,7 +12,7 @@ public class LaunchAgents {
         Properties prop = new ExtendedProperties();
         // demander la fenetre de controle
         prop.setProperty(Profile.GUI, "true");
-        // nommer les agencesVoyages.agents
+        // nommer les agents
         StringBuilder sb = new StringBuilder("bureau:protocoles.voteBorda.agents.AgentBureauVote;");
         for(int i=0; i<5; i++)
             sb.append("votant_").append(i).append(":protocoles.voteBorda.agents.AgentParticipant;");

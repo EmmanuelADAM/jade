@@ -19,7 +19,7 @@ public class AgentHello extends Agent {
         out.println("De l'agent " + getLocalName() + " : " + texteHello);
         out.println("Mon adresse est " + getAID());
         //l'agent demande son retrait de la plateforme
-        doDelete();
+       doDelete();
     }
 
     // 'Nettoyage' de l'agent
@@ -28,11 +28,12 @@ public class AgentHello extends Agent {
         out.println("Moi, Agent " + getLocalName() + " je quitte la plateforme ! ");
     }
 
+    /**ce main lance la plateforme jade et lui demande de creer un agent*/
     public static void main(String[] args) {
         String[] jadeArgs = new String[2];
         StringBuilder sbAgents = new StringBuilder();
         sbAgents.append("monPremierAgent:helloworldSolo.AgentHello").append(";");
-        jadeArgs[0] = "-agencesVoyages.gui";
+        jadeArgs[0] = "-gui";
         jadeArgs[1] = sbAgents.toString();
         jade.Boot.main(jadeArgs);
     }

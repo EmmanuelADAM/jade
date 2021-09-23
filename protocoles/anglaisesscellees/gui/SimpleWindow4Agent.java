@@ -12,25 +12,31 @@ import java.awt.event.ActionListener;
 
 /** a simple window with a text area to display informations
  * @author emmanueladam */
-public class SimpleWindow4Agent extends JFrame  implements ActionListener{
-    static int nb=0;
-    int no=0;
-    /** Text area */
+public class SimpleWindow4Agent extends JFrame  implements ActionListener {
+    static int nb = 0;
+    int no = 0;
+    /**
+     * Text area
+     */
     JTextArea jTextArea;
-    /** Text area */
+    /**
+     * Text area
+     */
     JButton jbutton;
-    /**monAgent linked to this frame */
+    /**
+     * monAgent linked to this frame
+     */
     AgentWindowed myAgent;
     private boolean buttonActivated;
 
 
     public SimpleWindow4Agent() {
-        no=nb++;
-        int widthJFrame = 400;
-        int heightJFrame = 100;
+        no = nb++;
+        int widthJFrame = 450;
+        int heightJFrame = 200;
         Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-        int xx = 10 + (int)((no* widthJFrame)%screen.getWidth());
-        int yy = 10 + (heightJFrame * (int)(((no+1) * widthJFrame)/screen.getWidth()) ) ;
+        int xx = 10 + (int) ((no * widthJFrame) % screen.getWidth());
+        int yy = 10 + (heightJFrame * (int) (((no + 1) * widthJFrame) / screen.getWidth()));
         setBounds(xx, yy, widthJFrame, heightJFrame);
         buildGui();
         setVisible(true);
@@ -53,13 +59,14 @@ public class SimpleWindow4Agent extends JFrame  implements ActionListener{
     }
 
 
-    /** build the agencesVoyages.gui : a text area in the center of the window, with scroll bars*/
-    private void buildGui()
-    {
+    /**
+     * build the gui : a text area in the center of the window, with scroll bars
+     */
+    private void buildGui() {
         getContentPane().setLayout(new BorderLayout());
         jTextArea = new JTextArea();
         jTextArea.setRows(5);
-        JScrollPane jScrollPane  = new JScrollPane(jTextArea);
+        JScrollPane jScrollPane = new JScrollPane(jTextArea);
         getContentPane().add(BorderLayout.CENTER, jScrollPane);
         jbutton = new JButton("--");
         getContentPane().add(BorderLayout.SOUTH, jbutton);
@@ -67,18 +74,27 @@ public class SimpleWindow4Agent extends JFrame  implements ActionListener{
     }
 
 
-    /** add a string to the text area */
+    /**
+     * add a string to the text area
+     */
     public void println(String chaine) {
         String texte = jTextArea.getText();
-        texte = texte +  chaine + "\n";
+        texte = texte + chaine + "\n";
         jTextArea.setText(texte);
         jTextArea.setCaretPosition(texte.length());
     }
 
-    /**SEND A MESSAGE TO THE AGENT*/
+    /**
+     * SEND A MESSAGE TO THE AGENT
+     */
     public void actionPerformed(ActionEvent evt) {
-        GuiEvent ev = new GuiEvent(this,-1);
+        GuiEvent ev = new GuiEvent(this, -1);
         myAgent.postGuiEvent(ev);
+    }
+
+    public void setBackgroundTextColor(Color c)
+    {
+        jTextArea.setBackground(c);
     }
 
     public boolean isButtonActivated() {

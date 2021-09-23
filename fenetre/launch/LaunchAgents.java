@@ -12,7 +12,7 @@ public class LaunchAgents {
 	  Properties prop = new ExtendedProperties();
 	  // demander la fenetre de controle
 	  prop.setProperty(Profile.GUI, "true");
-	  // nommer les agencesVoyages.agents
+	  // nommer les agents
 	  prop.setProperty(Profile.AGENTS, "a:fenetre.agents.AgentDirectEmissionButton;"
 	  		+ "b:fenetre.agents.AgentReceptionClassique;c:fenetre.agents.AgentReceptionClassique;d:fenetre.agents.AgentReceptionClassique");
 	  // creer le profile pour le conteneur principal

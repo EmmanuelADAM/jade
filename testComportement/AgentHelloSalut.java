@@ -8,7 +8,7 @@ import jade.core.behaviours.WakerBehaviour;
 import static java.lang.System.out;
 
 /**
- * classe d'un agent qui contient 2 agencesVoyages.comportements sans fin, qui affichent l'un 'bonjour', l'autre 'salut'
+ * classe d'un agent qui contient 2 comportements sans fin, qui affichent l'un 'bonjour', l'autre 'salut'
  * l'agent possède aussi un comportement à allumage retardé qui le supprime de la plateforme
  * @author emmanueladam
  * */
@@ -42,6 +42,7 @@ public class AgentHelloSalut extends Agent {
 		// ajout d'un comportement qui retire l'agent dans 1000 ms
 		addBehaviour(new WakerBehaviour(this, 1000) {
 			protected void onWake() {
+				out.println("De l'agent " + getLocalName() + " : bon j'y vais...");
 				myAgent.doDelete();
 			}
 		});
@@ -54,7 +55,7 @@ public class AgentHelloSalut extends Agent {
 	}
 
 	/**procedure principale.
-	 * lance 2 agencesVoyages.agents qui agissent en "parallele" et dont les agencesVoyages.comportements s'éxécutent dans le même cycle de temps
+	 * lance 2 agents qui agissent en "parallele" et dont les comportements s'éxécutent dans le même cycle de temps
 	 * */
 	public static void main(String[] args)
 	{

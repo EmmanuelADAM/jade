@@ -12,7 +12,7 @@ import jade.util.ExtendedProperties;
 import jade.core.Runtime;
 
 /**
- * agencesVoyages.launch the simulation of travelers and travel agencies
+ * launch the simulation of travelers and travel agencies
  * 
  * @author emmanueladam
  */
@@ -37,7 +37,7 @@ public class LaunchSimu {
 		
 		// allow to send arguments to the JADE launcher
 		var pp = new ExtendedProperties();
-		// add the agencesVoyages.gui
+		// add the gui
 		pp.setProperty(Profile.GUI, "true");
 		// add the Topic Management Service
 		pp.setProperty(Profile.SERVICES, "jade.core.messaging.TopicManagementService;jade.core.event.NotificationService");		 
@@ -52,7 +52,7 @@ public class LaunchSimu {
 		// create a default Profile
 		var pMain = new ProfileImpl(pp);
 
-		// agencesVoyages.launch the main jade container
+		// launch the main jade container
 		Runtime.instance().createMainContainer(pMain);
 
 	}

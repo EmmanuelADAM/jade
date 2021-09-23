@@ -15,10 +15,10 @@ import jade.lang.acl.ACLMessage;
  */
 public class HelloAgent extends GuiAgent {
 
-	/** little agencesVoyages.gui to display debug messages */
+	/** little gui to display debug messages */
 	 SimpleGui4Agent window;
 
-	/** address (aid) of the other agencesVoyages.agents */
+	/** address (aid) of the other agents */
 	AID[] neighbourgs;
 
 	/** msg to send */
@@ -50,7 +50,7 @@ public class HelloAgent extends GuiAgent {
   
 	}
 
-	/**envoi un message a tous les agencesVoyages.agents du service cordialite
+	/**envoi un message a tous les agents du service cordialite
 	 * @param text texte envoye par le message
 	 * */
 	private void sendHello(String text) {
