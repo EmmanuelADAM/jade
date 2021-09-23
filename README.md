@@ -42,5 +42,5 @@ La documentation et l'API sont également accessibles [sur le lien](http://emman
 - [Vote](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/voteBorda) : codes illustrant la communication entre agents par le protocoles protocole ContractNet pour un vote.
 
 
-##Exemple complet, support à développements : 
+## Exemple complet, support à développements : 
 - [agentsVoyage](https://github.com/EmmanuelADAM/jade/tree/master/agentsVoyage) : codes pour des agents simulant des agences de voyages
