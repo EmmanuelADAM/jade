@@ -39,7 +39,7 @@ La documentation et l'API sont également accessibles [sur le lien](http://emman
 ## Protocoles d'interactions entre agents
 - [Requete](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/requetes) : codes illustrant la communication entre agents par le protocoles AchieveRE. 
 - [Enchere](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/anglaisesscellees) : codes illustrant la communication entre agents par le protocole ContractNet pour une enchère simple.
-- [Vote](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/voteBorda) : codes illustrant la communication entre agents par le protocoles protocole ContractNet pour un vote.
+- [Vote](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/voteBorda) : codes illustrant la communication entre agents par le protocole ContractNet pour un vote.
 
 
 ## Exemple complet, support à développements : 
