@@ -42,4 +42,4 @@ La documentation et l'API sont également accessibles [sur le lien](http://emman
 - [Vote](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/voteBorda) : codes illustrant le mécanisme de vote par la méthode de Borda, à l'aide du protocole ContractNet.
 
 ## Base de travail : des agences de voyages
-- [agentsVoyage](https://github.com/EmmanuelADAM/jade/tree/master/agentsVoyage) : codes pour des agents simulant des agences de voyages
+- [agentsVoyage](https://github.com/EmmanuelADAM/jade/tree/master/agencesVoyages) : codes pour des agents simulant des agences de voyages
