@@ -43,4 +43,4 @@ La documentation et l'API sont également accessibles [sur le lien](http://emman
 
 
 ## Exemple complet, support à développements : 
-- [agentsVoyage](https://github.com/EmmanuelADAM/jade/tree/master/agentsVoyage) : codes pour des agents simulant des agences de voyages
+- [agentsVoyage](https://github.com/EmmanuelADAM/jade/tree/master/agencesVoyages) : codes pour des agents simulant des agences de voyages
