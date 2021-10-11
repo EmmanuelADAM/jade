@@ -118,6 +118,7 @@ public class ContractNetAchat extends ContractNetInitiator {
                     e.printStackTrace();
                 }
                 if (receivedCatalog != null) {
+                    receivedCatalog.removeIf(j->j.getPlaces()<=0);
                     catalogs.addJourneys(receivedCatalog);
                     monAgent.println("reçu de " + ans.getSender().getLocalName() + " : ");
                     monAgent.println(receivedCatalog.toString());

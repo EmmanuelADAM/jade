@@ -42,6 +42,7 @@ public class Journey implements Cloneable, Serializable, Comparable<Journey> {
     private static String ARRIVAL = ", arrival:";
     private static String COST = ", cost = ";
     private static String PROPOSEDBY = ", proposed by ";
+	private static final String NBPLACES = ", nb=";
 
 	public Journey(final String _start, final String _stop, final String _means, final int _departureDate,
 			final int _duration) {
@@ -190,9 +191,10 @@ public class Journey implements Cloneable, Serializable, Comparable<Journey> {
 	@Override
 	public String toString() {
 	    return new StringBuilder(Journey.TRAJECTFROM).append(start).append(Journey.TO).
-                append(stop).append(Journey.BY).append(means).append(Journey.DEPARTURE).
-                append(departureDate).append(Journey.ARRIVAL).append(arrivalDate).
-                append(Journey.COST).append(cost).append(Journey.PROPOSEDBY).append(proposedBy).toString();
+				append(stop).append(Journey.BY).append(means).append(Journey.DEPARTURE).
+				append(departureDate).append(Journey.ARRIVAL).append(arrivalDate).
+				append(Journey.COST).append(cost).append(Journey.PROPOSEDBY).append(proposedBy).
+				append(NBPLACES).append(places).toString();
 	}
 
 	public int getPlaces() {

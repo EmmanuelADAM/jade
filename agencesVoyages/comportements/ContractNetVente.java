@@ -13,6 +13,7 @@ import jade.proto.ContractNetResponder;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import agencesVoyages.agents.AgenceAgent;
 import agencesVoyages.data.JourneysList;
@@ -74,6 +75,7 @@ public class ContractNetVente extends  ContractNetResponder
 	 */
 	protected ACLMessage handleAcceptProposal(ACLMessage cfp, ACLMessage propose,ACLMessage accept) throws FailureException 
 	{
+		boolean ok = true;
 		ACLMessage inform = accept.createReply();
 		inform.setPerformative(ACLMessage.INFORM);
 		window.println(" RECU UN ACCORD DE "+accept.getSender().getLocalName() +" !!!" );
@@ -86,8 +88,18 @@ public class ContractNetVente extends  ContractNetResponder
 			liste.forEach(j->window.println(j.toString()));
 			window.println("  !!!!" );
 			inform.setContent("ok pour ces "+liste.size()+" tickets...");
+			for(Journey j:liste)
+			{
+				var journeysFromStart =  catalog.getJourneysFrom(j.getStart());
+				var reducedStream = journeysFromStart.stream().filter(oj-> Objects.equals(j.getStop(), oj.getStop()) &&
+						Objects.equals(j.getDepartureDate(), oj.getDepartureDate()) );
+				var optionalJourney = reducedStream.findFirst();
+				optionalJourney.ifPresent(journeyFound-> journeyFound.setPlaces(journeyFound.getPlaces()-1));
+			}
+
+			//TODO: verifier si disponibilite des billet pour refus eventuel			if(Math.random() <0.5) ok = false;
 		}
-		return inform;
+		if(!ok) throw new FailureException("plus de place !!");		return inform;
 	}
 
 	/** methode lancee suite a la reception d'un refus de l'offre par l'acheteur

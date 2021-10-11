@@ -4,6 +4,7 @@ package agencesVoyages.agents;
 import agencesVoyages.comportements.ContractNetVente;
 import agencesVoyages.data.Journey;
 import agencesVoyages.data.JourneysList;
+import agencesVoyages.data.TransportMeans;
 import com.opencsv.CSVReader;
 import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
@@ -131,6 +132,7 @@ public class AgenceAgent extends GuiAgent {
                 int frequence = (nbRepetitions == 0) ? 0 : Integer.parseInt(nextLine[9].trim());
                 Journey firstJourney = new Journey(origine, destination, means, departureDate, duration, cost,
                         co2, confort);
+                firstJourney.setPlaces(TransportMeans.valueOf(means.toUpperCase()).getNbTickets());
                 firstJourney.setProposedBy(this.getLocalName());
                 window.println(firstJourney.toString());
                 catalog.addJourney(firstJourney);

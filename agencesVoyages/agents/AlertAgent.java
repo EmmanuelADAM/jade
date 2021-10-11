@@ -72,7 +72,9 @@ public class AlertAgent extends GuiAgent {
 		}
 		if (eventFromGui.getType() == AlertAgent.ALERT) {
 			ACLMessage alert = new ACLMessage(ACLMessage.INFORM);
-			alert.setContent("une alerte meteo !! ");
+			var start = (String) eventFromGui.getParameter(0);
+			var stop = (String) eventFromGui.getParameter(1);
+			alert.setContent(start + "," + stop);
 			alert.addReceiver(topic);
 			send(alert);
 			println("j'ai envoyé une alerte...");
