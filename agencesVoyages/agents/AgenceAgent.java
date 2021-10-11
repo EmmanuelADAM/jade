@@ -124,7 +124,7 @@ public class AgenceAgent extends GuiAgent {
                 String means = nextLine[2].trim();
                 int departureDate = Integer.parseInt(nextLine[3].trim());
                 int duration = Integer.parseInt(nextLine[4].trim());
-                int cost = Integer.parseInt(nextLine[5].trim());
+                double cost = Double.parseDouble(nextLine[5].trim());
                 int co2 = Integer.parseInt(nextLine[6].trim());
                 int confort = Integer.parseInt(nextLine[7].trim());
                 int nbRepetitions = (nextLine.length == 9) ? 0 : Integer.parseInt(nextLine[8].trim());
