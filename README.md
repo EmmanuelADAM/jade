@@ -20,9 +20,9 @@ La documentation et l'API sont également accessibles [sur le lien](http://emman
 
 ### Agents avec comportements
 - Ajout de comportements simples à un agent, exemple d'exécution
-    - [testComportement](https://github.com/EmmanuelADAM/jade/blob/master/testComportement) : code pour un agent doté de comportements simples
-    - [AgentHelloEuropeenSequentiel](https://github.com/EmmanuelADAM/jade/blob/master/AgentHelloEuropeenSequentiel) : code pour deux agents dotés de comportements simples s'exécutant séquentiellement
-    - [AgentHelloEuropeenParallel](https://github.com/EmmanuelADAM/jade/blob/master/AgentHelloEuropeenParallel) : code pour deux agents dotés de comportements simples s'exécutant en parallèle
+    - [AgentHelloSalut](https://github.com/EmmanuelADAM/jade/blob/master/testComportement) : code pour un agent doté de comportements simples
+    - [AgentHelloEuropeenSequentiel](https://github.com/EmmanuelADAM/jade/blob/master/testComportement) : code pour deux agents dotés de comportements simples s'exécutant séquentiellement
+    - [AgentHelloEuropeenParallel](https://github.com/EmmanuelADAM/jade/blob/master/testComportement) : code pour deux agents dotés de comportements simples s'exécutant en parallèle
 
 ### Agents communiquant
 - Exemple classique de test de communication entre 2 agents : le ping-pong
