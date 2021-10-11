@@ -71,8 +71,9 @@ A-------B
 ## Autres agences 
 - Ajoutez 2 autres agences : l'une pour les bus utilisant les voyages de busAutre.csv, l'autre pour les voitures utilisant le fichier carAutre.csv
 - Créez une classe PortailAgence. Une classe portail agence se comporte comme une agence mais ne dispose pas de moyens de locomotion. Le client n'envoie plus de demande auprès des agences mais auprès des portails.
-- Créez un agent PortailBus qui sert d'intermédiaire entre les clients et les bus, et un agent PortailCar qui fait de même pour les agences de voiture. L'agent agence de train, se définit lui même commu une agence..
+- Créez un agent PortailBus qui sert d'intermédiaire entre les clients et les bus, et un agent PortailCar qui fait de même pour les agences de voiture. 
+- L'agent agence de train, se définit lui même comme un portail auprès des pages jaunes, bien qu'il ne soit pas défini par une classe PortailAgence..
 
-- un achat auprès d'un portail est répercuté au niveau de l'agence.
+- un achat auprès d'un portail est répercuté au niveau de l'agence (sauf pour l'agence de train).
 
 
