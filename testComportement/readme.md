@@ -13,7 +13,7 @@
 
 - [AgentHelloEuropeenParallel](https://github.com/EmmanuelADAM/jade/blob/master/testComp01/AgentHelloEuropeenParallel.java) : code pour deux agent qui possèdent contient des comportements s'exécutant en **parallèle**. Ces comportments s'exécutent 3 fois 
   - ils affichent des salutations dans différentes langues européennes..
-``a1 -> bonjour
+```a1 -> bonjour
 a2 -> bonjour
 a1 -> hallo
 a2 -> hallo
@@ -29,13 +29,15 @@ a2 -> saluton
 a1 -> hallo
 a2 -> bonjour
 a2 -> hallo
-a1 -> buongiorno``
+a1 -> buongiorno
+...
+```
 
 
 
 - [AgentHelloEuropeenSequentiel](https://github.com/EmmanuelADAM/jade/blob/master/testComp01/AgentHelloEuropeenSequentiel.java) : code pour deux agent qui possèdent contient des comportements s'exécutant en **séquentiel**. Ces comportments s'exécutent 3 fois 
   - ils affichent des salutations dans différentes langues européennes..
-``a2 -> bonjour
+```a2 -> bonjour
 a2 -> bonjour
 a2 -> bonjour
 a2 -> hallo
@@ -53,4 +55,6 @@ a2 -> OlÃ¡
 a2 -> saluton
 a2 -> saluton
 a1 -> bonjour
-a2 -> saluton``
+a2 -> saluton
+...
+```
