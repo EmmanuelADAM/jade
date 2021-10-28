@@ -103,23 +103,30 @@ public class AgentBureauVote extends AgentWindowed {
                 println("Résultat du vote " + best);
                 println("-".repeat(40));
 
-                //placement du nom des elus dans les messages à retourner
+                //placement du nom du ou des elus dans les messages à retourner
                 for(ACLMessage m:retours)
                     m.setContent(best.toString());
                 mesRetours.addAll(retours);
 
                 //si ex-aequo, on relance un vote avec ceux-ci
+                //(on a + que 1 valeur separee par une ',' dans le texte du message retourne)
                 if((best.toString()).split(",").length>1)
                 {
                     println("-".repeat(30));
                     println("un nouveau tour va etre lance ces choix : " + best);
                     println("-".repeat(30));
-                    myAgent.addBehaviour(new WakerBehaviour(myAgent, 100) {
-                        @Override
-                        protected void onWake() {
-                            createVote("voteNo1", best.toString());
-                        }
-                    });
+                    //on va relance le CFP sur base des votants exprimes avec un choix a faire parmi les elus
+                    //on ajoute au vecteur des messages de retour les messages pour le futur  CFP
+                    for(ACLMessage m:listeVotes)
+                    {
+                        var rep = m.createReply();
+                        rep.setPerformative(ACLMessage.CFP);
+                        rep.setContent(best.toString());
+                        mesRetours.add(rep);
+                    }
+                    votes.replaceAll((k,v)->0);
+                    //On relance une nouvelle iteration du CFP
+                    newIteration(mesRetours);
                 }
             }
 
