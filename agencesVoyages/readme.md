@@ -90,7 +90,7 @@ A-------B
 
 **Confiance dans le service**
 - Ajoutez maintenance une notion de confiance envers le réseaux routier...
-  - pour chaque axe, ajoutez une valeur de confiance (confiance dans la relation A-B, ..... , E-F
+  - pour chaque axe, ajoutez une valeur de confiance (confiance dans la relation A-B, ..... , E-F)
   - à chaque problème sur un axe, la confiance envers la relation passe à 0
   - à la restauration du problème; la confiance se rétablit "petit à petit" selon une vitesse plus ou moins rapide selon que l'agent soit rancunier ou confiant.
   - un acheteur qui se voit proposer un déplacement sur un axe décidera de risquer de prendre cet axe ou non selon la confiance qu'il lui accorde (par un tirage aléatoire, si le nombre est dessous la confiance accordée, la chemin sera pris ou non)
