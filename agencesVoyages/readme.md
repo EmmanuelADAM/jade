@@ -77,4 +77,24 @@ A-------B
 
 - un achat auprès d'un portail est répercuté au niveau de l'agence.
 
+---
+## Confiance
+
+**Confiance envers l'autre**
+
+- Ajoutez une notion d'évaluation aux agences, sur une valeur de 0 à 10. 
+  - Un agent peut maintenant avoir une nature courageuse ou prudente ou neutre.
+  - Le courageux ne tient pas compte des avis et prendra l'offre la plus intéressante quelque soit l'évaluation de l'agence.
+  - Le prudent se basera plutôt sur l'évaluation que sur l'intérêt de l'offre; sur un odre de 90/10 : si le confort est demandé et qu'un trajet en voiture est proposé par une agence de faible renomée, le voyageur préfèrera éventuellement prendre le bus proposé par une agence renommée.
+  - Le neutre effectue un ratio 50/50 sur la renommée et l'intérêt de l'offre pour faire son choix
+
+**Confiance dans le service**
+- Ajoutez maintenance une notion de confiance envers le réseaux routier...
+  - pour chaque axe, ajoutez une valeur de confiance (confiance dans la relation A-B, ..... , E-F
+  - à chaque problème sur un axe, la confiance envers la relation passe à 0
+  - à la restauration du problème; la confiance se rétablit "petit à petit" selon une vitesse plus ou moins rapide selon que l'agent soit rancunier ou confiant.
+  - un acheteur qui se voit proposer un déplacement sur un axe décidera de risquer de prendre cet axe ou non selon la confiance qu'il lui accorde (par un tirage aléatoire, si le nombre est dessous la confiance accordée, la chemin sera pris ou non)
+  - une agence choisira de même de proposer dans son catalogue les trajets selon la confiance accordée à ceux-ci 
+
+---
 
