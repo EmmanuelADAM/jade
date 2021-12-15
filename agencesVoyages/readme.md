@@ -29,10 +29,12 @@ Le code utilise
  - la librairie jade.jar à télécharger sur le site de [jade](https://jade.tilab.com).
 -----
 Le code s'exécute tel quel, mais le client ne peut effectuer qu'un choix par durée la plus courte parmi les voyages proposées.  
-- <span style='color:red'> **Proposez et codez** la décrémentation du nb de places par voyage (on pose 3 places par trajet en voiture, 50 en bus, et 200 places par trajet en train),</span>
-- <span style='color:red'>  **Proposez et codez** le comportement de réaction suite à la réception d'un message d'alerte sur un tronçon donné; 
-  - pour les agences (disparition des trajets impactés), 
-  - pour le client (relance d'une demande de trajet si impacté, achat des billets permettant de compléter le trajet). </span>
+-  **Proposez et codez** la décrémentation du nb de places par voyage (on pose 3 places par trajet en voiture, 50 en bus, et 200 places par trajet en train),
+-  **Proposez et codez** le comportement de réaction suite à la réception d'un message d'alerte sur un tronçon donné; 
+   - pour les agences (disparition des trajets impactés), 
+   - pour le client (relance d'une demande de trajet si impacté, achat des billets permettant de compléter le trajet). 
+
+> si code correct => + 5 points
 
 -----
 
@@ -40,9 +42,13 @@ Le code s'exécute tel quel, mais le client ne peut effectuer qu'un choix par du
 - **enchères** : un client impacté par une route bloquée peut se retrouver avec des tickets achetés non remoursables.
   - pour chaque billet acheté, 
      - il lance une enchère hollandaise; partant du prix d'achat; diminuant jusqu'à 1€. Si aucun acheteur, le billet est abandonné.
-     - ou il lance une enchere anglaise (1 un tour (**facile**, mais pas de bonus de points)), en n tours classiquement; l'enchere grimpe au fur et à mesure des annonces et stoppe lorsqu'il n'y en a plus. le vainqueur étant celui ayant donné le prix le plus haut)
-  - un voyageur peut également devoir abandonner son déplacement. Proposez une adaptation de sa fenêtre afin de lui permettre de lancer des enchèses.
-    - un trajet peut subitement devenir très prisé. Un voyageur peut décider de revendre un trajet plutôt que de le réalliser en faisant un bénéfice. Implémentez une enchère ascendante en un tour (cf. enchère de Vikrey)
+     - ou il lance une enc here anglaise (1 un tour (**facile**, mais pas de bonus de points)), en n tours classiquement; l'enchère grimpe au fur et à mesure des annonces et stoppe lorsqu'il n'y en a plus. le vainqueur étant celui ayant donné le prix le plus haut)
+  - un voyageur peut également devoir abandonner son déplacement. Proposez une adaptation de sa fenêtre afin de lui permettre de lancer des enchères.
+    - un trajet peut subitement devenir très prisé. Un voyageur peut décider de revendre un trajet plutôt que de le réaliser en faisant un bénéfice. Implémentez une enchère ascendante en un tour (cf. enchère de Vikrey)
+
+> si code enchères correct => + 5 points
+> 
+> si code de modification d'une fenêtre client correct => + 3 points
 
 ---
 
@@ -77,6 +83,8 @@ A-------B
 
 - un achat auprès d'un portail est répercuté au niveau de l'agence.
 
+> si code portail correct => + 5 points
+
 ---
 ## Confiance
 
@@ -88,6 +96,8 @@ A-------B
   - Le prudent se basera plutôt sur l'évaluation que sur l'intérêt de l'offre; sur un odre de 90/10 : si le confort est demandé et qu'un trajet en voiture est proposé par une agence de faible renomée, le voyageur préfèrera éventuellement prendre le bus proposé par une agence renommée.
   - Le neutre effectue un ratio 50/50 sur la renommée et l'intérêt de l'offre pour faire son choix
 
+> si code "Confiance envers l'autre" correct => + 5 points
+
 **Confiance dans le service**
 - Ajoutez maintenance une notion de confiance envers le réseaux routier...
   - pour chaque axe, ajoutez une valeur de confiance (confiance dans la relation A-B, ..... , E-F)
@@ -95,6 +105,8 @@ A-------B
   - à la restauration du problème; la confiance se rétablit "petit à petit" selon une vitesse plus ou moins rapide selon que l'agent soit rancunier ou confiant.
   - un acheteur qui se voit proposer un déplacement sur un axe décidera de risquer de prendre cet axe ou non selon la confiance qu'il lui accorde (par un tirage aléatoire, si le nombre est dessous la confiance accordée, la chemin sera pris ou non)
   - une agence choisira de même de proposer dans son catalogue les trajets selon la confiance accordée à ceux-ci 
+
+> si code "Confiance dans le service" correct => + 5 points
 
 ---
 
