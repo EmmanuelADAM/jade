@@ -8,9 +8,9 @@ Ces codes illustrent un petit cas d'étude permettant de manipuler le protocole 
 
 Un voyageur souhaite aller d'un point `a` à un point `b` :
 - il lance un appel d'offre à plusieurs agences de voyages, 
-- certaines sont spécialisées dans les bus, les trains et/ou les voitures.
+- certaines sont spécialisées dans les bus, les trains ou les voitures.
 - ces agences envoient leurs catalogues de voyages possibles
-- le client fait son choix, et peut combiner différentes offres selon ses critères (coûts, temps, émission de CO2, ...)
+- le client fait son choix et peut combiner différentes offres selon ses critères (coûts, temps, émission de CO2, ...)
 
 
 - Des classes sont déjà proposées : 
@@ -28,7 +28,7 @@ Le code utilise
  - la librairie opencsv ([http://opencsv.sourceforge.net](http://opencsv.sourceforge.net)) version 3.9 attachée à ce dossier.
  - la librairie jade.jar à télécharger sur le site de [jade](https://jade.tilab.com).
 -----
-Le code s'exécute tel quel, mais le client ne peut effectuer qu'un choix par durée la plus courte parmi les voyages proposées.  
+Le code s'exécute tel quel, mais le client ne peut effectuer qu'un choix par durée la plus courte parmi les voyages proposés.  
 -  **Proposez et codez** la décrémentation du nb de places par voyage (on pose 3 places par trajet en voiture, 50 en bus, et 200 places par trajet en train),
 -  **Proposez et codez** le comportement de réaction suite à la réception d'un message d'alerte sur un tronçon donné; 
    - pour les agences (disparition des trajets impactés), 
@@ -42,11 +42,11 @@ Le code s'exécute tel quel, mais le client ne peut effectuer qu'un choix par du
 - **enchères** : un client impacté par une route bloquée peut se retrouver avec des tickets achetés non remoursables.
   - pour chaque billet acheté, 
      - il lance une enchère hollandaise; partant du prix d'achat; diminuant jusqu'à 1€. Si aucun acheteur, le billet est abandonné.
-     - ou il lance une enc here anglaise (1 un tour (**facile**, mais pas de bonus de points)), en n tours classiquement; l'enchère grimpe au fur et à mesure des annonces et stoppe lorsqu'il n'y en a plus. le vainqueur étant celui ayant donné le prix le plus haut)
+     - ou il lance une enchère anglaise (1 un tour (**facile**, mais pas de bonus de points)), en n tours classiquement; l'enchère grimpe au fur et à mesure des annonces et stoppe lorsqu'il n'y en a plus. le vainqueur étant celui ayant donné le prix le plus haut)
   - un voyageur peut également devoir abandonner son déplacement. Proposez une adaptation de sa fenêtre afin de lui permettre de lancer des enchères.
     - un trajet peut subitement devenir très prisé. Un voyageur peut décider de revendre un trajet plutôt que de le réaliser en faisant un bénéfice. Implémentez une enchère ascendante en un tour (cf. enchère de Vikrey)
 
-> si code enchères correct => + 5 points
+> si code enchères correct => + 5 points (+ 4 points par autre type d'enchère)
 > 
 > si code de modification d'une fenêtre client correct => + 3 points
 
@@ -78,8 +78,8 @@ A-------B
 
 ## Autres agences 
 - Ajoutez 2 autres agences : l'une pour les bus utilisant les voyages de busAutre.csv, l'autre pour les voitures utilisant le fichier carAutre.csv
-- Créez une classe PortailAgence. Une classe portail agence se comporte comme une agence mais ne dispose pas de moyens de locomotion. Le client n'envoie plus de demande auprès des agences mais auprès des portails.
-- Créez un agent PortailBus qui sert d'intermédiaire entre les clients et les bus, et un agent PortailCar qui fait de même pour les agences de voiture. L'agent agence de train, se définit lui même commu une agence..
+- Créez une classe PortailAgence. Une classe portail agence se comporte comme une agence, mais ne dispose pas de moyens de locomotion. Le client n'envoie plus de demande auprès des agences, mais auprès des portails.
+- Créez un agent PortailBus qui sert d'intermédiaire entre les clients et les bus, et un agent PortailCar qui fait de même pour les agences de voiture. L'agent agence de train, se définit lui-même comme une agence..
 
 - un achat auprès d'un portail est répercuté au niveau de l'agence.
 
@@ -99,11 +99,11 @@ A-------B
 > si code "Confiance envers l'autre" correct => + 5 points
 
 **Confiance dans le service**
-- Ajoutez maintenance une notion de confiance envers le réseaux routier...
+- Ajoutez maintenance une notion de confiance envers le réseau routier...
   - pour chaque axe, ajoutez une valeur de confiance (confiance dans la relation A-B, ..... , E-F)
   - à chaque problème sur un axe, la confiance envers la relation passe à 0
   - à la restauration du problème; la confiance se rétablit "petit à petit" selon une vitesse plus ou moins rapide selon que l'agent soit rancunier ou confiant.
-  - un acheteur qui se voit proposer un déplacement sur un axe décidera de risquer de prendre cet axe ou non selon la confiance qu'il lui accorde (par un tirage aléatoire, si le nombre est dessous la confiance accordée, la chemin sera pris ou non)
+  - un acheteur qui se voit proposer un déplacement sur un axe décidera de risquer de prendre cet axe ou non selon la confiance qu'il lui accorde (par un tirage aléatoire, si le nombre est dessous la confiance accordée, le chemin sera pris ou non)
   - une agence choisira de même de proposer dans son catalogue les trajets selon la confiance accordée à ceux-ci 
 
 > si code "Confiance dans le service" correct => + 5 points
