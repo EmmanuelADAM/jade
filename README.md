@@ -5,9 +5,7 @@
 Liste de supports pour le cours de programmation orientée agent en [Jade](https://jade.tilab.com).
 Pour l'ensemble de ces codes, il est nécessaire de disposer dans vos projet de la librairie "jade.jar"..
 Si le site de Jade est inaccessible, voici des liens pour télécharger la librairie :
-  - [jade.jar](https://github.com/EmmanuelADAM/jade/blob/master/jade.jar?raw=true) : librairie principale,
-  - [commons-codec-1.3.jar](http://emmanuel.adam.free.fr/jade/lib/commons-codec/commons-codec-1.3.jar) : librairie à utiliser lors d ela manipulation d'ontologie,
-  - [jadeExamples.jar](http://emmanuel.adam.free.fr/jade/lib/jadeExamples.jar) : librairie contenant les exemples de la documentation Jade.
+  - [jade2022c.jar](https://github.com/EmmanuelADAM/jade/blob/master/jade2022c.jar?raw=true) : librairie principale, mise à jour pour Java >= 17
   
 La documentation et l'API sont également accessibles [sur le lien](http://emmanuel.adam.free.fr/jade/doc/index.html).
 
@@ -31,7 +29,7 @@ La documentation et l'API sont également accessibles [sur le lien](http://emman
     - [ticTac](https://github.com/EmmanuelADAM/jade/tree/master/ticTac) : un agent envoie des messages taggés avec 2 types différents; un agent les reçoit et les traite différement selon leurs types. agent "decompte" envoie des msgs "tictac" taggés "CLOCK" toutes les secondes, puis un msg taggé "BOOM" au bout de 10s à l'agent "agentPiege"
 
 ### Agents interactifs et communicants
-- Ajout d'une petite interface graphique pour faciliter le dialogue avec l'utilisateur
+- Utilisation de la classe AgentWindowed qui ajoute une petite interface graphique pour faciliter le dialogue avec l'utilisateur
     - [fenetre](https://github.com/EmmanuelADAM/jade/tree/master/fenetre) : codes pour des agents liés à des fenêtres
     - [radio](https://github.com/EmmanuelADAM/jade/tree/master/radio) : codes qui ilustrent la communication par broadcast. Un agent ne cible plus des destinataires, mais un canal qu'écoutent d'autres agents
 
