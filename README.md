@@ -2,17 +2,10 @@
 
 [(version web)](https://emmanueladam.github.io/jade/)
 
-Liste de supports pour le cours de programmation orientée agent en [Jade](https://jade.tilab.com). Pour l'ensemble de
-ces codes, il est nécessaire de disposer dans vos projet de la librairie "jade.jar".. Si le site de Jade est
-inaccessible, voici des liens pour télécharger la librairie :
+Liste de supports pour le cours de programmation orientée agent en JADE. 
+Pour l'ensemble de ces codes, il est nécessaire de disposer dans vos projet de la librairie "[jade2022c.jar](https://github.com/EmmanuelADAM/JadeUPHF/releases/download/v22c/jade2022c.jar)". 
+Cette librairie est une mise à jour basée sur Java 17 de la version de [Jade](https://jade.tilab.com) de Tilab et y ajoute des fonctionnalités pour un codage simplifié.
 
-- [jade.jar](https://github.com/EmmanuelADAM/jade/blob/master/jade.jar?raw=true) : librairie principale,
-- [commons-codec-1.3.jar](http://emmanuel.adam.free.fr/jade/lib/commons-codec/commons-codec-1.3.jar) : librairie à
-  utiliser lors d ela manipulation d'ontologie,
-- [jadeExamples.jar](http://emmanuel.adam.free.fr/jade/lib/jadeExamples.jar) : librairie contenant les exemples de la
-  documentation Jade.
-
-La documentation et l'API sont également accessibles [sur le lien](http://emmanuel.adam.free.fr/jade/doc/index.html).
 
 ## Eléments de base : agent, comportement et envoi de messages
 
@@ -47,20 +40,22 @@ La documentation et l'API sont également accessibles [sur le lien](http://emman
 
 ### Agents interactifs et communicants
 
-- Ajout d'une petite interface graphique pour faciliter le dialogue avec l'utilisateur
+- Utilisation d'une petite interface graphique pour faciliter le dialogue avec l'utilisateur
     - [fenetre](https://github.com/EmmanuelADAM/jade/tree/master/fenetre) : codes pour des agents liés à des fenêtres
-    - [radio](https://github.com/EmmanuelADAM/jade/tree/master/radio) : codes qui ilustrent la communication par
+    - [radio](https://github.com/EmmanuelADAM/jade/tree/master/radio) : codes qui illustrent la communication par
       broadcast. Un agent ne cible plus des destinataires, mais un canal qu'écoutent d'autres agents
 
 ### Agents avec comportements de type FSM
 
-- Agents qui possèdent des comportements organisés selon une machine d'états finis (
-  FMS)  : [fsm](https://github.com/EmmanuelADAM/jade/tree/master/fsm)
+- Agents qui possèdent des comportements organisés selon une machine d'états finis (FMS)  : [fsm](https://github.com/EmmanuelADAM/jade/tree/master/fsm). 
+Deux exemples sont donnés : 
+  - enchaînements de comportement de salutation européennes au sein d'un agent,
+  - processus de soumission et de review d'un article entre un agent auteur, un agent journal et trois agents reviewers
 
 ## Gestion de services : déclaration et recherche
 
 - [helloWorldService](https://github.com/EmmanuelADAM/jade/tree/master/helloWorldService) : codes pour des agents liés
-  chacun à une fenêtre. Ces agents se découvrent par reherche de services, et s'envoient des messages simples
+  chacun à une fenêtre. Ces agents se découvrent par recherche de services, et s'envoient des messages simples
 
 ## Protocoles d'interactions entre agents
 
