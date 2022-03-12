@@ -14,7 +14,7 @@ import jade.core.AID;
  */
 @SuppressWarnings("serial")
 public class ComposedJourney implements Serializable {
-	private List<Journey> journeys;
+	private final List<Journey> journeys;
 	/** origin */
 	private String start;
 	/** destination */
@@ -102,14 +102,14 @@ public class ComposedJourney implements Serializable {
 	}
 
 	//some String constants to improve the memory management
-	private static String JOURNEYFROM = "journey from ";
-	private static String TO = " to ";
-	private static String DURATION = ", duration  ";
-	private static String DEPARTURE = " mn, departure: ";
-	private static String ARRIVAL = ", arrival:";
-	private static String COST = ", cost = ";
-	private static String LINE = "\n";
-	private static String SEP = "--";
+	private static final String JOURNEYFROM = "journey from ";
+	private static final String TO = " to ";
+	private static final String DURATION = ", duration  ";
+	private static final String DEPARTURE = " mn, departure: ";
+	private static final String ARRIVAL = ", arrival:";
+	private static final String COST = ", cost = ";
+	private static final String LINE = "\n";
+	private static final String SEP = "--";
     @Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

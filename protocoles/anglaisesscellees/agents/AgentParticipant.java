@@ -1,12 +1,15 @@
 package protocoles.anglaisesscellees.agents;
 
 
-import protocoles.anglaisesscellees.gui.SimpleWindow4Agent;
+import jade.core.AgentServicesTools;
 import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.FailureException;
 import jade.domain.FIPAAgentManagement.NotUnderstoodException;
 import jade.domain.FIPAAgentManagement.RefuseException;
 import jade.domain.FIPAException;
+import jade.gui.AgentWindowed;
+import jade.gui.GuiEvent;
+import jade.gui.SimpleWindow4Agent;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.proto.ContractNetResponder;
@@ -28,7 +31,7 @@ public class AgentParticipant extends AgentWindowed {
         println("Hello! Agent  " +  getLocalName() + " is ready, my address is " + this.getAID().getName());
         println("- ".repeat(20));
 
-        AgentToolsEA.register(this,"enchere", "participant");
+        AgentServicesTools.register(this,"enchere", "participant");
         Random hasard = new Random();
 
 
@@ -92,12 +95,17 @@ public class AgentParticipant extends AgentWindowed {
         addBehaviour(encherissement);
 
     }
+    @Override
+    public void onGuiEvent(GuiEvent event)
+    {
+        if(event.getType()==SimpleWindow4Agent.QUIT_EVENT) doDelete();
+    }
 
     @Override
     public void takeDown()
     {
-        println("je pars et je me desinscris...");
-        try { DFService.deregister(this); }
-        catch (FIPAException fe) { fe.printStackTrace(); }
+        AgentServicesTools.deregisterAll(this);
+        System.err.println("moi " + this.getLocalName() + ", je quitte la plateforme...");
     }
+
 }

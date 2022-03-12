@@ -12,6 +12,7 @@ import agencesVoyages.data.ComposedJourney;
 import agencesVoyages.data.JourneysList;
 import agencesVoyages.gui.TravellerGui;
 import jade.core.AID;
+import jade.core.AgentServicesTools;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
@@ -27,7 +28,6 @@ import jade.proto.SubscriptionInitiator;
  * 
  * @author Emmanuel ADAM
  */
-@SuppressWarnings("serial")
 public class TravellerAgent extends GuiAgent {
 	/** code pour ajout de livre par la gui */
 	public static final int EXIT = 0;
@@ -60,7 +60,7 @@ public class TravellerAgent extends GuiAgent {
 		vendeurs = new ArrayList<>();
 		detectAgences();
 
-		topic = AgentToolsEA.generateTopicAID(this,"TRAFFIC NEWS");
+		topic = AgentServicesTools.generateTopicAID(this,"TRAFFIC NEWS");
 		//ecoute des messages radio
 		addBehaviour(new CyclicBehaviour() {
 			@Override
@@ -81,7 +81,7 @@ public class TravellerAgent extends GuiAgent {
 	/**ecoute des evenement de type enregistrement en tant qu'agence aupres des pages jaunes*/
 	private void detectAgences()
 	{
-		var model = AgentToolsEA.createAgentDescription("travel agency", "seller");
+		var model = AgentServicesTools.createAgentDescription("travel agency", "seller");
 		var msg = DFService.createSubscriptionMessage(this, getDefaultDF(), model, null);
 		vendeurs = new ArrayList<>();
 		addBehaviour(new SubscriptionInitiator(this, msg) {
@@ -132,26 +132,19 @@ public class TravellerAgent extends GuiAgent {
 			//oter les voyages demarrant trop tard (1h30 apres la date de depart souhaitee)
 			journeys.removeIf(j->j.getJourneys().get(0).getDepartureDate()-departure>90);
 			switch (preference) {
-			case "duration":
-				Stream<ComposedJourney> strCJ = journeys.stream();
-				OptionalDouble moy = strCJ.mapToInt(ComposedJourney::getDuration).average();
-				final double avg = moy.getAsDouble();
-				println("duree moyenne = " + avg );//+ ", moy au carre = " + avg * avg);
-				journeys.sort(Comparator.comparingInt(ComposedJourney::getDuration));
-				break;
-			case "confort":
-				journeys.sort(Comparator.comparingInt(ComposedJourney::getConfort).reversed());
-				break;
-			case "cost":
-				journeys.sort(Comparator.comparingDouble(ComposedJourney::getCost));
-				break;
-			case "duration-cost":
-				//TODO: replace below to make a compromise between cost and confort...
-				journeys.sort(Comparator.comparingDouble(ComposedJourney::getCost));
-				break;
-			default:
-				journeys.sort(Comparator.comparingDouble(ComposedJourney::getCost));
-				break;
+				case "duration" -> {
+					Stream<ComposedJourney> strCJ = journeys.stream();
+					OptionalDouble moy = strCJ.mapToInt(ComposedJourney::getDuration).average();
+					final double avg = moy.orElse(0);
+					println("duree moyenne = " + avg);//+ ", moy au carre = " + avg * avg);
+					journeys.sort(Comparator.comparingInt(ComposedJourney::getDuration));
+				}
+				case "confort" -> journeys.sort(Comparator.comparingInt(ComposedJourney::getConfort).reversed());
+				case "cost" -> journeys.sort(Comparator.comparingDouble(ComposedJourney::getCost));
+				case "duration-cost" ->
+						//TODO: replace below to make a compromise between cost and confort...
+						journeys.sort(Comparator.comparingDouble(ComposedJourney::getCost));
+				default -> journeys.sort(Comparator.comparingDouble(ComposedJourney::getCost));
 			}
 			myJourney = journeys.get(0);
 			println("I choose this journey : " + myJourney);

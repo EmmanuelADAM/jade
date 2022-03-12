@@ -21,23 +21,22 @@ import java.util.*;
  * @author revised by Emmanuel ADAM
  * @version 191017
  */
-@SuppressWarnings("serial")
 public class ContractNetAchat extends ContractNetInitiator {
 
-    private String from;
-    private String to;
-    private int departure;
-    private String preference;
+    private final String from;
+    private final String to;
+    private final int departure;
+    private final String preference;
 
     /**
      * agent gui
      */
-    private TravellerGui window;
+    private final TravellerGui window;
 
     /**
      * acheteur lie a ce comportement
      */
-    private TravellerAgent monAgent;
+    private final TravellerAgent monAgent;
 
     /**
      * initialisation
@@ -99,17 +98,15 @@ public class ContractNetAchat extends ContractNetInitiator {
      *
      * @param responses   reponses recues
      * @param acceptances vecteur des messages a transmettre en retour aux reponses recues
-     * @see ContractNetInitiator#handleAllResponses(Vector, Vector)
+     * @see ContractNetInitiator#handleAllResponses(List, List)
      */
-    @SuppressWarnings({"rawtypes"})
     @Override
-    protected void handleAllResponses(Vector responses, Vector acceptances) {
+    protected void handleAllResponses(List<ACLMessage> responses, List<ACLMessage> acceptances) {
         //catalog of journeys built from answers
         var catalogs = new JourneysList();
         //map <name to the agent (agence), Msg built to answer to it>
         Map<String, ACLMessage> reponses = new HashMap<>();
-        for (Object respons : responses) {
-            var ans = (ACLMessage) respons;
+        for (ACLMessage ans : responses) {
             if (ans.getPerformative() == ACLMessage.PROPOSE) {
                 JourneysList receivedCatalog = null;
                 try {

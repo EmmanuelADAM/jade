@@ -1,9 +1,10 @@
 package fenetre.agents;
 
 
-import fenetre.gui.SimpleWindow4Agent;
 import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
+import jade.gui.AgentWindowed;
+import jade.gui.SimpleWindow4Agent;
 import jade.lang.acl.ACLMessage;
 
 /**
@@ -11,7 +12,7 @@ import jade.lang.acl.ACLMessage;
  * @author eadam
  */
 @SuppressWarnings("serial")
-public class AgentReceptionClassique extends AgentWindowed{
+public class AgentReceptionClassique extends AgentWindowed {
 
 
 	/**

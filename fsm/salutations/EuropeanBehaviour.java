@@ -44,4 +44,4 @@ class EuropeanBehaviour extends Behaviour {
         return (int) (Math.random() + 0.5);
     }
 
-};
+}

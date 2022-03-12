@@ -29,11 +29,11 @@ import jade.gui.GuiEvent;
 public class TravellerGui extends JFrame {
 
 	/** Text area */
-	private JTextArea jTextArea;
+	private final JTextArea jTextArea;
 
 
-	private TravellerAgent myAgent;
-	private JLabel lblPrice;
+	private final TravellerAgent myAgent;
+	private final JLabel lblPrice;
 	private JComboBox<String> jListFrom;
 	private JComboBox<String> jListTo;
 	private JComboBox<String> jListCriteria;

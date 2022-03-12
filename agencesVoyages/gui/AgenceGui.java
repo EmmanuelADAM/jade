@@ -19,16 +19,15 @@ import jade.gui.GuiEvent;
  * 
  * @author Emmanuel Adam - LAMIH
  */
-@SuppressWarnings("serial")
 public class AgenceGui extends JFrame {
 
 	private static int nbAgenceGui = 0;
-	private int noAgenceGui;
+	private final int noAgenceGui;
 
 	/** Text area */
-	private JTextArea jTextArea;
+	private final JTextArea jTextArea;
 
-	private AgenceAgent myAgent;
+	private final AgenceAgent myAgent;
 
 	public AgenceGui(AgenceAgent a) {
 		super(a.getName());

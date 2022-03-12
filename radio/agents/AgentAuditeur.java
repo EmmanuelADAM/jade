@@ -2,11 +2,13 @@ package radio.agents;
 
 
 import jade.core.AID;
+import jade.core.AgentServicesTools;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.core.messaging.TopicManagementHelper;
+import jade.gui.AgentWindowed;
+import jade.gui.SimpleWindow4Agent;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
-import radio.gui.SimpleWindow4Agent;
 
 /**
  * agent lié à une fenêtre qui ecoute en boucle des messages sur un topic
@@ -20,15 +22,7 @@ public class AgentAuditeur extends AgentWindowed {
 		window = new SimpleWindow4Agent(getAID().getName(), this);
 		println("Hello! Agent  " + getAID().getName() + " is ready. ");
 		//recherche d'un "canal radio" de nom InfoRadio
-		try {
-			var topicHelper = (TopicManagementHelper) getHelper(TopicManagementHelper.SERVICE_NAME);
-			topic = topicHelper.createTopic("InfoRadio");
-			topicHelper.register(this.getAID(), topic);
-		}
-		catch (Exception e) {
-			System.err.println("Agent "+getLocalName()+": ERROR registering to topic \"InfoRadio\"");
-			e.printStackTrace();
-		}
+		topic = AgentServicesTools.generateTopicAID(this, "InfoRadio" );
 
 		//ecoute cyclique sur le canal radio
 		addBehaviour(new CyclicBehaviour(this) {

@@ -6,6 +6,7 @@ import agencesVoyages.data.Journey;
 import agencesVoyages.data.JourneysList;
 import com.opencsv.CSVReader;
 import jade.core.AID;
+import jade.core.AgentServicesTools;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
@@ -57,10 +58,11 @@ public class AgenceAgent extends GuiAgent {
             fromCSV2Catalog((String) args[0]);
         }
 
-        AgentToolsEA.register(this, "travel agency", "seller");
+        AgentServicesTools.register(this, "travel agency", "seller");
 
         //REGLAGE ECOUTE DE LA RADIO
-        topic = AgentToolsEA.generateTopicAID(this, "TRAFFIC NEWS");
+        topic = AgentServicesTools.generateTopicAID(this, "TRAFFIC NEWS");
+
         //ecoute des messages radio
         addBehaviour(new CyclicBehaviour() {
             @Override

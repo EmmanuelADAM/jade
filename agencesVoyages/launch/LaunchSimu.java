@@ -21,7 +21,6 @@ public class LaunchSimu {
 	public static final Logger logger = Logger.getLogger("simu");
 
 	/**
-	 * @param args
 	 */
 	public static void main(String... args) {
 
@@ -40,13 +39,13 @@ public class LaunchSimu {
 		// add the gui
 		pp.setProperty(Profile.GUI, "true");
 		// add the Topic Management Service
-		pp.setProperty(Profile.SERVICES, "jade.core.messaging.TopicManagementService;jade.core.event.NotificationService");		 
-		
+		pp.setProperty(Profile.SERVICES, "jade.core.messaging.TopicManagementService;jade.core.event.NotificationService");
+
 		var lesAgents = new StringBuilder();
 		lesAgents.append("client1:agencesVoyages.agents.TravellerAgent;");
-		lesAgents.append("agentCar:agencesVoyages.agents.AgenceAgent(agentsVoyage/car.csv);");
-		lesAgents.append("agentBus:agencesVoyages.agents.AgenceAgent(agentsVoyage/bus.csv);");
-		lesAgents.append("agentTrain:agencesVoyages.agents.AgenceAgent(agentsVoyage/train.csv);");
+		lesAgents.append("agentCar:agencesVoyages.agents.AgenceAgent(agencesVoyages/car.csv);");
+		lesAgents.append("agentBus:agencesVoyages.agents.AgenceAgent(agencesVoyages/bus.csv);");
+		lesAgents.append("agentTrain:agencesVoyages.agents.AgenceAgent(agencesVoyages/train.csv);");
 		lesAgents.append("alert1:agencesVoyages.agents.AlertAgent");
 		pp.setProperty(Profile.AGENTS, lesAgents.toString());
 		// create a default Profile

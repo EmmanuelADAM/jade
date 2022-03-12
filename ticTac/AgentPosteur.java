@@ -1,12 +1,9 @@
 package ticTac;
 
-import jade.core.Runtime;
 import jade.core.*;
 import jade.core.behaviours.TickerBehaviour;
 import jade.core.behaviours.WakerBehaviour;
 import jade.lang.acl.ACLMessage;
-import jade.util.ExtendedProperties;
-import jade.util.leap.Properties;
 
 /**
  * classe d'agents pour échange entre 1 agent de cette classe et 1 autre<br>

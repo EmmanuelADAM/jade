@@ -2,6 +2,7 @@ package helloWorldService.agents;
 
 import helloWorldService.gui.SimpleGui4Agent;
 import jade.core.AID;
+import jade.core.AgentServicesTools;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
@@ -34,7 +35,14 @@ public class HelloAgent extends GuiAgent {
 		window = new SimpleGui4Agent(this);
 		window.println(helloMsg);
 		//s'enregistrer en tant d'agent d'accueil dans le service de cordialite
-		AgentToolsEA.register(this, "cordialite", "accueil");
+		var model = AgentServicesTools.createAgentDescription("cordialite", "accueil");
+		try { DFService.register(this, model);}
+		catch (FIPAException fe) { fe.printStackTrace(); }
+		//changer de service
+		model = AgentServicesTools.createAgentDescription("cordialite", "coucou");
+		try { DFService.modify(this, model);}
+		catch (FIPAException fe) { fe.printStackTrace(); }
+
 
 		//rester a l'ecoute des messages recus
 		addBehaviour(new CyclicBehaviour(this) {
@@ -54,10 +62,13 @@ public class HelloAgent extends GuiAgent {
 	 * @param text texte envoye par le message
 	 * */
 	private void sendHello(String text) {
-		neighbourgs = AgentToolsEA.searchAgents(this, "cordialite", null);
+		String nameService = "accueil";
+		if(Math.random()<0.5) nameService = "coucou";
+		window.lowTextArea.setText(text + " envoye au service " + nameService);
 		ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-		msg.setContent(text);
-		for (AID other : neighbourgs) msg.addReceiver(other);
+		msg.setContent(text + " pour service " + nameService);
+		neighbourgs = AgentServicesTools.searchAgents(this, "cordialite", nameService);
+		msg.addReceivers(neighbourgs);
 		send(msg);
 	}
 
@@ -80,10 +91,11 @@ public class HelloAgent extends GuiAgent {
 	@Override
 	protected void takeDown() {
 		// S'effacer du service pages jaunes
-		try { DFService.deregister(this);}
-		catch (FIPAException fe) { fe.printStackTrace();}
-		System.err.println("Agent : " + getAID().getName() + " quitte la plateforme.");
+		AgentServicesTools.deregisterAll(this);
+		//fermer la fenetre
 		window.dispose();
+		//bye
+		System.err.println("Agent : " + getAID().getName() + " quitte la plateforme.");
 	}
 
 }

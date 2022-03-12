@@ -1,7 +1,10 @@
 package protocoles.requetes.agents;
 
 
-import protocoles.requetes.gui.SimpleWindow4Agent;
+import jade.core.AgentServicesTools;
+import jade.gui.AgentWindowed;
+import jade.gui.GuiEvent;
+import jade.gui.SimpleWindow4Agent;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.proto.AchieveREResponder;
@@ -16,14 +19,14 @@ import java.util.Random;
  * @author eadam
  */
 @SuppressWarnings("serial")
-public class AgentReceptionARE extends AgentWindowed{
+public class AgentReceptionARE extends AgentWindowed {
 
     /**ajout du suivi de protocole AchieveRE*/
     protected void setup() {
         window = new SimpleWindow4Agent(getAID().getName(), this);
         window.println("Hello! Agent  " +  getLocalName() + " is ready, my address is " + this.getAID().getName());
 
-        AgentToolsEA.register(this,"calcul", "somme");
+        AgentServicesTools.register(this,"calcul", "somme");
         Random hasard = new Random();
 
 
@@ -32,6 +35,7 @@ public class AgentReceptionARE extends AgentWindowed{
         AchieveREResponder init = new AchieveREResponder(this, model){
 
             //fonction déclenchée à la réception d'un message par le protocole correspondant
+            @Override
             protected ACLMessage handleRequest(ACLMessage request){
                 window.println("recu  " + request.getContent() );
                 ACLMessage answer = request.createReply();
@@ -52,6 +56,7 @@ public class AgentReceptionARE extends AgentWindowed{
             }
             //fonction utilisée pour retourner un résultat sou forme de message
             //request = requete initiale, response = reponse que cet agent avait envoyé
+            @Override
             protected ACLMessage prepareResultNotification(ACLMessage request, ACLMessage response){
                 String content = request.getContent();
                 String[] terms = content.split(" ");
@@ -70,5 +75,18 @@ public class AgentReceptionARE extends AgentWindowed{
         };
 
         addBehaviour(init);
+    }
+
+    @Override
+    public void onGuiEvent(GuiEvent event)
+    {
+        if(event.getType()==SimpleWindow4Agent.QUIT_EVENT) doDelete();
+    }
+
+    @Override
+    public void takeDown()
+    {
+        AgentServicesTools.deregisterAll(this);
+        System.err.println("moi " + this.getLocalName() + ", je quitte la plateforme...");
     }
 }

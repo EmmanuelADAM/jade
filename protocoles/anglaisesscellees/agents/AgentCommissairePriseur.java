@@ -1,10 +1,12 @@
 package protocoles.anglaisesscellees.agents;
 
 
-import protocoles.anglaisesscellees.gui.SimpleWindow4Agent;
 import jade.core.AID;
+import jade.core.AgentServicesTools;
 import jade.domain.FIPANames;
+import jade.gui.AgentWindowed;
 import jade.gui.GuiEvent;
+import jade.gui.SimpleWindow4Agent;
 import jade.lang.acl.ACLMessage;
 import jade.proto.ContractNetInitiator;
 
@@ -34,8 +36,8 @@ public class AgentCommissairePriseur extends AgentWindowed {
         msg.setConversationId(id);
         msg.setContent(objet);
 
-        var adresses = AgentToolsEA.searchAgents(this, "enchere", "participant");
-        for (AID dest : adresses) msg.addReceiver(dest);
+        var adresses = AgentServicesTools.searchAgents(this, "enchere", "participant");
+        msg.addReceivers(adresses);
         println("(o)".repeat(30));
 
         println("destinataires trouves : " + Arrays.stream(adresses).map(AID::getLocalName).toList().toString());
@@ -49,7 +51,7 @@ public class AgentCommissairePriseur extends AgentWindowed {
         ContractNetInitiator init = new ContractNetInitiator(this, msg) {
             /**fonction lancee a chaque proposition*/
             @Override
-            public void handlePropose(ACLMessage propose, Vector v)
+            public void handlePropose(ACLMessage propose, List<ACLMessage> acceptattions)
             {
                 println(String.format("l'agent %s propose %s ", propose.getSender().getLocalName(), propose.getContent()) );
             }
@@ -62,10 +64,10 @@ public class AgentCommissairePriseur extends AgentWindowed {
 
             /**fonction lancee quand toutes les reponses ont ete recues*/
             @Override
-            protected void handleAllResponses(Vector leursOffres, Vector mesRetours) {
+            protected void handleAllResponses(List<ACLMessage> leursOffres, List<ACLMessage> mesRetours) {
                 int maxi = Integer.MIN_VALUE;
                 ACLMessage msgPourMeilleurOffreur = null;
-                List<ACLMessage> listeOffres = new ArrayList<>((List<ACLMessage>)leursOffres.stream().toList());
+                List<ACLMessage> listeOffres = new ArrayList<>(leursOffres);
 
                 //on ne garde que les propositions
                 listeOffres.removeIf(msg->msg.getPerformative()!=ACLMessage.PROPOSE);

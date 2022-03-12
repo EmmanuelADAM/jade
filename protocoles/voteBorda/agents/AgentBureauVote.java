@@ -2,17 +2,18 @@ package protocoles.voteBorda.agents;
 
 
 import jade.core.AID;
+import jade.core.AgentServicesTools;
 import jade.core.behaviours.WakerBehaviour;
 import jade.domain.FIPANames;
+import jade.gui.AgentWindowed;
 import jade.gui.GuiEvent;
+import jade.gui.SimpleWindow4Agent;
 import jade.lang.acl.ACLMessage;
 import jade.proto.ContractNetInitiator;
-import protocoles.voteBorda.gui.SimpleWindow4Agent;
 
 import java.awt.*;
 import java.util.*;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * classe d'un agent qui soumet un appel au vote a d'autres agents  par le protocole ContractNet
@@ -43,8 +44,8 @@ public class AgentBureauVote extends AgentWindowed {
         msg.setConversationId(id);
         msg.setContent(objet);
 
-        var adresses = AgentToolsEA.searchAgents(this, "vote", "participant");
-        for (AID dest : adresses) msg.addReceiver(dest);
+        var adresses = AgentServicesTools.searchAgents(this, "vote", "participant");
+        msg.addReceivers(adresses);
         println("destinataires trouves : " + Arrays.stream(adresses).map(AID::getLocalName).toList().toString());
         println("-".repeat(40));
 
@@ -55,7 +56,7 @@ public class AgentBureauVote extends AgentWindowed {
         ContractNetInitiator init = new ContractNetInitiator(this, msg) {
             /**fonction lancee a chaque proposition*/
             @Override
-            public void handlePropose(ACLMessage propose, Vector v)
+            public void handlePropose(ACLMessage propose, List<ACLMessage> acceptations)
             {
                 println("l'agent %s propose %s ".formatted(propose.getSender().getLocalName(), propose.getContent()) );
             }
@@ -68,8 +69,8 @@ public class AgentBureauVote extends AgentWindowed {
 
             /**fonction lancee quand toutes les reponses ont ete recues*/
             @Override
-            protected void handleAllResponses(Vector leursVotes, Vector mesRetours) {
-                ArrayList<ACLMessage> listeVotes = new ArrayList<ACLMessage>(leursVotes.stream().toList());
+            protected void handleAllResponses(List<ACLMessage> leursVotes, List<ACLMessage> mesRetours) {
+                ArrayList<ACLMessage> listeVotes = new ArrayList<ACLMessage>(leursVotes);
                 //on ne garde que les propositions
                 listeVotes.removeIf(v->v.getPerformative()!=ACLMessage.PROPOSE);
 

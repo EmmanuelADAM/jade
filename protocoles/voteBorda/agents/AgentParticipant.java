@@ -1,18 +1,20 @@
 package protocoles.voteBorda.agents;
 
 
+import jade.core.AgentServicesTools;
 import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.FailureException;
 import jade.domain.FIPAAgentManagement.NotUnderstoodException;
 import jade.domain.FIPAAgentManagement.RefuseException;
 import jade.domain.FIPAException;
+import jade.gui.AgentWindowed;
+import jade.gui.GuiEvent;
+import jade.gui.SimpleWindow4Agent;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.proto.ContractNetResponder;
-import protocoles.voteBorda.gui.SimpleWindow4Agent;
 
 import java.util.*;
-import java.util.stream.IntStream;
 
 
 /**
@@ -26,7 +28,7 @@ public class AgentParticipant extends AgentWindowed {
         window = new SimpleWindow4Agent(getAID().getName(), this);
         window.println("Hello! Agent  " +  getLocalName() + " is ready, my address is " + this.getAID().getName());
 
-        AgentToolsEA.register(this,"vote", "participant");
+        AgentServicesTools.register(this,"vote", "participant");
 
         MessageTemplate model = MessageTemplate.MatchConversationId("voteNo1");
 
@@ -93,10 +95,16 @@ public class AgentParticipant extends AgentWindowed {
     }
 
     @Override
+    public void onGuiEvent(GuiEvent event)
+    {
+        if(event.getType()==SimpleWindow4Agent.QUIT_EVENT) doDelete();
+    }
+
+    @Override
     public void takeDown()
     {
-        window.println("je pars et je me desinscris...");
-        try { DFService.deregister(this); }
-        catch (FIPAException fe) { fe.printStackTrace(); }
+        AgentServicesTools.deregisterAll(this);
+        System.err.println("moi " + this.getLocalName() + ", je quitte la plateforme...");
     }
+
 }

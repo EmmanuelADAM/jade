@@ -15,7 +15,7 @@ import java.util.function.Predicate;
 @SuppressWarnings("serial")
 public class JourneysList implements Serializable {
 	/** catalog of journeys from a departure (the key of the hashtable) */
-	private Map<String, ArrayList<Journey>> catalog;
+	private final Map<String, ArrayList<Journey>> catalog;
 
 	public JourneysList() {
 		catalog = new HashMap<>();
@@ -152,7 +152,7 @@ public class JourneysList implements Serializable {
 		lists.forEach(list::addAll);
 		list.forEach(j->sb.append(j).append("\n"));
 		sb.append("---end---");
-		return "list of journeys:\n" + sb.toString();
+		return "list of journeys:\n" + sb;
 	}
 
 	public static void main(String[] args) {

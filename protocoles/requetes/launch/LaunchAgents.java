@@ -4,7 +4,8 @@ import jade.core.Profile;
 import jade.core.ProfileImpl;
 import jade.core.Runtime;
 import jade.util.ExtendedProperties;
-import jade.util.leap.Properties;
+
+import java.util.Properties;
 
 public class LaunchAgents {
     public static void main(String[] args) {

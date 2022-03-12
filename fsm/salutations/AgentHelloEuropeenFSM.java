@@ -59,9 +59,9 @@ public class AgentHelloEuropeenFSM extends Agent {
         // de A on va a C si le comportement lie a A a retourne 0 en fin (OnEnd)
         fsm.registerTransition("A", "C", 1);
         // de B on va a D si le comportement lie a A a retourne 0 en fin (OnEnd)
-		fsm.registerTransition("B", "D", 0);
+        fsm.registerTransition("B", "D", 0);
         // de B on va a E si le comportement lie a A a retourne 0 en fin (OnEnd)
-		fsm.registerTransition("B", "E", 1);
+        fsm.registerTransition("B", "E", 1);
         // de C on va a E sans condition
         fsm.registerDefaultTransition("C", "E");
         // de D on va a E sans condition
@@ -71,7 +71,7 @@ public class AgentHelloEuropeenFSM extends Agent {
         // de E on retourne a A si le comportement lie a E a retourne 1 en fin (OnEnd)
         //alors on precise les comportement qui doivent realiser un reset
         //si on ne "resette" pas, les comportements ne vont pas reinitialiser le nb de cycles courant
-		fsm.registerTransition("E", "A", 1, new String[]{"A", "B", "C", "D", "E", "F"});
+        fsm.registerTransition("E", "A", 1, new String[]{"A", "B", "C", "D", "E", "F"});
 
         // ajout d'un comportement qui ajoute le comportement fsm dans 100ms
         addBehaviour(new WakerBehaviour(this, 100) {

@@ -1,8 +1,9 @@
 package fenetre.agents;
 
-import fenetre.gui.SimpleWindow4Agent;
 import jade.core.AID;
+import jade.gui.AgentWindowed;
 import jade.gui.GuiEvent;
+import jade.gui.SimpleWindow4Agent;
 import jade.lang.acl.ACLMessage;
 
 
@@ -11,7 +12,7 @@ import jade.lang.acl.ACLMessage;
  * @author eadam
  */
 @SuppressWarnings("serial")
-public class AgentDirectEmissionButton extends AgentWindowed{
+public class AgentDirectEmissionButton extends AgentWindowed {
 
 	/**
 	 * initialize the agents <br>
@@ -27,7 +28,7 @@ public class AgentDirectEmissionButton extends AgentWindowed{
 	  /**reaction to a gui event*/
 	  protected void onGuiEvent(GuiEvent ev) {
 	    switch(ev.getType()) {
-	      case -1:  sendMessages(); break;
+			case SimpleWindow4Agent.OK_EVENT -> sendMessages();
 	    }
 	  }
 

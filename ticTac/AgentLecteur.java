@@ -1,11 +1,8 @@
 package ticTac;
 
-import jade.core.Runtime;
 import jade.core.*;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.MessageTemplate;
-import jade.util.ExtendedProperties;
-import jade.util.leap.Properties;
 
 import static java.lang.System.out;
 
@@ -24,7 +21,7 @@ public class AgentLecteur extends Agent {
 
         // ajout d'un comportement qui attend des msgs de type clock
         addBehaviour(new CyclicBehaviour(this) {
-            MessageTemplate mt = MessageTemplate.MatchConversationId("CLOCK");
+            final MessageTemplate mt = MessageTemplate.MatchConversationId("CLOCK");
 
             public void action() {
                 var msg = receive(mt);
@@ -37,7 +34,7 @@ public class AgentLecteur extends Agent {
         });
         // ajout d'un comportement qui attend des msgs de type boom
         addBehaviour(new CyclicBehaviour(this) {
-            MessageTemplate mt = MessageTemplate.MatchConversationId("BOOM");
+            final MessageTemplate mt = MessageTemplate.MatchConversationId("BOOM");
 
             public void action() {
                 var msg = receive(mt);

@@ -1,6 +1,8 @@
 package radio.agents;
 
-import radio.gui.SimpleWindow4Agent;
+import jade.core.AgentServicesTools;
+import jade.gui.AgentWindowed;
+import jade.gui.SimpleWindow4Agent;
 import jade.core.AID;
 import jade.core.messaging.TopicManagementHelper;
 import jade.gui.GuiEvent;
@@ -23,20 +25,13 @@ public class AgentDiffuseur extends AgentWindowed {
 		println("Hello! Agent  " +  getLocalName() + " is ready, my address is " + this.getAID().getName());
 		window.setButtonActivated(true);
 		//Creation d'un "canal radio" de nom InfoRadio
-		try {
-			TopicManagementHelper topicHelper = (TopicManagementHelper) getHelper(TopicManagementHelper.SERVICE_NAME);
-			topic = topicHelper.createTopic("InfoRadio");
-		}
-		catch (Exception e) {
-			System.err.println("Agent "+getLocalName()+": ERROR creating topic \"InfoRadio\"");
-			e.printStackTrace();
-		}
+		topic = AgentServicesTools.generateTopicAID(this, "InfoRadio" );
 	}
 
 	  /**reaction to a gui event*/
 	  protected void onGuiEvent(GuiEvent ev) {
 	    switch(ev.getType()) {
-	      case -1:  sendMessages(); break;
+	      case SimpleWindow4Agent.OK_EVENT:  sendMessages(); break;
 	    }
 	  }
 

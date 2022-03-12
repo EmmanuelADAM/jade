@@ -3,8 +3,9 @@ package helloWorldService.launch;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
 import jade.util.ExtendedProperties;
-import jade.util.leap.Properties;
-import jade.core.Runtime; 
+import jade.core.Runtime;
+
+import java.util.Properties;
 
 public class LaunchAgents {
  public static void main(String[] args) {
@@ -18,7 +19,7 @@ public class LaunchAgents {
   StringBuilder sb = new StringBuilder();
   String nomAgent = "jean";
   String typeAgent = ":helloWorldService.agents.HelloAgent(hello);";
-  for(int i=0; i<50; i++) sb.append(nomAgent).append(i).append(typeAgent);
+  for(int i=0; i<5; i++) sb.append(nomAgent).append(i).append(typeAgent);
   prop.setProperty(Profile.AGENTS,sb.toString());
   // creer le profile pour le conteneur principal
   ProfileImpl profMain = new ProfileImpl(prop);

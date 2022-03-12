@@ -26,11 +26,11 @@ import jade.gui.GuiEvent;
 @SuppressWarnings("serial")
 public class AlertGui extends JFrame {
 	/** Text area */
-	private JTextArea jTextArea;
+	private final JTextArea jTextArea;
 
-	private AlertAgent myAgent;
-	private JComboBox<String> jListFrom;
-	private JComboBox<String> jListTo;
+	private final AlertAgent myAgent;
+	private final JComboBox<String> jListFrom;
+	private final JComboBox<String> jListTo;
 
 	private String departure;
 	private String arrival;

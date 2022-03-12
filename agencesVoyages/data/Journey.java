@@ -35,13 +35,13 @@ public class Journey implements Cloneable, Serializable, Comparable<Journey> {
 	/** nb of remaining places (not used) */
 	private int places = 1;
     /**some fields to improve the memory management*/
-    private static String TO = " to ";
-    private static String TRAJECTFROM = "traject from ";
-    private static String BY = " by ";
-    private static String DEPARTURE = ", departure: ";
-    private static String ARRIVAL = ", arrival:";
-    private static String COST = ", cost = ";
-    private static String PROPOSEDBY = ", proposed by ";
+    private static final String TO = " to ";
+    private static final String TRAJECTFROM = "traject from ";
+    private static final String BY = " by ";
+    private static final String DEPARTURE = ", departure: ";
+    private static final String ARRIVAL = ", arrival:";
+    private static final String COST = ", cost = ";
+    private static final String PROPOSEDBY = ", proposed by ";
 
 	public Journey(final String _start, final String _stop, final String _means, final int _departureDate,
 			final int _duration) {

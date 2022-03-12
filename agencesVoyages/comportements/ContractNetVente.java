@@ -27,10 +27,10 @@ public class ContractNetVente extends  ContractNetResponder
 {
 
 	/** catalog of the proposed journeys */
-	private JourneysList catalog;
+	private final JourneysList catalog;
 
 	/** agent gui*/
-	private AgenceGui window;
+	private final AgenceGui window;
 
 	/**
 	 * Initialisation du contract net
