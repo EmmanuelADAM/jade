@@ -3,7 +3,7 @@
 [(version web)](https://emmanueladam.github.io/jade/)
 
 Liste de supports pour le cours de programmation orientée agent en [Jade](https://jade.tilab.com).
-Pour l'ensemble de ces codes, il est nécessaire de disposer dans vos projet de la librairie "jade2022c.jar"..
+Pour l'ensemble de ces codes, il est nécessaire de disposer dans vos projet de la librairie "jade2022c.jar" :
   - [jade2022c.jar](https://github.com/EmmanuelADAM/jade/blob/master/jade2022c.jar?raw=true) : librairie principale, mise à jour pour Java >= 17
   
 
