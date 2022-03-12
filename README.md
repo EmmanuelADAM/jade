@@ -35,7 +35,7 @@ Pour l'ensemble de ces codes, il est nécessaire de disposer dans vos projet de 
 - Agents qui possèdent des comportements organisés selon une machine d'états finis (FMS)  : [fsm](https://github.com/EmmanuelADAM/jade/tree/master/fsm)
 
 ## Gestion de services : déclaration et recherche
-- [helloWorldService](https://github.com/EmmanuelADAM/jade/tree/master/helloWorldService) : codes pour des agents liés chacun à une fenêtre. Ces agents se découvrent par reherche de services, et s'envoient des messages simples
+- [helloWorldService](https://github.com/EmmanuelADAM/jade/tree/master/helloWorldService) : codes pour des agents liés chacun à une fenêtre. Ces agents se découvrent par recherche de services, et s'envoient des messages simples
 
 ## Protocoles d'interactions entre agents
 - [Requete](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/requetes) : codes illustrant la communication entre agents par le protocoles AchieveRE. 
