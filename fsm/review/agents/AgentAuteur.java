@@ -21,7 +21,6 @@ import static java.lang.System.out;
  *
  * @author eadam
  */
-@SuppressWarnings("serial")
 public class AgentAuteur extends AgentWindowed {
 
     final String SOUMETTRE = "soumettre";
@@ -44,7 +43,7 @@ public class AgentAuteur extends AgentWindowed {
         HashMap<String, Object> ds = new HashMap<>();
 
 
-        //creation du comportement de type machine d'etat finis
+        //creation du comportement de type machine d'etats finis
         fsm = new FSMBehaviour(this) {
             public int onEnd() {
                 out.println("FSM behaviour terminé, je m'en vais");
@@ -55,21 +54,26 @@ public class AgentAuteur extends AgentWindowed {
 
         //____LES ETATS
         //ETAT INITIAL
-        fsm.registerFirstState(soumettre(ds), SOUMETTRE );
+        fsm.registerFirstState(soumettre(ds), SOUMETTRE);
         // autres etats
         fsm.registerState(attendreAvis(ds), ATTENDREAVIS);
         fsm.registerState(resoumettre(ds), POURSUIVRE);
-        fsm.registerLastState(arreter(ds), ARRETER);
-        //ETAT FINAL
-        fsm.registerLastState(feter(ds), FETER);
+        //ETATS FINAUX
+        fsm.registerLastState(arreter(), ARRETER);
+        fsm.registerLastState(feter(), FETER);
 
         //____LES TRANSITIONS
         fsm.registerDefaultTransition(SOUMETTRE, ATTENDREAVIS);
+        //si le comportement lie a attendre avis retourne 0, c'est fini
         fsm.registerTransition(ATTENDREAVIS, ARRETER, 0);
+        //si le comportement lie a attendre avis retourne 2, c'est fini mais on fete cela
         fsm.registerTransition(ATTENDREAVIS, FETER, 2);
+        //si le comportement lie a attendre avis retourne 1, on regarde pour poursuivre
         fsm.registerTransition(ATTENDREAVIS, POURSUIVRE, 1);
+        //si le comportement lie a attendre poursuivre retourne 0, on a decide d'arreter
         fsm.registerTransition(POURSUIVRE, ARRETER, 0);
-        fsm.registerTransition(POURSUIVRE, ATTENDREAVIS, 1, new String[]{SOUMETTRE, ATTENDREAVIS, POURSUIVRE, ARRETER, FETER});
+        //si le comportement lie a attendre poursuivre retourne 1, on retente une nouvelle soumission et on attends un nouvel avis (on reinitialise certains comportements)
+        fsm.registerTransition(POURSUIVRE, ATTENDREAVIS, 1, new String[]{ATTENDREAVIS, POURSUIVRE});
 
 
     }
@@ -111,7 +115,8 @@ public class AgentAuteur extends AgentWindowed {
             MessageTemplate mt;
 
             @Override
-            public void onStart() {}
+            public void onStart() {
+            }
 
             @Override
             public void reset() {
@@ -145,7 +150,7 @@ public class AgentAuteur extends AgentWindowed {
     private Behaviour resoumettre(HashMap<String, Object> ds) {
         Behaviour b = new OneShotBehaviour(this) {
             int retour = 1;
-            int i=1;
+            int i = 1;
 
             @Override
             public void reset() {
@@ -156,14 +161,12 @@ public class AgentAuteur extends AgentWindowed {
                 ACLMessage msg = new ACLMessage(ACLMessage.PROPOSE);
                 msg.setConversationId(String.valueOf(ds.get("cle")));
                 msg.addReceiver(new AID("j", AID.ISLOCALNAME));
-                if(Math.random()<0.3)
-                {
+                if (Math.random() < 0.3) {
                     msg.setPerformative(ACLMessage.CANCEL);
                     msg.setContent("je ne souhaite pas poursuivre...");
                     println("je ne souhaite pas poursuivre...");
                     retour = 0;
-                }
-                else {
+                } else {
                     msg.setContent("voici ma prose R#" + i);
                     println("j'envoie ma prose R#" + i + " avec la cle " + msg.getConversationId());
                     i++;
@@ -171,6 +174,7 @@ public class AgentAuteur extends AgentWindowed {
                 println("-".repeat(40));
                 send(msg);
             }
+
             @Override
             public int onEnd() {
                 return retour;
@@ -182,7 +186,7 @@ public class AgentAuteur extends AgentWindowed {
     /**
      * resoumettre un article a l'agent journal
      */
-    private Behaviour arreter(HashMap<String, Object> ds) {
+    private Behaviour arreter() {
         Behaviour b = new OneShotBehaviour(this) {
             int i = 0;
 
@@ -203,7 +207,7 @@ public class AgentAuteur extends AgentWindowed {
     /**
      * resoumettre un article a l'agent journal
      */
-    private Behaviour feter(HashMap<String, Object> ds) {
+    private Behaviour feter() {
         Behaviour b = new OneShotBehaviour(this) {
             @Override
             public void action() {

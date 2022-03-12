@@ -6,29 +6,13 @@ import static java.lang.System.out;
 
 /**
  * un simple agent qui affiche un texte
- * @author emmanueladam 
- * */
+ *
+ * @author emmanueladam
+ */
 public class AgentHello extends Agent {
     /**
-     * Initialisation de l'agent
+     * ce main lance la plateforme jade et lui demande de creer un agent
      */
-    @Override
-    protected void setup() {
-        String texteHello = "Bonjour à toutezétatousse";
-
-        out.println("De l'agent " + getLocalName() + " : " + texteHello);
-        out.println("Mon adresse est " + getAID());
-        //l'agent demande son retrait de la plateforme
-       doDelete();
-    }
-
-    // 'Nettoyage' de l'agent
-    @Override
-    protected void takeDown() {
-        out.println("Moi, Agent " + getLocalName() + " je quitte la plateforme ! ");
-    }
-
-    /**ce main lance la plateforme jade et lui demande de creer un agent*/
     public static void main(String[] args) {
         String[] jadeArgs = new String[2];
         StringBuilder sbAgents = new StringBuilder();
@@ -36,5 +20,24 @@ public class AgentHello extends Agent {
         jadeArgs[0] = "-gui";
         jadeArgs[1] = sbAgents.toString();
         jade.Boot.main(jadeArgs);
+    }
+
+    /**
+     * Initialisation de l'agent
+     */
+    @Override
+    protected void setup() {
+        String texteHello = "Bonjour a toutezetatousse";
+
+        out.println("De l'agent " + getLocalName() + " : " + texteHello);
+        out.println("Mon adresse est " + getAID());
+        //l'agent demande son retrait de la plateforme
+        doDelete();
+    }
+
+    // 'Nettoyage' de l'agent
+    @Override
+    protected void takeDown() {
+        out.println("Moi, Agent " + getLocalName() + " je quitte la plateforme ! ");
     }
 }

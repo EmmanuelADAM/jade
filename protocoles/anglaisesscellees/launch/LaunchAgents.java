@@ -15,7 +15,7 @@ public class LaunchAgents {
         prop.setProperty(Profile.GUI, "true");
         // nommer les agents
         StringBuilder sb = new StringBuilder("a:protocoles.anglaisesscellees.agents.AgentCommissairePriseur;");
-        for(int i=0; i<10; i++)
+        for (int i = 0; i < 10; i++)
             sb.append("encherisseur_").append(i).append(":protocoles.anglaisesscellees.agents.AgentParticipant;");
         prop.setProperty(Profile.AGENTS, sb.toString());
         // creer le profile pour le conteneur principal

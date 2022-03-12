@@ -16,8 +16,8 @@ public class LaunchAgents {
         // nommer les agents
         StringBuilder sb = new StringBuilder("a:protocoles.requetes.agents.AgentEmissionARE;");
         String typeAgent = ":protocoles.requetes.agents.AgentReceptionARE;";
-        for(int i=0; i<10; i++)
-            sb.append((char)(98+i)).append(typeAgent);
+        for (int i = 0; i < 10; i++)
+            sb.append((char) (98 + i)).append(typeAgent);
         prop.setProperty(Profile.AGENTS, sb.toString());
         // creer le profile pour le conteneur principal
         ProfileImpl profMain = new ProfileImpl(prop);

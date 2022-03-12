@@ -21,6 +21,7 @@ import static java.lang.System.out;
 
 /**
  * classe d'un agent qui soumet un appel d'offres a d'autres agents  par le protocole ContractNet
+ *
  * @author eadam
  */
 public class AgentJournal extends AgentWindowed {
@@ -34,11 +35,13 @@ public class AgentJournal extends AgentWindowed {
 
     int nbReviewers;
 
-    /**un journal attend un article, le transmets aux reviewers, envoi le resultat a l'auteur
-     * et stoppe si retour est acceptation ou refus; ou attend un retour de l'auteur s'il souhaite resoumetre ou non */
+    /**
+     * un journal attend un article, le transmets aux reviewers, envoi le resultat a l'auteur
+     * et stoppe si retour est acceptation ou refus; ou attend un retour de l'auteur s'il souhaite resoumetre ou non
+     */
     protected void setup() {
         window = new SimpleWindow4Agent(getAID().getName(), this);
-        println("Hello! Agent  " +  getLocalName() + " is ready, my address is " + this.getAID().getName());
+        println("Hello! Agent  " + getLocalName() + " is ready, my address is " + this.getAID().getName());
         window.setButtonActivated(false);
         window.setBackgroundTextColor(Color.ORANGE);
 
@@ -55,9 +58,9 @@ public class AgentJournal extends AgentWindowed {
         //____LES ETATS
         fsm.registerFirstState(attendreArticle(ds), ATTENDRE_ARTICLE);
         fsm.registerState(envoyerPourRelecture(ds), ENVOYER_3REVIEWERS);
-        fsm.registerState(attendreReviews(ds),      ATTENDRE_REVIEWS);
-        fsm.registerState(envoyerResultat(ds),      ENVOYER_RESULTAT);
-        fsm.registerState(attendreAvisAuteur(ds),   ATTENDRE_AR);
+        fsm.registerState(attendreReviews(ds), ATTENDRE_REVIEWS);
+        fsm.registerState(envoyerResultat(ds), ENVOYER_RESULTAT);
+        fsm.registerState(attendreAvisAuteur(ds), ATTENDRE_AR);
         fsm.registerLastState(arreter(ds), FINIR);
 
         //____LES TRANSITIONS
@@ -82,15 +85,16 @@ public class AgentJournal extends AgentWindowed {
     private Behaviour attendreArticle(HashMap<String, Object> ds) {
         Behaviour b = new OneShotBehaviour(this) {
             MessageTemplate mt;
+
             @Override
-            public void onStart(){
+            public void onStart() {
                 mt = MessageTemplate.MatchPerformative(ACLMessage.PROPOSE);
             }
 
             @Override
             public void action() {
                 ACLMessage msg = null;
-                while((msg = blockingReceive(mt))==null) block();
+                while ((msg = blockingReceive(mt)) == null) block();
                 ds.put("article", msg);
                 ds.put("cle", msg.getConversationId());
 
@@ -101,7 +105,7 @@ public class AgentJournal extends AgentWindowed {
     }
 
     private Behaviour envoyerPourRelecture(HashMap<String, Object> ds) {
-        Behaviour b = new OneShotBehaviour(this){
+        Behaviour b = new OneShotBehaviour(this) {
 
             @Override
             public void action() {
@@ -115,7 +119,7 @@ public class AgentJournal extends AgentWindowed {
                 forward.addReceivers(tab);
                 forward.setConversationId(cle);
                 myAgent.send(forward);
-                println("j'envoie le doc a reviewer (avec la cle "+cle+") a " + Arrays.toString(tab));
+                println("j'envoie le doc a reviewer (avec la cle " + cle + ") a " + Arrays.toString(tab));
             }
         };
         return b;
@@ -123,41 +127,44 @@ public class AgentJournal extends AgentWindowed {
 
     private Behaviour attendreReviews(HashMap<String, Object> ds) {
         Behaviour b = new Behaviour(this) {
-            int i=0;
+            int i = 0;
             int val = 1;
             MessageTemplate mt;
+
             @Override
-            public void onStart(){
-                String cle = (String)ds.get("cle");
+            public void onStart() {
+                String cle = (String) ds.get("cle");
                 mt = MessageTemplate.MatchConversationId(cle);
                 println("je suis dans l'attente des reviewers sur la cle " + cle);
             }
 
             @Override
-            public void reset(){i=0; val = 1;}
+            public void reset() {
+                i = 0;
+                val = 1;
+            }
+
             @Override
             public void action() {
                 ACLMessage msg = blockingReceive(mt);
 
-                if(msg!=null)
-                {
+                if (msg != null) {
                     i++;
                     val = val * Integer.parseInt(msg.getContent());
                     println("j'ai recu la note %s de la part de %s".formatted(msg.getContent(), msg.getSender().getLocalName()));
-                }
-                else block();
+                } else block();
             }
 
             @Override
             public boolean done() {
-                return i==nbReviewers;
+                return i == nbReviewers;
             }
 
             @Override
-            public int onEnd(){
-                println("attendreReviews a fini avec i="+i);
-                if(val==8) val = 2;
-                else if(val!=0) val = 1;
+            public int onEnd() {
+                println("attendreReviews a fini avec i=" + i);
+                if (val == 8) val = 2;
+                else if (val != 0) val = 1;
                 ds.put("val", val);
                 return val;
             }
@@ -167,45 +174,47 @@ public class AgentJournal extends AgentWindowed {
     }
 
     private Behaviour envoyerResultat(HashMap<String, Object> ds) {
-        Behaviour b = new OneShotBehaviour(this){
-            int val=0;
+        Behaviour b = new OneShotBehaviour(this) {
+            int val = 0;
 
             @Override
             public void action() {
-                val = (Integer)(ds.get("val"));
+                val = (Integer) (ds.get("val"));
                 ACLMessage msg = (ACLMessage) ds.get("article");
                 ACLMessage reply = msg.createReply();
-                switch(val)
-                {
-                    case 0->reply.setContent("0: Désolé votre article n'a pas ete accepte.... Perseverez et retentez une prochaine fois");
-                    case 1->reply.setContent("1: Votre article est accepte sous reserve de modification...");
-                    case 2->reply.setContent("2: Nous avons le plaisir de vous informer que votre article est accepte !");
+                switch (val) {
+                    case 0 -> reply.setContent("0: Désolé votre article n'a pas ete accepte.... Perseverez et retentez une prochaine fois");
+                    case 1 -> reply.setContent("1: Votre article est accepte sous reserve de modification...");
+                    case 2 -> reply.setContent("2: Nous avons le plaisir de vous informer que votre article est accepte !");
                 }
                 myAgent.send(reply);
                 println("j'envoie cet avis a '" + msg.getSender().getLocalName() + "' : " + reply.getContent());
             }
 
             @Override
-            public int onEnd(){return val;}
+            public int onEnd() {
+                return val;
+            }
         };
         return b;
     }
 
     private Behaviour attendreAvisAuteur(HashMap<String, Object> ds) {
         Behaviour b = new Behaviour(this) {
-            boolean fin=false;
+            boolean fin = false;
             int val = 0;
             String cle;
             MessageTemplate mt;
+
             @Override
-            public void onStart(){
+            public void onStart() {
                 cle = String.valueOf(ds.get("cle"));
                 mt = MessageTemplate.MatchConversationId(cle);
                 window.setButtonActivated(false);
             }
 
             @Override
-            public void reset(){
+            public void reset() {
                 cle = String.valueOf(ds.get("cle"));
                 mt = MessageTemplate.MatchConversationId(cle);
             }
@@ -214,15 +223,13 @@ public class AgentJournal extends AgentWindowed {
             @Override
             public void action() {
                 ACLMessage msg = blockingReceive(mt);
-                if(msg!=null)
-                {
+                if (msg != null) {
                     println("j'ai recu ceci : " + msg.getContent());
-                    if(msg.getPerformative()==ACLMessage.CANCEL)
-                    {
+                    if (msg.getPerformative() == ACLMessage.CANCEL) {
                         println("l'auteur ne souhaite pas poursuivre...");
                         val = 0;
                     }
-                    if(msg.getPerformative()==ACLMessage.PROPOSE) {
+                    if (msg.getPerformative() == ACLMessage.PROPOSE) {
                         ds.put("cle", msg.getConversationId());
                         ds.put("article", msg);
                         println("l'auteur a soumis une revision");
@@ -230,8 +237,7 @@ public class AgentJournal extends AgentWindowed {
                     }
                     fin = true;
                     println("-".repeat(40));
-                }
-                else block();
+                } else block();
             }
 
             @Override
@@ -240,7 +246,7 @@ public class AgentJournal extends AgentWindowed {
             }
 
             @Override
-            public int onEnd(){
+            public int onEnd() {
                 return val;
             }
 
@@ -249,7 +255,7 @@ public class AgentJournal extends AgentWindowed {
     }
 
     private Behaviour arreter(HashMap<String, Object> ds) {
-        Behaviour b = new OneShotBehaviour(this){
+        Behaviour b = new OneShotBehaviour(this) {
             @Override
             public void action() {
                 println("le processus est fini ... ");

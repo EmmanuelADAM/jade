@@ -1,6 +1,6 @@
 package ticTac;
 
-import jade.core.*;
+import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.MessageTemplate;
 
@@ -10,7 +10,7 @@ import static java.lang.System.out;
  * classe d'agent qui ecoute 2 types de messages.
  *
  * @author emmanueladam
- * */
+ */
 public class AgentLecteur extends Agent {
     /**
      * Initialisation de l'agent
@@ -28,7 +28,7 @@ public class AgentLecteur extends Agent {
                 if (msg != null) {
                     var content = msg.getContent();
                     var sender = msg.getSender();
-                    out.println("agent " + getLocalName() + " : j'ai reçu " + content + " de " + sender);
+                    out.println("agent " + getLocalName() + " : j'ai recu " + content + " de " + sender);
                 } else block();
             }
         });
@@ -41,7 +41,7 @@ public class AgentLecteur extends Agent {
                 if (msg != null) {
                     var content = msg.getContent();
                     var sender = msg.getSender();
-                    out.println("attention !!!! moi agent  " + getLocalName() + " : j'ai reçu " + content + " de " + sender);
+                    out.println("attention !!!! moi agent  " + getLocalName() + " : j'ai recu " + content + " de " + sender);
                 } else block();
             }
         });

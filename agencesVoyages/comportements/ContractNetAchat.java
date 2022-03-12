@@ -136,17 +136,20 @@ public class ContractNetAchat extends ContractNetInitiator {
         var journey = monAgent.getMyJourney();
         journey.getJourneys().forEach(j ->
                 voyagesAAcheter.compute(j.getProposedBy(),
-                    (agence, list) -> {
-                        if (list == null) list = new ArrayList<>();
-                        list.add(j);
-                        return list;
-                    }));
-        voyagesAAcheter.forEach((agence,journeys)->{
-                    var msg = reponses.get(agence);
-                    msg.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
-                    try { msg.setContentObject(journeys); }
-                    catch (IOException e) { e.printStackTrace(); }
-                } );
+                        (agence, list) -> {
+                            if (list == null) list = new ArrayList<>();
+                            list.add(j);
+                            return list;
+                        }));
+        voyagesAAcheter.forEach((agence, journeys) -> {
+            var msg = reponses.get(agence);
+            msg.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
+            try {
+                msg.setContentObject(journeys);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     /**

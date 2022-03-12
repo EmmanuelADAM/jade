@@ -1,34 +1,39 @@
 package protocoles.requetes.agents;
 
 
+import jade.core.AID;
 import jade.core.AgentServicesTools;
 import jade.gui.AgentWindowed;
 import jade.gui.GuiEvent;
-import jade.core.AID;
 import jade.gui.SimpleWindow4Agent;
 import jade.lang.acl.ACLMessage;
 import jade.proto.AchieveREInitiator;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 /**
  * classe d'un agent qui soumet une requête de somme à un autre agent et gère l'échange par le protocole AchieveRE
+ *
  * @author eadam
  */
 public class AgentEmissionARE extends AgentWindowed {
 
-    /**ajout du suivi de protocole AchieveRE*/
+    /**
+     * ajout du suivi de protocole AchieveRE
+     */
     protected void setup() {
         window = new SimpleWindow4Agent(getAID().getName(), this);
-        window.println("Hello! Agent  " +  getLocalName() + " is ready, my address is " + this.getAID().getName());
+        window.println("Hello! Agent  " + getLocalName() + " is ready, my address is " + this.getAID().getName());
         window.setButtonActivated(true);
         window.setBackgroundTextColor(Color.CYAN);
     }
 
-    /**add a AchieveREInitiator protocol to send a request */
+    /**
+     * add a AchieveREInitiator protocol to send a request
+     */
     private void createRequest(String id, String computation) {
         ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
         msg.setConversationId(id);
@@ -81,11 +86,11 @@ public class AgentEmissionARE extends AgentWindowed {
 
     protected void onGuiEvent(GuiEvent arg0) {
         Random r = new Random();
-        int nb = r.nextInt(3,7);
+        int nb = r.nextInt(3, 7);
         StringBuilder sb = new StringBuilder();
-        for(int i=0; i<nb; i++)
-            sb.append(r.nextInt(1,100)).append(",");
-        createRequest("123", "sum "+sb);
+        for (int i = 0; i < nb; i++)
+            sb.append(r.nextInt(1, 100)).append(",");
+        createRequest("123", "sum " + sb);
     }
 
 }

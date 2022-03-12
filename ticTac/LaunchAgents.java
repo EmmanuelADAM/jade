@@ -12,7 +12,7 @@ import java.util.Properties;
  * classe qui lance 2 agents pour illustrer le filtrage de messages.
  *
  * @author emmanueladam
- * */
+ */
 public class LaunchAgents extends Agent {
 
     public static void main(String[] args) {

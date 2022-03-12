@@ -1,9 +1,9 @@
-
 package agencesVoyages.agents;
 
 import agencesVoyages.comportements.ContractNetVente;
 import agencesVoyages.data.Journey;
 import agencesVoyages.data.JourneysList;
+import agencesVoyages.launch.LaunchSimu;
 import com.opencsv.CSVReader;
 import jade.core.AID;
 import jade.core.AgentServicesTools;
@@ -15,7 +15,6 @@ import jade.gui.GuiAgent;
 import jade.gui.GuiEvent;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
-import agencesVoyages.launch.LaunchSimu;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -165,7 +164,9 @@ public class AgenceAgent extends GuiAgent {
         }
     }
 
-    /**display a msg on the window*/
+    /**
+     * display a msg on the window
+     */
     public void println(String msg) {
         window.println(msg);
     }

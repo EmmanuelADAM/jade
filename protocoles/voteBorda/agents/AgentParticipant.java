@@ -2,11 +2,9 @@ package protocoles.voteBorda.agents;
 
 
 import jade.core.AgentServicesTools;
-import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.FailureException;
 import jade.domain.FIPAAgentManagement.NotUnderstoodException;
 import jade.domain.FIPAAgentManagement.RefuseException;
-import jade.domain.FIPAException;
 import jade.gui.AgentWindowed;
 import jade.gui.GuiEvent;
 import jade.gui.SimpleWindow4Agent;
@@ -14,21 +12,26 @@ import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.proto.ContractNetResponder;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 /**
  * agent qui attend un message à partir du protocole CFP, prépare la réponse et la retourne
+ *
  * @author eadam
  */
 public class AgentParticipant extends AgentWindowed {
 
-    /**ajout du suivi de protocole AchieveRE*/
+    /**
+     * ajout du suivi de protocole AchieveRE
+     */
     protected void setup() {
         window = new SimpleWindow4Agent(getAID().getName(), this);
-        window.println("Hello! Agent  " +  getLocalName() + " is ready, my address is " + this.getAID().getName());
+        window.println("Hello! Agent  " + getLocalName() + " is ready, my address is " + this.getAID().getName());
 
-        AgentServicesTools.register(this,"vote", "participant");
+        AgentServicesTools.register(this, "vote", "participant");
 
         MessageTemplate model = MessageTemplate.MatchConversationId("voteNo1");
 
@@ -51,14 +54,14 @@ public class AgentParticipant extends AgentWindowed {
              * @param offres liste de propositions sous la forme option1,option2,option3,option4
              * @return choix ordonne sous la forme option2_1,option4_2,option3_3,option1_4
              * */
-            private String faireSonChoix(String offres){
+            private String faireSonChoix(String offres) {
                 ArrayList<String> choix = new ArrayList<>(List.of(offres.split(",")));
                 Collections.shuffle(choix);
                 StringBuilder sb = new StringBuilder();
                 String soul = "_"; //pour eviter de recreer une chaine '_' a chaque vote
                 String virg = ",";//pour eviter de recreer une chaine ',' a chaque vote
-                for(int i=0; i<choix.size(); i++)
-                    sb.append(choix.get(i)).append(soul).append(i+1).append(virg);
+                for (int i = 0; i < choix.size(); i++)
+                    sb.append(choix.get(i)).append(soul).append(i + 1).append(virg);
                 println("j'ai propose ceci " + sb);
                 return sb.toString();
             }
@@ -87,7 +90,6 @@ public class AgentParticipant extends AgentWindowed {
             }
 
 
-
         };
 
         addBehaviour(comportementVote);
@@ -95,14 +97,12 @@ public class AgentParticipant extends AgentWindowed {
     }
 
     @Override
-    public void onGuiEvent(GuiEvent event)
-    {
-        if(event.getType()==SimpleWindow4Agent.QUIT_EVENT) doDelete();
+    public void onGuiEvent(GuiEvent event) {
+        if (event.getType() == SimpleWindow4Agent.QUIT_EVENT) doDelete();
     }
 
     @Override
-    public void takeDown()
-    {
+    public void takeDown() {
         AgentServicesTools.deregisterAll(this);
         System.err.println("moi " + this.getLocalName() + ", je quitte la plateforme...");
     }

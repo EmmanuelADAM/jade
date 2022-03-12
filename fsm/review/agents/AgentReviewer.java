@@ -36,16 +36,18 @@ public class AgentReviewer extends AgentWindowed {
         window.setBackgroundTextColor(Color.CYAN);
         random = new Random();
         AgentServicesTools.register(this, "journal", "reviewer");
-        var dfd  = AgentServicesTools.createAgentDescription("journal", "reviewer");
+        var dfd = AgentServicesTools.createAgentDescription("journal", "reviewer");
         this.addService("reviewer", dfd);
         addBehaviour(new BehaviourReviewer());
         window.setButtonActivated(false);
     }
 
-    /**un clic sur le bouton declenche cette fonction qui envoie une note en retour de l'artcile recu*/
+    /**
+     * un clic sur le bouton declenche cette fonction qui envoie une note en retour de l'artcile recu
+     */
     @Override
     protected void onGuiEvent(GuiEvent arg0) {
-        if(message!=null) {
+        if (message != null) {
             var reply = message.createReply();
             reply.setContent(Integer.toString(random.nextInt(0, 3)));
             println("j'envoie cette note %s avec la cle %s ".formatted(reply.getContent(), reply.getConversationId()));
@@ -57,11 +59,15 @@ public class AgentReviewer extends AgentWindowed {
         }
     }
 
+    @Override
+    protected void takeDown() {
+        AgentServicesTools.deregisterService(this, mapServices.get("reviewer"));
+    }
 
     class BehaviourReviewer extends CyclicBehaviour {
         @Override
         public void action() {
-            if(!busy) {
+            if (!busy) {
                 message = receive();
                 if (message != null) {
                     println("j'ai recu ce contenu à reviewer : " + message.getContent());
@@ -71,11 +77,5 @@ public class AgentReviewer extends AgentWindowed {
                 } else block();
             }
         }
-    }
-
-    @Override
-    protected void takeDown()
-    {
-        AgentServicesTools.deregisterService(this, mapServices.get("reviewer"));
     }
 }
