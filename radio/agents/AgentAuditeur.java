@@ -39,20 +39,4 @@ public class AgentAuditeur extends AgentWindowed {
     }
 
 
-    /**
-     * @return the window
-     */
-    public SimpleWindow4Agent getWindow() {
-        return window;
-    }
-
-
-    /**
-     * @param window the window to set
-     */
-    public void setWindow(SimpleWindow4Agent window) {
-        this.window = window;
-    }
-
-
 }

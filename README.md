@@ -49,13 +49,16 @@ Cette librairie est une mise à jour basée sur Java 17 de la version de [Jade](
 
 - Agents qui possèdent des comportements organisés selon une machine d'états finis (FMS)  : [fsm](https://github.com/EmmanuelADAM/jade/tree/master/fsm). 
 Deux exemples sont donnés : 
-  - enchaînements de comportement de salutation européennes au sein d'un agent,
-  - processus de soumission et de review d'un article entre un agent auteur, un agent journal et trois agents reviewers
+  - [salutations](https://github.com/EmmanuelADAM/jade/tree/master/fsm/salutations) : enchaînements de comportement de salutations européennes au sein d'un agent,
+  - [review](https://github.com/EmmanuelADAM/jade/tree/master/fsm/review) : processus de soumission et de review d'un article entre un agent auteur, un agent journal et trois agents reviewers
 
 ## Gestion de services : déclaration et recherche
 
 - [helloWorldService](https://github.com/EmmanuelADAM/jade/tree/master/helloWorldService) : codes pour des agents liés
   chacun à une fenêtre. Ces agents se découvrent par recherche de services, et s'envoient des messages simples
+- [attenteServices](https://github.com/EmmanuelADAM/jade/tree/master/attenteServices) : codes pour des agents liés
+  chacun à une fenêtre. Des agents se déclarent aurpès des pages jaunes pour un service donné. 
+  Un agent a demandé aux pages jaunes (DF) d'être averti en cas d'inscription/desinsciption à ce service.
 
 ## Protocoles d'interactions entre agents
 

@@ -22,7 +22,7 @@ en 1 tour (le plus offrant remporte immédiatement l'enchère)
         - et d'informer l'agent choisit de l'acceptation de l'offre
         - l'agent ayant remporté l'enchère confirme ensuite sa position
 
-- [LaunchAgents](https://https://github.com/EmmanuelADAM/jade/blob/master/protocoles/requetes/launch/LaunchAgents.java) : **
+- [LaunchAgents](https://https://github.com/EmmanuelADAM/jade/blob/master/protocoles/anglaisesscellees/launch/LaunchAgents.java) : **
   classe principale**, lançant Jade et créant les agents
     - Au lancement, 1 commissaire priseur et 10 participants sont lancés.
     - Le commissaire priseur active une enchère à chaque clic sur 'go'..

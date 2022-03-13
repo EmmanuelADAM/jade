@@ -36,8 +36,7 @@ public class AgentReviewer extends AgentWindowed {
         window.setBackgroundTextColor(Color.CYAN);
         random = new Random();
         AgentServicesTools.register(this, "journal", "reviewer");
-        var dfd = AgentServicesTools.createAgentDescription("journal", "reviewer");
-        this.addService("reviewer", dfd);
+        var dfd = AgentServicesTools.getAgentDescription(this, "journal", "reviewer");
         addBehaviour(new BehaviourReviewer());
         window.setButtonActivated(false);
     }
@@ -61,7 +60,7 @@ public class AgentReviewer extends AgentWindowed {
 
     @Override
     protected void takeDown() {
-        AgentServicesTools.deregisterService(this, mapServices.get("reviewer"));
+        AgentServicesTools.deregisterAll(this);
     }
 
     class BehaviourReviewer extends CyclicBehaviour {

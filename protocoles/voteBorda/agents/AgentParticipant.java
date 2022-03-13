@@ -97,11 +97,6 @@ public class AgentParticipant extends AgentWindowed {
     }
 
     @Override
-    public void onGuiEvent(GuiEvent event) {
-        if (event.getType() == SimpleWindow4Agent.QUIT_EVENT) doDelete();
-    }
-
-    @Override
     public void takeDown() {
         AgentServicesTools.deregisterAll(this);
         System.err.println("moi " + this.getLocalName() + ", je quitte la plateforme...");

@@ -1,15 +1,21 @@
-# Jade : Agents, protocole et services
+# Jade : Agents et comportements à états
 
-## Exemple : FIPA Contract Net Protocole en Jade
-
-### Utilisation pour une enchère
+## FMS : Machine State Machine
 
 ---
 
-Ici, vous trouverez un exemple de communications suivant une machine à états finis (FSM (Finite States Machine)).
+Supports pour le cours de programmation orientée agent en Jade
 
-Il s'agit de reproduire un processus de soumission par un auteur d'un article à un journal. Ce journal transmet la
-propoisiton à 3 reviewers qui attribuent une note entre 0(rejet)  & 2(acceptation franche). Le journal reçoit les notes,
-les aggrége et transmet à l'auteur une acceptation, un rejet ou une propoisiton de corrections, alors l'auteur peut
-décider de renvoyer une nouvelle version ou d'arrêter.
+
+- Dans le package [Review](https://github.com/EmmanuelADAM/jade/blob/master/fsm/review/) des agents simulent le principe
+  de dépôt d'article de recherche :
+    - un auteur soumet un article à un journal
+    - ce journal réceptionne et envoie l'article à 3 reviewers
+    - lorsque les 3 reviews sont reçues (une note de 0 à 2),
+        - si un 0 est reçu, l'article est refusé
+        - si toutes les notes sont de 2, l'article est accepté sans modification
+        - sinon il est proposé à l'auteur de corriger
+    - si l'auteur accepte de corriger, il retourne le document au journal (retour étape 2)
+    - sinon il refuse de poursuivre et en informe le journal Reprenez pour cela la trame des agents utilisé lors
+      d'enchère ou de vote..
 

@@ -34,6 +34,7 @@ public class AgentParticipant extends AgentWindowed {
         AgentServicesTools.register(this, "enchere", "participant");
         Random hasard = new Random();
 
+        AgentServicesTools.register(this, "enchere", "participantS");
 
         MessageTemplate model = MessageTemplate.MatchConversationId("echereNo1");
 
