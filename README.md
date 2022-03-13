@@ -52,7 +52,7 @@ Deux exemples sont donnés :
   - [salutations](https://github.com/EmmanuelADAM/jade/tree/master/fsm/salutations) : enchaînements de comportement de salutations européennes au sein d'un agent,
   - [review](https://github.com/EmmanuelADAM/jade/tree/master/fsm/review) : processus de soumission et de review d'un article entre un agent auteur, un agent journal et trois agents reviewers
 
-## Gestion de services : déclaration et recherche
+### Gestion de services : déclaration et recherche
 
 - [helloWorldService](https://github.com/EmmanuelADAM/jade/tree/master/helloWorldService) : codes pour des agents liés
   chacun à une fenêtre. Ces agents se découvrent par recherche de services, et s'envoient des messages simples
@@ -60,7 +60,7 @@ Deux exemples sont donnés :
   chacun à une fenêtre. Des agents se déclarent aurpès des pages jaunes pour un service donné. 
   Un agent a demandé aux pages jaunes (DF) d'être averti en cas d'inscription/desinsciption à ce service.
 
-## Protocoles d'interactions entre agents
+### Protocoles d'interactions entre agents
 
 - [Requete](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/requetes) : codes illustrant la communication
   entre agents par le protocoles AchieveRE.
@@ -69,7 +69,7 @@ Deux exemples sont donnés :
 - [Vote](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/voteBorda) : codes illustrant la communication
   entre agents par le protocole ContractNet pour un vote.
 
-## Exemple complet, support à développements :
+### Exemple complet, support à développements :
 
 - [agentsVoyage](https://github.com/EmmanuelADAM/jade/tree/master/agencesVoyages) : codes pour des agents simulant des
   agences de voyages
