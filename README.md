@@ -38,21 +38,21 @@ Cette librairie est une mise à jour basée sur Java 17 de la version de [Jade](
       types différents; un agent les reçoit et les traite différement selon leurs types. agent "decompte" envoie des
       msgs "tictac" taggés "CLOCK" toutes les secondes, puis un msg taggé "BOOM" au bout de 10s à l'agent "agentPiege"
 
-### Agents interactifs et communicants
+# Agents interactifs et communicants
 
 - Utilisation d'une petite interface graphique pour faciliter le dialogue avec l'utilisateur
     - [fenetre](https://github.com/EmmanuelADAM/jade/tree/master/fenetre) : codes pour des agents liés à des fenêtres
     - [radio](https://github.com/EmmanuelADAM/jade/tree/master/radio) : codes qui illustrent la communication par
       broadcast. Un agent ne cible plus des destinataires, mais un canal qu'écoutent d'autres agents
 
-### Agents avec comportements de type FSM
+## Agents avec comportements de type FSM
 
-- Agents qui possèdent des comportements organisés selon une machine d'états finis (FMS)  : [fsm](https://github.com/EmmanuelADAM/jade/tree/master/fsm). 
+- Agents qui possèdent des comportements organisés selon une machine d'états finis (FSM)  : [fsm](https://github.com/EmmanuelADAM/jade/tree/master/fsm). 
 Deux exemples sont donnés : 
   - [salutations](https://github.com/EmmanuelADAM/jade/tree/master/fsm/salutations) : enchaînements de comportement de salutations européennes au sein d'un agent,
   - [review](https://github.com/EmmanuelADAM/jade/tree/master/fsm/review) : processus de soumission et de review d'un article entre un agent auteur, un agent journal et trois agents reviewers
 
-### Gestion de services : déclaration et recherche
+## Gestion de services : déclaration et recherche
 
 - [helloWorldService](https://github.com/EmmanuelADAM/jade/tree/master/helloWorldService) : codes pour des agents liés
   chacun à une fenêtre. Ces agents se découvrent par recherche de services, et s'envoient des messages simples
@@ -60,7 +60,7 @@ Deux exemples sont donnés :
   chacun à une fenêtre. Des agents se déclarent aurpès des pages jaunes pour un service donné. 
   Un agent a demandé aux pages jaunes (DF) d'être averti en cas d'inscription/desinsciption à ce service.
 
-### Protocoles d'interactions entre agents
+## Protocoles d'interactions entre agents
 
 - [Requete](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/requetes) : codes illustrant la communication
   entre agents par le protocoles AchieveRE.
@@ -69,7 +69,7 @@ Deux exemples sont donnés :
 - [Vote](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/voteBorda) : codes illustrant la communication
   entre agents par le protocole ContractNet pour un vote.
 
-### Exemple complet, support à développements :
+## Exemple complet, support à développements :
 
 - [agentsVoyage](https://github.com/EmmanuelADAM/jade/tree/master/agencesVoyages) : codes pour des agents simulant des
   agences de voyages
