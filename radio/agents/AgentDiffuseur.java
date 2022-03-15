@@ -39,10 +39,8 @@ public class AgentDiffuseur extends AgentWindowed {
      * reaction to a gui event
      */
     protected void onGuiEvent(GuiEvent ev) {
-        switch (ev.getType()) {
-            case SimpleWindow4Agent.OK_EVENT:
-                sendMessages();
-                break;
+        if (ev.getType() == SimpleWindow4Agent.OK_EVENT) {
+            sendMessages();
         }
     }
 

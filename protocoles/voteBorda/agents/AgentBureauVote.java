@@ -74,7 +74,7 @@ public class AgentBureauVote extends AgentWindowed {
             /**fonction lancee quand toutes les reponses ont ete recues*/
             @Override
             protected void handleAllResponses(List<ACLMessage> leursVotes, List<ACLMessage> mesRetours) {
-                ArrayList<ACLMessage> listeVotes = new ArrayList<ACLMessage>(leursVotes);
+                ArrayList<ACLMessage> listeVotes = new ArrayList<>(leursVotes);
                 //on ne garde que les propositions
                 listeVotes.removeIf(v -> v.getPerformative() != ACLMessage.PROPOSE);
 
