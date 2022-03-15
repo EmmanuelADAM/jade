@@ -8,6 +8,8 @@ import jade.gui.GuiAgent;
 import jade.gui.GuiEvent;
 import jade.lang.acl.ACLMessage;
 
+import java.awt.*;
+
 /**
  * des agents qui s'enregistrent comme membres de services et qui se saluent.<br>
  * Utilisation d'une fenetre dediee
@@ -39,14 +41,16 @@ public class HelloAgent extends GuiAgent {
         String[] args = (String[]) this.getArguments();
         helloMsg = ((args != null && args.length > 0) ? args[0] : "Hello");
         window = new SimpleGui4Agent(this);
-        window.println(helloMsg);
+        window.println(helloMsg, false);
         //on s'enregistre au hasard dans des services differents
         if (Math.random() < 0.5) {
             //s'enregistrer en tant d'agent d'accueil dans le service de cordialite
             AgentServicesTools.register(this, "cordialite", "accueil");
+            window.mainTextArea.setBackground(Color.pink);
         } else {
             //s'enregistrer en tant d'agent de reception dans le service de cordialite
             AgentServicesTools.register(this, "cordialite", "reception");
+            window.mainTextArea.setBackground(Color.lightGray);
         }
 
 
@@ -56,8 +60,9 @@ public class HelloAgent extends GuiAgent {
             public void action() {
                 ACLMessage msg = myAgent.receive();
                 if (msg != null) {
-                    window.println("j'ai recu un message de " + msg.getSender(), true);
+                    window.println("j'ai recu un message de " + msg.getSender().getLocalName(), true);
                     window.println("voici le contenu : " + msg.getContent(), true);
+                    window.println("-".repeat(30));
                 }
             }
         });
@@ -78,7 +83,7 @@ public class HelloAgent extends GuiAgent {
         neighbourgs = AgentServicesTools.searchAgents(this, "cordialite", nameService);
         msg.addReceivers(neighbourgs);
         send(msg);
-        window.lowTextArea.setText(text + " envoye au service " + nameService);
+        window.println("-> "+text + " envoye au service " + nameService);
     }
 
     /**
@@ -89,12 +94,7 @@ public class HelloAgent extends GuiAgent {
     protected void onGuiEvent(GuiEvent ev) {
         switch (ev.getType()) {
             case SimpleGui4Agent.SENDCODE -> sendHello(window.lowTextArea.getText());
-            case SimpleGui4Agent.QUITCODE -> {
-                window.dispose();
-                doDelete();
-            }
-            default -> {
-            }
+            case SimpleGui4Agent.QUITCODE -> doDelete();
         }
     }
 

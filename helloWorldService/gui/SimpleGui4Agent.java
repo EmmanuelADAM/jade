@@ -43,7 +43,7 @@ public class SimpleGui4Agent extends JFrame implements ActionListener {
     /**
      * Main Text area
      */
-    JTextArea mainTextArea;
+    public JTextArea mainTextArea;
     /**
      * monAgent linked to this frame
      */
@@ -65,9 +65,8 @@ public class SimpleGui4Agent extends JFrame implements ActionListener {
         Dimension screenSize = toolkit.getScreenSize();
         int screenWidth = screenSize.width;
         int screenHeight = screenSize.height;
-        int dX = preferedWidth;
-        int x = (no * dX) % screenWidth;
-        int y = (((no * dX) / screenWidth) * preferedHeight) % screenHeight;
+        int x = (no * preferedWidth) % screenWidth;
+        int y = (((no * preferedWidth) / screenWidth) * preferedHeight) % screenHeight;
 
         setBounds(x, y, preferedWidth, preferedHeight);
         buildGui();
@@ -109,23 +108,25 @@ public class SimpleGui4Agent extends JFrame implements ActionListener {
     }
 
     /**
-     * add a string to the low text area
+     * add a string to the main text area
      */
     public void println(final String chaine) {
-        String texte = lowTextArea.getText();
-        texte = texte + chaine + "\n";
-        lowTextArea.setText(texte);
-        lowTextArea.setCaretPosition(texte.length());
-    }
-
-    /**
-     * add a string to the low text area  (main parameter is no more used)
-     */
-    public void println(final String chaine, final boolean main) {
         String texte = mainTextArea.getText();
         texte = texte + chaine + "\n";
         mainTextArea.setText(texte);
         mainTextArea.setCaretPosition(texte.length());
+    }
+
+    /**
+     * add a string to a text area  (main parameter is no more used)
+     * @param chaine text to add
+     * @param main if true text is added to the main text area, if false, text is set in the small text area
+     */
+    public void println(final String chaine, final boolean main) {
+        if(main)println(chaine);
+        else {
+            lowTextArea.setText(chaine);
+        }
     }
 
     /**

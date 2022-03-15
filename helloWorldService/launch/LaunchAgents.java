@@ -13,13 +13,12 @@ public class LaunchAgents {
         Properties prop = new ExtendedProperties();
         // demander la fenetre de controle
         prop.setProperty(Profile.GUI, "true");
-        // nommer les agents
-        //  prop.setProperty(Profile.AGENTS,"a1:helloWorldService.agents.HelloAgent(hello);a2:helloWorldService.agents.HelloAgent(salut);a3:helloWorldService.agents.HelloAgent(coucou)");
-        //avec 50 agents :
+        // nommer les agents jean0, jean1, ....
         StringBuilder sb = new StringBuilder();
         String nomAgent = "jean";
         String typeAgent = ":helloWorldService.agents.HelloAgent(hello);";
-        for (int i = 0; i < 5; i++) sb.append(nomAgent).append(i).append(typeAgent);
+        for (int i = 0; i < 10; i++) sb.append(nomAgent).append(i).append(typeAgent);
+        // demander leurs creations au demarrage de Jade
         prop.setProperty(Profile.AGENTS, sb.toString());
         // creer le profile pour le conteneur principal
         ProfileImpl profMain = new ProfileImpl(prop);

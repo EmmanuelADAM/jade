@@ -36,10 +36,12 @@ Les codes suivants nécessitent donc cette librairie ainsi que Java 17 ou supér
     - [pingPong](https://github.com/EmmanuelADAM/jade/blob/master/pingPong) : code pour qui permet de lancer deux agents
       qui communiquent entre eux. L'agent ping envoie un balle à l'agent pong qui la retourne à ping qui la renvoie à
       son tour, ...
+    - [AgentPingPlouf](https://github.com/EmmanuelADAM/jade/blob/master/pingPong/AgentPingPlouf.java) : code pour un agent qui
+  possède envoie un message au hasard et attends une réponse..! Celle-ci viendra de l'agent des pages blanches (AMS) lui signifiant qu'il n'y a personne à l'adresse indiquée...
 - Exemple avec filtrage de messages :
     - [ticTac](https://github.com/EmmanuelADAM/jade/tree/master/ticTac) : un agent envoie des messages taggés avec 2
-      types différents; un agent les reçoit et les traite différement selon leurs types. agent "decompte" envoie des
-      msgs "tictac" taggés "CLOCK" toutes les secondes, puis un msg taggé "BOOM" au bout de 10s à l'agent "agentPiege"
+  types différents; un agent les reçoit et les traite différement selon leurs types. agent "decompte" envoie des
+  msgs "tictac" taggés "CLOCK" toutes les secondes, puis un msg taggé "BOOM" au bout de 10s à l'agent "agentPiege"
 
 # Agents interactifs et communicants
 
