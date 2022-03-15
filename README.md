@@ -3,9 +3,12 @@
 [(version web)](https://emmanueladam.github.io/jade/)
 
 Liste de supports pour le cours de programmation orientée agent en JADE. 
-Pour l'ensemble de ces codes, il est nécessaire de disposer dans vos projet de la librairie "[jade2022c.jar](https://github.com/EmmanuelADAM/JadeUPHF/releases/download/v22c/jade2022c.jar)". 
+Pour l'ensemble de ces codes, il est nécessaire de disposer dans vos projet de la librairie "[jade2022cv.jar](https://github.com/EmmanuelADAM/JadeUPHF/releases/download/v22c1/jade2022cv.jar)". 
 Cette librairie est une mise à jour basée sur Java 17 de la version de [Jade](https://jade.tilab.com) de Tilab et y ajoute des fonctionnalités pour un codage simplifié.
 
+Les codes suivants nécessitent donc cette librairie ainsi que Java 17 ou supérieur.
+
+----
 
 ## Eléments de base : agent, comportement et envoi de messages
 
