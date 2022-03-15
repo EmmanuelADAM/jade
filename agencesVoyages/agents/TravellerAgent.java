@@ -8,6 +8,7 @@ import jade.core.AID;
 import jade.core.AgentServicesTools;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.domain.DFService;
+import jade.domain.DFSubscriber;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAException;
 import jade.gui.GuiAgent;
@@ -17,10 +18,8 @@ import jade.lang.acl.MessageTemplate;
 import jade.proto.SubscriptionInitiator;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.*;
 import java.util.List;
-import java.util.OptionalDouble;
 import java.util.stream.Stream;
 
 /**
@@ -99,25 +98,24 @@ public class TravellerAgent extends GuiAgent {
      */
     private void detectAgences() {
         var model = AgentServicesTools.createAgentDescription("travel agency", "seller");
-        var msg = DFService.createSubscriptionMessage(this, getDefaultDF(), model, null);
         vendeurs = new ArrayList<>();
-        addBehaviour(new SubscriptionInitiator(this, msg) {
+
+        //souscription au service des pages jaunes pour recevoir une alerte en cas mouvement sur le service travel agency'seller
+        addBehaviour(new DFSubscriber(this, model) {
             @Override
-            protected void handleInform(ACLMessage inform) {
-                window.println("Agent " + getLocalName() + ": information recues de DF");
-                try {
-                    var results = DFService.decodeNotification(inform.getContent());
-                    if (results.length > 0) {
-                        for (DFAgentDescription dfd : results) {
-                            vendeurs.add(dfd.getName());
-                            window.println(dfd.getName().getName() + " s'est inscrit en tant qu'agence");
-                        }
-                    }
-                } catch (FIPAException fe) {
-                    fe.printStackTrace();
-                }
+            public void onRegister(DFAgentDescription dfd) {
+                vendeurs.add(dfd.getName());
+                window.println(dfd.getName().getLocalName() + " s'est inscrit en tant qu'agence : " + model.getAllServices().get(0));
             }
+
+            @Override
+            public void onDeregister(DFAgentDescription dfd) {
+                vendeurs.remove(dfd.getName());
+                window.println(dfd.getName().getLocalName() + " s'est desinscrit de  : " + model.getAllServices().get(0));
+            }
+
         });
+
     }
 
     // 'Nettoyage' de l'agent

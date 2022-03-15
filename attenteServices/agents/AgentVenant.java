@@ -22,6 +22,7 @@ public class AgentVenant extends AgentWindowed {
     protected void setup() {
         window = new SimpleWindow4Agent(getAID().getName(), this);
         println("Hello! Agent  " + getAID().getName() + " is ready. ");
+        AgentServicesTools.register(this, "unServiceQuelconque", "unTypedeService");
 
         //s'inscrire au service de passage au bout de quelques temps
         addBehaviour(new WakerBehaviour(this, (long)(Math.random()*10000d)) {

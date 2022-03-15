@@ -41,9 +41,7 @@ public class AgentDirectEmissionButton extends AgentWindowed {
     private void sendMessages() {
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
         msg.setContent("salut");
-        msg.addReceiver(new AID("b", false));
-        msg.addReceiver(new AID("c", false));
-        msg.addReceiver(new AID("d", false));
+        msg.addReceivers("b", "c", "d");
         send(msg);
     }
 
