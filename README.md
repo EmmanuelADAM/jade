@@ -1,21 +1,3 @@
----
-title: "Programmation d'agents en Jade "
-authors:
-    - Emmanuel ADAM
-categories:
-    - education
-date: 2022-03-21 15:45
-description: "Ensembles de codes pour accompagner le tutorial sur la programmation d'agents avec une version de la plateforme Jade"
-license: default
-tags:
-    - IA
-    - agent
-    - java
-    - jade
-    - Intelligence Artificielle
-    - systèmes multi-agent
----
-
 # Programmation d'agents en Jade
 
 [(version web)](https://emmanueladam.github.io/jade/)
