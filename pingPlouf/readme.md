@@ -18,10 +18,10 @@ Supports pour le cours de programmation orientée agent en Jade
 participant Ping
 participant Pong
 participant AMS #red
-Ping -x AMS : msg pour tzoing 
-AMS --> Ping: FAILURE
 
+Ping -x AMS : msg pour tzoing 
+AMS -> Ping: FAILURE
 @enduml```
-<-->
+-->
 
 ![](pingplouf.png)
