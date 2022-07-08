@@ -19,7 +19,7 @@ Supports pour le cours de programmation orientée agent en Jade
 
 Voici les messages échangés entre les agents : 
 
-<div hidden>
+<div style="visibility: hidden">
 ```
 @startuml pinpong
 
