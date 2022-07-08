@@ -13,8 +13,8 @@ Supports pour le cours de programmation orientée agent en Jade
     - quelque soit le nom de l'agent, il possède un comportement qui s'exécute 20 fois :
         - de lecture de boite aux lettres,
         - d'affichage du message reçu et de son émetteur
-        - de retour à l'envoyeur
-        - comportement qui prend fin après un certain nombre de cycles.
+        - de retour à l'envoyeur du contenu "balle-x" où x est le no du message retourné
+    - ce comportement qui prend fin après un certain nombre de cycles.
     - au lancement, 2 agents sont donc lancés : ping & pong..
 
 Voici les messages échangés entre les agents : 
