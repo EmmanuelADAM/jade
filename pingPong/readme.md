@@ -19,7 +19,10 @@ Supports pour le cours de programmation orientée agent en Jade
 
 Voici les messages échangés entre les agents : 
 
-@startuml
+<div hidden>
+```
+@startuml pinpong
+
 Ping -> Pong: balle
 Pong -> Ping: balle-1
 Ping -> Pong: balle-1
@@ -27,6 +30,11 @@ Ping -> Pong: balle-1
 Pong -> Ping: balle-20
 Ping -> Pong: balle-20
 
-@enduml
+@enduml```
+</div>
+
+![](pinpong.svg)
+
+
 
 ---
