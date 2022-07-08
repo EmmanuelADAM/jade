@@ -20,7 +20,6 @@ Supports pour le cours de programmation orientée agent en Jade
 Voici les messages échangés entre les agents : 
 
 <div style="display: none;">
-
 ```
 @startuml pinpong
 
@@ -32,7 +31,6 @@ Pong -> Ping: balle-20
 Ping -> Pong: balle-20
 
 @enduml```
-
 </div>
 
 ![](pinpong.svg)
