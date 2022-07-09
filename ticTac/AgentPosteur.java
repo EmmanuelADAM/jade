@@ -26,11 +26,12 @@ public class AgentPosteur extends Agent {
                 var msg = new ACLMessage(ACLMessage.INFORM);
                 //ajout d'un identifiant au msg
                 msg.setConversationId("CLOCK");
-                msg.addReceiver(new AID("agentDemineur", AID.ISLOCALNAME));
+                msg.addReceiver("agentDemineur");
                 msg.setContent("tictac");
                 myAgent.send(msg);
             }
         };
+
         // ajout du  comportement cyclique  dans 1 secondes
         addBehaviour(new WakerBehaviour(this, 1000) {
             protected void onWake() {
@@ -43,7 +44,7 @@ public class AgentPosteur extends Agent {
             protected void onWake() {
                 var msg = new ACLMessage(ACLMessage.INFORM);
                 msg.setConversationId("BOOM");
-                msg.addReceiver(new AID("agentDemineur", AID.ISLOCALNAME));
+                msg.addReceiver("agentDemineur");
                 msg.setContent("b o o m ! ! !");
                 myAgent.removeBehaviour(compTicTac);
                 myAgent.send(msg);

@@ -13,3 +13,23 @@
 - [LaunchAgents](https://https://github.com/EmmanuelADAM/jade/blob/master/protocoles/voteBorda/launch/LaunchAgents.java) : **
   classe principale**, lançant Jade et créant 2 agents
 
+<!--
+```
+@startuml tictac
+participant posteur
+participant demineur
+par envoyer tictac
+  loop chaque seconde
+  posteur -> demineur  : TicTac
+  end
+end
+
+par envoyer boom 10 sec plus tard
+    posteur -> demineur: boom
+    posteur -> posteur : retirer 'envoyer tictac'
+end
+
+@enduml```
+-->
+
+![](tictac.png)

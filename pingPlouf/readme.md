@@ -15,13 +15,14 @@ Supports pour le cours de programmation orientée agent en Jade
 <!--
 ```
 @startuml pingplouf
-participant Ping
-participant Pong
-participant AMS #red
+participant ping
+participant pong
+participant AMS 
 
-Ping -x AMS : msg pour tzoing 
-AMS -> Ping: FAILURE
-@enduml```
+ping ->] : msg pour 'tzoing'
+AMS -[#red]> ping :  FAILURE 
+@enduml
+```
 -->
 
 ![](pingplouf.png)
