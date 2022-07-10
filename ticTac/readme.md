@@ -11,8 +11,10 @@
 - [AgentDemineur](https://github.com/EmmanuelADAM/jade/blob/master/ticTac/AgentDemineur.java) : est une classe pour un
   agent piochant dans sa boite aux lettres des messages de différents types (CLOCK, BOOM).
 - [LaunchAgents](https://https://github.com/EmmanuelADAM/jade/blob/master/protocoles/voteBorda/launch/LaunchAgents.java) : **
-  classe principale**, lançant Jade et créant 2 agents
+  classe principale**, lançant Jade et créant 2 agents.
 
+---
+Ci dessous un diagramme de communication entre les agents.
 <!--
 ```
 @startuml tictac
