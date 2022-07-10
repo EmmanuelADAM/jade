@@ -58,7 +58,7 @@ public class AgentCommissairePriseur extends AgentWindowed {
         ContractNetInitiator init = new ContractNetInitiator(this, msg) {
             /**fonction lancee a chaque proposition*/
             @Override
-            public void handlePropose(ACLMessage propose, List<ACLMessage> acceptattions) {
+            public void handlePropose(ACLMessage propose, List<ACLMessage> acceptations) {
                 println(String.format("l'agent %s propose %s ", propose.getSender().getLocalName(), propose.getContent()));
             }
 

@@ -62,7 +62,7 @@ public class AgentHelloEuropeenSequentiel extends Agent {
 
             @Override
             public void action() {
-                System.out.println(getLocalName() + " -> " + msg);
+                System.out.println(getLocalName() + " -> pour la " + i+"eme fois : " + msg);
                 i++;
             }
 

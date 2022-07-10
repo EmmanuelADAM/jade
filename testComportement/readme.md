@@ -10,7 +10,44 @@
     - un comportement cyclique avec activation toutes les 300ms
     - un comportement "à retardement" provoquant l'arrêt de l'agent au bout de 1000ms
     - au commencement, 2 agents sont lancés.
+<!--
+```
+@startuml helloSalut
 
+start
+while (agent vivant?) is (ok)
+  while (comportement activable ?) 
+    fork
+    partition "Behaviour" {
+      partition "action" {
+          ::aficher "Bonjour à toutezetàtousse";
+          :pause 200ms;
+      }
+      partition "done" {
+          :retourner False;
+      }
+    }
+    fork again
+    partition "CyclicBehaviour: chaque 300ms" {
+      partition "onTick" {
+          ::aficher "Salut à toutezetàtousse";
+      }
+    }
+    fork again
+    partition "WakerBehaviour: dans 1000ms" {
+      partition "onWake" {
+          ::delete Agent;
+      }
+    }
+    end fork
+  endwhile
+endwhile (deleted)
+stop
+
+@enduml```
+-->
+
+![](helloSalut.png)
 
 - [AgentHelloEuropeenParallel](https://github.com/EmmanuelADAM/jade/blob/master/testComp01/AgentHelloEuropeenParallel.java) :
   code pour deux agent qui possèdent contient des comportements s'exécutant en **parallèle**. Ces comportments

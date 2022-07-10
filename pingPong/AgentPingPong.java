@@ -43,12 +43,12 @@ public class AgentPingPong extends Agent {
         // si l'agent s'appelle ping,
         // ajout d'un comportement qui enverra le texte 'balle' à l'agent pong dans 10 secondes
         if (getLocalName().equals("ping")) {
-            long temps = 10000;
+            long temps = 20000;
             out.println("agent " + getLocalName() + " : je commence dans "+temps+" ms");
             addBehaviour(new WakerBehaviour(this, temps) {
                 protected void onWake() {
                     var msg = new ACLMessage(ACLMessage.INFORM);
-                    msg.addReceiver(new AID("pong", AID.ISLOCALNAME));
+                    msg.addReceiver("pong");
                     msg.setContent("balle");
                     myAgent.send(msg);
                     out.println("moi, " + getLocalName() + " je lance la balle");
@@ -74,9 +74,9 @@ public class AgentPingPong extends Agent {
             }
 
             public boolean done() {
-                if(step==30)
+                if(step==20)
                     out.println("agent " + getLocalName() + " : je ne joue plus");
-                return step == 30;
+                return step == 20;
             }
         });
     }

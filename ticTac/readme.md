@@ -27,8 +27,8 @@ end
 
 group WakerBehaviour : [dans 10 seconodes]
     posteur -> demineur: "boom"
-    posteur -> posteur : retirer 'compTicTac'
     demineur -> demineur : afficher "alerte"
+    posteur -> posteur : retirer 'compTicTac'
 end
 
 @enduml```
