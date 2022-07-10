@@ -18,15 +18,17 @@
 @startuml tictac
 participant posteur
 participant demineur
-par envoyer tictac
+group TickerBehaviour : compTicTac [chaque seconde]
   loop chaque seconde
-  posteur -> demineur  : TicTac
+  posteur -> demineur  : "TicTac"
+  demineur -> demineur : afficher "tictac"
   end
 end
 
-par envoyer boom 10 sec plus tard
-    posteur -> demineur: boom
-    posteur -> posteur : retirer 'envoyer tictac'
+group WakerBehaviour : [dans 10 seconodes]
+    posteur -> demineur: "boom"
+    posteur -> posteur : retirer 'compTicTac'
+    demineur -> demineur : afficher "alerte"
 end
 
 @enduml```
