@@ -19,10 +19,8 @@
 participant posteur
 participant demineur
 group TickerBehaviour : compTicTac [chaque seconde]
-  loop chaque seconde
   posteur -> demineur  : "TicTac"
   demineur -> demineur : afficher "tictac"
-  end
 end
 
 group WakerBehaviour : [dans 10 seconodes]
