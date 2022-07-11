@@ -15,8 +15,8 @@
 @startuml helloSalut
 
 start
-while (agent vivant?) is (ok)
-  while (comportement activable ?) 
+while (TQ agent vivant) is (ok)
+if (comportement activable ?) then ([choisir prochain comportement])
     fork
     partition "Behaviour" {
       partition "action" {
@@ -40,8 +40,8 @@ while (agent vivant?) is (ok)
       }
     }
     end fork
-  endwhile
-endwhile (deleted)
+ endif
+  endwhile (deleted)
 stop
 
 @enduml```
