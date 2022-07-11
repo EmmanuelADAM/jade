@@ -62,7 +62,7 @@ public class AgentHelloEuropeenParallel extends Agent {
 
             @Override
             public void action() {
-                System.out.println(myAgent.getLocalName() + " -> pour la " +i+"eme fois" + msg);
+                System.out.printf("%s -> %s %d fois\n", getLocalName(), msg, (i+1));
                 i++;
             }
 

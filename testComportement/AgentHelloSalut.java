@@ -35,7 +35,7 @@ public class AgentHelloSalut extends Agent {
     protected void setup() {
         out.println("Moi, Agent " + getLocalName() + ", mon  adresse est " + getAID());
 
-        // ajout d'un comportement "eternel" qui, a chaque passage, affiche bonjour et fait une pause de 10 ms
+        // ajout d'un comportement "eternel" qui, a chaque passage, affiche bonjour et fait une pause de 200 ms
         //(peut etre remplace par un comportement cyclique, voir l'exemple ticTac)
         addBehaviour(new Behaviour(this) {
             public void action() {
@@ -48,11 +48,11 @@ public class AgentHelloSalut extends Agent {
             }
         });
 
-        // ajout d'un comportement cyclique qui, à chaque passage, affiche salut et fait une pause de 15 ms
-        addBehaviour(new TickerBehaviour(this, 100) {
+        // ajout d'un comportement cyclique qui, à chaque passage, affiche salut et fait une pause de 300 ms
+        addBehaviour(new TickerBehaviour(this, 300) {
             public void onTick() {
                 out.println("De l'agent " + getLocalName() + " : Salut à toutezétatousse");
-                myAgent.doWait(300);
+               // myAgent.doWait(300);
             }
 
         });
