@@ -48,7 +48,7 @@ stop
 
 @enduml```
 -->
-![](compPingPong.svg)
+![](compPingPong.png)
 
 
 Voici les messages échangés entre les agents : 
