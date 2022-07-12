@@ -40,7 +40,8 @@ if (comportement activable ?) then ([choisir prochain comportement])
       }
     }
     end fork
- endif
+ else(non)
+ endif 
   endwhile (deleted)
 stop
 
@@ -68,50 +69,48 @@ if (comportement activable ?) then ([choisir prochain comportement])
     fork
     partition "EuropeanBehaviour A" {
       partition "action" {
-          :aficher "bonjour"
+          :afficher "bonjour"
           i <- i + 1;
       }
       partition "done" {
-      if (i==3) then (return
-  true)
+      if (i==3) then (true)
         :remove 
         behaviour;
-      else (return false)
+      else (false)
       endif 
       }
     }
     fork again
     partition "EuropeanBehaviour B" {
       partition "action" {
-          :aficher "hallo"
+          :afficher "hallo"
           i <- i + 1;
       }
       partition "done" {
-      if (i==3) then (return
-  true)
+      if (i==3) then (true)
         :remove 
         behaviour;
-      else (return false)
+      else (false)
       endif 
       }
     }
     fork again
     partition "EuropeanBehaviour C" {
       partition "action" {
-          :aficher "buongiorno"
+          :afficher "buongiorno"
           i <- i + 1;
       }
       partition "done" {
-      if (i==3) then (return
-  true)
+      if (i==3) then (true)
         :remove 
         behaviour;
-      else (return false)
+      else (false)
       endif 
       }
     }
     end fork
- endif
+else (non)
+ endif 
   endwhile (deleted)
 stop
 
@@ -158,50 +157,47 @@ a2 -> buenos dias 2 fois
 start
 while (TQ agent vivant) is (ok)
   if (EuropeanBehaviour A 
-  exists) then
+  exists) then (true)
     partition "EuropeanBehaviour A" {
       partition "action" {
-          :aficher "bonjour"
+          :afficher "bonjour"
           i <- i + 1;
       }
       partition "done" {
-      if (i==3) then (return
-  true)
+      if (i==3) then (true)
         :remove 
         behaviour;
-      else (return false)
+      else (false)
       endif 
       }
     }
   elseif (EuropeanBehaviour B 
-exists) then
+exists) then (true)
     partition "EuropeanBehaviour B" {
       partition "action" {
-          :aficher "hallo"
+          :afficher "hallo"
           i <- i + 1;
       }
       partition "done" {
-      if (i==3) then (return
-  true)
+      if (i==3) then (true) 
         :remove 
         behaviour;
-      else (return false)
+      else (false)
       endif 
       }
     }
   elseif (EuropeanBehaviour C 
-exists) then
+exists) then (true)
     partition "EuropeanBehaviour C" {
       partition "action" {
-          :aficher "hallo"
+          :afficher "buongiorno"
           i <- i + 1;
       }
       partition "done" {
-      if (i==3) then (return
-  true)
+      if (i==3) then (true)
         :remove 
         behaviour;
-      else (return false)
+      else (false)
       endif 
       }
     }
