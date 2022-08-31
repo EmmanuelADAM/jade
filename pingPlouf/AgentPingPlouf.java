@@ -26,24 +26,24 @@ public class AgentPingPlouf extends Agent {
     @Override
     protected void setup() {
         String texteHello = "Bonjour a toutezetatousse";
-        out.println("De l'agent " + getLocalName() + " : " + texteHello);
-        out.println("Mon adresse est " + getAID());
+        println("De l'agent " + getLocalName() + " : " + texteHello);
+        println("Mon adresse est " + getAID());
 
-        out.println("J'envoie un message a une mauvaise adresse. ");
-        out.println("En multiagent, ca ne plante pas..  ");
-        out.println("Mais si je veux, je peux etre a l'ecoute de l'agent AMS pour verifier s'il n'y a pas d'erreur d'adressage  ");
+        println("J'envoie un message a une mauvaise adresse. ");
+        println("En multiagent, ca ne plante pas..  ");
+        println("Mais si je veux, je peux etre a l'ecoute de l'agent AMS pour verifier s'il n'y a pas d'erreur d'adressage  ");
 
-        out.println("Envoie dans 1 seconde....");
+        println("Envoie dans 15 seconde....");
 
         //envoi d'un message a un agent n'existant pas dans 1 seconde
-        addBehaviour(new WakerBehaviour(this, 1000){
+        addBehaviour(new WakerBehaviour(this, 15000){
             @Override
             public void onWake() {
                 // envoie du texte 'texteHello' à l'agent tzoing
                 String nameOther = "tzoing";
-                out.println("agent " + getLocalName() + " : j'envoie un message a " + nameOther);
+                println("agent " + getLocalName() + " : j'envoie un message a " + nameOther);
                 var msg = new ACLMessage(ACLMessage.INFORM);
-                msg.addReceiver(new AID("nameOther", AID.ISLOCALNAME));
+                msg.addReceiver("tzoing");
                 msg.setContent(texteHello);
                 send(msg);
             }});
@@ -54,9 +54,9 @@ public class AgentPingPlouf extends Agent {
             public void action() {
                 ACLMessage msg = receive();
                 if(msg != null) {
-                    out.println("j'ai recu ceci de la part de " + msg.getSender().getLocalName() + " : ");
-                    out.println(msg);
-                    out.println("je suis donc au courant par les pages blanches du mauvais adressage ....");
+                    println("j'ai recu ceci de la part de " + msg.getSender().getLocalName() + " : ");
+                    println(msg.toString());
+                    println("je suis donc au courant par les pages blanches du mauvais adressage ....");
                 }
                 else block();
             }
@@ -67,7 +67,7 @@ public class AgentPingPlouf extends Agent {
     // 'Nettoyage' de l'agent
     @Override
     protected void takeDown() {
-        out.println("Moi, Agent " + getLocalName() + " je quitte la plateforme ! ");
+        println("Moi, Agent " + getLocalName() + " je quitte la plateforme ! ");
     }
 
     public static void main(String[] args) {

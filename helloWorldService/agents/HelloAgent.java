@@ -4,6 +4,7 @@ import helloWorldService.gui.SimpleGui4Agent;
 import jade.core.AID;
 import jade.core.AgentServicesTools;
 import jade.core.behaviours.CyclicBehaviour;
+import jade.core.behaviours.ReceiverBehaviour;
 import jade.gui.GuiAgent;
 import jade.gui.GuiEvent;
 import jade.lang.acl.ACLMessage;
@@ -54,18 +55,12 @@ public class HelloAgent extends GuiAgent {
         }
 
 
-        //rester a l'ecoute des messages recus
-        addBehaviour(new CyclicBehaviour(this) {
-            @Override
-            public void action() {
-                ACLMessage msg = myAgent.receive();
-                if (msg != null) {
+        //rester en conitu à l'ecoute des messages recus de tous types, sans limite de duree
+        addBehaviour(new ReceiverBehaviour(this, -1, null, true, (a,msg)->{
                     window.println("j'ai recu un message de " + msg.getSender().getLocalName(), true);
                     window.println("voici le contenu : " + msg.getContent(), true);
                     window.println("-".repeat(30));
-                }
-            }
-        });
+                }));
 
     }
 

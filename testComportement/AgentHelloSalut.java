@@ -39,7 +39,7 @@ public class AgentHelloSalut extends Agent {
         //(peut etre remplace par un comportement cyclique, voir l'exemple ticTac)
         addBehaviour(new Behaviour(this) {
             public void action() {
-                out.println("De l'agent " + getLocalName() + " : Bonjour à toutezétatousse");
+                println("De l'agent " + getLocalName() + " : Bonjour à toutezétatousse");
                 myAgent.doWait(200);
             }
 
@@ -49,21 +49,14 @@ public class AgentHelloSalut extends Agent {
         });
 
         // ajout d'un comportement cyclique qui, à chaque passage, affiche salut et fait une pause de 300 ms
-        addBehaviour(new TickerBehaviour(this, 300) {
-            public void onTick() {
-                out.println("De l'agent " + getLocalName() + " : Salut à toutezétatousse");
-               // myAgent.doWait(300);
-            }
-
-        });
+        addBehaviour(new TickerBehaviour(this, 300, a->{println("De l'agent " + a.getLocalName() + " : Salut à " +
+                "toutezétatousse");}));
 
         // ajout d'un comportement qui retire l'agent dans 1000 ms
-        addBehaviour(new WakerBehaviour(this, 1000) {
-            protected void onWake() {
-                out.println("De l'agent " + getLocalName() + " : bon j'y vais...");
-                myAgent.doDelete();
-            }
-        });
+        addBehaviour(new WakerBehaviour(this, 1000, a->{
+            out.println("De l'agent " + a.getLocalName() + " : bon j'y vais...");
+            a.doDelete();
+        }));
     }
 
     // 'Nettoyage' de l'agent

@@ -30,15 +30,15 @@ public class AgentHelloParametre extends Agent {
         if (params.length > 0) texteHello = (String) params[0];
         else texteHello = "Bonjour a toutezetatousse";
 
-        out.println("De l'agent " + getLocalName() + " : " + texteHello);
-        out.println("Mon adresse est " + getAID());
+        println("De l'agent " + getLocalName() + " : " + texteHello);
+        println("Mon adresse est " + getAID());
         //l'agent demande son retrait de la plateforme..
-        doDelete();
+        //doDelete();
     }
 
     // 'Nettoyage' de l'agent
     @Override
     protected void takeDown() {
-        out.println("Moi, Agent " + getLocalName() + " je quitte la plateforme ! ");
+        println("Moi, Agent " + getLocalName() + " je quitte la plateforme ! ");
     }
 }

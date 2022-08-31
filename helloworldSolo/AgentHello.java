@@ -29,15 +29,15 @@ public class AgentHello extends Agent {
     protected void setup() {
         String texteHello = "Bonjour a toutezetatousse";
 
-        out.println("De l'agent " + getLocalName() + " : " + texteHello);
-        out.println("Mon adresse est " + getAID());
+        println("De l'agent " + getLocalName() + " : " + texteHello);
+        println("Mon adresse est " + getAID());
         //l'agent demande son retrait de la plateforme
-        doDelete();
+//        doDelete();
     }
 
     // 'Nettoyage' de l'agent
     @Override
     protected void takeDown() {
-        out.println("Moi, Agent " + getLocalName() + " je quitte la plateforme ! ");
+        println("Moi, Agent " + getLocalName() + " je quitte la plateforme ! ");
     }
 }

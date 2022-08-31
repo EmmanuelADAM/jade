@@ -4,6 +4,7 @@ package radio.agents;
 import jade.core.AID;
 import jade.core.AgentServicesTools;
 import jade.core.behaviours.CyclicBehaviour;
+import jade.core.behaviours.ReceiverBehaviour;
 import jade.gui.AgentWindowed;
 import jade.gui.SimpleWindow4Agent;
 import jade.lang.acl.ACLMessage;
@@ -23,18 +24,10 @@ public class AgentAuditeur extends AgentWindowed {
         println("Hello! Agent  " + getAID().getName() + " is ready. ");
         //recherche d'un "canal radio" de nom InfoRadio
         topic = AgentServicesTools.generateTopicAID(this, "InfoRadio");
-
         //ecoute cyclique sur le canal radio
-        addBehaviour(new CyclicBehaviour(this) {
-            public void action() {
-                ACLMessage msg = receive(MessageTemplate.MatchTopic(topic));
-                while (msg != null) {
-                    println("recu " + msg.getContent() + " du canal " + topic.getLocalName() + ", emis par " + msg.getSender().getLocalName());
-                    msg = myAgent.receive(MessageTemplate.MatchTopic(topic));
-                }
-                block();
-            }
-        });
+        final MessageTemplate mt = MessageTemplate.MatchTopic(topic);
+        addBehaviour(new ReceiverBehaviour(this, -1, mt, true,
+                (a,msg)-> println("recu " + msg.getContent() + " du canal " + topic.getLocalName() + ", emis par " + msg.getSender().getLocalName()) ));
 
     }
 

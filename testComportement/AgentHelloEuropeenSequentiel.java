@@ -44,11 +44,7 @@ public class AgentHelloEuropeenSequentiel extends Agent {
         seqB.addSubBehaviour(europeanBehaviour("saluton"));
 
         // ajout d'un comportement qui ajoute le comportement seuentiel dans 100ms
-        addBehaviour(new WakerBehaviour(this, 100) {
-            protected void onWake() {
-                myAgent.addBehaviour(seqB);
-            }
-        });
+        addBehaviour(new WakerBehaviour(this, 100, a->a.addBehaviour(seqB)));
 
 
     }
@@ -62,7 +58,7 @@ public class AgentHelloEuropeenSequentiel extends Agent {
 
             @Override
             public void action() {
-                System.out.printf("%s -> %s %d fois\n", getLocalName(), msg, (i+1));
+                printf("%s -> %s %d fois\n", new Object[]{getLocalName(), msg, (i+1)});
                 i++;
             }
 

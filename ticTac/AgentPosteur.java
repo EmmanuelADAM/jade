@@ -19,36 +19,23 @@ public class AgentPosteur extends Agent {
     @Override
     protected void setup() {
 
-        // creation d'un comportement qui enverra le texte 'tictac' toutes les secondes
-        TickerBehaviour compTicTac = new TickerBehaviour(AgentPosteur.this, 1000) {
-            @Override
-            protected void onTick() {
-                var msg = new ACLMessage(ACLMessage.INFORM);
-                //ajout d'un identifiant au msg
-                msg.setConversationId("CLOCK");
-                msg.addReceiver("agentDemineur");
-                msg.setContent("tictac");
-                myAgent.send(msg);
-            }
-        };
+        // creation d'un comportement qui enverra le texte 'tictac' toutes les secondes à l'agent demineur
+        final var msgTic = new ACLMessage(ACLMessage.INFORM);
+        //ajout d'un tag CLOCK au message
+        msgTic.setConversationId("CLOCK");
+        msgTic.addReceiver("agentDemineur");
+        msgTic.setContent("tictac");
+        TickerBehaviour compTicTac = new TickerBehaviour(AgentPosteur.this, 1000, a->a.send(msgTic));
 
         // ajout du  comportement cyclique  dans 1 secondes
-        addBehaviour(new WakerBehaviour(this, 1000) {
-            protected void onWake() {
-                myAgent.addBehaviour(compTicTac);
-            }
-        });
+        addBehaviour(new WakerBehaviour(this, 1000, a->a.addBehaviour(compTicTac)));
 
         // ajout d'un comportement qui enverra le texte 'boom'   dans 10 secondes
-        addBehaviour(new WakerBehaviour(this, 10000) {
-            protected void onWake() {
-                var msg = new ACLMessage(ACLMessage.INFORM);
-                msg.setConversationId("BOOM");
-                msg.addReceiver("agentDemineur");
-                msg.setContent("b o o m ! ! !");
-                myAgent.removeBehaviour(compTicTac);
-                myAgent.send(msg);
-            }
-        });
+        final var msgBoom = new ACLMessage(ACLMessage.INFORM);
+        //ajout d'un tag BOOM au message
+        msgBoom.setConversationId("BOOM");
+        msgBoom.addReceiver("agentDemineur");
+        msgBoom.setContent("b o o m ! ! !");
+        addBehaviour(new WakerBehaviour(this, 10000, a->{a.removeBehaviour(compTicTac);a.send(msgBoom);}));
     }
 }

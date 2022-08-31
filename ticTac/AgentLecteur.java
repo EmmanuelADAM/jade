@@ -2,7 +2,10 @@ package ticTac;
 
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
+import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.MessageTemplate;
+
+import java.util.function.Consumer;
 
 import static java.lang.System.out;
 
@@ -28,7 +31,7 @@ public class AgentLecteur extends Agent {
                 if (msg != null) {
                     var content = msg.getContent();
                     var sender = msg.getSender();
-                    out.println("agent " + getLocalName() + " : j'ai recu " + content + " de " + sender);
+                    println("agent " + getLocalName() + " : j'ai recu " + content + " de " + sender);
                 } else block();
             }
         });
@@ -41,9 +44,11 @@ public class AgentLecteur extends Agent {
                 if (msg != null) {
                     var content = msg.getContent();
                     var sender = msg.getSender();
-                    out.println("attention !!!! moi agent  " + getLocalName() + " : j'ai recu " + content + " de " + sender);
+                    println("attention !!!! moi agent  " + getLocalName() + " : j'ai recu " + content + " de " + sender);
                 } else block();
             }
         });
+
+        addBehaviour(new OneShotBehaviour(this, a-> out.println("coucou je suis " + a.getLocalName())));
     }
 }

@@ -86,11 +86,7 @@ public class AgentHelloEuropeenFSM extends Agent {
         fsm.registerTransition("E", "A", 1, new String[]{"A", "B", "C", "D", "E", "F"});
 
         // ajout d'un comportement qui ajoute le comportement fsm dans 100ms
-        addBehaviour(new WakerBehaviour(this, 100) {
-            protected void onWake() {
-                myAgent.addBehaviour(fsm);
-            }
-        });
+        addBehaviour(new WakerBehaviour(this, 100, a-> a.addBehaviour(fsm)));
     }
 
 }

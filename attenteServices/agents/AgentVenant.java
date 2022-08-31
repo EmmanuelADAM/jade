@@ -4,6 +4,7 @@ package attenteServices.agents;
 import jade.core.AID;
 import jade.core.AgentServicesTools;
 import jade.core.behaviours.CyclicBehaviour;
+import jade.core.behaviours.ReceiverBehaviour;
 import jade.core.behaviours.WakerBehaviour;
 import jade.gui.AgentWindowed;
 import jade.gui.SimpleWindow4Agent;
@@ -25,24 +26,14 @@ public class AgentVenant extends AgentWindowed {
         AgentServicesTools.register(this, "unServiceQuelconque", "unTypedeService");
 
         //s'inscrire au service de passage au bout de quelques temps
-        addBehaviour(new WakerBehaviour(this, (long)(Math.random()*10000d)) {
-            @Override
-            protected void onWake() {
-                AgentServicesTools.register(myAgent, "balladeur", "ouvert");
-            }
-        });
+        addBehaviour(new WakerBehaviour(this, (long)(Math.random()*10000d),
+                a->AgentServicesTools.register(a, "balladeur", "ouvert")));
 
 
-        //ecoute cyclique de message
-        addBehaviour(new CyclicBehaviour(this) {
-            public void action() {
-                ACLMessage msg = receive();
-                if(msg!=null) {
-                    println("recu de " + msg.getSender().getLocalName() + ", ceci : \n" + msg.getContent() + "\n" + "-".repeat(20));
-                } else block();
-            }
-        });
-
+        //ecoute cyclique de message sans limite de duree, de tout type, en continu
+        addBehaviour(new ReceiverBehaviour(this, -1, null, true,
+                (a,msg)-> println("recu de " + msg.getSender().getLocalName() + ", ceci : \n" + msg.getContent() +
+                        "\n" + "-".repeat(20))));
     }
 
     @Override

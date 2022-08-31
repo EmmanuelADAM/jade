@@ -255,14 +255,10 @@ public class AgentJournal extends AgentWindowed {
     }
 
     private Behaviour arreter(HashMap<String, Object> ds) {
-        Behaviour b = new OneShotBehaviour(this) {
-            @Override
-            public void action() {
-                println("le processus est fini ... ");
-                println("~".repeat(40));
-            }
-        };
-        return b;
+        return new OneShotBehaviour(this, a -> {
+            println("le processus est fini ... ");
+            println("~".repeat(40));
+        });
     }
 
     @Override

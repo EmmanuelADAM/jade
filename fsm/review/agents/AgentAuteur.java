@@ -89,9 +89,7 @@ public class AgentAuteur extends AgentWindowed {
      * soumettre un article a l'agent journal
      */
     private Behaviour soumettre(HashMap<String, Object> ds) {
-        Behaviour b = new OneShotBehaviour(this) {
-            @Override
-            public void action() {
+        return  new OneShotBehaviour(this, a-> {
                 String cle = "msg" + System.currentTimeMillis();
                 ds.put("cle", cle);
                 ACLMessage msg = new ACLMessage(ACLMessage.PROPOSE);
@@ -100,9 +98,7 @@ public class AgentAuteur extends AgentWindowed {
                 println("J'envoie \"%s\" avec la cle (%s)".formatted(msg.getContent(), ds.get("cle")));
                 msg.addReceiver(new AID("j", AID.ISLOCALNAME));
                 send(msg);
-            }
-        };
-        return b;
+        });
     }
 
     /**
@@ -208,15 +204,10 @@ public class AgentAuteur extends AgentWindowed {
      * resoumettre un article a l'agent journal
      */
     private Behaviour feter() {
-        Behaviour b = new OneShotBehaviour(this) {
-            @Override
-            public void action() {
-
+        return new OneShotBehaviour(this, a->{
                 println("super, un article accepte !!");
                 println("~".repeat(40));
-            }
-        };
-        return b;
+            });
     }
 
 }

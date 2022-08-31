@@ -9,6 +9,7 @@ import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.proto.AchieveREResponder;
 
+import java.awt.*;
 import java.util.Random;
 
 
@@ -38,15 +39,18 @@ public class AgentReceptionARE extends AgentWindowed {
             //fonction déclenchée à la réception d'un message par le protocole correspondant
             @Override
             protected ACLMessage handleRequest(ACLMessage request) {
+                window.setBackgroundTextColor(Color.WHITE);
                 window.println("recu  " + request.getContent());
                 ACLMessage answer = request.createReply();
                 //parfois l'agent choisi de refuser la demande
                 if (hasard.nextBoolean()) {
                     answer.setPerformative(ACLMessage.AGREE);
+                    window.setBackgroundTextColor(Color.PINK);
                     println("Je suis ok pour repondre a la demande");
                     println("-".repeat(40));
                 } else {
                     answer.setPerformative(ACLMessage.REFUSE);
+                    window.setBackgroundTextColor(Color.LIGHT_GRAY);
                     println("Je refuse de poursuivre");
                     println("(o)".repeat(20));
                 }
@@ -74,11 +78,6 @@ public class AgentReceptionARE extends AgentWindowed {
         };
 
         addBehaviour(init);
-    }
-
-    @Override
-    public void onGuiEvent(GuiEvent event) {
-        if (event.getType() == SimpleWindow4Agent.QUIT_EVENT) doDelete();
     }
 
     @Override

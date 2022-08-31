@@ -38,8 +38,8 @@ public class AgentPingPong extends Agent {
     protected void setup() {
         String texteHello = "Bonjour a toutezetatousse";
 
-        out.println("De l'agent " + getLocalName() + " : " + texteHello);
-        out.println("Mon adresse est " + getAID());
+        println("De l'agent " + getLocalName() + " : " + texteHello);
+        println("Mon adresse est " + getAID());
         // si l'agent s'appelle ping,
         // ajout d'un comportement qui enverra le texte 'balle' à l'agent pong dans 10 secondes
         if (getLocalName().equals("ping")) {
@@ -51,7 +51,7 @@ public class AgentPingPong extends Agent {
                     msg.addReceiver("pong");
                     msg.setContent("balle");
                     myAgent.send(msg);
-                    out.println("moi, " + getLocalName() + " je lance la balle");
+                    println("moi, " + getLocalName() + " je lance la balle");
                 }
             });
         }
@@ -65,7 +65,7 @@ public class AgentPingPong extends Agent {
                     step++;
                     var content = msg.getContent();
                     var sender = msg.getSender();
-                    out.println("agent " + getLocalName() + " : j'ai recu " + content + " de " + sender);
+                    println("agent " + getLocalName() + " : j'ai recu " + content + " de " + sender);
                     myAgent.doWait(300);
                     var reply = msg.createReply();
                     reply.setContent("balle-" + step);
@@ -75,7 +75,7 @@ public class AgentPingPong extends Agent {
 
             public boolean done() {
                 if(step==20)
-                    out.println("agent " + getLocalName() + " : je ne joue plus");
+                    println("agent " + getLocalName() + " : je ne joue plus");
                 return step == 20;
             }
         });

@@ -37,6 +37,7 @@ public class AgentPointeur extends AgentWindowed {
         window.setBackgroundTextColor(Color.YELLOW);
         detectVenants();
     }
+
     /**
      * ecoute des evenement de type enregistrement aupres des pages jaunes en tant qu'agent venant<br>
      * A chaque nouvelle arrivee, la liste des agents du groupe est envoyee a ces agents
@@ -49,8 +50,8 @@ public class AgentPointeur extends AgentWindowed {
         addBehaviour(new DFSubscriber(this, model) {
             @Override
             public void onRegister(DFAgentDescription dfd) {
-                    venants.add(dfd.getName());
-                    window.println(dfd.getName().getLocalName() + " s'est inscrit avec " + model);
+                venants.add(dfd.getName());
+                window.println(dfd.getName().getLocalName() + " s'est inscrit avec " + model);
                 ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
                 //on transforme la liste des venants en un tableau pour passage en parametre
                 msg.addReceivers(venants.toArray(AID[]::new));
