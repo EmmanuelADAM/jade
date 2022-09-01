@@ -8,8 +8,7 @@ Liste de supports pour le cours de programmation orientée agent en JADE.
 Pour l'ensemble de ces codes, il est nécessaire de disposer dans vos projet de la librairie "[JadeUPHF.jar](https://github.com/EmmanuelADAM/JadeUPHF/blob/master/JadeUPHF.jar)". 
 Cette librairie est une mise à jour basée sur Java 17 de la dernière version offcielle de [Jade](https://jade.tilab.
 com) de Tilab et y ajoute des fonctionnalités pour un codage simplifié.
-Le code de cette nouvelle version et les notes de version sont accessibles ici : [JadeUPHF](https://emmanueladam.github.
-io/JadeUPHF/)".
+Le code de cette nouvelle version et les notes de version sont accessibles ici : [JadeUPHF](https://emmanueladam.github.io/JadeUPHF/)".
 
 Les codes suivants nécessitent donc cette librairie ainsi que Java 17 ou supérieur.
 
