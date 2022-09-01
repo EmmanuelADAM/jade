@@ -55,7 +55,7 @@ public class HelloAgent extends GuiAgent {
         }
 
 
-        //rester en conitu à l'ecoute des messages recus de tous types, sans limite de duree
+        //rester en continu à l'ecoute des messages recus de tous types, sans limite de duree
         addBehaviour(new ReceiverBehaviour(this, -1, null, true, (a,msg)->{
                     window.println("j'ai recu un message de " + msg.getSender().getLocalName(), true);
                     window.println("voici le contenu : " + msg.getContent(), true);

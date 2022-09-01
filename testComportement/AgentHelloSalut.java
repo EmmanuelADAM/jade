@@ -40,7 +40,7 @@ public class AgentHelloSalut extends Agent {
         addBehaviour(new Behaviour(this) {
             public void action() {
                 println("De l'agent " + getLocalName() + " : Bonjour à toutezétatousse");
-                myAgent.doWait(200);
+                block(200);
             }
 
             public boolean done() {
