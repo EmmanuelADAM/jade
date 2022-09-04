@@ -1,6 +1,5 @@
 package protocoles.anglaisesscellees.agents;
 
-
 import jade.core.AgentServicesTools;
 import jade.domain.FIPAAgentManagement.FailureException;
 import jade.domain.FIPAAgentManagement.NotUnderstoodException;

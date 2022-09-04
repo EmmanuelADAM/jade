@@ -115,6 +115,13 @@ public class AgentCommissairePriseur extends AgentWindowed {
                 println("");
             }
 
+            @Override
+            protected void handleFailure(ACLMessage failure) {
+                println("_".repeat(30));
+                println("la vente n'a finalement pas pu avoir lieu aupres de " + failure.getSender().getLocalName());
+                println("_".repeat(30));
+                println("");
+            }
 
         };
 

@@ -35,6 +35,7 @@ public class AgentLecteur extends Agent {
                 } else block();
             }
         });
+
         // ajout d'un comportement qui attend des msgs de type boom
         addBehaviour(new CyclicBehaviour(this) {
             final MessageTemplate mt = MessageTemplate.MatchConversationId("BOOM");

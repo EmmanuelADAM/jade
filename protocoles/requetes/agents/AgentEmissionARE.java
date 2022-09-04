@@ -55,8 +55,8 @@ public class AgentEmissionARE extends AgentWindowed {
 
             //fonction lancée dès accord
             @Override
-            protected void handleRefuse(ACLMessage agree) {
-                window.println("recu un refus de " + agree.getSender().getLocalName());
+            protected void handleRefuse(ACLMessage refuse) {
+                window.println("recu un refus de " + refuse.getSender().getLocalName());
             }
 
             //fonction lancée dès reception information
