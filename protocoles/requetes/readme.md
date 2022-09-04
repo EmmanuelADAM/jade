@@ -24,43 +24,46 @@ Protocole de l'agent émettant la requête :
 @startuml RequestInitiator
 
 hide empty description
-[*] --> CreateRequest
-CreateRequest --> WaitMsg
-WaitMsg-->handleRefuse : refuse
-handleRefuse --> WaitMsg
+[*] -- > CreateRequest
+CreateRequest -- > WaitMsg
+WaitMsg-- >handleRefuse : refuse
+handleRefuse -- > WaitMsg
 
-WaitMsg-->handleAgree : agree
+WaitMsg-- >handleAgree : agree
 state forkAgree   <<fork>>
-handleAgree --> forkAgree
-forkAgree --> waitInform
-forkAgree --> WaitMsg
-waitInform --> handleInform
+handleAgree -- > forkAgree
+forkAgree -- > waitInform
+forkAgree -- > WaitMsg
+waitInform -- > handleInform
 
 
-WaitMsg-->handleAllResult : all results
-handleAllResult --> [*]
+WaitMsg-- >handleAllResult : all results
+handleAllResult -- > [*]
 
 @enduml```
 -->
 
 ![](RequestInitiator.png)
 
+
 Protocole de l'agent recevant la requête :
+
+
 <!--
 ```
 @startuml RequestResponder
 
 hide empty description
-[*] --> WaitRequest
+[*] -- > WaitRequest
 state answerChoice <<choice>>
-WaitRequest-->answerChoice
-answerChoice --> Refuse
-answerChoice --> NotUnderstood
-answerChoice --> Accept
-Accept--> Inform
-Refuse --> [*]
-NotUnderstood --> [*]
-Inform --> [*]
+WaitRequest-- >answerChoice
+answerChoice -- > Refuse
+answerChoice -- > NotUnderstood
+answerChoice -- > Accept
+Accept-- > Inform
+Refuse -- > [*]
+NotUnderstood -- > [*]
+Inform -- > [*]
 
 @enduml```
 -->
