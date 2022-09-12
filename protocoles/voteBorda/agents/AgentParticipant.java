@@ -58,12 +58,11 @@ public class AgentParticipant extends AgentWindowed {
                 ArrayList<String> choix = new ArrayList<>(List.of(offres.split(",")));
                 Collections.shuffle(choix);
                 StringBuilder sb = new StringBuilder();
-                String soul = "_"; //pour eviter de recreer une chaine '_' a chaque vote
-                String virg = ",";//pour eviter de recreer une chaine ',' a chaque vote
-                for (int i = 0; i < choix.size(); i++)
-                    sb.append(choix.get(i)).append(soul).append(i + 1).append(virg);
-                println("j'ai propose ceci " + sb);
-                return sb.toString();
+                String pref = ">";//pour eviter de recreer une chaine ',' a chaque vote
+                for (String s : choix) sb.append(s).append(pref);
+                String proposition  = sb.substring(0, sb.length()-1);
+                println("j'ai propose ceci " + proposition);
+                return proposition;
             }
 
             /**fonction lancee a la reception d'une acceptation de la proposition*/

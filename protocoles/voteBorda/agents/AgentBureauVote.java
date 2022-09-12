@@ -87,11 +87,12 @@ public class AgentBureauVote extends AgentWindowed {
                     retours.add(retour);
                     var content = vote.getContent();
                     //analyse du contenu sous la forme resto1_valeur1,resto2_valeur2,...
-                    String[] sesVotes = content.split(",");
+                    String[] sesVotes = content.split(">");
+                    int[] points = {sesVotes.length};
                     for (String s : sesVotes) {
-                        String[] detail = s.split("_");
                         //on ajoute la valeur du vote de chaque resto dans la map des votes
-                        votes.computeIfPresent(detail[0], (k, v) -> v + Integer.parseInt(detail[1]));
+                        votes.computeIfPresent(s, (k, v) -> v + points[0]);
+                        points[0]--;
                     }
                 }
 
