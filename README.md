@@ -75,8 +75,10 @@ Deux exemples sont donnés :
   entre agents par le protocoles AchieveRE.
 - [Enchere](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/anglaisesscellees) : codes illustrant la
   communication entre agents par le protocole ContractNet pour une enchère simple.
-- [Vote](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/voteBorda) : codes illustrant la communication
-  entre agents par le protocole ContractNet pour un vote.
+- [Vote Borda](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/voteBorda) : codes illustrant la 
+  communication entre agents par le protocole ContractNet pour un vote de Borda.
+- [Vote Condorcet](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/voteConcorcet) : codes illustrant la 
+  communication entre agents par le protocole ContractNet pour un vote de Condorcet
 
 ## Exemple complet, support à développements :
 
