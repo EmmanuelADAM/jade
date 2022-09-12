@@ -2,7 +2,7 @@
 
 ## Exemple : FIPA Contract Net Protocole en Jade
 
-### Utilisation pour un vote de Borda
+### Utilisation pour un vote de Concorcet
 
 ---
 
@@ -19,8 +19,8 @@ classent les options en les notant, une somme des notes est ensuite effectuées)
     - les destinataires à répondre (refus, erreur, accord), si accord, la réponse est de la forme : 
       legumes>pizzeria>sushi>...
     - au bureau de vote :
-        - de sommer les points envoyés par les votants (si choix entre n restos, pour chaque vote, le 1er reçoit n 
-          points, le 2e n-1, ...),
+        - de sommer les points envoyés par les votants (pour chaque vote, compte le nb de fois qu'un resto est placé 
+          devant un autre),
         - d'envoyer le choix gagnant à tous les votants (ou les choix si ex-aequo)
         - chaque votant confirme la reception et l'acceptation du résultat du vote
     - si ex-aequo, le vote est relancé pour les choix non départagés

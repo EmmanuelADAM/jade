@@ -1,4 +1,4 @@
-package protocoles.voteBorda.agents;
+package protocoles.voteCondorcet.agents;
 
 
 import jade.core.AID;
@@ -88,7 +88,7 @@ public class AgentBureauVote extends AgentWindowed {
                     var content = vote.getContent();
                     //analyse du contenu sous la forme resto1>resto2>,...
                     String[] sesVotes = content.split(">");
-                    int[] points = {sesVotes.length};
+                    int[] points = {sesVotes.length-1};
                     for (String s : sesVotes) {
                         //on ajoute la valeur du vote de chaque resto dans la map des votes
                         votes.computeIfPresent(s, (k, v) -> v + points[0]);
