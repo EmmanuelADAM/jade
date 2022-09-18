@@ -38,7 +38,7 @@ Les codes suivants nécessitent donc cette librairie ainsi que Java 17 ou supér
 
 - Exemple classique de test de communication entre 2 agents : le ping-pong
     - [pingPong](https://github.com/EmmanuelADAM/jade/blob/master/pingPong) : code pour qui permet de lancer deux agents
-      qui communiquent entre eux. L'agent ping envoie un balle à l'agent pong qui la retourne à ping qui la renvoie à
+      qui communiquent entre eux. L'agent ping envoie une balle à l'agent pong qui la retourne à ping qui la renvoie à
       son tour, ...
     - [AgentPingPlouf](https://github.com/EmmanuelADAM/jade/tree/master/pingPlouf) : code pour un agent qui
   possède envoie un message au hasard et attends une réponse..! Celle-ci viendra de l'agent des pages blanches (AMS) lui signifiant qu'il n'y a personne à l'adresse indiquée...
@@ -72,7 +72,7 @@ Deux exemples sont donnés :
 ## Protocoles d'interactions entre agents
 
 - [Requete](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/requetes) : codes illustrant la communication
-  entre agents par le protocoles AchieveRE.
+  entre agents par le protocole AchieveRE.
 - [Enchere](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/anglaisesscellees) : codes illustrant la
   communication entre agents par le protocole ContractNet pour une enchère simple.
 - [Vote Borda](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/voteBorda) : codes illustrant la
