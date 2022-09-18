@@ -1,4 +1,4 @@
-package protocoles.voteCondorcet.launch;
+package protocoles.voteDoubleBorda.launch;
 
 import jade.core.Profile;
 import jade.core.ProfileImpl;
@@ -14,9 +14,9 @@ public class LaunchAgents {
         // demander la fenetre de controle
         prop.setProperty(Profile.GUI, "true");
         // nommer les agents
-        StringBuilder sb = new StringBuilder("bureau:protocoles.voteCondorcet.agents.AgentBureauVote;");
-        for (int i = 0; i < 5; i++)
-            sb.append("votant_").append(i).append(":protocoles.voteCondorcet.agents.AgentParticipant;");
+        StringBuilder sb = new StringBuilder("bureau:protocoles.voteDoubleBorda.agents.AgentBureauVote;");
+        for (int i = 0; i < 10; i++)
+            sb.append("votant_").append(i).append(":protocoles.voteDoubleBorda.agents.AgentParticipant;");
         prop.setProperty(Profile.AGENTS, sb.toString());
         // creer le profile pour le conteneur principal
         ProfileImpl profMain = new ProfileImpl(prop);

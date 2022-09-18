@@ -14,6 +14,8 @@ import jade.proto.ContractNetInitiator;
 import java.awt.*;
 import java.util.List;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * classe d'un agent qui soumet un appel au vote a d'autres agents  par le protocole ContractNet
@@ -40,10 +42,11 @@ public class AgentBureauVote extends AgentWindowed {
         println("_/ \\".repeat(20));
         println("/ \\_".repeat(20));
         println("debut d'un vote pour les options " + objet);
-        HashMap<String, Integer> votes = new HashMap<>();
-        for (Resto r : Resto.values()) votes.put(r.toString(), 0);
-        votes.forEach((k, v) -> println("nb votes pour " + k + " = " + v));
-        println("-".repeat(40));
+        String[] options = objet.split(",");
+        var listeOptions = List.of(options);
+        int dim = options.length;
+        final int[][]  votes = new int[dim][dim];
+        println("-".repeat(30));
 
         ACLMessage msg = new ACLMessage(ACLMessage.CFP);
         msg.setConversationId(id);
@@ -77,62 +80,48 @@ public class AgentBureauVote extends AgentWindowed {
                 ArrayList<ACLMessage> listeVotes = new ArrayList<>(leursVotes);
                 //on ne garde que les propositions
                 listeVotes.removeIf(v -> v.getPerformative() != ACLMessage.PROPOSE);
+                String[][] strMatVotes = new String[listeVotes.size()][dim];
+                String[] electedOption={""};
 
-                List<ACLMessage> retours = new ArrayList<>();
-
-                for (ACLMessage vote : listeVotes) {
+                for (int i=0; i<listeVotes.size(); i++)
+                {
+                    ACLMessage vote = listeVotes.get(i);
                     //par defaut, on accepte tout vote
                     var retour = vote.createReply();
                     retour.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
-                    retours.add(retour);
+                    mesRetours.add(retour);
                     var content = vote.getContent();
                     //analyse du contenu sous la forme resto1>resto2>,...
-                    String[] sesVotes = content.split(">");
-                    int[] points = {sesVotes.length-1};
-                    for (String s : sesVotes) {
-                        //on ajoute la valeur du vote de chaque resto dans la map des votes
-                        votes.computeIfPresent(s, (k, v) -> v + points[0]);
-                        points[0]--;
+                    strMatVotes[i] = content.split(">");
+                }
+
+                var tabNoOptions = IntStream.range(0, dim).toArray();
+                List<Integer> selectedOptions = new ArrayList<>();
+                for(int i:tabNoOptions) selectedOptions.add(i);
+
+                selectedOptions = voteCondorcet(strMatVotes, listeOptions, selectedOptions);
+                electedOption[0] = options[selectedOptions.get(0)];
+
+                if(selectedOptions.size()>1) {
+                    println("=".repeat(30));
+                    println("encore un ex-aequo ! => condorcet limite a ces options...");
+                    for(int[] ligne:votes)Arrays.fill(ligne, 0);
+
+                    selectedOptions = voteCondorcet(strMatVotes, listeOptions, selectedOptions);
+                    electedOption[0] = options[selectedOptions.get(0)];
+
+
+
+                    if(selectedOptions.size()>1) {
+                        println("encore un ex-aequo ! => tirage aleatoire entre ces options...");
+                        electedOption[0] = options[selectedOptions.stream().findAny().orElse(0)];
+                        println("Choix final : " + electedOption[0]);
                     }
+
                 }
 
-                println("-".repeat(40));
-                //affichage du total des votes
-                votes.forEach((k, v) -> println(k + " a obtenu " + v + " points"));
-                //récupération du plus haut score
-                int highScore = Collections.max(votes.values());
-                //récuperation des elus
-                StringBuffer best = new StringBuffer();
-                votes.forEach((k, v) -> {
-                    if (v == highScore) best.append(k).append(",");
-                });
-                println("-".repeat(40));
-                println("Résultat du vote " + best);
-                println("-".repeat(40));
-
-                //placement du nom des elus dans les messages à retourner
-                for (ACLMessage m : retours)
-                    m.setContent(best.toString());
-                mesRetours.addAll(retours);
-
-                //si ex-aequo, on relance un vote avec ceux-ci
-                if ((best.toString()).split(",").length > 1) {
-                    println("-".repeat(30));
-                    println("un nouveau tour va etre lance ces choix : " + best);
-                    println("-".repeat(30));
-                    myAgent.addBehaviour(new WakerBehaviour(myAgent, 100) {
-                        @Override
-                        protected void onWake() {
-                            createVote("voteNo1", best.toString());
-                        }
-                    });
-                }
-            }
-
-            /**fonction lancee quand le meilleur offreur confirme son intention*/
-            @Override
-            protected void handleInform(ACLMessage inform) {
-                println("le vote a bien ete accepte par " + inform.getSender().getLocalName());
+                mesRetours.forEach(msg -> msg.setContent(electedOption[0]));
+                println("#-".repeat(30));
             }
 
 
@@ -140,6 +129,86 @@ public class AgentBureauVote extends AgentWindowed {
 
         addBehaviour(init);
 
+    }
+
+    /**
+     * @param strMatVotes matrice (n,m) de m votes par n votants
+     * @param listeOptions choix d'un votant classe ordre de preference
+     * @param selectedOptions liste des options acceptables
+     * @return liste des options ayant gagne le plus de duels et en ayant perdu le moins */
+    private List<Integer> voteCondorcet(String [][]strMatVotes, List<String> listeOptions, List<Integer> selectedOptions)
+    {
+        int dim = listeOptions.size();
+        final int[][]  votes = new int[dim][dim];
+        for(String[]sesVotes:strMatVotes)
+        {
+            String strChoixI, strChoixJ;
+
+            for (int i=0; i<sesVotes.length-1; i++) {
+                strChoixI = sesVotes[i];
+                int oi = listeOptions.indexOf(strChoixI);
+                if(selectedOptions.contains(oi)) {
+                    for (int j = i + 1; j < sesVotes.length; j++) {
+                        strChoixJ = sesVotes[j];
+                        int oj = listeOptions.indexOf(strChoixJ);
+                        if(selectedOptions.contains(oj)) {
+                            votes[oi][oj] += 1;
+                            votes[oj][oi] -= 1;
+                        }
+                    }
+                }
+            }
+        }
+
+        println("-".repeat(40));
+        //affichage du total des votes
+        println("resultat des votes : ");
+        for(int[]ligne:votes) println(Arrays.toString(ligne));
+
+        // on regarde s'il existe une option gagnante (preferee des autres)
+        int[]duelsGagnes = new int[dim];
+        final int[]sommePoints = new int[dim];
+        for(int i=0; i<dim; i++) {
+            duelsGagnes[i] = (int)Arrays.stream(votes[i]).filter(j->j>0).count();
+            sommePoints[i] = Arrays.stream(votes[i]).sum();
+        }
+
+        println("nb de duels gagnes / options : "+ Arrays.toString(duelsGagnes));
+        println("points / options : "+ Arrays.toString(sommePoints));
+
+        int maxMax = Arrays.stream(duelsGagnes).max().orElse(0);
+        var newSelectedOptions = new ArrayList<Integer>();
+        for(int i=0; i<dim; i++) if (duelsGagnes[i]==maxMax && selectedOptions.contains(i)) newSelectedOptions.add(i);
+
+        StringBuilder sbMax = new StringBuilder("Options ayant gagnes le plus de duels :");
+        newSelectedOptions.forEach(i->sbMax.append(listeOptions.get(i)).append(", "));
+        println(sbMax.toString());
+
+        if(newSelectedOptions.size()>1) {
+            condorcetParPoints(listeOptions, dim, sommePoints, newSelectedOptions);
+        }
+        return newSelectedOptions;
+    }
+
+    /**
+     * @param listeOptions choix d'un votant classe ordre de preference
+     * @param sommePoints somme des points par liste 'duels gagnes/duels perdus)
+     * @param newSelectedOptions liste des options acceptables
+     * */
+    private void condorcetParPoints(List<String> listeOptions, int dim, int[] sommePoints,
+                          ArrayList<Integer> newSelectedOptions) {
+        int maxMax;
+        println("=".repeat(30));
+        println("ex-aequo !");
+        int[] sommePointsSelected = new int[dim];
+        Arrays.setAll(sommePointsSelected, i -> newSelectedOptions.contains(i) ? sommePoints[i] : 0);
+        println("max de points parmi " + Arrays.toString(sommePointsSelected));
+        maxMax = Arrays.stream(sommePointsSelected).max().orElse(0);
+        newSelectedOptions.clear();
+        for (int i = 0; i < dim; i++) if (sommePointsSelected[i] == maxMax) newSelectedOptions.add(i);
+        StringBuilder sbTotal = new StringBuilder("Options ayant obtenu le plus de points : ");
+        newSelectedOptions.forEach(i -> sbTotal.append(listeOptions.get(i)).append(", "));
+        println(sbTotal.toString());
     }
 
     @Override
@@ -152,6 +221,12 @@ public class AgentBureauVote extends AgentWindowed {
         StringBuilder sb = new StringBuilder();
         for (Resto r : Resto.values()) sb.append(r).append(",");
         createVote("voteNo1", sb.toString());
+    }
+
+    @Override
+    public void takeDown() {
+        System.err.println("moi " + this.getLocalName() + ", je quitte la plateforme...");
+        window.dispose();
     }
 
 }

@@ -1,4 +1,4 @@
-package protocoles.voteCondorcet.agents;
+package protocoles.voteDoubleBorda.agents;
 
 
 import jade.core.AgentServicesTools;
@@ -51,27 +51,26 @@ public class AgentParticipant extends AgentWindowed {
             /**le participant recoit une liste de propositions sous la forme option1,option2,option3,option4,.....
              * il retourne son choix en ordonnant les options et en donnant leurs positions
              * @param offres liste de propositions sous la forme option1,option2,option3,option4
-             * @return choix ordonne sous la forme option2>option4>option3>option1
+             * @return choix ordonne sous la forme option2_1,option4_2,option3_3,option1_4
              * */
             private String faireSonChoix(String offres) {
                 ArrayList<String> choix = new ArrayList<>(List.of(offres.split(",")));
                 Collections.shuffle(choix);
                 StringBuilder sb = new StringBuilder();
-                String pref = ">";
+                String pref = ">";//pour eviter de recreer une chaine ',' a chaque vote
                 for (String s : choix) sb.append(s).append(pref);
                 String proposition  = sb.substring(0, sb.length()-1);
-                println("je propose ceci " + proposition);
+                println("j'ai propose ceci " + proposition);
                 return proposition;
             }
 
             /**fonction lancee a la reception d'une acceptation de la proposition*/
             @Override
             protected ACLMessage handleAcceptProposal(ACLMessage cfp, ACLMessage propose, ACLMessage accept) throws FailureException {
-                println("~".repeat(30));
-                println("Fin du vote..");
-                println(cfp.getSender().getLocalName() + " avait lance un vote pour " + cfp.getContent());
+                println("=".repeat(10));
+                println(cfp.getSender().getLocalName() + " a lance un vote pour " + cfp.getContent());
                 println(" j'ai propose " + propose.getContent());
-                println(cfp.getSender().getLocalName() + " m'informe que l'option elue est " + accept.getContent());
+                println(cfp.getSender().getLocalName() + " a accepte avec ce message " + accept.getContent());
                 ACLMessage msg = accept.createReply();
                 msg.setPerformative(ACLMessage.INFORM);
                 msg.setContent("ok !");
@@ -83,10 +82,12 @@ public class AgentParticipant extends AgentWindowed {
             protected void handleRejectProposal(ACLMessage cfp, ACLMessage propose, ACLMessage reject) {
                 println("=".repeat(10));
                 println("VOTE REJETE");
-                println(cfp.getSender().getLocalName() + " avait lance un vote pour " + cfp.getContent());
-                println(" j'ai propos " + propose.getContent());
+                println(cfp.getSender().getLocalName() + " a lance un vote pour " + cfp.getContent());
+                println(" j'ai propose " + propose.getContent());
                 println(cfp.getSender().getLocalName() + " a refuse ! avec ce message " + reject.getContent());
             }
+
+
         };
 
         addBehaviour(comportementVote);
@@ -97,7 +98,6 @@ public class AgentParticipant extends AgentWindowed {
     public void takeDown() {
         AgentServicesTools.deregisterAll(this);
         System.err.println("moi " + this.getLocalName() + ", je quitte la plateforme...");
-        window.dispose();
     }
 
 }

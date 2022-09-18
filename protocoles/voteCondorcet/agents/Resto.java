@@ -1,5 +1,5 @@
 package protocoles.voteCondorcet.agents;
 
 public enum Resto {
-    Pizza, Legumes, Pattaterie, Sushi, Leon
+    Pizza, Legumes, Pattate, Sushi, Moules, Gastro, Brasserie;
 }
