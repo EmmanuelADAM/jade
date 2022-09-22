@@ -74,7 +74,9 @@ Deux exemples sont donnés :
 - [Requete](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/requetes) : codes illustrant la communication
   entre agents par le protocole AchieveRE.
 - [Enchere](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/anglaisesscellees) : codes illustrant la
-  communication entre agents par le protocole ContractNet pour une enchère simple.
+  communication entre agents par le protocole ContractNet pour une enchère anglaise à un tour (simple appel d'offres).
+- [Enchere de Vickrey](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/vickrey) : codes 
+  illustrant la communication entre agents par le protocole ContractNet pour une enchère de Vickrey.
 - [Vote Borda](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/voteBorda) : codes illustrant la
   communication entre agents par le protocole ContractNet pour un vote de Borda.
 - [Vote DoubleBorda](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/voteDoubleBorda) : codes illustrant la
