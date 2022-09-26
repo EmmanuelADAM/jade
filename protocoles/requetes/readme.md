@@ -19,6 +19,7 @@ protocole [FIPA Request Interaction](http://www.fipa.org/specs/fipa00026/SC00026
   prise en charge des échanges
 
 Protocole de l'agent émettant la requête : 
+
 <!--
 ```
 @startuml RequestInitiator

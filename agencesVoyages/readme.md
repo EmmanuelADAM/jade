@@ -80,26 +80,42 @@ proposés.
 
 Pour information, les trajets possibles sont les suivants :
 
-- en bus, entre les villes a<->b, b<->c, b<->d, c<->d, c<>-e, d<->e, e<->f,
-- en train, entre les villes a<->d, d<->f,
-- en voiture (covoiturage), entre les villes a<->f, c<->f
+- en bus (en noir dans la figure ci-dessous), entre les villes a<->b, b<->c, b<->d, c<->d, c<>-e, d<->e, e<->f,
+- en train (en bleu dans la figure ci-dessous), entre les villes a<->d, d<->f,
+- en voiture (covoiturage) (en rouge dans la figure ci-dessous), entre les villes a<->f, c<->f
 - les coûts, vitesses, émissions de co2, confort ... dépendent du moyen utilisé
 
+
+<!--
 ```
-A-------B
-* \\   /|         -- : bus
-*   \\/ |         == : train
-*    /\\|         ** : voiture
-*   C---D\\
-*   *\  | ||
-*   * \ | ||
-*   *  \| || 
- *  *   E ||
- *  *  /  //
- *  * /  //
-  * */  //
-   *F==//
-```
+@startuml RequestInitiator
+hide empty description
+rectangle A
+rectangle B
+rectangle C
+rectangle D
+rectangle E
+rectangle F
+A <-- > B
+A <--[#blue]> D
+B <-- > C
+B <-- > D
+C <-- > D
+C <-- > E
+D <-- > E
+D <--[#blue]> F
+A <--[#red]> F 
+C <--[#red]> F 
+E <-- > F
+
+
+@enduml```
+
+-->
+
+![](trajetsV1.png)
+
+
 
 ---
 
