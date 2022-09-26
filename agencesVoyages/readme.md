@@ -42,7 +42,7 @@ Le code utilise
 
 - la librairie opencsv ([http://opencsv.sourceforge.net](http://opencsv.sourceforge.net)) version 3.9 attachée à ce
   dossier.
-- la librairie jade.jar à télécharger sur le site de [jade](https://jade.tilab.com).
+- la librairie jadeUPHF.jar à télécharger ici :  "[JadeUPHF.jar](https://github.com/EmmanuelADAM/JadeUPHF/blob/master/JadeUPHF.jar)".
 
 -----
 Le code s'exécute tel quel, mais le client ne peut effectuer qu'un choix par durée la plus courte parmi les voyages
