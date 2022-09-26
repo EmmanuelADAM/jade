@@ -86,7 +86,7 @@ Pour information, les trajets possibles sont les suivants :
 - les coûts, vitesses, émissions de co2, confort ... dépendent du moyen utilisé
 
 
-<!--
+<!-- note, pour plantUml, ci-dessous retirer les espaces entre un tiret - et sa fin >
 ```
 @startuml RequestInitiator
 hide empty description
@@ -97,23 +97,33 @@ rectangle D
 rectangle E
 rectangle F
 A <-- > B
+A <--[#grey]> B
 A <--[#blue]> D
 B <-- > C
+B <--[#grey]> C
 B <-- > D
+B <--[#grey]> D
 C <-- > D
+C <--[#grey]> D
 C <-- > E
+C <--[#grey]> E
 D <-- > E
+D <--[#grey]> E
 D <--[#blue]> F
 A <--[#red]> F 
 C <--[#red]> F 
 E <-- > F
+E <--[#grey]> F
+B <--[#orange]> F
+A <--[#orange]> E 
 
 
-@enduml```
+@enduml 
+```
 
 -->
 
-![](trajetsV1.png)
+<img src="trajetsV1.png" alt="reseau v2" height="300"/>
 
 
 
@@ -131,6 +141,50 @@ E <-- > F
 - un achat auprès d'un portail est répercuté au niveau de l'agence.
 
 > si code portail correct => + 5 points
+
+Voici la nouvelle offre de voyage (en orange pour la 2e agence de voiture, en gris pour la 2e agence de bus)
+
+<!-- note, pour plantUml, ci-dessous retirer les espaces entre un tiret - et sa fin >
+```
+@startuml RequestInitiator
+hide empty description
+rectangle A
+rectangle B
+rectangle C
+rectangle D
+rectangle E
+rectangle F
+A <-- > B
+A <--[#grey]> B
+A <--[#blue]> D
+B <-- > C
+B <--[#grey]> C
+B <-- > D
+B <--[#grey]> D
+C <-- > D
+C <--[#grey]> D
+C <-- > E
+C <--[#grey]> E
+D <-- > E
+D <--[#grey]> E
+D <--[#blue]> F
+A <--[#red]> F
+C <--[#red]> F
+E <-- > F
+E <--[#grey]> F
+B <--[#orange]> F
+A <--[#orange]> E
+
+
+@enduml
+```
+
+-->
+
+<img src="trajetsV2.png" alt="reseau v2" height="300"/>
+
+
+
 
 ---
 
