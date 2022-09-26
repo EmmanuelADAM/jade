@@ -86,9 +86,9 @@ Pour information, les trajets possibles sont les suivants :
 - les coûts, vitesses, émissions de co2, confort ... dépendent du moyen utilisé
 
 
-<!-- note, pour plantUml, ci-dessous retirer les espaces entre un tiret - et sa fin >
+<!-- note, pour plantUml, ci-dessous retirer les espaces entre des tirets -- et le signe > 
 ```
-@startuml RequestInitiator
+@startuml trajetsV1
 hide empty description
 rectangle A
 rectangle B
@@ -97,25 +97,16 @@ rectangle D
 rectangle E
 rectangle F
 A <-- > B
-A <--[#grey]> B
-A <--[#blue]> D
-B <-- > C
-B <--[#grey]> C
-B <-- > D
-B <--[#grey]> D
+A <-[#blue]> D
+B <-> C
+B <-> D
 C <-- > D
-C <--[#grey]> D
-C <-- > E
-C <--[#grey]> E
-D <-- > E
-D <--[#grey]> E
-D <--[#blue]> F
-A <--[#red]> F 
-C <--[#red]> F 
+C <-> E
+D <-> E
+D <-[#blue]> F
+A <-[#red]> F 
+C <-[#red]> F 
 E <-- > F
-E <--[#grey]> F
-B <--[#orange]> F
-A <--[#orange]> E 
 
 
 @enduml 
@@ -144,9 +135,9 @@ A <--[#orange]> E
 
 Voici la nouvelle offre de voyage (en orange pour la 2e agence de voiture, en gris pour la 2e agence de bus)
 
-<!-- note, pour plantUml, ci-dessous retirer les espaces entre un tiret - et sa fin >
+<!-- note, pour plantUml, ci-dessous retirer les espaces entre deux tirets -- et le signe > 
 ```
-@startuml RequestInitiator
+@startuml trajetsV2
 hide empty description
 rectangle A
 rectangle B
@@ -156,22 +147,21 @@ rectangle E
 rectangle F
 A <-- > B
 A <--[#grey]> B
-A <--[#blue]> D
-B <-- > C
-B <--[#grey]> C
-B <-- > D
-B <--[#grey]> D
+A <-[#blue]> D
+B <-> C
+B <-[#grey]> C
+B <-> D
+B <-[#grey]> D
 C <-- > D
 C <--[#grey]> D
-C <-- > E
-C <--[#grey]> E
-D <-- > E
-D <--[#grey]> E
-D <--[#blue]> F
-A <--[#red]> F
-C <--[#red]> F
+C <-> E
+C <-[#grey]> E
+D <-> E
+D <-[#grey]> E
+D <-[#blue]> F
+A <-[#red]> F
+C <-[#red]> F
 E <-- > F
-E <--[#grey]> F
 B <--[#orange]> F
 A <--[#orange]> E
 
