@@ -25,4 +25,11 @@ Supports pour le cours de programmation orientée agent en Jade
     - sinon il refuse de poursuivre et en informe le journal Reprenez pour cela la trame des agents utilisé lors
       d'enchère ou de vote..
 
-- Créez maintenant le principe d'enchère anglaise ouverte avec des comportement de type FSM...
+- Créez maintenant le principe de négociation avec des comportement de type FSM...
+  - deux agents : Acheteur et Vendeur interagissent
+    - Acheteur a un prix max _maxi_ qu'il ne souhaite pas dépasser
+    - Vendeur a un prix min qu'il ne souhaite pas franchir et propose un prix de vente
+    - Acheteur propose un prix < _maxi_ 
+    - Vendeur propose un prix plus bas que le prix de vente
+    - cela se poursuit jusqu'à l'arrêt positif ou négatif (rejet de la negociation) par un des deux agents
+    
