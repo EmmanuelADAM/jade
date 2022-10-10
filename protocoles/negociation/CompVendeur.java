@@ -17,7 +17,7 @@ public class CompVendeur extends Behaviour {
         super(monAgent);
         this.monAgent = monAgent;
         this.modele = modele;
-        monAgent.seuil = 70;
+        monAgent.seuil = 60;
         offrePrecedente = monAgent.prixSouhaite;
     }
 
@@ -29,7 +29,7 @@ public class CompVendeur extends Behaviour {
             var content = msg.getContent();
             monAgent.println("j'ai reçu une offre à %s".formatted(content));
             offreAutre = Double.parseDouble(msg.getContent());
-            if (offreAutre > offrePrecedente) accord = true;
+            if (offreAutre >= offrePrecedente) accord = true;
             if (offreAutre < monAgent.seuil) rejet = true;
             if (!accord || !rejet) {
                 offre = offrePrecedente * (1 - epsilon);

@@ -30,7 +30,7 @@ public class CompAcheteur extends Behaviour {
             var sender = msg.getSender();
             offreAutre = Double.parseDouble(msg.getContent());
             monAgent.println("j'ai reçu une offre à " + content );
-            if (offreAutre<offrePrecedente) accord =true;
+            if (offreAutre<=offrePrecedente) accord =true;
             if (offreAutre>monAgent.seuil) rejet =true;
             if(!accord || !rejet){
                 if (offrePrecedente==0) offrePrecedente = monAgent.prixSouhaite;
