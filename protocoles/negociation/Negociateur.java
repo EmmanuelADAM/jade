@@ -8,6 +8,7 @@ import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.ReceiverBehaviour;
 import jade.core.behaviours.WakerBehaviour;
 import jade.gui.AgentWindowed;
+import jade.gui.GuiEvent;
 import jade.gui.SimpleWindow4Agent;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
@@ -38,38 +39,20 @@ public class Negociateur extends AgentWindowed {
         // si l'agent s'appelle vendeur,
         // ajout d'un comportement qui enverra le texte 'balle' à l'agent pong dans 10 secondes
         if (getLocalName().equals("vendeur")) {
-            long temps = 2000;
-            out.println("agent " + getLocalName() + " : je commence dans " + temps + " ms");
-            addBehaviour(new WakerBehaviour(this, temps) {
-                protected void onWake() {
-                    var msg = new ACLMessage(ACLMessage.INFORM);
-                    msg.addReceiver("acheteur");
-                    msg.setContent(String.valueOf(prixSouhaite));
-                    msg.setConversationId("MARCHE");
-                    myAgent.send(msg);
-                    println("moi, " + getLocalName() + " je lance la négociation");
-                }
-            });
-            var modele = MessageTemplate.and(
-                    MessageTemplate.MatchConversationId("MARCHE"),
-                    MessageTemplate.MatchPerformative(ACLMessage.INFORM));
+            window.setBackgroundTextColor(Color.lightGray);
+            println("Cliquez pour lancer la négociation...");
+
+            var modele =  MessageTemplate.MatchConversationId("MARCHE");
             // ajout d'un comportement à 30 itérations qui attend un msg contenant la balle et la retourne à l'envoyeur après 300ms
             addBehaviour(new CompVendeur(this, modele));
         }
 
         if (getLocalName().equals("acheteur")) {
-            var modele = MessageTemplate.and(
-                    MessageTemplate.MatchConversationId("MARCHE"),
-                    MessageTemplate.MatchPerformative(ACLMessage.INFORM));
+            var modele =  MessageTemplate.MatchConversationId("MARCHE");
             // ajout d'un comportement à 30 itérations qui attend un msg contenant la balle et la retourne à l'envoyeur après 300ms
             addBehaviour(new CompAcheteur(this, modele));
         }
 
-        var modele2 = MessageTemplate.MatchPerformative(ACLMessage.FAILURE);
-        // ajout d'un comportement à 30 itérations qui attend un msg contenant la balle et la retourne à l'envoyeur après 300ms
-        addBehaviour(new ReceiverBehaviour(this,  -1, modele2,true, (a, msg) ->
-            println("agent " + getLocalName() + " : j'ai recu un msg d erreur   de " + msg.getSender().getLocalName() + " : " + msg.getContent())
-        ));
     }
 
     protected void println(String str){super.println(str);}
@@ -79,6 +62,28 @@ public class Negociateur extends AgentWindowed {
     protected void takeDown() {
         out.println("Moi, Agent " + getLocalName() + " je quitte la plateforme ! ");
     }
+
+    /**
+     * reaction to a gui event
+     */
+    protected void onGuiEvent(GuiEvent ev) {
+        switch (ev.getType()) {
+            case SimpleWindow4Agent.OK_EVENT -> sendMessages();
+        }
+    }
+
+    /**
+     * send messages to agents b, c & d
+     */
+    private void sendMessages() {
+        var msg = new ACLMessage(ACLMessage.INFORM);
+        msg.addReceiver("acheteur");
+        msg.setContent(String.valueOf(prixSouhaite));
+        msg.setConversationId("MARCHE");
+        send(msg);
+        println("moi, " + getLocalName() + " je lance la négociation");
+    }
+
 
     public static void main(String[] args) {
         // preparer les arguments pout le conteneur JADE

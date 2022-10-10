@@ -1,6 +1,7 @@
 package protocoles.negociation;
 
 import jade.core.behaviours.Behaviour;
+import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
 public class CompAcheteur extends Behaviour {
@@ -25,14 +26,19 @@ public class CompAcheteur extends Behaviour {
     public void action() {
         var msg = myAgent.receive(modele);
         if (msg != null) {
+            switch (msg.getPerformative()){
+                case ACLMessage.AGREE -> {
+                    accord = true;
+                    monAgent.println("accord trouve avec l autre sur " + msg.getContent());}
+                case ACLMessage.REFUSE -> rejet = true;
+                case ACLMessage.FAILURE -> rejet = true;
+            }
             step++;
-            var content = msg.getContent();
-            var sender = msg.getSender();
             offreAutre = Double.parseDouble(msg.getContent());
-            monAgent.println("j'ai reçu une offre à " + content );
+            monAgent.println("j'ai reçu une offre à %.2f".formatted(offreAutre));
             if (offreAutre<=offrePrecedente) accord =true;
             if (offreAutre>monAgent.seuil) rejet =true;
-            if(!accord || !rejet){
+            if(!accord && !rejet){
                 if (offrePrecedente==0) offrePrecedente = monAgent.prixSouhaite;
                 offre = offrePrecedente * (1+epsilon);
                 offrePrecedente = offre;
@@ -41,15 +47,32 @@ public class CompAcheteur extends Behaviour {
                 myAgent.send(reponse);
                 monAgent.println("je propose %.2f".formatted(offre));
             }
+            if(accord){
+                var reponse = msg.createReply();
+                reponse.setContent(String.valueOf(offreAutre));
+                reponse.setPerformative(ACLMessage.AGREE);
+                myAgent.send(reponse);
+                monAgent.println("j'envoie mon accord");
+            }
+            if(rejet){
+                var reponse = msg.createReply();
+                reponse.setPerformative(ACLMessage.REFUSE);
+                myAgent.send(reponse);
+            }
+            if(step == 10){
+                var reponse = msg.createReply();
+                reponse.setPerformative(ACLMessage.FAILURE);
+                myAgent.send(reponse);
+            }
         } else block();
     }
 
     @Override
     public boolean done() {
         if (accord)
-            monAgent.println("Accord sur cette proposition %.2f".formatted(offreAutre));
+            monAgent.println("Fin sur un accord ");
         if (rejet)
-            monAgent.println("Rejet des négociation sur cette dernière offre recue %.2f".formatted(offreAutre));
+            monAgent.println("Fin sur un rejet ");
         if (step == 10)
             monAgent.println("Temps de négociation expiré");
         return step == 10 || accord || rejet;
