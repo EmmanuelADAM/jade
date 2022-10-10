@@ -84,6 +84,8 @@ Deux exemples sont donnés :
 - [Vote Condorcet](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/voteCondorcet) : codes illustrant la 
   communication entre agents par le protocole ContractNet pour un vote de Condorcet augmenté pour être effectué en 1 
   tour.
+- [Negociation](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/negociation) : codes à compléter 
+  pour coder la négociation 1-1.
 
 ## Exemple complet, support à développements :
 
