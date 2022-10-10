@@ -43,12 +43,13 @@ resultat -- > J:Acceptation
 resultat -- > J:Corrections
 J:Refus -- > [*]
 J:Acceptation -- > [*]
-A:Decision <-- J:Corrections
+J:Corrections -- > A:Decision 
 state decision <<choice>>
-decision <-- A:Decision
+A:Decision -- > decision
 A:ReSoumission <-- decision
+A:Abandon <-- decision
 J:reception <-- A:ReSoumission
-[*] <-- decision 
+[*] <- A:Abandon 
 @enduml```
 -->
 

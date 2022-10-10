@@ -1,6 +1,7 @@
 package agencesVoyages.data;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * class that represents a journey<br>
@@ -216,13 +217,6 @@ public class Journey implements Cloneable, Serializable, Comparable<Journey> {
         this.proposedBy = proposedBy;
     }
 
-    @Override
-    public String toString() {
-        return new StringBuilder(Journey.TRAJECTFROM).append(start).append(Journey.TO).
-                append(stop).append(Journey.BY).append(means).append(Journey.DEPARTURE).
-                append(departureDate).append(Journey.ARRIVAL).append(arrivalDate).
-                append(Journey.COST).append(cost).append(Journey.PROPOSEDBY).append(proposedBy).toString();
-    }
 
     public int getPlaces() {
         return places;
@@ -231,6 +225,30 @@ public class Journey implements Cloneable, Serializable, Comparable<Journey> {
     public void setPlaces(int places) {
         this.places = places;
     }
+
+    @Override
+    public String toString() {
+        return new StringBuilder(Journey.TRAJECTFROM).append(start).append(Journey.TO).
+                append(stop).append(Journey.BY).append(means).append(Journey.DEPARTURE).
+                append(departureDate).append(Journey.ARRIVAL).append(arrivalDate).
+                append(Journey.COST).append(cost).append(Journey.PROPOSEDBY).append(proposedBy).toString();
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Journey journey = (Journey) o;
+
+        if (departureDate != journey.departureDate) return false;
+        if (!Objects.equals(start, journey.start)) return false;
+        if (!Objects.equals(stop, journey.stop)) return false;
+        return Objects.equals(means, journey.means);
+    }
+
+
 
     @Override
     public int compareTo(Journey o) {

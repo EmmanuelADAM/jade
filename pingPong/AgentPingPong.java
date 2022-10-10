@@ -3,8 +3,10 @@ package pingPong;
 import jade.core.Runtime;
 import jade.core.*;
 import jade.core.behaviours.Behaviour;
+import jade.core.behaviours.ReceiverBehaviour;
 import jade.core.behaviours.WakerBehaviour;
 import jade.lang.acl.ACLMessage;
+import jade.lang.acl.MessageTemplate;
 import jade.util.ExtendedProperties;
 
 import java.util.Properties;
@@ -43,29 +45,34 @@ public class AgentPingPong extends Agent {
         // si l'agent s'appelle ping,
         // ajout d'un comportement qui enverra le texte 'balle' à l'agent pong dans 10 secondes
         if (getLocalName().equals("ping")) {
-            long temps = 20000;
-            out.println("agent " + getLocalName() + " : je commence dans "+temps+" ms");
+            long temps = 10000;
+            out.println("agent " + getLocalName() + " : je commence dans " + temps + " ms");
             addBehaviour(new WakerBehaviour(this, temps) {
                 protected void onWake() {
                     var msg = new ACLMessage(ACLMessage.INFORM);
                     msg.addReceiver("pong");
                     msg.setContent("balle");
+                    msg.setConversationId("SPORT");
                     myAgent.send(msg);
                     println("moi, " + getLocalName() + " je lance la balle");
                 }
             });
         }
+
+        var modele = MessageTemplate.and(
+                MessageTemplate.MatchConversationId("SPORT"),
+                MessageTemplate.MatchPerformative(ACLMessage.INFORM));
         // ajout d'un comportement à 30 itérations qui attend un msg contenant la balle et la retourne à l'envoyeur après 300ms
         addBehaviour(new Behaviour(this) {
             int step = 0;
 
             public void action() {
-                var msg = receive();
+                var msg = receive(modele);
                 if (msg != null) {
                     step++;
                     var content = msg.getContent();
                     var sender = msg.getSender();
-                    println("agent " + getLocalName() + " : j'ai recu " + content + " de " + sender);
+                    println("agent " + getLocalName() + " : j'ai recu " + content + " de " + sender.getLocalName());
                     myAgent.doWait(300);
                     var reply = msg.createReply();
                     reply.setContent("balle-" + step);
@@ -74,11 +81,17 @@ public class AgentPingPong extends Agent {
             }
 
             public boolean done() {
-                if(step==20)
+                if (step == 20)
                     println("agent " + getLocalName() + " : je ne joue plus");
                 return step == 20;
             }
         });
+
+        var modele2 = MessageTemplate.MatchPerformative(ACLMessage.FAILURE);
+        // ajout d'un comportement à 30 itérations qui attend un msg contenant la balle et la retourne à l'envoyeur après 300ms
+        addBehaviour(new ReceiverBehaviour(this,  -1, modele2,true, (a, msg) ->
+            println("agent " + getLocalName() + " : j'ai recu un msg d erreur   de " + msg.getSender().getLocalName() + " : " + msg.getContent())
+        ));
     }
 
     // 'Nettoyage' de l'agent

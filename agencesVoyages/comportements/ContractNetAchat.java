@@ -92,12 +92,12 @@ public class ContractNetAchat extends ContractNetInitiator {
     }
 
     /**
-     * methode lancee si toutes les reponses sont arrivees ou si le temps est ecoule<br>
+     * methode lancée si toutes les reponses sont arrivées ou si le temps est écoulé<br>
      * accepte la meilleure offre, calcul basé sur la notoriété la plus haute et le prix le plus bas à part égale ici<br>
-     * n'accepte pas l'offre si d�passe le prix max fix� par l'acheteur
+     * n'accepte pas l'offre si dépasse le prix max fixé par l'acheteur
      *
      * @param responses   reponses recues
-     * @param acceptances vecteur des messages a transmettre en retour aux reponses recues
+     * @param acceptances vecteur des messages à transmettre en retour aux réponses reçues
      * @see ContractNetInitiator#handleAllResponses(List, List)
      */
     @Override

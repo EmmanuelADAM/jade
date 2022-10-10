@@ -8,6 +8,7 @@ import com.opencsv.CSVReader;
 import jade.core.AID;
 import jade.core.AgentServicesTools;
 import jade.core.behaviours.CyclicBehaviour;
+import jade.core.behaviours.ReceiverBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
 import jade.domain.FIPANames;
@@ -63,18 +64,11 @@ public class AgenceAgent extends GuiAgent {
         topic = AgentServicesTools.generateTopicAID(this, "TRAFFIC NEWS");
 
         //ecoute des messages radio
-        addBehaviour(new CyclicBehaviour() {
-            @Override
-            public void action() {
-                var msg = myAgent.receive(MessageTemplate.MatchTopic(topic));
-                if (msg != null) {
-                    println("Message recu sur le topic " + topic.getLocalName() + ". Contenu " + msg.getContent()
-                            + " émis par " + msg.getSender().getLocalName());
-                } else {
-                    block();
-                }
-            }
-        });
+        addBehaviour(new ReceiverBehaviour(this, -1, MessageTemplate.MatchTopic(topic), true, (a, m)->{
+                    println("Message recu sur le topic " + topic.getLocalName() + ". Contenu " + m.getContent()
+                            + " emis par :  " + m.getSender().getLocalName());
+                }));
+
         //FIN REGLAGE ECOUTE DE LA RADIO
 
 

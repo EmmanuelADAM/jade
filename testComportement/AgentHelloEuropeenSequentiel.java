@@ -21,7 +21,7 @@ public class AgentHelloEuropeenSequentiel extends Agent {
         String[] jadeArgs = new String[2];
         StringBuilder sbAgents = new StringBuilder();
         sbAgents.append("a1:testComportement.AgentHelloEuropeenSequentiel").append(";");
-        sbAgents.append("a2:testComportement.AgentHelloEuropeenSequentiel").append(";");
+//        sbAgents.append("a2:testComportement.AgentHelloEuropeenSequentiel").append(";");
         jadeArgs[0] = "-gui";
         jadeArgs[1] = sbAgents.toString();
         jade.Boot.main(jadeArgs);

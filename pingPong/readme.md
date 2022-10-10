@@ -24,24 +24,23 @@ Voici le comportement des joueurs :
 
 start
 while (TQ agent vivant) is (ok)
-if (comportement activable ?) then ([choisir prochain comportement])
+if (comportement activable ?) then ([oui, en choisir un])
     partition "Behaviour:pingpong" {
       partition "action" {
           :msg <- prendreMessage();
-          if (msg ≠ vide) then 
+          if (msg ≠ vide) then ([oui])
             :afficher msg;
             :répondre "balle-" + i;
             :i <- i + 1;
           endif
       }
       partition "done" {
-          if (i=20) then
-            :removeBehaviour pingpong;
+          if (i=20) then ([oui])
+            :comportement \nautomatiquement\nretiré;
           endif
       }
     }
 
- else(non)
  endif 
   endwhile (deleted)
 stop
