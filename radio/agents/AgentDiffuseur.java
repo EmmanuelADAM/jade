@@ -32,7 +32,7 @@ public class AgentDiffuseur extends AgentWindowed {
         window.setButtonActivated(true);
         window.setBackgroundTextColor(Color.YELLOW);
         //Creation d'un "canal radio" de nom InfoRadio
-        topic = AgentServicesTools.generateTopicAID(this, "InfoRadio");
+        topic = AgentServicesTools.generateTopicAID(this, "TNSID");
     }
 
     /**

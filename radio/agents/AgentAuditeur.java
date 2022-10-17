@@ -23,7 +23,7 @@ public class AgentAuditeur extends AgentWindowed {
         window = new SimpleWindow4Agent(getAID().getName(), this);
         println("Hello! Agent  " + getAID().getName() + " is ready. ");
         //recherche d'un "canal radio" de nom InfoRadio
-        topic = AgentServicesTools.generateTopicAID(this, "InfoRadio");
+        topic = AgentServicesTools.generateTopicAID(this, "TNSID");
         //ecoute cyclique sur le canal radio
         final MessageTemplate mt = MessageTemplate.MatchTopic(topic);
         addBehaviour(new ReceiverBehaviour(this, -1, mt, true,

@@ -34,9 +34,51 @@ d'accord, de rejet, de nb de tours dépassé).
     - le comportement prend fin en cas d'accord, de rejet, ou au bout de nb cycles
 
 ---
-**Compléter le code pour la prise en compte des terminaisons pour les 2 agents**
-
----
 **Créez un procotole en se basant sur les automates (FSM)**
+
+Modifier le code de ce répoertoire; voici ci-dessous l'enchaînement des étapes.
+- L'initiateur propose un prix,
+- Le prix proposé devient une offre pour le destinataire du message
+- Ce destinataire : 
+  - accepte si l'offre est proche de son prix désiré,
+  - refuse si l'offre dépasse un seuil (trop haut ou trop bas selon la position du négociateur),
+  - émet une contre-offre et retourne un prix au partenaire.
+
+<!-- 
+```
+@startuml negociation
+State Initiateur{
+[*] -> I:proposer
+state IattenteOffre <<fork>>
+I:proposer -- > IattenteOffre
+state choixInitiateur <<choice>>
+IattenteOffre -- > I:Etudier
+I:Etudier -- > choixInitiateur : offre
+choixInitiateur -- > I:rejet : [offre<seuil]
+choixInitiateur -- > I:accord : [offre ±= prix désiré]
+choixInitiateur -- > I:marchander : [seuil<offre<prix désiré]
+state ITraiterAccord
+state ITraiterRejet
+}
+
+State Répondeur{
+I:proposer -> R:Etudier : prix
+state choixRepondeur <<choice>>
+R:Etudier -- > choixRepondeur : offre
+choixRepondeur -- > R:rejet : [offre>seuil]
+choixRepondeur -- > R:accord : [offre ±= prix désiré]
+choixRepondeur -- > R:marchander : [prix désiré<offre<seuil]
+R:marchander -- > IattenteOffre : prix
+state RTraiterAccord
+state RTraiterRejet
+}
+ITraiterAccord<-R:accord
+ITraiterRejet<-R:rejet
+I:accord-- >RTraiterAccord
+I:rejet-- >RTraiterRejet
+@enduml```
+-->
+
+<img src="negociation.png" alt="reseau v2" height="600"/>
 
 ---

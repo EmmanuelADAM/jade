@@ -174,6 +174,17 @@ A <--[#orange]> E
 <img src="trajetsV2.png" alt="reseau v2" height="300"/>
 
 
+---
+### Rapport à rendre
+
+Vous associerez votre remise de codes d'un court rapport contenant :
+- un diagramme de classes, contenant les classes sur les agents et leurs comportements
+- de diagrammes de séquences détaillant les différents modes :
+    - recherche classique de voyages
+    - recherche via les agences "portails"
+- d'un diagramme d'états pour le mode d'enchère proposé
+
+Vous pouvez vous baser sur les exemples de diagramme illustrants les codes des TDs; ainsi que sur les codes PlantUML associé si vous souhaitez uitiliser cet outil pour la création de diagrammes.
 
 
 ---

@@ -13,3 +13,5 @@
 
 - au lancement, 11 agents sont lancés, un pointeur, 10 venant, leur nombre n'est pas limité hormis par la capacité de
   la machine.
+
+

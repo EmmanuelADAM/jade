@@ -41,14 +41,21 @@ public class CompVendeur extends Behaviour {
                 if (offreAutre < monAgent.seuil) rejet = true;
                 if (!accord && !rejet) {
                     offre = offrePrecedente * (1 - epsilon);
-                    offrePrecedente = offre;
-                    var reponse = msg.createReply();
-                    reponse.setContent(String.valueOf(offre));
-                    myAgent.send(reponse);
-                    monAgent.println("je propose %.2f".formatted(offre));
+                    if (offre<offreAutre) {
+                        offre = offreAutre;
+                        accord = true;
+                    }
+                    else {
+                        offrePrecedente = offre;
+                        var reponse = msg.createReply();
+                        reponse.setContent(String.valueOf(offre));
+                        myAgent.send(reponse);
+                        monAgent.println("je propose %.2f".formatted(offre));
+                    }
                 }
                 if (accord) {
                     var reponse = msg.createReply();
+                    reponse.setContent(String.valueOf(offreAutre));
                     reponse.setPerformative(ACLMessage.AGREE);
                     myAgent.send(reponse);
                 }

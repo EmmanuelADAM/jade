@@ -29,23 +29,25 @@ public class CompAcheteur extends Behaviour {
             switch (msg.getPerformative()){
                 case ACLMessage.AGREE -> {
                     accord = true;
-                    monAgent.println("accord trouve avec l autre sur " + msg.getContent());}
+                    monAgent.println("accord trouve avec l autre sur %.2f".formatted(Double.valueOf(msg.getContent())));}
                 case ACLMessage.REFUSE -> rejet = true;
                 case ACLMessage.FAILURE -> rejet = true;
             }
-            step++;
-            offreAutre = Double.parseDouble(msg.getContent());
-            monAgent.println("j'ai reçu une offre à %.2f".formatted(offreAutre));
-            if (offreAutre<=offrePrecedente) accord =true;
-            if (offreAutre>monAgent.seuil) rejet =true;
-            if(!accord && !rejet){
-                if (offrePrecedente==0) offrePrecedente = monAgent.prixSouhaite;
-                offre = offrePrecedente * (1+epsilon);
-                offrePrecedente = offre;
-                var reponse = msg.createReply();
-                reponse.setContent(String.valueOf(offre));
-                myAgent.send(reponse);
-                monAgent.println("je propose %.2f".formatted(offre));
+            if(!accord && !rejet) {
+                step++;
+                offreAutre = Double.parseDouble(msg.getContent());
+                monAgent.println("j'ai reçu une offre à %.2f".formatted(offreAutre));
+                if (offreAutre <= offrePrecedente) accord = true;
+                if (offreAutre > monAgent.seuil) rejet = true;
+                if (!accord && !rejet) {
+                    if (offrePrecedente == 0) offrePrecedente = monAgent.prixSouhaite;
+                    offre = offrePrecedente * (1 + epsilon);
+                    offrePrecedente = offre;
+                    var reponse = msg.createReply();
+                    reponse.setContent(String.valueOf(offre));
+                    myAgent.send(reponse);
+                    monAgent.println("je propose %.2f".formatted(offre));
+                }
             }
             if(accord){
                 var reponse = msg.createReply();

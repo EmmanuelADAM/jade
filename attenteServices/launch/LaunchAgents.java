@@ -18,6 +18,7 @@ public class LaunchAgents {
         for (int i = 0; i < 10; i++)
             sb.append("jean_").append(i).append(":attenteServices.agents.AgentVenant;");
         prop.setProperty(Profile.AGENTS, sb.toString());
+        prop.setProperty(Profile.MAIN_PORT, "1234");
         // creer le profile pour le conteneur principal
         ProfileImpl profMain = new ProfileImpl(prop);
         // lancer le conteneur principal
