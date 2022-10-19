@@ -47,7 +47,7 @@ Les codes suivants nécessitent donc cette librairie ainsi que Java 17 ou supér
   types différents; un agent les reçoit et les traite différement selon leurs types. agent "decompte" envoie des
   msgs "tictac" taggés "CLOCK" toutes les secondes, puis un msg taggé "BOOM" au bout de 10s à l'agent "agentPiege"
 
-# Agents interactifs et communicants
+## Agents interactifs et communicants
 
 - Utilisation d'une petite interface graphique pour faciliter le dialogue avec l'utilisateur
     - [fenetre](https://github.com/EmmanuelADAM/jade/tree/master/fenetre) : codes pour des agents liés à des fenêtres
