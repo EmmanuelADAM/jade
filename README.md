@@ -34,7 +34,7 @@ Les codes suivants nécessitent donc cette librairie ainsi que Java 17 ou supér
     - [AgentHelloEuropeenParallel](https://github.com/EmmanuelADAM/jade/blob/master/testComportement) : code pour deux
       agents dotés de comportements simples s'exécutant en parallèle
 
-### Agents communiquant
+### Agents communicants
 
 - Exemple classique de test de communication entre 2 agents : le ping-pong
     - [pingPong](https://github.com/EmmanuelADAM/jade/blob/master/pingPong) : code pour qui permet de lancer deux agents
