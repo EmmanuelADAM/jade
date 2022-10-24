@@ -62,10 +62,10 @@ proposés.
 
 - **enchères** : un client impacté par une route bloquée peut se retrouver avec des tickets achetés non remoursables.
     - pour chaque billet acheté,
-        - il lance une enchère hollandaise; partant du prix d'achat; diminuant jusqu'à 1€. Si aucun acheteur, le billet
+        - il lance une enchère hollandaise, partant du prix d'achat, diminuant jusqu'à 1€. Si aucun acheteur, le billet
           est abandonné.
         - ou il lance une enchère anglaise (1 un tour (**facile**, mais pas de bonus de points)), en n tours
-          classiquement; l'enchère grimpe au fur et à mesure des annonces et stoppe lorsqu'il n'y en a plus. le
+          classiquement : l'enchère grimpe au fur et à mesure des annonces et stoppe lorsqu'il n'y en a plus. le
           vainqueur étant celui ayant donné le prix le plus haut)
     - un voyageur peut également devoir abandonner son déplacement. Proposez une adaptation de sa fenêtre afin de lui
       permettre de lancer des enchères.
@@ -184,7 +184,8 @@ Vous associerez votre remise de codes d'un court rapport contenant :
     - recherche via les agences "portails"
 - d'un diagramme d'états pour le mode d'enchère proposé
 
-Vous pouvez vous baser sur les exemples de diagramme illustrants les codes des TDs; ainsi que sur les codes PlantUML associé si vous souhaitez uitiliser cet outil pour la création de diagrammes.
+Vous pouvez vous baser sur les exemples de diagramme illustrant les codes des TDs ; ainsi que sur les codes 
+PlantUML associé si vous souhaitez uitiliser cet outil pour la création de diagrammes.
 
 
 ---
@@ -207,7 +208,7 @@ Vous pouvez vous baser sur les exemples de diagramme illustrants les codes des T
       confiance qu'il accorde à l'alerte sur cet axe (par un tirage aléatoire, si le nombre est dessous la confiance 
       accordée, l'alerte est considérée comme vraie).
     - une agence choisira de même de proposer dans son catalogue les trajets selon la confiance accordée aux alertes 
-      sur ceux-ci
+      sur ceux-ci.
 
 > si code "Confiance dans le service" correct => + 5 points
 
@@ -217,10 +218,10 @@ Vous pouvez vous baser sur les exemples de diagramme illustrants les codes des T
     - Un agent peut maintenant avoir une nature courageuse ou prudente ou neutre.
     - Le courageux ne tient pas compte des avis et prendra l'offre la plus intéressante quelque soit l'évaluation de
       l'agence.
-    - Le prudent se basera plutôt sur l'évaluation que sur l'intérêt de l'offre; sur un odre de 90/10 : si le confort
-      est demandé et qu'un trajet en voiture est proposé par une agence de faible renomée, le voyageur préfèrera
-      éventuellement prendre le bus proposé par une agence renommée.
-    - Le neutre effectue un ratio 50/50 sur la renommée et l'intérêt de l'offre pour faire son choix
+    - Le prudent se basera plutôt sur l'évaluation que sur l'intérêt de l'offre (sur un ratio de 90/10) : si le confort
+      est demandé et qu'un trajet en voiture est proposé par une agence de faible renommée, le voyageur préfèrera
+      éventuellement prendre le bus proposé par une agence plus renommée.
+    - Le neutre effectue un ratio 50/50 sur la renommée et l'intérêt de l'offre pour faire son choix.
 
 > si code "Confiance envers l'autre" correct => + 5 points
 
