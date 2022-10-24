@@ -194,14 +194,20 @@ Vous pouvez vous baser sur les exemples de diagramme illustrants les codes des T
 **Confiance dans le service**
 
 - Ajoutez maintenance une notion de confiance envers le réseau routier...
-    - pour chaque axe, ajoutez une valeur de confiance (confiance dans la relation A-B, ..... , E-F)
-    - à chaque problème sur un axe, la confiance envers la relation, l'arc, passe à 0.
-    - à la restauration du problème ; la confiance se rétablit "petit à petit" selon une vitesse plus ou moins rapide
-      selon que l'agent soit rancunier ou confiant.
+    - pour chaque alerte, ajoutez une valeur de confiance (confiance dans l'alerte "problème A-B", ..... ,"problème E-F")
+    - lorsqu'une alerte est tenue pour vraie, les trajets sont retirés temporairement des catalogues (reçus ou transmis)
+    - la confiance en l'alerte décroit avec le temps : on peut supposer l'information comme étant obsolète
+    - à chaque "top", la confiance envers une alerte décroit : 
+      - $confiance_A \gets confiance_A \times \epsilon$, avec $epsilon \in [Ø,1]$,
+      - $epsilon = 0$ signifie que l'agent ne croit à aucune alerte,
+      - $epsilon = 1$ signifie que l'agent ne remet jamais en cause une alerte.
+      - si $confiance_A < seuil$, alors $confiance_A \gets 0$
+      - si $confiance_A \leq 0$, alors l'alerte $A$ est retirée des connaissances de l'agent
     - un acheteur qui se voit proposer un déplacement sur un axe décidera de risquer de prendre cet axe ou non selon la
-      confiance qu'il lui accorde (par un tirage aléatoire, si le nombre est dessous la confiance accordée, le chemin
-      sera pris ou non)
-    - une agence choisira de même de proposer dans son catalogue les trajets selon la confiance accordée à ceux-ci
+      confiance qu'il accorde à l'alerte sur cet axe (par un tirage aléatoire, si le nombre est dessous la confiance 
+      accordée, l'alerte est considérée comme vraie).
+    - une agence choisira de même de proposer dans son catalogue les trajets selon la confiance accordée aux alertes 
+      sur ceux-ci
 
 > si code "Confiance dans le service" correct => + 5 points
 
