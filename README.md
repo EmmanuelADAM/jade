@@ -1,10 +1,11 @@
-<meta name="description" content="Programmation multi-agent en Java : utilisation d'une version actualisée de la plateforme Jade. Support au tutoriel de jade portant sur : la communication, les protocoles, les votes, la recherche de services, les comportements simples et complexes" />
+<meta name="description" content="Programming multi-agent in Java : use of an updated version of the Jade 
+platform. Materials for Jade Tutorial : communication, protocols, votes, services, behaviors, ..." />
 
 # Programming agents in Jade
 
 [(version web)](https://emmanueladam.github.io/jade/)
 
-Set of source code or the course/tutorial abot multiagent programming with the JADE platform. 
+Set of source code or the course/tutorial about multiagent programming with the JADE platform. 
 
 To run these codes, it is necessary to import the library "[JadeUPHF.jar](https://github.
 com/EmmanuelADAM/JadeUPHF/blob/master/JadeUPHF.jar)". 
