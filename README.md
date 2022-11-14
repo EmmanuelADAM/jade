@@ -50,13 +50,16 @@ _The following codes need, thus, this library and Java >= 17._
     - [ticTac](https://github.com/EmmanuelADAM/jade/tree/english/ticTac) : an agent sends messages tagged with 2 
       different types; an agent receives them and treats them differently according to their types.
 
-## Agents interactifs et communicants
+---
 
-- Utilisation d'une petite interface graphique pour faciliter le dialogue avec l'utilisateur
-    - [fenetre](https://github.com/EmmanuelADAM/jade/tree/master/fenetre) : codes pour des agents liés à des fenêtres
-    - [radio](https://github.com/EmmanuelADAM/jade/tree/master/radio) : codes qui illustrent la communication par
-      broadcast. Un agent ne cible plus des destinataires, mais un canal qu'écoutent d'autres agents
+## Interactive and communicative agents
 
+- Use of a small graphical interface to facilitate dialogue with the user
+    - [window](https://github.com/EmmanuelADAM/jade/tree/english/window) : codes for agents linked to windows
+    - [radio](https://github.com/EmmanuelADAM/jade/tree/english/radio) : codes that illustrate broadcast 
+      communication. An agent no longer targets recipients, but a channel that other agents are listening to
+
+---
 ## Agents avec comportements de type FSM
 
 - Agents qui possèdent des comportements organisés selon une machine d'états finis (FSM)  : [fsm](https://github.com/EmmanuelADAM/jade/tree/master/fsm). 
