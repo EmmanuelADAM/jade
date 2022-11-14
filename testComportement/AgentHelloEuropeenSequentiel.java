@@ -8,20 +8,21 @@ import jade.core.behaviours.WakerBehaviour;
 import static java.lang.System.out;
 
 /**
- * classe d'un agent qui contient 1 comportement sequentiel contenant plusieurs comportement s'activant 3 fois
+ * class for an agent having 1 sequential behavior that contains several behaviors acting 3 times
  *
  * @author emmanueladam
  */
 public class AgentHelloEuropeenSequentiel extends Agent {
     /**
-     * procedure principale.
-     * lance 2 agents qui agissent en "parallele" et dont les comportements s'éxécutent en sequence
+     * main function
+     * launch 2 agents whom the behaviors act in sequence
+     *
      */
     public static void main(String[] args) {
         String[] jadeArgs = new String[2];
         StringBuilder sbAgents = new StringBuilder();
         sbAgents.append("a1:testComportement.AgentHelloEuropeenSequentiel").append(";");
-//        sbAgents.append("a2:testComportement.AgentHelloEuropeenSequentiel").append(";");
+        sbAgents.append("a2:testComportement.AgentHelloEuropeenSequentiel").append(";");
         jadeArgs[0] = "-gui";
         jadeArgs[1] = sbAgents.toString();
         jade.Boot.main(jadeArgs);
@@ -32,8 +33,9 @@ public class AgentHelloEuropeenSequentiel extends Agent {
      */
     @Override
     protected void setup() {
-        out.println("Moi, Agent " + getLocalName() + ", mon  adresse est " + getAID());
-        out.println("J'execute des comportements en sequentiel");
+        out.printf("""
+                I, Agent %s, my address is %s
+                    I execute several behaviors in parallel%n""", getLocalName(), getAID());
 
         SequentialBehaviour seqB = new SequentialBehaviour();
         seqB.addSubBehaviour(europeanBehaviour("bonjour"));
@@ -43,14 +45,16 @@ public class AgentHelloEuropeenSequentiel extends Agent {
         seqB.addSubBehaviour(europeanBehaviour("Olá"));
         seqB.addSubBehaviour(europeanBehaviour("saluton"));
 
-        // ajout d'un comportement qui ajoute le comportement seuentiel dans 100ms
+        // add a behavior that adds the parallel behavior in 100ms
         addBehaviour(new WakerBehaviour(this, 100, a->a.addBehaviour(seqB)));
 
 
     }
 
     /**
-     * @return un comportement qui affiche le message transmis, 3 fois
+     * create a behavior that displays a message; this behavior can be executed 3 times
+     * @param msg the msg to display
+     * @return  a simple behavior that can be executed 3 times
      */
     private Behaviour europeanBehaviour(String msg) {
         Behaviour b = new Behaviour(this) {
@@ -58,7 +62,7 @@ public class AgentHelloEuropeenSequentiel extends Agent {
 
             @Override
             public void action() {
-                printf("%s -> %s %d fois\n", new Object[]{getLocalName(), msg, (i+1)});
+                println("%s -> %s (%d/3)".formatted(getLocalName(), msg, (i+1)));
                 i++;
             }
 

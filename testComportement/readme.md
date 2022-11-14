@@ -4,7 +4,7 @@
 
 ---
 
-- [AgentHelloSalut](https://github.com/EmmanuelADAM/jade/tree/english/testComp01/AgentHelloSalut.java) : code for an 
+- [AgentHelloSalut](https://github.com/EmmanuelADAM/jade/tree/english/testComportement/AgentHelloSalut.java) : code for an 
   agent that owns 3 behaviors:
     - a behavior displaying "hello" every 200ms, endlessly
     - a cyclic behavior with activation every 300ms
@@ -50,13 +50,13 @@ stop
 
 ![](helloSalut.png)
 
-- [AgentHelloEuropeenParallel](https://github.com/EmmanuelADAM/jade/blob/master/testComp01/AgentHelloEuropeenParallel.java) :
-  code pour deux agent qui possèdent contient des comportements s'exécutant en **parallèle**. Ces comportments
-  s'exécutent 3 fois et  affichent des salutations dans différentes langues européennes..
-- JADE partage bien les ressources entre les agents, et pour chaque agent entre ses comportements s'exécutant en
-  parallèle.
+- [AgentHelloEuropeenParallel](https://github.com/EmmanuelADAM/jade/tree/english/testComportement/AgentHelloEuropeenParallel.
+  java) :
+  code that launches 2 agents that owns behaviors executing in **parallel**. These behaviors can be activated 3 
+  times and display greetings in European languages..
+- The results shown that JADE share ressources between agents and their behaviors receive the same priority.
 
-- Voici une vue du fonctionnement de comportements en séquentiel.
+- Here is a view of how behaviors work in parallel.
 
 
 <!--
@@ -64,12 +64,12 @@ stop
 @startuml HelloEuropeenParallel
 
 start
-while (TQ agent vivant) is (ok)
-if (comportement activable ?) then ([choisir prochain comportement])
+while (While agent alive) is (ok)
+if (activatable behavior?) then ([choose a next behavior])
     fork
     partition "EuropeanBehaviour A" {
       partition "action" {
-          :afficher "bonjour"
+          :display "bonjour"
           i <- i + 1;
       }
       partition "done" {
@@ -83,7 +83,7 @@ if (comportement activable ?) then ([choisir prochain comportement])
     fork again
     partition "EuropeanBehaviour B" {
       partition "action" {
-          :afficher "hallo"
+          :display "hallo"
           i <- i + 1;
       }
       partition "done" {
@@ -97,7 +97,7 @@ if (comportement activable ?) then ([choisir prochain comportement])
     fork again
     partition "EuropeanBehaviour C" {
       partition "action" {
-          :afficher "buongiorno"
+          :display "buongiorno"
           i <- i + 1;
       }
       partition "done" {
@@ -109,7 +109,7 @@ if (comportement activable ?) then ([choisir prochain comportement])
       }
     }
     end fork
-else (non)
+else (no)
  endif 
   endwhile (deleted)
 stop
@@ -120,47 +120,47 @@ stop
 ![](HelloEuropeenParallel.png)
 
 ```
-a1 -> bonjour 1 fois
-a2 -> bonjour 1 fois
-a1 -> hallo 1 fois
-a2 -> hallo 1 fois
-a1 -> buongiorno 1 fois
-a2 -> buongiorno 1 fois
-a1 -> buenos dias 1 fois
-a2 -> buenos dias 1 fois
-a1 -> OlÃ¡ 1 fois
-a2 -> OlÃ¡ 1 fois
-a1 -> saluton 1 fois
-a2 -> saluton 1 fois
-a1 -> bonjour 2 fois
-a2 -> bonjour 2 fois
-a1 -> hallo 2 fois
-a2 -> hallo 2 fois
-a1 -> buongiorno 2 fois
-a2 -> buongiorno 2 fois
-a1 -> buenos dias 2 fois
-a2 -> buenos dias 2 fois
+a1 -> bonjour (1/3)
+a2 -> bonjour (1/3)
+a1 -> hallo (1/3)
+a2 -> hallo (1/3)
+a1 -> buongiorno (1/3)
+a2 -> buongiorno (1/3)
+a1 -> buenos dias (1/3)
+a2 -> buenos dias (1/3)
+a1 -> OlÃ¡ (1/3)
+a2 -> OlÃ¡ (1/3)
+a1 -> saluton (1/3)
+a2 -> saluton (1/3)
+a1 -> bonjour (2/3)
+a2 -> bonjour (2/3)
+a1 -> hallo (2/3)
+a2 -> hallo (2/3)
+a1 -> buongiorno (2/3)
+a2 -> buongiorno (2/3)
+a1 -> buenos dias (2/3)
+a2 -> buenos dias (2/3)
 ...
 ```
 
-- [AgentHelloEuropeenSequentiel](https://github.com/EmmanuelADAM/jade/blob/master/testComp01/AgentHelloEuropeenSequentiel.java) :
-  code pour deux agent qui possèdent contient des comportements s'exécutant en **séquentiel**. Ces comportments
-  s'exécutent 3 fois  et  affichent des salutations dans différentes langues européennes..
-- JADE partage bien les ressources entre les agents, et cette fois, pour chaque agent le même comportement est 
-  appelé tant qu'il n'est pas terminé, les autres comportement s'exécutant dans l'ordre de leurs déclarations.
+- [AgentHelloEuropeenSequentiel](https://github.
+  com/EmmanuelADAM/jade/tree/english/testComportement/AgentHelloEuropeenSequentiel.java) :
+  code that launches 2 agents that owns behaviors executing in **sequence**. These behaviors can be activated 3
+  times and display greetings in European languages..
+- The results shown that JADE share ressources between agents and their behaviors receive the same priority. This time, for each agent, the same behavior is called until it completes, with the other behaviors executing in the order of their declarations.
 
-- Voici une vue du fonctionnement de comportements en séquentiel.
+- Here is a view of how behaviors work in sequence.
 <!--
 ```
 @startuml HelloEuropeenSequentiel
 
 start
-while (TQ agent vivant) is (ok)
+while (While agent alive) is (ok)
   if (EuropeanBehaviour A 
   exists) then (true)
     partition "EuropeanBehaviour A" {
       partition "action" {
-          :afficher "bonjour"
+          :display "bonjour"
           i <- i + 1;
       }
       partition "done" {
@@ -175,7 +175,7 @@ while (TQ agent vivant) is (ok)
 exists) then (true)
     partition "EuropeanBehaviour B" {
       partition "action" {
-          :afficher "hallo"
+          :display "hallo"
           i <- i + 1;
       }
       partition "done" {
@@ -190,7 +190,7 @@ exists) then (true)
 exists) then (true)
     partition "EuropeanBehaviour C" {
       partition "action" {
-          :afficher "buongiorno"
+          :display "buongiorno"
           i <- i + 1;
       }
       partition "done" {
@@ -211,30 +211,30 @@ stop
 ![](HelloEuropeenSequentiel.png)
 
 ```
-a1 -> bonjour 1 fois
-a2 -> bonjour 1 fois
-a1 -> bonjour 2 fois
-a2 -> bonjour 2 fois
-a2 -> bonjour 3 fois
-a1 -> bonjour 3 fois
-a2 -> hallo 1 fois
-a1 -> hallo 1 fois
-a2 -> hallo 2 fois
-a1 -> hallo 2 fois
-a2 -> hallo 3 fois
-a1 -> hallo 3 fois
-a2 -> buongiorno 1 fois
-a1 -> buongiorno 1 fois
-a2 -> buongiorno 2 fois
-a1 -> buongiorno 2 fois
-a2 -> buongiorno 3 fois
-a1 -> buongiorno 3 fois
-a2 -> buenos dias 1 fois
-a1 -> buenos dias 1 fois
-a2 -> buenos dias 2 fois
-a1 -> buenos dias 2 fois
-a2 -> buenos dias 3 fois
-a1 -> buenos dias 3 fois
-a2 -> OlÃ¡ 1 fois
+a1 -> bonjour (1/3)
+a2 -> bonjour (1/3)
+a1 -> bonjour (2/3)
+a2 -> bonjour (2/3)
+a2 -> bonjour (3/3)
+a1 -> bonjour (3/3)
+a2 -> hallo (1/3)
+a1 -> hallo (1/3)
+a2 -> hallo (2/3)
+a1 -> hallo (2/3)
+a2 -> hallo (3/3)
+a1 -> hallo (3/3)
+a2 -> buongiorno (1/3)
+a1 -> buongiorno (1/3)
+a2 -> buongiorno (2/3)
+a1 -> buongiorno (2/3)
+a2 -> buongiorno (3/3)
+a1 -> buongiorno (3/3)
+a2 -> buenos dias (1/3)
+a1 -> buenos dias (1/3)
+a2 -> buenos dias (2/3)
+a1 -> buenos dias (2/3)
+a2 -> buenos dias (3/3)
+a1 -> buenos dias (3/3)
+a2 -> OlÃ¡ (1/3)
 ...
 ```

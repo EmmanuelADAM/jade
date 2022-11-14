@@ -8,14 +8,16 @@ import jade.core.behaviours.WakerBehaviour;
 import static java.lang.System.out;
 
 /**
- * classe d'un agent qui contient 1 comportement parallèle contenant plusieurs comportement s'activant 3 fois
+ * class for an agent having 1 parallel behavior that contains several behaviors acting 3 times
+ * s'activant 3 fois
  *
  * @author emmanueladam
  */
 public class AgentHelloEuropeenParallel extends Agent {
     /**
-     * procedure principale.
-     * lance 2 agent qui agissent en "parallele" et dont les comportements s'éxécutent en parallèle
+     * main function
+     * launch 2 agents whom the behaviors act in parallel
+     *
      */
     public static void main(String[] args) {
         String[] jadeArgs = new String[2];
@@ -28,13 +30,14 @@ public class AgentHelloEuropeenParallel extends Agent {
     }
 
     /**
-     * Initialisation de l'agent
+     * agent set-up
      */
     @Override
     protected void setup() {
-        out.println("Moi, Agent " + getLocalName() + ", mon  adresse est " + getAID());
-        out.println("J'execute des comportements en parallel");
+        out.println("I, Agent " + getLocalName() + ", my address is " + getAID());
+        out.println("I execute several behaviors in parallel");
 
+        //create a parallel behavior
         ParallelBehaviour paraB = new ParallelBehaviour();
         paraB.addSubBehaviour(europeanBehaviour("bonjour"));
         paraB.addSubBehaviour(europeanBehaviour("hallo"));
@@ -44,13 +47,15 @@ public class AgentHelloEuropeenParallel extends Agent {
         paraB.addSubBehaviour(europeanBehaviour("saluton"));
 
 
-        // ajout d'un comportement qui ajoute le comportement parallele dans 100ms
+        // add a behavior that adds the parallel behavior in 100ms
         addBehaviour(new WakerBehaviour(this, 100, a->a.addBehaviour(paraB)));
 
     }
 
     /**
-     * @return un comportement qui affiche le message transmis, 3 fois
+     * create a behavior that displays a message; this behavior can be executed 3 times
+     * @param msg the msg to display
+     * @return  a simple behavior that can be executed 3 times
      */
     private Behaviour europeanBehaviour(String msg) {
         Behaviour b = new Behaviour(this) {
@@ -58,7 +63,7 @@ public class AgentHelloEuropeenParallel extends Agent {
 
             @Override
             public void action() {
-                printf("%s -> %s %d fois\n", new Object[]{getLocalName(), msg, (i+1)});
+                printf("%s -> %s (%d/3)\n", new Object[]{getLocalName(), msg, (i+1)});
                 i++;
             }
 
