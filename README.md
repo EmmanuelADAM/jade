@@ -41,14 +41,14 @@ _The following codes need, thus, this library and Java >= 17._
 ### Communicating Agents
 
 - Classic example of a communication test between 2 agents: ping-pong
-    - [pingPong](https://github.com/EmmanuelADAM/jade/blob/master/pingPong): Code that launches two agents that 
+    - [pingPong](https://github.com/EmmanuelADAM/jade/tree/english/pingPong): Code that launches two agents that 
       communicate with each other. The ping agent sends a ball to the pong agent which returns it to ping which in 
       turn returns it, ...
-    - [AgentPingPlouf](https://github.com/EmmanuelADAM/jade/tree/master/pingPlouf): code for an agent that sends a 
+    - [AgentPingPlouf](https://github.com/EmmanuelADAM/jade/tree/english/pingPlouf): code for an agent that sends a 
       random message and waits for a response..! This will come from the white pages agent (AMS) telling him that 
       there is no one at the address indicated...
 - Example with message filtering:
-    - [ticTac](https://github.com/EmmanuelADAM/jade/tree/master/ticTac) : an agent sends messages tagged with 2 
+    - [ticTac](https://github.com/EmmanuelADAM/jade/tree/english/ticTac) : an agent sends messages tagged with 2 
       different types; an agent receives them and treats them differently according to their types.
 
 ## Agents interactifs et communicants
