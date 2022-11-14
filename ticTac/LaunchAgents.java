@@ -9,22 +9,22 @@ import jade.util.ExtendedProperties;
 import java.util.Properties;
 
 /**
- * classe qui lance 2 agents pour illustrer le filtrage de messages.
+ * class that launch the jade platform and 2 agents (deminer and sender).
  *
  * @author emmanueladam
  */
 public class LaunchAgents extends Agent {
 
     public static void main(String[] args) {
-        // preparer les arguments pout le conteneur JADE
+        // prepare arguments for the Jade container
         Properties prop = new ExtendedProperties();
-        // demander la fenetre de controle
+        // -- add a control/debug window
         prop.setProperty(Profile.GUI, "true");
-        // nommer les agents
-        prop.setProperty(Profile.AGENTS, "sender:ticTac.AgentPosteur;deminer:ticTac.AgentLecteur");
-        // creer le profile pour le conteneur principal
+        // -- add the agents
+        prop.setProperty(Profile.AGENTS, "sender:ticTac.SenderAgent;deminer:ticTac.DeminerAgent");
+        // create the jade profile
         ProfileImpl profMain = new ProfileImpl(prop);
-        // lancer le conteneur principal
+        // launch the main jade container
         Runtime rt = Runtime.instance();
         rt.createMainContainer(profMain);
     }

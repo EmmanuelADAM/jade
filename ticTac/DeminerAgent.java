@@ -2,19 +2,14 @@ package ticTac;
 
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
-import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.MessageTemplate;
 
-import java.util.function.Consumer;
-
-import static java.lang.System.out;
-
 /**
- * class for an aget that listen 2 types of messages
+ * class for an agent that listen 2 types of messages
  *
  * @author emmanueladam
  */
-public class AgentLecteur extends Agent {
+public class DeminerAgent extends Agent {
     /**
      * Agent set-up
      */

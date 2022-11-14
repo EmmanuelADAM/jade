@@ -1,6 +1,5 @@
 package ticTac;
 
-import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.TickerBehaviour;
 import jade.core.behaviours.WakerBehaviour;
@@ -11,7 +10,7 @@ import jade.lang.acl.ACLMessage;
  *
  * @author emmanueladam
  */
-public class AgentPosteur extends Agent {
+public class SenderAgent extends Agent {
     /**
      * Agent set-up
      */
@@ -25,7 +24,7 @@ public class AgentPosteur extends Agent {
         msgTic.addReceiver("deminer");
         msgTic.setContent("tictac");
         // -- create a ticker behaviour with a period of 1000ms
-        TickerBehaviour ticTacBehaviour = new TickerBehaviour(AgentPosteur.this, 1000, a->a.send(msgTic));
+        TickerBehaviour ticTacBehaviour = new TickerBehaviour(SenderAgent.this, 1000, a->a.send(msgTic));
 
         // add the ticker behaviour in 5000 ms
         addBehaviour(new WakerBehaviour(this, 5000, a->a.addBehaviour(ticTacBehaviour)));
