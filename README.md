@@ -7,13 +7,11 @@ platform. Materials for Jade Tutorial : communication, protocols, votes, service
 
 Set of source code or the course/tutorial about multiagent programming with the JADE platform. 
 
-To run these codes, it is necessary to import the library "[JadeUPHF.jar](https://github.
-com/EmmanuelADAM/JadeUPHF/blob/master/JadeUPHF.jar)". 
-This library is a update, with JAVA 17, of the last offical version of  [Jade]
+To run these codes, it is necessary to import the library "[JadeUPHF.jar](https://github.com/EmmanuelADAM/JadeUPHF/blob/master/JadeUPHF.jar)". 
+This library is a update, with JAVA 17, of the last official version of  [Jade]
 (https://jade.tilab.com) of Tilab and add functionalities to easier the implementation of agents.
 
-The source code of these new version, the library and notes about it are accessible from here : [JadeUPHF]
-(https://emmanueladam.github.io/JadeUPHF/)".
+The source code of these new version, the library and notes about it are accessible from here : [JadeUPHF](https://emmanueladam.github.io/JadeUPHF/)".
 
 _The following codes need, thus, this library and Java >= 17._
 
