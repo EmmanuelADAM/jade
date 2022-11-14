@@ -44,7 +44,7 @@ Les codes suivants nécessitent donc cette librairie ainsi que Java 17 ou supér
   possède envoie un message au hasard et attends une réponse..! Celle-ci viendra de l'agent des pages blanches (AMS) lui signifiant qu'il n'y a personne à l'adresse indiquée...
 - Exemple avec filtrage de messages :
     - [ticTac](https://github.com/EmmanuelADAM/jade/tree/master/ticTac) : un agent envoie des messages taggés avec 2
-  types différents; un agent les reçoit et les traite différement selon leurs types. agent "decompte" envoie des
+  types différents ; un agent les reçoit et les traite différemment selon leurs types. L'agent "decompte" envoie des
   msgs "tictac" taggés "CLOCK" toutes les secondes, puis un msg taggé "BOOM" au bout de 10s à l'agent "agentPiege"
 
 ## Agents interactifs et communicants
@@ -66,7 +66,7 @@ Deux exemples sont donnés :
 - [helloWorldService](https://github.com/EmmanuelADAM/jade/tree/master/helloWorldService) : codes pour des agents liés
   chacun à une fenêtre. Ces agents se découvrent par recherche de services, et s'envoient des messages simples
 - [attenteServices](https://github.com/EmmanuelADAM/jade/tree/master/attenteServices) : codes pour des agents liés
-  chacun à une fenêtre. Des agents se déclarent aurpès des pages jaunes pour un service donné. 
+  chacun à une fenêtre. Des agents se déclarent auprès des pages jaunes pour un service donné. 
   Un agent a demandé aux pages jaunes (DF) d'être averti en cas d'inscription/desinsciption à ce service.
 
 ## Protocoles d'interactions entre agents

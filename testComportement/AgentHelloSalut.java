@@ -15,8 +15,8 @@ import static java.lang.System.out;
  */
 public class AgentHelloSalut extends Agent {
     /**
-     * procedure principale.
-     * lance 2 agents qui agissent en "parallele" et dont les comportements s'éxécutent dans le même cycle de temps
+     * procédure principale.
+     * lance 2 agents qui agissent en "parallèle"
      */
     public static void main(String[] args) {
         String[] jadeArgs = new String[2];
@@ -35,11 +35,12 @@ public class AgentHelloSalut extends Agent {
     protected void setup() {
         out.println("Moi, Agent " + getLocalName() + ", mon  adresse est " + getAID());
 
-        // ajout d'un comportement "eternel" qui, a chaque passage, affiche bonjour et fait une pause de 200 ms
-        //(peut etre remplace par un comportement cyclique, voir l'exemple ticTac)
+        // ajout d'un comportement "éternel" qui, à chaque passage, affiche bonjour et fait une pause d'au plus 200 ms
+        //(devrait être remplacé par un comportement cyclique, voir le comportement suivant)
         addBehaviour(new Behaviour(this) {
             public void action() {
                 println("De l'agent " + getLocalName() + " : Bonjour à toutezétatousse");
+                // attente au plus 200ms, ou moins si l'agent reçoit un message
                 block(200);
             }
 

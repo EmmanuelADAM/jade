@@ -14,7 +14,7 @@
   classe principale**, lançant Jade et créant 2 agents.
 
 ---
-Ci dessous un diagramme de communication entre les agents.
+Ci-dessous un diagramme de communication entre les agents.
 <!--
 ```
 @startuml tictac

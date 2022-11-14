@@ -51,8 +51,8 @@ stop
 ![](helloSalut.png)
 
 - [AgentHelloEuropeenParallel](https://github.com/EmmanuelADAM/jade/blob/master/testComp01/AgentHelloEuropeenParallel.java) :
-  code pour deux agent qui possèdent contient des comportements s'exécutant en **parallèle**. Ces comportments
-  s'exécutent 3 fois et  affichent des salutations dans différentes langues européennes..
+  code pour deux agents qui possèdent contient des comportements s'exécutant en **parallèle**. Ces comportements
+  s'exécutent 3 fois et affichent des salutations dans différentes langues européennes..
 - JADE partage bien les ressources entre les agents, et pour chaque agent entre ses comportements s'exécutant en
   parallèle.
 
@@ -144,10 +144,10 @@ a2 -> buenos dias 2 fois
 ```
 
 - [AgentHelloEuropeenSequentiel](https://github.com/EmmanuelADAM/jade/blob/master/testComp01/AgentHelloEuropeenSequentiel.java) :
-  code pour deux agent qui possèdent contient des comportements s'exécutant en **séquentiel**. Ces comportments
-  s'exécutent 3 fois  et  affichent des salutations dans différentes langues européennes..
+  code pour deux agents qui possèdent contient des comportements s'exécutant en **séquentiel**. Ces comportements
+  s'exécutent 3 fois et affichent des salutations dans différentes langues européennes..
 - JADE partage bien les ressources entre les agents, et cette fois, pour chaque agent le même comportement est 
-  appelé tant qu'il n'est pas terminé, les autres comportement s'exécutant dans l'ordre de leurs déclarations.
+  appelé tant qu'il n'est pas terminé, les autres comportements s'exécutant dans l'ordre de leurs déclarations.
 
 - Voici une vue du fonctionnement de comportements en séquentiel.
 <!--

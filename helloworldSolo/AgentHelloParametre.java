@@ -33,7 +33,7 @@ public class AgentHelloParametre extends Agent {
         println("De l'agent " + getLocalName() + " : " + texteHello);
         println("Mon adresse est " + getAID());
         //l'agent demande son retrait de la plateforme..
-        //doDelete();
+        doDelete();
     }
 
     // 'Nettoyage' de l'agent

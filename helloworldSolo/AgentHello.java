@@ -11,7 +11,7 @@ import static java.lang.System.out;
  */
 public class AgentHello extends Agent {
     /**
-     * ce main lance la plateforme jade et lui demande de creer un agent
+     * ce main lance la plateforme jade et lui demande de créer un agent
      */
     public static void main(String[] args) {
         String[] jadeArgs = new String[2];
@@ -32,7 +32,7 @@ public class AgentHello extends Agent {
         println("De l'agent " + getLocalName() + " : " + texteHello);
         println("Mon adresse est " + getAID());
         //l'agent demande son retrait de la plateforme
-//        doDelete();
+        doDelete();
     }
 
     // 'Nettoyage' de l'agent

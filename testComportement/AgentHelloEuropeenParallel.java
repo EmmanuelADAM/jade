@@ -8,14 +8,14 @@ import jade.core.behaviours.WakerBehaviour;
 import static java.lang.System.out;
 
 /**
- * classe d'un agent qui contient 1 comportement parallèle contenant plusieurs comportement s'activant 3 fois
+ * classe d'un agent qui contient 1 comportement parallèle contenant plusieurs comportements s'activant 3 fois
  *
  * @author emmanueladam
  */
 public class AgentHelloEuropeenParallel extends Agent {
     /**
-     * procedure principale.
-     * lance 2 agent qui agissent en "parallele" et dont les comportements s'éxécutent en parallèle
+     * Procédure principale.
+     * lance 2 agent qui agissent en "parallèle" et dont les comportements s'exécutent en parallèle
      */
     public static void main(String[] args) {
         String[] jadeArgs = new String[2];
@@ -32,8 +32,9 @@ public class AgentHelloEuropeenParallel extends Agent {
      */
     @Override
     protected void setup() {
-        out.println("Moi, Agent " + getLocalName() + ", mon  adresse est " + getAID());
-        out.println("J'execute des comportements en parallel");
+        out.printf("""
+                Moi, Agent %s, mon  adresse est %s
+                    J'exécute des comportements en parallèle%n""", getLocalName(), getAID());
 
         ParallelBehaviour paraB = new ParallelBehaviour();
         paraB.addSubBehaviour(europeanBehaviour("bonjour"));
@@ -44,7 +45,7 @@ public class AgentHelloEuropeenParallel extends Agent {
         paraB.addSubBehaviour(europeanBehaviour("saluton"));
 
 
-        // ajout d'un comportement qui ajoute le comportement parallele dans 100ms
+        // ajout d'un comportement qui ajoute le comportement parallèle dans 100ms
         addBehaviour(new WakerBehaviour(this, 100, a->a.addBehaviour(paraB)));
 
     }
@@ -58,7 +59,7 @@ public class AgentHelloEuropeenParallel extends Agent {
 
             @Override
             public void action() {
-                printf("%s -> %s %d fois\n", new Object[]{getLocalName(), msg, (i+1)});
+                printf("%s -> %s (%d/3)\n", new Object[]{getLocalName(), msg, (i+1)});
                 i++;
             }
 

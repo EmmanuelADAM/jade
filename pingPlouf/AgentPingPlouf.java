@@ -26,14 +26,14 @@ public class AgentPingPlouf extends Agent {
     @Override
     protected void setup() {
         String texteHello = "Bonjour a toutezetatousse";
-        println("De l'agent " + getLocalName() + " : " + texteHello);
-        println("Mon adresse est " + getAID());
+        println("De l'agent " + getLocalName() + " : " + texteHello + ", mon adresse est " + getAID());
 
-        println("J'envoie un message a une mauvaise adresse. ");
-        println("En multiagent, ca ne plante pas..  ");
-        println("Mais si je veux, je peux etre a l'ecoute de l'agent AMS pour verifier s'il n'y a pas d'erreur d'adressage  ");
+        println(getLocalName() + " -> J'envoie un message a une mauvaise adresse. ");
+        println(getLocalName() + " -> En multiagent, ca ne plante pas..  ");
+        println(getLocalName() + " -> Mais si je veux, je peux être a l'écoute de l'agent AMS pour verifier s'il n'y " +
+                "a pas d'erreur d'adressage  ");
 
-        println("Envoie dans 15 seconde....");
+        println(getLocalName() + " -> Envoi dans 15 seconde....");
 
         //envoi d'un message a un agent n'existant pas dans 1 seconde
         addBehaviour(new WakerBehaviour(this, 15000){
@@ -41,9 +41,9 @@ public class AgentPingPlouf extends Agent {
             public void onWake() {
                 // envoie du texte 'texteHello' à l'agent tzoing
                 String nameOther = "tzoing";
-                println("agent " + getLocalName() + " : j'envoie un message a " + nameOther);
+                println(getLocalName() + " ->  : j'envoie un message a " + nameOther);
                 var msg = new ACLMessage(ACLMessage.INFORM);
-                msg.addReceiver("tzoing");
+                msg.addReceiver(nameOther);
                 msg.setContent(texteHello);
                 send(msg);
             }});
@@ -54,9 +54,9 @@ public class AgentPingPlouf extends Agent {
             public void action() {
                 ACLMessage msg = receive();
                 if(msg != null) {
-                    println("j'ai recu ceci de la part de " + msg.getSender().getLocalName() + " : ");
+                    println(getLocalName() + " -> j'ai reçu ceci de la part de " + msg.getSender().getLocalName() + " : ");
                     println(msg.toString());
-                    println("je suis donc au courant par les pages blanches du mauvais adressage ....");
+                    println(getLocalName() + " -> je suis donc au courant par les pages blanches du mauvais adressage ....");
                 }
                 else block();
             }

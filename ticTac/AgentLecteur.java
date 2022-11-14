@@ -10,7 +10,7 @@ import java.util.function.Consumer;
 import static java.lang.System.out;
 
 /**
- * classe d'agent qui ecoute 2 types de messages.
+ * classe d'agent qui écoute 2 types de messages.
  *
  * @author emmanueladam
  */
@@ -31,7 +31,7 @@ public class AgentLecteur extends Agent {
                 if (msg != null) {
                     var content = msg.getContent();
                     var sender = msg.getSender();
-                    println("agent " + getLocalName() + " : j'ai recu " + content + " de " + sender);
+                    println("agent " + getLocalName() + " : j'ai reçu " + content + " de " + sender.getLocalName());
                 } else block();
             }
         });
@@ -45,7 +45,7 @@ public class AgentLecteur extends Agent {
                 if (msg != null) {
                     var content = msg.getContent();
                     var sender = msg.getSender();
-                    println("attention !!!! moi agent  " + getLocalName() + " : j'ai recu " + content + " de " + sender);
+                    println("attention !!!! moi agent  " + getLocalName() + " : j'ai reçu " + content + " de " + sender.getLocalName());
                 } else block();
             }
         });

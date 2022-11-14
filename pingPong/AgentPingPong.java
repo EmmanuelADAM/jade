@@ -14,7 +14,8 @@ import java.util.Properties;
 import static java.lang.System.out;
 
 /**
- * classe d'agent pour échange entre 2 agents de cette classe. l'un s'appelle ping et initie un échange avec l'agent pong.
+ * classe d'agent pour échange entre 2 agents de cette classe.
+ * L'un s'appelle ping et initie un échange avec l'agent Pong.
  *
  * @author emmanueladam
  */
@@ -22,7 +23,7 @@ public class AgentPingPong extends Agent {
     public static void main(String[] args) {
         // preparer les arguments pout le conteneur JADE
         Properties prop = new ExtendedProperties();
-        // demander la fenetre de controle
+        // demander la fenêtre de contrôle
         prop.setProperty(Profile.GUI, "true");
         // nommer les agents
         prop.setProperty(Profile.AGENTS, "ping:pingPong.AgentPingPong;pong:pingPong.AgentPingPong");
@@ -62,7 +63,8 @@ public class AgentPingPong extends Agent {
         var modele = MessageTemplate.and(
                 MessageTemplate.MatchConversationId("SPORT"),
                 MessageTemplate.MatchPerformative(ACLMessage.INFORM));
-        // ajout d'un comportement à 30 itérations qui attend un msg contenant la balle et la retourne à l'envoyeur après 300ms
+        // ajout d'un comportement à 30 itérations qui attend un msg de type INFORM sur le sujet "Sport" et contenant
+        // la balle et qu'il retourne à l'envoyeur après 300ms
         addBehaviour(new Behaviour(this) {
             int step = 0;
 
@@ -72,7 +74,8 @@ public class AgentPingPong extends Agent {
                     step++;
                     var content = msg.getContent();
                     var sender = msg.getSender();
-                    println("agent " + getLocalName() + " : j'ai recu " + content + " de " + sender.getLocalName());
+                    println("agent %s : j'ai reçu \"%s\" de '%s'".formatted(getLocalName(),content,
+                            sender.getLocalName()));
                     myAgent.doWait(300);
                     var reply = msg.createReply();
                     reply.setContent("balle-" + step);
@@ -88,7 +91,8 @@ public class AgentPingPong extends Agent {
         });
 
         var modele2 = MessageTemplate.MatchPerformative(ACLMessage.FAILURE);
-        // ajout d'un comportement à 30 itérations qui attend un msg contenant la balle et la retourne à l'envoyeur après 300ms
+        // ajout d'un comportement à 20 itérations qui attend un msg contenant la balle et la retourne à l'envoyeur
+        // après 300ms
         addBehaviour(new ReceiverBehaviour(this,  -1, modele2,true, (a, msg) ->
             println("agent " + getLocalName() + " : j'ai recu un msg d erreur   de " + msg.getSender().getLocalName() + " : " + msg.getContent())
         ));

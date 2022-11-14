@@ -8,20 +8,20 @@ import jade.core.behaviours.WakerBehaviour;
 import static java.lang.System.out;
 
 /**
- * classe d'un agent qui contient 1 comportement sequentiel contenant plusieurs comportement s'activant 3 fois
+ * classe d'un agent qui contient 1 comportement séquentiel contenant plusieurs comportements s'activant 3 fois
  *
  * @author emmanueladam
  */
 public class AgentHelloEuropeenSequentiel extends Agent {
     /**
-     * procedure principale.
-     * lance 2 agents qui agissent en "parallele" et dont les comportements s'éxécutent en sequence
+     * procédure principale.
+     * lance 2 agents dont les comportements s'exécutent en sequence
      */
     public static void main(String[] args) {
         String[] jadeArgs = new String[2];
         StringBuilder sbAgents = new StringBuilder();
         sbAgents.append("a1:testComportement.AgentHelloEuropeenSequentiel").append(";");
-//        sbAgents.append("a2:testComportement.AgentHelloEuropeenSequentiel").append(";");
+        sbAgents.append("a2:testComportement.AgentHelloEuropeenSequentiel").append(";");
         jadeArgs[0] = "-gui";
         jadeArgs[1] = sbAgents.toString();
         jade.Boot.main(jadeArgs);
@@ -33,7 +33,7 @@ public class AgentHelloEuropeenSequentiel extends Agent {
     @Override
     protected void setup() {
         out.println("Moi, Agent " + getLocalName() + ", mon  adresse est " + getAID());
-        out.println("J'execute des comportements en sequentiel");
+        out.println("J'exécute des comportements en séquentiel");
 
         SequentialBehaviour seqB = new SequentialBehaviour();
         seqB.addSubBehaviour(europeanBehaviour("bonjour"));
@@ -58,7 +58,7 @@ public class AgentHelloEuropeenSequentiel extends Agent {
 
             @Override
             public void action() {
-                printf("%s -> %s %d fois\n", new Object[]{getLocalName(), msg, (i+1)});
+                printf("%s -> %s (%d/3)\n", new Object[]{getLocalName(), msg, (i+1)});
                 i++;
             }
 

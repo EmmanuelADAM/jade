@@ -10,7 +10,7 @@ Supports pour le cours de programmation orientée agent en Jade
   possède 2 comportements de communication :
     - si l'agent s'appelle 'ping', il émet quelques secondes après son activation un message contenant la chaine "balle"
       à un agent s'appelant "pong"
-    - quel que soit le nom de l'agent, il possède un comportement qui s'exécute 20 fois :
+    - quelquesoit le nom de l'agent, il possède un comportement qui s'exécute 20 fois :
         - de lecture de boite aux lettres,
         - d'affichage du message reçu et de son émetteur
         - de retour à l'envoyeur du contenu "balle-x" où x est le no du message retourné
