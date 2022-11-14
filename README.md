@@ -1,6 +1,6 @@
 <meta name="description" content="Programmation multi-agent en Java : utilisation d'une version actualisée de la plateforme Jade. Support au tutoriel de jade portant sur : la communication, les protocoles, les votes, la recherche de services, les comportements simples et complexes" />
 
-# Programmation d'agents en Jade
+# Programming agents in Jade
 
 [(version web)](https://emmanueladam.github.io/jade/)
 
