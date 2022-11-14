@@ -4,34 +4,38 @@
 
 [(version web)](https://emmanueladam.github.io/jade/)
 
-Liste de supports pour le cours de programmation orientée agent en JADE. 
-Pour l'ensemble de ces codes, il est nécessaire de disposer dans vos projet de la librairie "[JadeUPHF.jar](https://github.com/EmmanuelADAM/JadeUPHF/blob/master/JadeUPHF.jar)". 
-Cette librairie est une mise à jour basée sur Java 17 de la dernière version offcielle de [Jade](https://jade.tilab.
-com) de Tilab et y ajoute des fonctionnalités pour un codage simplifié.
-Le code de cette nouvelle version et les notes de version sont accessibles ici : [JadeUPHF](https://emmanueladam.github.io/JadeUPHF/)".
+Set of source code or the course/tutorial abot multiagent programming with the JADE platform. 
 
-Les codes suivants nécessitent donc cette librairie ainsi que Java 17 ou supérieur.
+To run these codes, it is necessary to import the library "[JadeUPHF.jar](https://github.
+com/EmmanuelADAM/JadeUPHF/blob/master/JadeUPHF.jar)". 
+This library is a update, with JAVA 17, of the last offical version of  [Jade]
+(https://jade.tilab.com) of Tilab and add functionalities to easier the implementation of agents.
+
+The source code of these new version, the library and notes about it are accessible from here : [JadeUPHF]
+(https://emmanueladam.github.io/JadeUPHF/)".
+
+_The following codes need, thus, this library and Java >= 17._
 
 ----
 
-## Eléments de base : agent, comportement et envoi de messages
+## Basics: Agent, Behavior, and Sending Messages
 
-### Agents sans comportement ni communication
+### Agents without behavior or communication
 
-- Pour tester l'installation de Jade, le classique HelloWorld
-    - [AgentHello](https://github.com/EmmanuelADAM/jade/blob/master/helloworldSolo/AgentHello.java) : code pour un agent
-      simple affichant un message sur la console
-    - [AgentHelloParametre](https://github.com/EmmanuelADAM/jade/blob/master/helloworldSolo/AgentHelloParametre.java) :
-      également code pour un agent simple affichant un message sur la console, mais le message est passé en paramètre
+- To test the installation of Jade, the classic HelloWorld
+    - [AgentHello](https://github.com/EmmanuelADAM/jade/tree/english/helloworldSolo/AgentHello.java) : code for a 
+      simple agent displaying a message on the console
+    - [AgentHelloParametre](https://github.com/EmmanuelADAM/jade/tree/english/helloworldSolo/AgentHelloParametre.java) :
+      also code for a simple agent displaying a message on the console, but the message is passed as a parameter
 
-### Agents avec comportements
+### Agents with behaviors
 
-- Ajout de comportements simples à un agent, exemple d'exécution
-    - [AgentHelloSalut](https://github.com/EmmanuelADAM/jade/blob/master/testComportement) : code pour un agent doté de
-      comportements simples
-    - [AgentHelloEuropeenSequentiel](https://github.com/EmmanuelADAM/jade/blob/master/testComportement) : code pour deux
+- Add simple behaviors to an agent, examples
+    - [AgentHelloSalut](https://github.com/EmmanuelADAM/jade/tree/english/testComportement) : code for an agent with 
+      simple behaviors
+    - [AgentHelloEuropeenSequentiel](https://github.com/EmmanuelADAM/jade/tree/english/testComportement) : code pour deux
       agents dotés de comportements simples s'exécutant séquentiellement
-    - [AgentHelloEuropeenParallel](https://github.com/EmmanuelADAM/jade/blob/master/testComportement) : code pour deux
+    - [AgentHelloEuropeenParallel](https://github.com/EmmanuelADAM/jade/tree/english/testComportement) : code pour deux
       agents dotés de comportements simples s'exécutant en parallèle
 
 ### Agents communicants

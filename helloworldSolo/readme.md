@@ -4,11 +4,11 @@
 
 ---
 
-Supports pour le cours de programmation orientée agent en Jade
+Jade Agent-Oriented Programming Course Materials
 
-- [AgentHello](https://github.com/EmmanuelADAM/jade/blob/master/helloworldSolo/AgentHello.java) : code pour un agent
-  simple affichant un message sur la console
+- [AgentHello](https://github.com/EmmanuelADAM/jade/blob/master/helloworldSolo/AgentHello.java) : code for a simple 
+  agent displaying a message on the console
 - [AgentHelloParametre](https://github.com/EmmanuelADAM/jade/blob/master/helloworldSolo/AgentHelloParametre.java) :
-  également code pour un agent simple affichant un message sur la console, mais le message est passé en paramètre
+  also a code for a simple agent displaying a message on the console, but the message is given as a parameter
 
 ---

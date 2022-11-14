@@ -5,40 +5,41 @@ import jade.core.Agent;
 import static java.lang.System.out;
 
 /**
- * un simple agent qui affiche un texte passé en paramètre
+ * A simple agent that display a text found in its parameters
  *
  * @author emmanueladam
  */
 public class AgentHelloParametre extends Agent {
+    /**
+     * this main launch JADE plateforme and asks it to create an agent
+     */
     public static void main(String[] args) {
         String[] jadeArgs = new String[2];
         StringBuilder sbAgents = new StringBuilder();
-        sbAgents.append("agentA:helloworldSolo.AgentHelloParametre(coucou)").append(";");
-        sbAgents.append("agentB:helloworldSolo.AgentHelloParametre(bonjour)").append(";");
+        sbAgents.append("agentA:helloworldSolo.AgentHelloParametre(Hi)").append(";");
+        sbAgents.append("agentB:helloworldSolo.AgentHelloParametre(Hello)").append(";");
         jadeArgs[0] = "-gui";
         jadeArgs[1] = sbAgents.toString();
         jade.Boot.main(jadeArgs);
     }
 
     /**
-     * Initialisation de l'agent
+     * agent set-up
      */
     @Override
     protected void setup() {
         String texteHello = null;
         Object[] params = this.getArguments();
         if (params.length > 0) texteHello = (String) params[0];
-        else texteHello = "Bonjour a toutezetatousse";
+        else texteHello = "Hello everybody and especially you !";
 
-        println("De l'agent " + getLocalName() + " : " + texteHello);
-        println("Mon adresse est " + getAID());
-        //l'agent demande son retrait de la plateforme..
-        //doDelete();
+        println("From agent " + getLocalName() + " : " + texteHello);
+        println("My address is " + getAID());
     }
 
     // 'Nettoyage' de l'agent
     @Override
     protected void takeDown() {
-        println("Moi, Agent " + getLocalName() + " je quitte la plateforme ! ");
+        println("Me, Agent " + getLocalName() + " I leave the platform ! ");
     }
 }

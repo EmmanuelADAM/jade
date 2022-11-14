@@ -8,14 +8,14 @@ import jade.core.behaviours.WakerBehaviour;
 import static java.lang.System.out;
 
 /**
- * classe d'un agent qui contient 2 comportements sans fin, qui affichent l'un 'bonjour', l'autre 'salut'
- * l'agent possède aussi un comportement à allumage retardé qui le supprime de la plateforme
+ * class of an agent that contains 2 endless behaviors, one displaying 'hello', the other 'hi'.
+ * the agent also has a delayed behavior that removes it from the platform
  *
  * @author emmanueladam
  */
 public class AgentHelloSalut extends Agent {
     /**
-     * procedure principale.
+     * main function.
      * lance 2 agents qui agissent en "parallele" et dont les comportements s'éxécutent dans le même cycle de temps
      */
     public static void main(String[] args) {
@@ -33,35 +33,36 @@ public class AgentHelloSalut extends Agent {
      */
     @Override
     protected void setup() {
-        out.println("Moi, Agent " + getLocalName() + ", mon  adresse est " + getAID());
+        out.println("Me, Agent " + getLocalName() + ", my address is " + getAID());
 
-        // ajout d'un comportement "eternel" qui, a chaque passage, affiche bonjour et fait une pause de 200 ms
-        //(peut etre remplace par un comportement cyclique, voir l'exemple ticTac)
+        // added an "eternal" behavior which, on each pass, displays hello and pauses for at most 200 ms
+        //(should be replaced by cyclic behavior, see next behavior)
         addBehaviour(new Behaviour(this) {
             public void action() {
-                println("De l'agent " + getLocalName() + " : Bonjour à toutezétatousse");
+                println("From agent " + getLocalName() + " : Hello everybody and especially you!");
+                //pause at most for 200ms, or before if the agent receives a message
                 block(200);
             }
 
+            /**this behavior never ends*/
             public boolean done() {
                 return false;
             }
         });
 
-        // ajout d'un comportement cyclique qui, à chaque passage, affiche salut et fait une pause de 300 ms
-        addBehaviour(new TickerBehaviour(this, 300, a->{println("De l'agent " + a.getLocalName() + " : Salut à " +
-                "toutezétatousse");}));
+        // add a cyclic behavior that on each pass displays hi and pauses for 300ms
+        addBehaviour(new TickerBehaviour(this, 300, a->{println("From agent " + a.getLocalName() + " : Hi !!!");}));
 
-        // ajout d'un comportement qui retire l'agent dans 1000 ms
+        // add a delayed behavior that demands the platform to remove the agent in 1000 ms
         addBehaviour(new WakerBehaviour(this, 1000, a->{
-            out.println("De l'agent " + a.getLocalName() + " : bon j'y vais...");
+            out.println("From agent " + a.getLocalName() + " : well, I'm leaving...");
             a.doDelete();
         }));
     }
 
-    // 'Nettoyage' de l'agent
+    // 'clean-up' of the agent
     @Override
     protected void takeDown() {
-        out.println("Moi, Agent " + getLocalName() + " je quitte la plateforme ! ");
+        println("Me, Agent " + getLocalName() + " I leave the platform ! ");
     }
 }

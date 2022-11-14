@@ -2,42 +2,40 @@ package helloworldSolo;
 
 import jade.core.Agent;
 
-import static java.lang.System.out;
-
 /**
- * un simple agent qui affiche un texte
+ * A simple agent that display a text
  *
  * @author emmanueladam
  */
 public class AgentHello extends Agent {
     /**
-     * ce main lance la plateforme jade et lui demande de creer un agent
+     * this main launch JADE plateforme and asks it to create an agent
      */
     public static void main(String[] args) {
         String[] jadeArgs = new String[2];
         StringBuilder sbAgents = new StringBuilder();
-        sbAgents.append("monPremierAgent:helloworldSolo.AgentHello").append(";");
+        sbAgents.append("myFirstAgent:helloworldSolo.AgentHello").append(";");
         jadeArgs[0] = "-gui";
         jadeArgs[1] = sbAgents.toString();
         jade.Boot.main(jadeArgs);
     }
 
     /**
-     * Initialisation de l'agent
+     * agent set-up
      */
     @Override
     protected void setup() {
-        String texteHello = "Bonjour a toutezetatousse";
+        String texteHello = "Hello everybody and especially you !";
 
-        println("De l'agent " + getLocalName() + " : " + texteHello);
-        println("Mon adresse est " + getAID());
-        //l'agent demande son retrait de la plateforme
-//        doDelete();
+        println("From agent " + getLocalName() + " : " + texteHello);
+        println("My address is " + getAID());
+        //agent asks to be removed from the platform
+        doDelete();
     }
 
-    // 'Nettoyage' de l'agent
+    // 'clean-up' of the agent
     @Override
     protected void takeDown() {
-        println("Moi, Agent " + getLocalName() + " je quitte la plateforme ! ");
+        println("Me, Agent " + getLocalName() + " I leave the platform ! ");
     }
 }

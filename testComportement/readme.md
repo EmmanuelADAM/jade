@@ -4,43 +4,43 @@
 
 ---
 
-- [AgentHelloSalut](https://github.com/EmmanuelADAM/jade/blob/master/testComp01/AgentHelloSalut.java) : code pour un
-  agent qui possède 3 comportements :
-    - un comportement affichant "bonjour", sans fin
-    - un comportement cyclique avec activation toutes les 300ms
-    - un comportement "à retardement" provoquant l'arrêt de l'agent au bout de 1000ms
-    - au commencement, 2 agents sont lancés.
+- [AgentHelloSalut](https://github.com/EmmanuelADAM/jade/tree/english/testComp01/AgentHelloSalut.java) : code for an 
+  agent that owns 3 behaviors:
+    - a behavior displaying "hello" every 200ms, endlessly
+    - a cyclic behavior with activation every 300ms
+    - a delayed behavior causing the removal of the agent after 1000ms
+    - initially, 2 agents are launched.
 <!--
 ```
 @startuml helloSalut
 
 start
-while (TQ agent vivant) is (ok)
-if (comportement activable ?) then ([choisir prochain comportement])
+while (While agent alive) is (ok)
+if (activatable behavior ?) then ([select next behavior])
     fork
     partition "Behaviour" {
       partition "action" {
-          ::aficher "Bonjour à toutezetàtousse";
+          ::display "Hello everybody";
           :pause 200ms;
       }
       partition "done" {
-          :retourner False;
+          :return False;
       }
     }
     fork again
-    partition "CyclicBehaviour: chaque 300ms" {
+    partition "CyclicBehaviour: each 300ms" {
       partition "onTick" {
-          ::aficher "Salut à toutezetàtousse";
+          ::display "Hi !";
       }
     }
     fork again
-    partition "WakerBehaviour: dans 1000ms" {
+    partition "WakerBehaviour: in 1000ms" {
       partition "onWake" {
           ::delete Agent;
       }
     }
     end fork
- else(non)
+ else(no)
  endif 
   endwhile (deleted)
 stop
