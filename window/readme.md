@@ -13,10 +13,10 @@ The agents here are of the `AgentWindowed` type, they have a simple window (`Sim
  - By default, the event reaction function `protected void onGuiEvent(GuiEvent ev)` kills the agent on window closing
 
 
-- [AgentDirectEmissionButton](https://github.com/EmmanuelADAM/jade/blob/english/window/agents/SenderAgentWithWindow.java) :
+- [SenderAgentWithWindow](https://github.com/EmmanuelADAM/jade/blob/english/window/agents/SenderAgentWithWindow.java) :
   agent of type  *AgentWindowed*
     - in reaction to the button click, it sends a simple text message to 3 agents "b", "c" & "d"
-- [AgentReceptionClassique](https://github.com/EmmanuelADAM/jade/blob/english/window/agents/ReceiverAgentWithWindow.java) :
+- [ReceiverAgentWithWindow](https://github.com/EmmanuelADAM/jade/blob/english/window/agents/ReceiverAgentWithWindow.java) :
   agent of type  *AgentWindowed*
     - the agent has a cyclic behavior which displays on its window the messages it receives
 - [LaunchAgents](https://github.com/EmmanuelADAM/jade/blob/english/window/launch/LaunchAgents.java) : **main 

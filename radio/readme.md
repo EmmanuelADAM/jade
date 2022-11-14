@@ -1,15 +1,42 @@
-# Jade : Agents
+# Jade : Agents, Windows & Communication
 
-## Exemple de diffusion d'information par broadcast
+## Example of information dissemination by broadcast
 
 ---
 
-- [AgentDiffuseur](https://github.com/EmmanuelADAM/jade/blob/master/radio/agents/AgentDiffuseur.java) : classe pour un
-  agent qui diffuse de l'information sur un topic radio
-- [AgentAuditeur](https://github.com/EmmanuelADAM/jade/blob/master/radio/agents/AgentAuditeur.java) : classe pour un
-  agent qui se branche sur un topic radio pour écouter les messages et les affiche
-- [LaunchAgents](https://github.com/EmmanuelADAM/jade/blob/master/radio/launch/LaunchAgents.java) : **classe
-  principale**, lançant Jade et créant les agents
+- [BroadcasterAgent](https://github.com/EmmanuelADAM/jade/blob/english/radio/agents/BroadcasterAgent.java) : class for an 
+  agent who broadcasts information on a radio channel
+- [ListenerAgent](https://github.com/EmmanuelADAM/jade/blob/english/radio/agents/ListenerAgent.java) : class for an 
+  agent who connects to a radio channel to listen to messages and displays them
+- [LaunchAgents](https://github.com/EmmanuelADAM/jade/blob/english/radio/launch/LaunchAgents.java) : **main class**, 
+  launch Jade and create the agents
 
-- au lancement, 11 agents sont lancés, un émetteur, 10 auditeurs, leur nombre n'est pas limité hormis par la capacité de
-  la machine.
+- Initially, 10 agents are launched, a transmitter, 9 listeners, their number is not limited except by the capacity of 
+  the machine.
+
+Here is the diagram for broadcast communication 
+<!--
+```
+@startuml broadcasting
+participant Sim_1
+participant Sim_2
+participant Sim_3
+participant Sim_4
+participant Sim_5
+Sim_1 ->> TopicServer: registerTo 'BAC'channel
+Sim_2 ->> TopicServer: registerTo 'BAC'channel
+Sim_3 ->> TopicServer: registerTo 'BAC'channel
+Sim_4 ->> TopicServer: registerTo 'BAC'channel
+Sim_5 ->> TopicServer: registerTo 'BAC'channel
+TopicServer <- BroadcasterAgent : "Hello !" to 'BAC' channel
+Sim_1 <- TopicServer: "Hello !"
+Sim_2 <- TopicServer: "Hello !"
+Sim_3 <- TopicServer: "Hello !"
+Sim_4 <- TopicServer: "Hello !"
+Sim_5 <- TopicServer: "Hello !"
+
+@enduml```
+-->
+
+
+![](broadcasting.png)

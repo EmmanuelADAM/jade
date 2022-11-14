@@ -11,28 +11,28 @@ import java.awt.*;
 
 
 /**
- * agents associé à une fenêtre, envoie un message radio sur un canal
+ * agents linked to a window, sends a radio message on a channel
  *
  * @author eadam
  */
 @SuppressWarnings("serial")
-public class AgentDiffuseur extends AgentWindowed {
+public class BroadcasterAgent extends AgentWindowed {
     /**
-     * adresse du topic radio
+     * address of the radio topic
      */
     AID topic;
     /**
-     * no du msg envoyé
+     * no of the sent msg
      */
     int i = 0;
 
     protected void setup() {
         window = new SimpleWindow4Agent(getAID().getName(), this);
-        println("Hello! Agent  " + getLocalName() + " is ready, my address is " + this.getAID().getName());
+        println("Hello! I'm ready, my address is " + this.getAID().getName());
         window.setButtonActivated(true);
         window.setBackgroundTextColor(Color.YELLOW);
-        //Creation d'un "canal radio" de nom InfoRadio
-        topic = AgentServicesTools.generateTopicAID(this, "TNSID");
+        //Create a "radio channel" with the name 'BestAgentsCharts'
+        topic = AgentServicesTools.generateTopicAID(this, "BestAgentsCharts");
     }
 
     /**
@@ -45,7 +45,7 @@ public class AgentDiffuseur extends AgentWindowed {
     }
 
     /**
-     * send messages to the topic
+     * send messages on the "radio channel"
      */
     private void sendMessages() {
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);

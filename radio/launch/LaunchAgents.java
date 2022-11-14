@@ -9,20 +9,20 @@ import java.util.Properties;
 
 public class LaunchAgents {
     public static void main(String[] args) {
-        // preparer les arguments pout le conteneur JADE
+        // prepare arguments for the Jade container
         Properties prop = new ExtendedProperties();
-        // demander la fenetre de controle
+        // -- add a control/debug window
         prop.setProperty(Profile.GUI, "true");
-        // add the Topic Management Service
+        // -- add the Topic Management Service
         prop.setProperty(Profile.SERVICES, "jade.core.messaging.TopicManagementService;jade.core.event.NotificationService");
-        // nommer les agents
-        StringBuilder sb = new StringBuilder("a:radio.agents.AgentDiffuseur;");
-        for (int i = 0; i < 10; i++)
-            sb.append("jean_").append(i).append(":radio.agents.AgentAuditeur;");
+        // -- add the agents
+        StringBuilder sb = new StringBuilder("a:radio.agents.BroadcasterAgent;");
+        for (int i = 1; i < 10; i++)
+            sb.append("sim_").append(i).append(":radio.agents.ListenerAgent;");
         prop.setProperty(Profile.AGENTS, sb.toString());
-        // creer le profile pour le conteneur principal
+        // create the jade profile
         ProfileImpl profMain = new ProfileImpl(prop);
-        // lancer le conteneur principal
+        // launch the main jade container
         Runtime rt = Runtime.instance();
         rt.createMainContainer(profMain);
     }
