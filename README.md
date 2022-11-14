@@ -38,18 +38,18 @@ _The following codes need, thus, this library and Java >= 17._
     - [AgentHelloEuropeenParallel](https://github.com/EmmanuelADAM/jade/tree/english/testComportement) : code pour deux
       agents dotés de comportements simples s'exécutant en parallèle
 
-### Agents communicants
+### Communicating Agents
 
-- Exemple classique de test de communication entre 2 agents : le ping-pong
-    - [pingPong](https://github.com/EmmanuelADAM/jade/blob/master/pingPong) : code pour qui permet de lancer deux agents
-      qui communiquent entre eux. L'agent ping envoie une balle à l'agent pong qui la retourne à ping qui la renvoie à
-      son tour, ...
-    - [AgentPingPlouf](https://github.com/EmmanuelADAM/jade/tree/master/pingPlouf) : code pour un agent qui
-  possède envoie un message au hasard et attends une réponse..! Celle-ci viendra de l'agent des pages blanches (AMS) lui signifiant qu'il n'y a personne à l'adresse indiquée...
-- Exemple avec filtrage de messages :
-    - [ticTac](https://github.com/EmmanuelADAM/jade/tree/master/ticTac) : un agent envoie des messages taggés avec 2
-  types différents; un agent les reçoit et les traite différement selon leurs types. agent "decompte" envoie des
-  msgs "tictac" taggés "CLOCK" toutes les secondes, puis un msg taggé "BOOM" au bout de 10s à l'agent "agentPiege"
+- Classic example of a communication test between 2 agents: ping-pong
+    - [pingPong](https://github.com/EmmanuelADAM/jade/blob/master/pingPong): Code that launches two agents that 
+      communicate with each other. The ping agent sends a ball to the pong agent which returns it to ping which in 
+      turn returns it, ...
+    - [AgentPingPlouf](https://github.com/EmmanuelADAM/jade/tree/master/pingPlouf): code for an agent that sends a 
+      random message and waits for a response..! This will come from the white pages agent (AMS) telling him that 
+      there is no one at the address indicated...
+- Example with message filtering:
+    - [ticTac](https://github.com/EmmanuelADAM/jade/tree/master/ticTac) : an agent sends messages tagged with 2 
+      different types; an agent receives them and treats them differently according to their types.
 
 ## Agents interactifs et communicants
 

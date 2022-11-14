@@ -10,19 +10,17 @@ import java.util.function.Consumer;
 import static java.lang.System.out;
 
 /**
- * classe d'agent qui ecoute 2 types de messages.
+ * class for an aget that listen 2 types of messages
  *
  * @author emmanueladam
  */
 public class AgentLecteur extends Agent {
     /**
-     * Initialisation de l'agent
+     * Agent set-up
      */
     @Override
     protected void setup() {
-        out.println("De l'agent " + getLocalName());
-
-        // ajout d'un comportement qui attend des msgs de type clock
+        // add a behaviour that reacts to "CLOCK" msgs
         addBehaviour(new CyclicBehaviour(this) {
             final MessageTemplate mt = MessageTemplate.MatchConversationId("CLOCK");
 
@@ -31,12 +29,12 @@ public class AgentLecteur extends Agent {
                 if (msg != null) {
                     var content = msg.getContent();
                     var sender = msg.getSender();
-                    println("agent " + getLocalName() + " : j'ai recu " + content + " de " + sender);
+                    println("%s -> I received \"%s\" from '%s'".formatted(getLocalName(), content,sender.getLocalName()));
                 } else block();
             }
         });
 
-        // ajout d'un comportement qui attend des msgs de type boom
+        // add a behaviour that reacts to "BOOM" msgs
         addBehaviour(new CyclicBehaviour(this) {
             final MessageTemplate mt = MessageTemplate.MatchConversationId("BOOM");
 
@@ -45,11 +43,11 @@ public class AgentLecteur extends Agent {
                 if (msg != null) {
                     var content = msg.getContent();
                     var sender = msg.getSender();
-                    println("attention !!!! moi agent  " + getLocalName() + " : j'ai recu " + content + " de " + sender);
+                    println("ATTENTION :: %s -> I received \"%s\" from '%s'".formatted(getLocalName(), content,
+                            sender.getLocalName()));
                 } else block();
             }
         });
 
-        addBehaviour(new OneShotBehaviour(this, a-> out.println("coucou je suis " + a.getLocalName())));
     }
 }

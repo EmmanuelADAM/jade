@@ -7,35 +7,37 @@ import jade.core.behaviours.WakerBehaviour;
 import jade.lang.acl.ACLMessage;
 
 /**
- * classe d'agents pour échange entre 1 agent de cette classe et 1 autre<br>
- * 2 msg de type differents sont envoyes
+ * class or an agent that send periodically some messages
  *
  * @author emmanueladam
  */
 public class AgentPosteur extends Agent {
     /**
-     * Initialisation de l'agents
+     * Agent set-up
      */
     @Override
     protected void setup() {
 
-        // creation d'un comportement qui enverra le texte 'tictac' toutes les secondes à l'agent demineur
+        // creation of a behavior that will send the text 'tictac' every second to the demining agent
+        // -- creation of the INFORM message, tagged "CLOCK"
         final var msgTic = new ACLMessage(ACLMessage.INFORM);
-        //ajout d'un tag CLOCK au message
         msgTic.setConversationId("CLOCK");
-        msgTic.addReceiver("agentDemineur");
+        msgTic.addReceiver("deminer");
         msgTic.setContent("tictac");
-        TickerBehaviour compTicTac = new TickerBehaviour(AgentPosteur.this, 1000, a->a.send(msgTic));
+        // -- create a ticker behaviour with a period of 1000ms
+        TickerBehaviour ticTacBehaviour = new TickerBehaviour(AgentPosteur.this, 1000, a->a.send(msgTic));
 
-        // ajout du  comportement cyclique  dans 1 secondes
-        addBehaviour(new WakerBehaviour(this, 1000, a->a.addBehaviour(compTicTac)));
+        // add the ticker behaviour in 5000 ms
+        addBehaviour(new WakerBehaviour(this, 5000, a->a.addBehaviour(ticTacBehaviour)));
 
-        // ajout d'un comportement qui enverra le texte 'boom'   dans 10 secondes
+        // creation of a behavior that will send the text 'b o o o m' in 10 secondes
+        // -- creation of the INFORM message, tagged "BOOM"
         final var msgBoom = new ACLMessage(ACLMessage.INFORM);
-        //ajout d'un tag BOOM au message
         msgBoom.setConversationId("BOOM");
-        msgBoom.addReceiver("agentDemineur");
+        msgBoom.addReceiver("deminer");
         msgBoom.setContent("b o o m ! ! !");
-        addBehaviour(new WakerBehaviour(this, 10000, a->{a.removeBehaviour(compTicTac);a.send(msgBoom);}));
+        // create and add a WakerBehaviour (with  delay of 10000ms) that remove the TicTac behavior and send the boom
+        // msg
+        addBehaviour(new WakerBehaviour(this, 10000, a->{a.removeBehaviour(ticTacBehaviour);a.send(msgBoom);}));
     }
 }

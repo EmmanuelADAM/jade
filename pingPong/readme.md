@@ -1,42 +1,42 @@
-# Jade : Agents et communication
+# Jade : Agents and communication
 
-## Exemple basique : le "Ping"-"Pong" en Jade
+## Basic example : "Ping"-"Pong" in Jade
 
 ---
 
-Supports pour le cours de programmation orientée agent en Jade
+Jade Agent-Oriented Programming Course Materials
 
-- [AgentPingPong](https://github.com/EmmanuelADAM/jade/blob/master/pingPong/AgentPingPong.java) : code pour un agent qui
-  possède 2 comportements de communication :
-    - si l'agent s'appelle 'ping', il émet quelques secondes après son activation un message contenant la chaine "balle"
-      à un agent s'appelant "pong"
-    - quel que soit le nom de l'agent, il possède un comportement qui s'exécute 20 fois :
-        - de lecture de boite aux lettres,
-        - d'affichage du message reçu et de son émetteur
-        - de retour à l'envoyeur du contenu "balle-x" où x est le no du message retourné
-    - ce comportement qui prend fin après un certain nombre de cycles.
-    - au lancement, 2 agents sont donc lancés : ping & pong..
+- [AgentPingPong](https://github.com/EmmanuelADAM/jade/blob/english/pingPong/AgentPingPong.java) : code for an agent 
+  that has 2 communication behaviors :
+    - if the agent is called 'ping', it sends a message containing the string "ball" a few seconds after its 
+      activation to an agent called "pong"
+    - whatever the name of the agent, it has a behavior that runs 20 times :
+        - mailbox reading,
+        - display of the received message and its sender,
+        - return to sender content "balle-x" where x is the number of the returned message
+    - this behavior ends after a certain number of cycles.
+    - at start, 2 agents are therefore launched: ping & pong..
 
-Voici le comportement des joueurs : 
+Here is the behavior of the player agents: 
 <!--
 ```
 @startuml compPingPong
 
 start
-while (TQ agent vivant) is (ok)
-if (comportement activable ?) then ([oui, en choisir un])
+while (While agent alive) is (ok)
+if (activatable behavior?) then ([yes, select one (the only one here)])
     partition "Behaviour:pingpong" {
       partition "action" {
-          :msg <- prendreMessage();
-          if (msg ≠ vide) then ([oui])
-            :afficher msg;
-            :répondre "balle-" + i;
+          :msg <- takeMessage();
+          if (msg ≠ none) then ([yes])
+            :dsplay msg;
+            :answers "ball-" + i;
             :i <- i + 1;
           endif
       }
       partition "done" {
-          if (i=20) then ([oui])
-            :comportement \nautomatiquement\nretiré;
+          if (i=20) then ([yes])
+            :behavior \nremoved;
           endif
       }
     }
@@ -50,24 +50,23 @@ stop
 ![](compPingPong.png)
 
 
-Voici les messages échangés entre les agents : 
+Here are the msg exchanged between the agents: 
 
 <!--
 ```
 @startuml pinpong
 
-Ping -> Pong: balle
-Pong -> Ping: balle-1
-Ping -> Pong: balle-1
+Ping -> Pong: ball
+Pong -> Ping: ball-1
+Ping -> Pong: ball-1
 ...
-Pong -> Ping: balle-20
-Ping -> Pong: balle-20
+Pong -> Ping: ball-20
 
 @enduml```
 -->
 
 
-![](pinpong.svg)
+![](pinpong.png)
 
 
 

@@ -21,7 +21,7 @@ public class LaunchAgents extends Agent {
         // demander la fenetre de controle
         prop.setProperty(Profile.GUI, "true");
         // nommer les agents
-        prop.setProperty(Profile.AGENTS, "agentDecompte:ticTac.AgentPosteur;agentDemineur:ticTac.AgentLecteur");
+        prop.setProperty(Profile.AGENTS, "sender:ticTac.AgentPosteur;deminer:ticTac.AgentLecteur");
         // creer le profile pour le conteneur principal
         ProfileImpl profMain = new ProfileImpl(prop);
         // lancer le conteneur principal

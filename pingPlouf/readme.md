@@ -1,14 +1,14 @@
-# Jade : Agents et communication
+# Jade : Agents and communication
 
-## Exemple basique : le "Ping"-"Pong" en Jade
+## Basic example : "Ping"-"Pong" in Jade, with error
 
 ---
 
-Supports pour le cours de programmation orientée agent en Jade
+Jade Agent-Oriented Programming Course Materials
 
-- [AgentPingPlouf](https://github.com/EmmanuelADAM/jade/blob/master/pingPong/AgentPingPlouf.java) : code pour un agent qui
-  possède envoie un message à un agent n'existant  pas (tzoing) et attends une réponse..! Celle-ci viendra de l'agent 
-  des pages blanches (AMS) lui signifiant qu'il n'y a personne à l'adresse indiquée...
+- [AgentPingPlouf](https://github.com/EmmanuelADAM/jade/blob/english/pingPong/AgentPingPlouf.java) : code for an 
+  agent that sends a message to an agent that does'nt exist in the platform! and wait for a response... This one 
+  will comme from the white pages (AMS) indicating it that there is no one at the given address...
 
 ---
 
@@ -19,7 +19,7 @@ participant ping
 participant pong
 participant AMS 
 
-ping ->] : msg pour 'tzoing'
+ping ->] : msg for 'tzoing'
 AMS -[#red]> ping :  FAILURE 
 @enduml
 ```
