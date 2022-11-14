@@ -63,8 +63,8 @@ public class AgentPingPong extends Agent {
         var modele = MessageTemplate.and(
                 MessageTemplate.MatchConversationId("SPORT"),
                 MessageTemplate.MatchPerformative(ACLMessage.INFORM));
-        // ajout d'un comportement à 30 itérations qui attend un msg de type INFORM sur le sujet "Sport" et contenant
-        // la balle et qu'il retourne à l'envoyeur après 300ms
+        // ajout d'un comportement à 20 itérations qui attend un msg de type INFORM sur le sujet "Sport" auquel il
+        // répond après 300ms
         addBehaviour(new Behaviour(this) {
             int step = 0;
 
@@ -91,8 +91,7 @@ public class AgentPingPong extends Agent {
         });
 
         var modele2 = MessageTemplate.MatchPerformative(ACLMessage.FAILURE);
-        // ajout d'un comportement à 20 itérations qui attend un msg contenant la balle et la retourne à l'envoyeur
-        // après 300ms
+        // ajout d'un comportement attendant la reception de messages de type FAILURE
         addBehaviour(new ReceiverBehaviour(this,  -1, modele2,true, (a, msg) ->
             println("agent " + getLocalName() + " : j'ai recu un msg d erreur   de " + msg.getSender().getLocalName() + " : " + msg.getContent())
         ));
