@@ -7,7 +7,7 @@ import jade.core.behaviours.WakerBehaviour;
 import static java.lang.System.out;
 
 /**
- * classe d'un agent qui contient 1 comportement en machine d'etats (6 etats)
+ * class for an agent that contains 1 behavior defined with a finited state machine (6 etats)
  * A <---\
  * /   \    \
  * B     C    \

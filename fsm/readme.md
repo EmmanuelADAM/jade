@@ -1,35 +1,36 @@
-# Jade : Agents et comportements à états
+# Jade : Agents et states behaviors
 
-## FMS : Machine State Machine
+## FMS : Finite State Machine
 
 ---
 
-Supports pour le cours de programmation orientée agent en Jade
+Jade Agent-Oriented Programming Course Materials
 
-- [AgentHelloEuropeenFSM](https://github.com/EmmanuelADAM/jade/blob/master/fsm/salutations/AgentHelloEuropeenFSM.java) :
-  code pour un agent qui organise 6 comportements de salutations selon une machine d'états finis.
-    - il commence à effectuer le comportement A (état initial), puis soit exécute B ou C selon le retour de A.
-    - selon le retour de B, exécute D ou E
-    - la fin de C, la fin de D mènent à à E
-    - E mène à F (état final)  ou retourne à A
+- [AgentHelloEuropeenFSM](https://github.com/EmmanuelADAM/jade/blob/english/fsm/salutations/AgentHelloEuropeenFSM.
+  java) :
+  code for an agent that organizes 6 greeting behaviors according to a finite state machine.
+    - it starts performing behavior A (initial state), then performs B or C depending on the result of A.
+    - according to the return of B, executes D or E
+    - end of C, end of D lead to E
+    - E leads to F (final state) or returns to A
 
-- Dans le package [Review](https://github.com/EmmanuelADAM/jade/blob/master/fsm/review/) des agents simulent le principe
-  de dépôt d'article de recherche :
-    - un auteur soumet un article à un journal
-    - ce journal réceptionne et envoie l'article à 3 reviewers
-    - lorsque les 3 reviews sont reçues (une note de 0 à 2),
-        - si un 0 est reçu, l'article est refusé
-        - si toutes les notes sont de 2, l'article est accepté sans modification
-        - sinon il est proposé à l'auteur de corriger
-    - si l'auteur accepte de corriger, il retourne le document au journal (retour étape 2)
-    - sinon il refuse de poursuivre et en informe le journal Reprenez pour cela la trame des agents utilisé lors
-      d'enchère ou de vote..
+- Dans le package [Review](https://github.com/EmmanuelADAM/jade/blob/english/fsm/review/) agents simulate the 
+  principle of depositing a research article:
+    - an author submits an article to a journal
+    - this journal receives it and sends this article to 3 reviewers
+    - when all 3 evaluations are received (a score of 0 to 2),
+        - if a 0 is received, the item is refused
+        - if all marks are 2, the article is accepted without modification
+        - otherwise it is proposed to the author to correct
+    - if the author agrees to correct, he returns the document to the journal (return step 2)
+    - otherwise, he refuses to continue and informs the newspaper. To do this, take the frame of the agents used 
+      during the auction or the vote.
 
-- Créez maintenant le principe de négociation avec des comportement de type FSM...
-  - deux agents : Acheteur et Vendeur interagissent
-    - Acheteur a un prix max _maxi_ qu'il ne souhaite pas dépasser
-    - Vendeur a un prix min qu'il ne souhaite pas franchir et propose un prix de vente
-    - Acheteur propose un prix < _maxi_ 
-    - Vendeur propose un prix plus bas que le prix de vente
-    - cela se poursuit jusqu'à l'arrêt positif ou négatif (rejet de la negociation) par un des deux agents
+- Now create the trading principle with FSM-like behaviors...
+  - two agents: Buyer and Seller interact
+    - Buyer has a max _maxi_ price that he does not wish to exceed
+    - Seller has a minimum price that he does not wish to exceed and offers a sale price
+    - Buyer offers a price < _maxi_
+    - Seller offers a price lower than the sale price
+    - this continues until the positive or negative stop (rejection of the negotiation) by one of the two agents
     

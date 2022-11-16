@@ -60,13 +60,16 @@ _The following codes need, thus, this library and Java >= 17._
       communication. An agent no longer targets recipients, but a channel that other agents are listening to
 
 ---
-## Agents avec comportements de type FSM
+## Agents with FSM behaviors
 
-- Agents qui possèdent des comportements organisés selon une machine d'états finis (FSM)  : [fsm](https://github.com/EmmanuelADAM/jade/tree/master/fsm). 
-Deux exemples sont donnés : 
-  - [salutations](https://github.com/EmmanuelADAM/jade/tree/master/fsm/salutations) : enchaînements de comportement de salutations européennes au sein d'un agent,
-  - [review](https://github.com/EmmanuelADAM/jade/tree/master/fsm/review) : processus de soumission et de review d'un article entre un agent auteur, un agent journal et trois agents reviewers
+- Agents that have behaviors organized according to a finite state machine (FSM)  : [fsm](https://github.com/EmmanuelADAM/jade/tree/english/fsm).
+  Two examples are given : 
+  - [salutations](https://github.com/EmmanuelADAM/jade/tree/english/fsm/salutations) : sequences of behavior for 
+    European greetings within an agent,
+  - [review](https://github.com/EmmanuelADAM/jade/tree/english/fsm/review) : process of submitting and reviewing an 
+    article between an author agent, a journal agent and three reviewer agents
 
+---
 ## Gestion de services : déclaration et recherche
 
 - [helloWorldService](https://github.com/EmmanuelADAM/jade/tree/master/helloWorldService) : codes pour des agents liés
