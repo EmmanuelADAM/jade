@@ -1,9 +1,10 @@
 package fsm.salutations;
 
 import jade.core.behaviours.Behaviour;
+import jade.gui.AgentWindowed;
 
 /**
- * minimal behaviour that display nbCycles times a msg
+ * minimal behavior that display nbCycles times a msg
  *
  * @author emmanueladam
  * @version 2021-11-24
@@ -41,7 +42,7 @@ class EuropeanBehaviour extends Behaviour {
     @Override
     public void action() {
         i++;
-        System.out.println(myAgent.getLocalName() + " -> " + msg + " " + i + "/" + nbCycles);
+        ((AgentWindowed)myAgent).getWindow().println( msg + " " + i + "/" + nbCycles);
     }
 
     /**

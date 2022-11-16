@@ -28,15 +28,13 @@ state choiceFromB <<choice>>
 B -- > choiceFromB
 choiceFromB -- > D
 choiceFromB -- > E
-state synchroCD <<fork>>
-C-> synchroCD
-D -- > synchroCD
-synchroCD -- > E
+C-> E
+D -- > E
 state choiceFromE <<choice>>
-choiceFromE <- E  
-A <- choiceFromE 
+E -- > choiceFromE
+A <-- choiceFromE
 choiceFromE -> F
-F -- > [*]
+F -> [*]
 
 @enduml```
 

@@ -23,57 +23,57 @@ import static java.lang.System.out;
  */
 public class AgentAuteur extends AgentWindowed {
 
-    final String SOUMETTRE = "soumettre";
-    final String ATTENDREAVIS = "attendre_avis";
-    final String POURSUIVRE = "poursuivre";
-    final String ARRETER = "arreter";
-    final String FETER = "feter";
+    final String SUBMIT = "submission";
+    final String WAITRESULT = "wait_decision";
+    final String CONTINUE = "continue";
+    final String STOP = "abandon";
+    final String CELEBRATE = "celebrate";
 
     FSMBehaviour fsm;
 
     /**
-     * un agent auteur soumet un article, attends le resultat puis fete, arrete ou resoumet selon le cas
+     * an author agent submits an article, waits for the decision and then celebrates, stops or resubmits as appropriate
      */
     protected void setup() {
         window = new SimpleWindow4Agent(getAID().getName(), this);
         window.setButtonActivated(true);
-        println("Hello! Agent  " + getLocalName() + " is ready, my address is " + this.getAID().getName());
+        println("Hello! I'm ready, my address is " + this.getAID().getName());
         println("- ".repeat(20));
 
         HashMap<String, Object> ds = new HashMap<>();
 
 
-        //creation du comportement de type machine d'etats finis
+        //creation of finite state machine type behavior
         fsm = new FSMBehaviour(this) {
             public int onEnd() {
-                out.println("FSM behaviour terminé, je m'en vais");
+                out.println("FSM behaviour ended, I'm leaving");
                 myAgent.doDelete();
                 return super.onEnd();
             }
         };
 
-        //____LES ETATS
-        //ETAT INITIAL
-        fsm.registerFirstState(soumettre(ds), SOUMETTRE);
+        //____THE STATES
+        // INITIAL STATE
+        fsm.registerFirstState(soumettre(ds), SUBMIT);
         // autres etats
-        fsm.registerState(attendreAvis(ds), ATTENDREAVIS);
-        fsm.registerState(resoumettre(ds), POURSUIVRE);
+        fsm.registerState(attendreAvis(ds), WAITRESULT);
+        fsm.registerState(resoumettre(ds), CONTINUE);
         //ETATS FINAUX
-        fsm.registerLastState(arreter(), ARRETER);
-        fsm.registerLastState(feter(), FETER);
+        fsm.registerLastState(arreter(), STOP);
+        fsm.registerLastState(feter(), CELEBRATE);
 
         //____LES TRANSITIONS
-        fsm.registerDefaultTransition(SOUMETTRE, ATTENDREAVIS);
+        fsm.registerDefaultTransition(SUBMIT, WAITRESULT);
         //si le comportement lie a attendre avis retourne 0, c'est fini
-        fsm.registerTransition(ATTENDREAVIS, ARRETER, 0);
+        fsm.registerTransition(WAITRESULT, STOP, 0);
         //si le comportement lie a attendre avis retourne 2, c'est fini mais on fete cela
-        fsm.registerTransition(ATTENDREAVIS, FETER, 2);
+        fsm.registerTransition(WAITRESULT, CELEBRATE, 2);
         //si le comportement lie a attendre avis retourne 1, on regarde pour poursuivre
-        fsm.registerTransition(ATTENDREAVIS, POURSUIVRE, 1);
+        fsm.registerTransition(WAITRESULT, CONTINUE, 1);
         //si le comportement lie a attendre poursuivre retourne 0, on a decide d'arreter
-        fsm.registerTransition(POURSUIVRE, ARRETER, 0);
+        fsm.registerTransition(CONTINUE, STOP, 0);
         //si le comportement lie a attendre poursuivre retourne 1, on retente une nouvelle soumission et on attends un nouvel avis (on reinitialise certains comportements)
-        fsm.registerTransition(POURSUIVRE, ATTENDREAVIS, 1, new String[]{ATTENDREAVIS, POURSUIVRE});
+        fsm.registerTransition(CONTINUE, WAITRESULT, 1, new String[]{WAITRESULT, CONTINUE});
 
 
     }

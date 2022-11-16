@@ -21,33 +21,34 @@ Jade Agent-Oriented Programming Course Materials
 <!-- 
 ```
 @startuml fsmReview
+!pragma layout smetana
 
 hide empty description
 
-[*] -> A:soumission
-A:soumission -- > J:reception
+[*] -> A:Submission
+A:Submission -- > J:Reception
 state JDispatch <<fork>>
-J:reception -- > JDispatch
-JDispatch -- > R1:Relecture
-JDispatch -- > R2:Relecture
-JDispatch -- > R3:Relecture
+J:Reception -- > JDispatch
+JDispatch -- > R1:Reviewing
+JDispatch -- > R2:Reviewing
+JDispatch -- > R3:Reviewing
 state JCollect <<fork>>
-R1:Relecture -- > JCollect
-R2:Relecture -- > JCollect
-R3:Relecture -- > JCollect
+R1:Reviewing -- > JCollect
+R2:Reviewing -- > JCollect
+R3:Reviewing -- > JCollect
 state resultat <<choice>>
 JCollect -- > resultat
-resultat -- > J:Refus
+resultat -- > J:Refuse
 resultat -- > J:Acceptation
 resultat -- > J:Corrections
-J:Refus -- > [*]
+J:Refuse -- > [*]
 J:Acceptation -- > [*]
 J:Corrections -- > A:Decision 
 state decision <<choice>>
 A:Decision -- > decision
-A:ReSoumission <-- decision
+A:ReSubmission <-- decision
 A:Abandon <-- decision
-J:reception <-- A:ReSoumission
+J:Reception <-- A:ReSubmission
 [*] <- A:Abandon 
 @enduml```
 -->

@@ -1,13 +1,13 @@
 package fsm.salutations;
 
-import jade.core.Agent;
 import jade.core.behaviours.FSMBehaviour;
 import jade.core.behaviours.WakerBehaviour;
+import jade.gui.AgentWindowed;
+import jade.gui.SimpleWindow4Agent;
 
-import static java.lang.System.out;
 
 /**
- * class for an agent that contains 1 behavior defined with a finited state machine (6 etats)
+ * class for an agent that contains 1 behavior defined with a finite state machine (6 etats)
  * A <---\
  * /   \    \
  * B     C    \
@@ -21,16 +21,17 @@ import static java.lang.System.out;
  * @author emmanueladam
  * @since 2021-11-24
  */
-public class AgentHelloEuropeenFSM extends Agent {
+public class AgentHelloEuropeenFSM extends AgentWindowed {
 
     /**
-     * procedure principale.
-     * lance les agents (1 de type AgentHelloEuropeenFSM ici)
+     * main function
+     * start some agents (of type AgentHelloEuropeenFSM )
      */
     public static void main(String[] args) {
         String[] jadeArgs = new String[2];
         StringBuilder sbAgents = new StringBuilder();
         sbAgents.append("a1:fsm.salutations.AgentHelloEuropeenFSM").append(";");
+        sbAgents.append("a2:fsm.salutations.AgentHelloEuropeenFSM").append(";");
         jadeArgs[0] = "-gui";
         jadeArgs[1] = sbAgents.toString();
         jade.Boot.main(jadeArgs);
@@ -41,51 +42,52 @@ public class AgentHelloEuropeenFSM extends Agent {
      */
     @Override
     protected void setup() {
-        out.println("Moi, Agent " + getLocalName() + ", mon  adresse est " + getAID());
-        out.println("J'execute des comportements selon une machine d'états finis");
+        window = new SimpleWindow4Agent(getAID().getName(), this);
+        println("Hello! I'm ready, my address is " + this.getAID().getName());
+        println("I execute the behaviors according to a finite state machine");
 
-        //creation du comportement de type machine d'etat finis
+        //a Finite State Machine behavior
         FSMBehaviour fsm = new FSMBehaviour(this) {
             public int onEnd() {
-                out.println("FSM behaviour terminé, je m'en vais");
+                println("FSM behaviour ended, I leave");
                 myAgent.doDelete();
                 return super.onEnd();
             }
         };
 
-        //____LES ETATS
-        //on enregistre les etats (idealement, les noms A, B, .. F devraient etre dans des constantes
-        //ETAT INITIAL (2 x bonjour)
+        //____THE STATES
+        //we store the states (ideally, names "A", "B", .. "F" should be in constants
+        //INITIAL STATE (2 x bonjour)
         fsm.registerFirstState(new EuropeanBehaviour("bonjour", 2), "A");
-        // autres etats
+        // other states
         fsm.registerState(new EuropeanBehaviour("hallo", 2), "B");
         fsm.registerState(new EuropeanBehaviour("buongiorno", 3), "C");
         fsm.registerState(new EuropeanBehaviour("buenos dias", 3), "D");
         fsm.registerState(new EuropeanBehaviour("Olá", 1), "E");
-        //ETAT FINAL (1 x saluton)
+        //FINAL STATE (1 x saluton)
         fsm.registerLastState(new EuropeanBehaviour("saluton", 1), "F");
 
-        //____LES TRANSITIONS
-        // de A on va à B si le comportement lie a A retourne 0 en fin (OnEnd)
+        // TRANSITIONS
+        // from A, we go to B if the behavior linked to A returns 0 On End
         fsm.registerTransition("A", "B", 0);
-        // de A on va a C si le comportement lie a A retourne 1 en fin (OnEnd)
+        // from A, we go to C if the behavior linked to A returns 1 On End
         fsm.registerTransition("A", "C", 1);
-        // de B on va a D si le comportement lie a B retourne 0 en fin (OnEnd)
+        // from B, we go to D if the behavior linked to B returns 0 On End
         fsm.registerTransition("B", "D", 0);
-        // de B on va a E si le comportement lie B retourne 1 en fin (OnEnd)
+        // from B, we go to E if the behavior linked to B returns 1 On End
         fsm.registerTransition("B", "E", 1);
-        // de C on va a E sans condition
+        // after C, we go to E without any condition
         fsm.registerDefaultTransition("C", "E");
-        // de D on va a E sans condition
+        // after D, we go to E without any condition
         fsm.registerDefaultTransition("D", "E");
-        // de E on va a F si le comportement lie a E retourne 0 en fin (OnEnd)
+        // from E, we go to F if the behavior linked to E returns 0 On End
         fsm.registerTransition("E", "F", 0);
-        // de E on retourne a A si le comportement lie a E retourne 1 en fin (OnEnd)
-        //alors on precise les comportement qui doivent realiser un reset
-        //si on ne "resette" pas, les comportements ne vont pas reinitialiser le nb de cycles courant
+        // from E, we go to A if the behavior linked to E returns 1 On End
+        //then we indicate which behaviors have to be reset
+        //if we do not "reset" them, the 'EuropeanBehaviors' will not reset the current number of cycles
         fsm.registerTransition("E", "A", 1, new String[]{"A", "B", "C", "D", "E", "F"});
 
-        // ajout d'un comportement qui ajoute le comportement fsm dans 100ms
+        // add the fsm behavior in  100ms
         addBehaviour(new WakerBehaviour(this, 100, a-> a.addBehaviour(fsm)));
     }
 
