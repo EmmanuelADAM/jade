@@ -1,23 +1,22 @@
-# Jade : Agents et comportements à états
+# Jade : Agents et states behaviors
 
-## FMS : Machine State Machine
+## FMS : Finite State Machine
 
 ---
 
-Supports pour le cours de programmation orientée agent en Jade
+Jade Agent-Oriented Programming Course Materials
 
 
-- Dans le package [Review](https://github.com/EmmanuelADAM/jade/blob/master/fsm/review/) des agents simulent le principe
-  de dépôt d'article de recherche :
-    - un auteur soumet un article à un journal
-    - ce journal réceptionne et envoie l'article à 3 reviewers
-    - lorsque les 3 reviews sont reçues (une note de 0 à 2),
-        - si un 0 est reçu, l'article est refusé
-        - si toutes les notes sont de 2, l'article est accepté sans modification
-        - sinon il est proposé à l'auteur de corriger
-    - si l'auteur accepte de corriger, il retourne le document au journal (retour étape 2)
-    - sinon il refuse de poursuivre et en informe le journal Reprenez pour cela la trame des agents utilisé lors
-      d'enchère ou de vote..
+- In the package [Review](https://github.com/EmmanuelADAM/jade/blob/master/fsm/review/)  agents simulate the
+  principle of depositing a research article:
+    - an author submits an article to a journal
+    - this journal receives it and sends this article to 3 reviewers
+    - when all 3 evaluations are received (a score of 0 to 2),
+        - if a 0 is received, the item is refused
+        - if all marks are 2, the article is accepted without modification
+        - otherwise it is proposed to the author to correct
+    - if the author agrees to correct, he returns the document to the journal (return step 2)
+    - otherwise, he refuses to continue and informs the newspaper.
 
 <!-- 
 ```

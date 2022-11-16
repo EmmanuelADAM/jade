@@ -14,7 +14,7 @@ Jade Agent-Oriented Programming Course Materials
     - end of C, end of D lead to E
     - E leads to F (final state) or returns to A
 
-- Dans le package [Review](https://github.com/EmmanuelADAM/jade/blob/english/fsm/review/) agents simulate the 
+- In the package [Review](https://github.com/EmmanuelADAM/jade/blob/english/fsm/review/) agents simulate the 
   principle of depositing a research article:
     - an author submits an article to a journal
     - this journal receives it and sends this article to 3 reviewers
@@ -23,8 +23,7 @@ Jade Agent-Oriented Programming Course Materials
         - if all marks are 2, the article is accepted without modification
         - otherwise it is proposed to the author to correct
     - if the author agrees to correct, he returns the document to the journal (return step 2)
-    - otherwise, he refuses to continue and informs the newspaper. To do this, take the frame of the agents used 
-      during the auction or the vote.
+    - otherwise, he refuses to continue and informs the newspaper.
 
 - Now create the trading principle with FSM-like behaviors...
   - two agents: Buyer and Seller interact

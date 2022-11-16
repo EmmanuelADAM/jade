@@ -1,43 +1,41 @@
-# Jade : Agents et comportements à états
+# Jade : Agents et states behaviors
 
-## FMS : Machine State Machine
+## FMS : Finite State Machine
 
 ---
 
-Supports pour le cours de programmation orientée agent en Jade
+Jade Agent-Oriented Programming Course Materials
 
 - [AgentHelloEuropeenFSM](https://github.com/EmmanuelADAM/jade/blob/master/fsm/salutations/AgentHelloEuropeenFSM.java) :
-  code pour un agent qui organise 6 comportements de salutations selon une machine d'états finis.
-    - il commence à effectuer le comportement A (état initial), puis soit exécute B ou C selon le retour de A.
-    - selon le retour de B, exécute D ou E
-    - la fin de C, la fin de D mènent à à E
-    - E mène à F (état final)  ou retourne à A
-
+  code for an agent that organizes 6 greeting behaviors according to a finite state machine.
+  - it starts performing behavior A (initial state), then performs B or C depending on the result of A.
+  - according to the return of B, executes D or E
+  - end of C, end of D lead to E
+  - E leads to F (final state) or returns to A
 
 <!-- 
 ```
 @startuml fsmSalutations
-
+!pragma layout smetana
 hide empty description
-state choixFromB <<choice>>
 
 [*] -> A
-state choixFromA <<choice>>
-A -> choixFromA
-choixFromA -- > B
-choixFromA -- > C
-state choixFromB <<choice>>
-B-- > choixFromB
-choixFromB -- > D
-choixFromB -- > E
+state choiceFromA <<choice>>
+A -- > choiceFromA
+choiceFromA -- > B
+choiceFromA -- > C
+state choiceFromB <<choice>>
+B -- > choiceFromB
+choiceFromB -- > D
+choiceFromB -- > E
 state synchroCD <<fork>>
 C-> synchroCD
-D--  > synchroCD
+D -- > synchroCD
 synchroCD -- > E
-state choixFromE <<choice>>
-choixFromE <- E  
-A <-- choixFromE 
-choixFromE -> F
+state choiceFromE <<choice>>
+choiceFromE <- E  
+A <- choiceFromE 
+choiceFromE -> F
 F -- > [*]
 
 @enduml```
