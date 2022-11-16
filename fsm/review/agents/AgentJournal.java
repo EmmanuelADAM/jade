@@ -20,17 +20,17 @@ import static java.lang.System.out;
 
 
 /**
- * classe d'un agent qui soumet un appel d'offres a d'autres agents  par le protocole ContractNet
+ * class for an journal agent that use a Finite State MAchine behavior to manage its process of submission of an article
  *
  * @author eadam
  */
 public class AgentJournal extends AgentWindowed {
-    final String ATTENDRE_ARTICLE = "attendre_article";
-    final String ENVOYER_3REVIEWERS = "envoyer_pour_review";
-    final String ATTENDRE_REVIEWS = "attendre_reviews";
-    final String ENVOYER_RESULTAT = "transmettre_avis";
-    final String ATTENDRE_AR = "attendre_retour_auteur";
-    final String FINIR = "fin_session";
+    final String WAIT_ARTICLE = "wait_proposal";
+    final String SEND_TO_3REVIEWERS = "send_for_review";
+    final String WAIT_3REVIEWS = "wait_reviews";
+    final String SEND_DECISION = "send_decision";
+    final String WAIT_ACK = "wait_acknowledgment_of_receipt";
+    final String END = "terminate_session";
     volatile HashMap<String, Object> ds = new HashMap<>();
 
     int nbReviewers;
@@ -49,29 +49,29 @@ public class AgentJournal extends AgentWindowed {
         //creation du comportement de type machine d'etat finis
         FSMBehaviour fsm = new FSMBehaviour(this) {
             public int onEnd() {
-                out.println("FSM behaviour terminé, je m'en vais");
+                out.println("FSM behaviour terminï¿½, je m'en vais");
                 myAgent.doDelete();
                 return super.onEnd();
             }
         };
 
         //____LES ETATS
-        fsm.registerFirstState(attendreArticle(ds), ATTENDRE_ARTICLE);
-        fsm.registerState(envoyerPourRelecture(ds), ENVOYER_3REVIEWERS);
-        fsm.registerState(attendreReviews(ds), ATTENDRE_REVIEWS);
-        fsm.registerState(envoyerResultat(ds), ENVOYER_RESULTAT);
-        fsm.registerState(attendreAvisAuteur(ds), ATTENDRE_AR);
-        fsm.registerLastState(arreter(ds), FINIR);
+        fsm.registerFirstState(attendreArticle(ds), WAIT_ARTICLE);
+        fsm.registerState(envoyerPourRelecture(ds), SEND_TO_3REVIEWERS);
+        fsm.registerState(attendreReviews(ds), WAIT_3REVIEWS);
+        fsm.registerState(envoyerResultat(ds), SEND_DECISION);
+        fsm.registerState(attendreAvisAuteur(ds), WAIT_ACK);
+        fsm.registerLastState(arreter(ds), END);
 
         //____LES TRANSITIONS
-        fsm.registerDefaultTransition(ATTENDRE_ARTICLE, ENVOYER_3REVIEWERS);
-        fsm.registerDefaultTransition(ENVOYER_3REVIEWERS, ATTENDRE_REVIEWS);
-        fsm.registerDefaultTransition(ATTENDRE_REVIEWS, ENVOYER_RESULTAT);
-        fsm.registerTransition(ENVOYER_RESULTAT, FINIR, 0);
-        fsm.registerTransition(ENVOYER_RESULTAT, FINIR, 2);
-        fsm.registerTransition(ENVOYER_RESULTAT, ATTENDRE_AR, 1);
-        fsm.registerTransition(ATTENDRE_AR, FINIR, 0);
-        fsm.registerTransition(ATTENDRE_AR, ENVOYER_3REVIEWERS, 1, new String[]{ATTENDRE_REVIEWS, ENVOYER_RESULTAT, ATTENDRE_AR});
+        fsm.registerDefaultTransition(WAIT_ARTICLE, SEND_TO_3REVIEWERS);
+        fsm.registerDefaultTransition(SEND_TO_3REVIEWERS, WAIT_3REVIEWS);
+        fsm.registerDefaultTransition(WAIT_3REVIEWS, SEND_DECISION);
+        fsm.registerTransition(SEND_DECISION, END, 0);
+        fsm.registerTransition(SEND_DECISION, END, 2);
+        fsm.registerTransition(SEND_DECISION, WAIT_ACK, 1);
+        fsm.registerTransition(WAIT_ACK, END, 0);
+        fsm.registerTransition(WAIT_ACK, SEND_TO_3REVIEWERS, 1, new String[]{WAIT_3REVIEWS, SEND_DECISION, WAIT_ACK});
 
         // ajout d'un comportement qui ajoute le comportement fsm dans 100ms
         addBehaviour(new WakerBehaviour(this, 100) {
@@ -183,7 +183,7 @@ public class AgentJournal extends AgentWindowed {
                 ACLMessage msg = (ACLMessage) ds.get("article");
                 ACLMessage reply = msg.createReply();
                 switch (val) {
-                    case 0 -> reply.setContent("0: Désolé votre article n'a pas ete accepte.... Perseverez et retentez une prochaine fois");
+                    case 0 -> reply.setContent("0: Dï¿½solï¿½ votre article n'a pas ete accepte.... Perseverez et retentez une prochaine fois");
                     case 1 -> reply.setContent("1: Votre article est accepte sous reserve de modification...");
                     case 2 -> reply.setContent("2: Nous avons le plaisir de vous informer que votre article est accepte !");
                 }

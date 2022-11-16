@@ -17,7 +17,7 @@ import static java.lang.System.out;
 
 
 /**
- * agent qui attend un message à partir du protocole CFP, prépare la réponse et la retourne
+ * class for an author agent that use a Finite State MAchine behavior to manage its process of submission of an article
  *
  * @author eadam
  */
@@ -25,7 +25,7 @@ public class AgentAuteur extends AgentWindowed {
 
     final String SUBMIT = "submission";
     final String WAITRESULT = "wait_decision";
-    final String CONTINUE = "continue";
+    final String CONTINUE = "continue?";
     final String STOP = "abandon";
     final String CELEBRATE = "celebrate";
 
@@ -54,30 +54,31 @@ public class AgentAuteur extends AgentWindowed {
 
         //____THE STATES
         // INITIAL STATE
-        fsm.registerFirstState(soumettre(ds), SUBMIT);
-        // autres etats
-        fsm.registerState(attendreAvis(ds), WAITRESULT);
-        fsm.registerState(resoumettre(ds), CONTINUE);
-        //ETATS FINAUX
+        fsm.registerFirstState(submit(ds), SUBMIT);
+        // other states
+        fsm.registerState(waitEvaluation(ds), WAITRESULT);
+        fsm.registerState(resubmit(ds), CONTINUE);
+        //FINAL STATES
         fsm.registerLastState(arreter(), STOP);
-        fsm.registerLastState(feter(), CELEBRATE);
+        fsm.registerLastState(celebrate(), CELEBRATE);
 
-        //____LES TRANSITIONS
+        //____TRANSITIONS
         fsm.registerDefaultTransition(SUBMIT, WAITRESULT);
-        //si le comportement lie a attendre avis retourne 0, c'est fini
+        //If the behavior related to Wait results returns 0, it's over
         fsm.registerTransition(WAITRESULT, STOP, 0);
-        //si le comportement lie a attendre avis retourne 2, c'est fini mais on fete cela
+        //If the behavior related to Wait results returns 0, it's over but I celebrate
         fsm.registerTransition(WAITRESULT, CELEBRATE, 2);
-        //si le comportement lie a attendre avis retourne 1, on regarde pour poursuivre
+        //If the behavior related to Wait results returns 1, I decide if I submit again
         fsm.registerTransition(WAITRESULT, CONTINUE, 1);
-        //si le comportement lie a attendre poursuivre retourne 0, on a decide d'arreter
+        //If the behavior related to the reflexion about resubmission returns 0, I decide to stop
         fsm.registerTransition(CONTINUE, STOP, 0);
-        //si le comportement lie a attendre poursuivre retourne 1, on retente une nouvelle soumission et on attends un nouvel avis (on reinitialise certains comportements)
+        //If the behavior related to the reflexion about resubmission returns 0, I try a new submission, and I reset some behaviors
         fsm.registerTransition(CONTINUE, WAITRESULT, 1, new String[]{WAITRESULT, CONTINUE});
 
 
     }
 
+    /**click on the button => submission (only 1 click allowed)*/
     @Override
     protected void onGuiEvent(GuiEvent arg0) {
         fsm.reset();
@@ -86,28 +87,32 @@ public class AgentAuteur extends AgentWindowed {
     }
 
     /**
-     * soumettre un article a l'agent journal
+     * Submit an article to the journal agent
+     * @param ds a data store to store the keys used to stamp the msgs
+     * @return a one shot behavior that sends a msg to the journal agent, and store its key
      */
-    private Behaviour soumettre(HashMap<String, Object> ds) {
+    private Behaviour submit(HashMap<String, Object> ds) {
         return  new OneShotBehaviour(this, a-> {
-                String cle = "msg" + System.currentTimeMillis();
-                ds.put("cle", cle);
+                String key = "msg" + System.currentTimeMillis();
+                ds.put("key", key);
                 ACLMessage msg = new ACLMessage(ACLMessage.PROPOSE);
-                msg.setContent("voici ma prose originale");
-                msg.setConversationId(cle);
-                println("J'envoie \"%s\" avec la cle (%s)".formatted(msg.getContent(), ds.get("cle")));
-                msg.addReceiver(new AID("j", AID.ISLOCALNAME));
+                msg.setContent("here is my original prose...");
+                msg.setConversationId(key);
+                msg.addReceiver("j");
                 send(msg);
+                println("I've sent \"%s\" with the key (%s)".formatted(msg.getContent(), ds.get("key")));
         });
     }
 
     /**
-     * attendre un retour correspondant a l'article envoyé
+     * wait for a response corresponding to the article sent
+     * @param ds the data store containing the keys linked to the msg sent
+     * @return a one shot behaviour that wait for a response
      */
-    private Behaviour attendreAvis(HashMap<String, Object> ds) {
+    private Behaviour waitEvaluation(HashMap<String, Object> ds) {
         Behaviour b = new OneShotBehaviour(this) {
-            int retour = 1;
-            String cle;
+            int evaluation = 1;
+            String key;
             MessageTemplate mt;
 
             @Override
@@ -116,23 +121,23 @@ public class AgentAuteur extends AgentWindowed {
 
             @Override
             public void reset() {
-                retour = 1;
+                evaluation = 1;
             }
 
             @Override
             public void action() {
-                cle = String.valueOf(ds.get("cle"));
-                mt = MessageTemplate.MatchConversationId(cle);
-                println("j'attends un retour avec cette cle : " + mt);
+                key = String.valueOf(ds.get("key"));
+                mt = MessageTemplate.MatchConversationId(key);
+                println("I wait for a response with this key : " + mt);
                 ACLMessage msg = null;
                 while ((msg = blockingReceive(mt)) == null) block();
-                retour = Integer.parseInt(msg.getContent().split(":")[0]);
-                println("j'ai recu cet avis : " + msg.getContent());
+                evaluation = Integer.parseInt(msg.getContent().split(":")[0]);
+                println("I received this evaluation : " + msg.getContent());
             }
 
             @Override
             public int onEnd() {
-                return retour;
+                return evaluation;
             }
 
         };
@@ -141,11 +146,13 @@ public class AgentAuteur extends AgentWindowed {
 
 
     /**
-     * resoumettre un article a l'agent journal
+     * Decision to continue or not the submission
+     * @param ds a data store to store the keys used to stamp the msgs
+     * @return a One-shot behavior that sends an MSG to the journal agent indicating whether the author is abandoning or proposing a new version
      */
-    private Behaviour resoumettre(HashMap<String, Object> ds) {
+    private Behaviour resubmit(HashMap<String, Object> ds) {
         Behaviour b = new OneShotBehaviour(this) {
-            int retour = 1;
+            int decision = 1;
             int i = 1;
 
             @Override
@@ -155,16 +162,16 @@ public class AgentAuteur extends AgentWindowed {
             @Override
             public void action() {
                 ACLMessage msg = new ACLMessage(ACLMessage.PROPOSE);
-                msg.setConversationId(String.valueOf(ds.get("cle")));
+                msg.setConversationId(String.valueOf(ds.get("key")));
                 msg.addReceiver(new AID("j", AID.ISLOCALNAME));
                 if (Math.random() < 0.3) {
                     msg.setPerformative(ACLMessage.CANCEL);
-                    msg.setContent("je ne souhaite pas poursuivre...");
-                    println("je ne souhaite pas poursuivre...");
-                    retour = 0;
+                    msg.setContent("I propose to stop and cancel the submission...");
+                    println("I decided to stop and cancel the submission...");
+                    decision = 0;
                 } else {
-                    msg.setContent("voici ma prose R#" + i);
-                    println("j'envoie ma prose R#" + i + " avec la cle " + msg.getConversationId());
+                    msg.setContent("here is my revision R#" + i);
+                    println("I send my revision R#" + i + " with the key " + msg.getConversationId());
                     i++;
                 }
                 println("-".repeat(40));
@@ -173,14 +180,15 @@ public class AgentAuteur extends AgentWindowed {
 
             @Override
             public int onEnd() {
-                return retour;
+                return decision;
             }
         };
         return b;
     }
 
     /**
-     * resoumettre un article a l'agent journal
+     * Abandon
+     * @return a One-shot behavior that displays a msg indicating the abandon of the process
      */
     private Behaviour arreter() {
         Behaviour b = new OneShotBehaviour(this) {
@@ -193,7 +201,7 @@ public class AgentAuteur extends AgentWindowed {
 
             @Override
             public void action() {
-                println("J'arrete la, a une prochaine fois !");
+                println("I decide to stop and try other thing, see you !");
                 println("~".repeat(40));
             }
         };
@@ -201,11 +209,12 @@ public class AgentAuteur extends AgentWindowed {
     }
 
     /**
-     * resoumettre un article a l'agent journal
+     * Celebration
+     * @return a One-shot behavior that displays a msg indicating the author is happy
      */
-    private Behaviour feter() {
+    private Behaviour celebrate() {
         return new OneShotBehaviour(this, a->{
-                println("super, un article accepte !!");
+                println("Great !! My new article has been accepted !!");
                 println("~".repeat(40));
             });
     }
