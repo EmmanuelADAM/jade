@@ -2,7 +2,6 @@ package attenteServices.agents;
 
 import jade.core.AID;
 import jade.core.AgentServicesTools;
-import jade.domain.DFService;
 import jade.domain.DFSubscriber;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.gui.AgentWindowed;
@@ -21,7 +20,7 @@ import java.util.List;
  * @author eadam
  */
 @SuppressWarnings("serial")
-public class AgentPointeur extends AgentWindowed {
+public class ScribeAgent extends AgentWindowed {
     /**
      * liste des agents venant
      */

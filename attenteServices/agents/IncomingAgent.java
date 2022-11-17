@@ -3,20 +3,17 @@ package attenteServices.agents;
 
 import jade.core.AID;
 import jade.core.AgentServicesTools;
-import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.ReceiverBehaviour;
 import jade.core.behaviours.WakerBehaviour;
 import jade.gui.AgentWindowed;
 import jade.gui.SimpleWindow4Agent;
-import jade.lang.acl.ACLMessage;
-import jade.lang.acl.MessageTemplate;
 
 /**
  * agent lié à une fenêtre qui ecoute en boucle des messages sur un topic
  *
  * @author eadam
  */
-public class AgentVenant extends AgentWindowed {
+public class IncomingAgent extends AgentWindowed {
     AID topic = null;
 
 

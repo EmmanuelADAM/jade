@@ -85,6 +85,7 @@ public class SimpleGui4Agent extends JFrame implements ActionListener {
         this();
         myAgent = agent;
         setTitle(myAgent.getLocalName());
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
 
     /**

@@ -4,14 +4,16 @@
 
 ---
 
-- [AgentPointeur](https://github.com/EmmanuelADAM/jade/blob/master/attenteServices/agents/AgentPointeur.java) : classe pour un
-  agent qui guette les inscriptions et desinscription sur un service donné. A chaque arrivée, départ, l'agent transmet les noms des membres du groupe à ces derniers.
-- [AgentVenant](https://github.com/EmmanuelADAM/jade/blob/master/attenteServices/agents/AgentVenant.java) : classe pour un
-  agent qui, au bout d'un certain temps s'inscrit à un service. L'agent affiche les messages qu'il reçoit. Clore la fenêtre tue l'agent qui se desinscrit de son service.
-- [LaunchAgents](https://github.com/EmmanuelADAM/jade/blob/master/attenteServices/launch/LaunchAgents.java) : **classe
-  principale**, lançant Jade et créant les agents
+- [IncomingAgent](https://github.com/EmmanuelADAM/jade/blob/master/attenteServices/agents/IncomingAgent.java) : class
+  for an agent who, after a certain period of time, registers for a service. The agent displays the messages it
+  receives. Closing the window kills the agent who unsubscribes from his service.
+- [ScribeAgent](https://github.com/EmmanuelADAM/jade/blob/master/attenteServices/agents/ScribeAgent.java) : 
+  class for an agent that subscribe to a service proposed by the Yello Pages to receive information about 
+  registry/deregistry of agents to a given service. At each arrival and departure, the agent transmits the names of 
+  the members of the group.
+- [LaunchAgents](https://github.com/EmmanuelADAM/jade/blob/master/attenteServices/launch/LaunchAgents.java) : **main
+  class**, launch Jade and create the agents
 
-- au lancement, 11 agents sont lancés, un pointeur, 10 venant, leur nombre n'est pas limité hormis par la capacité de
-  la machine.
+- Initially, 10 agents are launched; one scribe and 9 incoming agents.
 
 
