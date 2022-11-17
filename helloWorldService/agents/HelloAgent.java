@@ -46,16 +46,18 @@ public class HelloAgent extends GuiAgent {
         //on s'enregistre au hasard dans des services differents
         if (Math.random() < 0.5) {
             //s'enregistrer en tant d'agent d'accueil dans le service de cordialite
-            AgentServicesTools.register(this, "cordialite", "accueil");
+            AgentServicesTools.register(this, "cordiality", "lobby");
             window.mainTextArea.setBackground(Color.pink);
+            window.println("I'm registered in the service 'lobby' inside the 'cordiality' type of service");
         } else {
             //s'enregistrer en tant d'agent de reception dans le service de cordialite
-            AgentServicesTools.register(this, "cordialite", "reception");
+            AgentServicesTools.register(this, "cordiality", "receptiondesk");
             window.mainTextArea.setBackground(Color.lightGray);
+            window.println("I'm registered in the service 'reception desk' inside the 'cordiality' type of service");
         }
 
 
-        //rester en continu à l'ecoute des messages recus de tous types, sans limite de duree
+        //rester en continu ï¿½ l'ecoute des messages recus de tous types, sans limite de duree
         addBehaviour(new ReceiverBehaviour(this, -1, null, true, (a,msg)->{
                     window.println("j'ai recu un message de " + msg.getSender().getLocalName(), true);
                     window.println("voici le contenu : " + msg.getContent(), true);
@@ -70,12 +72,10 @@ public class HelloAgent extends GuiAgent {
      *
      * @param text texte envoye par le message
      */
-    private void sendHello(String text) {
-        String nameService = "accueil";
-        if (Math.random() < 0.5) nameService = "reception";
+    private void sendHello(String text, String nameService) {
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
         msg.setContent(text + " pour service " + nameService);
-        neighbourgs = AgentServicesTools.searchAgents(this, "cordialite", nameService);
+        neighbourgs = AgentServicesTools.searchAgents(this, "cordiality", nameService);
         msg.addReceivers(neighbourgs);
         send(msg);
         window.println("-> "+text + " envoye au service " + nameService);
@@ -88,7 +88,8 @@ public class HelloAgent extends GuiAgent {
      */
     protected void onGuiEvent(GuiEvent ev) {
         switch (ev.getType()) {
-            case SimpleGui4Agent.SENDCODE -> sendHello(window.lowTextArea.getText());
+            case SimpleGui4Agent.SENDLOBBY -> sendHello(window.lowTextArea.getText(),"lobby");
+            case SimpleGui4Agent.SENDRECEPTIONDESK -> sendHello(window.lowTextArea.getText(), "receptiondesk");
             case SimpleGui4Agent.QUITCODE -> doDelete();
         }
     }

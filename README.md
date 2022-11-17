@@ -70,13 +70,13 @@ _The following codes need, thus, this library and Java >= 17._
     article between an author agent, a journal agent and three reviewer agents
 
 ---
-## Gestion de services : déclaration et recherche
+## Service Management: Reporting and Research
 
-- [helloWorldService](https://github.com/EmmanuelADAM/jade/tree/master/helloWorldService) : codes pour des agents liés
-  chacun à une fenêtre. Ces agents se découvrent par recherche de services, et s'envoient des messages simples
-- [attenteServices](https://github.com/EmmanuelADAM/jade/tree/master/attenteServices) : codes pour des agents liés
-  chacun à une fenêtre. Des agents se déclarent aurpès des pages jaunes pour un service donné. 
-  Un agent a demandé aux pages jaunes (DF) d'être averti en cas d'inscription/desinsciption à ce service.
+- [helloWorldService](https://github.com/EmmanuelADAM/jade/tree/master/helloWorldService) : Codes for agents each 
+  linked to a window. These agents discover each other by searching for services and send each other simple messages
+- [attenteServices](https://github.com/EmmanuelADAM/jade/tree/master/attenteServices) :  Some agents register to the 
+  yellow pages (DF) for a given service; little by little.
+  Another agent has subscribed to (DF) to be notified when an agent registers or unsubscribes from this service.
 
 ## Protocoles d'interactions entre agents
 

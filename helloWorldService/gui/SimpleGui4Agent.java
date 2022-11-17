@@ -21,17 +21,25 @@ public class SimpleGui4Agent extends JFrame implements ActionListener {
      */
     public static final int QUITCODE = -1;
     /**
-     * code associated to the Quit button
+     * code associated to the "send to lobby" button
      */
-    public static final int SENDCODE = 10;
+    public static final int SENDLOBBY = 1;
+    /**
+     * code associated to the "send to reception desk" button
+     */
+    public static final int SENDRECEPTIONDESK = 2;
     /**
      * string associated to the Quit button
      */
-    private static final String QUITCMD = "QUIT";
+    private static final String QUITCMD = "-1";
     /**
-     * string associated to the Quit button
+     * string associated to the send to lobby button
      */
-    private static final String SENDCMD = "SEND";
+    private static final String SENDCMDLOBBY = "1";
+    /**
+     * string associated to the send to reception desk button
+     */
+    private static final String SENDCMDRECEPTIONDESK = "2";
     /**
      * nb of windows created
      */
@@ -93,15 +101,19 @@ public class SimpleGui4Agent extends JFrame implements ActionListener {
         getContentPane().add(BorderLayout.SOUTH, jScrollPane);
 
         JPanel jpanel = new JPanel();
-        jpanel.setLayout(new GridLayout(0, 2));
+        jpanel.setLayout(new GridLayout(0, 3));
         // (just add columns to add button, or other thing...
         JButton button = new JButton("--- QUIT ---");
         button.addActionListener(this);
         button.setActionCommand(QUITCMD);
         jpanel.add(button);
-        button = new JButton("--- SEND ---");
+        button = new JButton("SEND LOBBY");
         button.addActionListener(this);
-        button.setActionCommand(SENDCMD);
+        button.setActionCommand(SENDCMDLOBBY);
+        jpanel.add(button);
+        button = new JButton("SEND RECEPTION");
+        button.addActionListener(this);
+        button.setActionCommand(SENDCMDRECEPTIONDESK);
         jpanel.add(button);
 
         getContentPane().add(BorderLayout.NORTH, jpanel);
@@ -135,13 +147,9 @@ public class SimpleGui4Agent extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent evt) {
         final String source = evt.getActionCommand();
-        if (source.equals(SimpleGui4Agent.QUITCMD)) {
-            GuiEvent ev = new GuiEvent(this, SimpleGui4Agent.QUITCODE);
+        if (source.equals(QUITCMD) || source.equals(SENDCMDLOBBY) || source.equals(SENDCMDRECEPTIONDESK) ) {
+            GuiEvent ev = new GuiEvent(this, Integer.parseInt(source));
             myAgent.postGuiEvent(ev);
-        }
-        if (source.equals(SimpleGui4Agent.SENDCMD)) {
-            GuiEvent event = new GuiEvent(this, SimpleGui4Agent.SENDCODE);
-            myAgent.postGuiEvent(event);
         }
     }
 
