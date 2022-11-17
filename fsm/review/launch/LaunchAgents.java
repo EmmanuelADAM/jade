@@ -10,20 +10,20 @@ import java.util.Properties;
 
 public class LaunchAgents {
     public static void main(String[] args) {
-        // preparer les arguments pout le conteneur JADE
+        // prepare arguments for the Jade container
         Properties prop = new ExtendedProperties();
-        // demander la fenetre de controle
+        // -- add a control/debug window
         prop.setProperty(Profile.GUI, "true");
-        // nommer les agents
-        StringBuilder sb = new StringBuilder("a:fsm.review.agents.AgentAuteur;");
-        sb.append("j:fsm.review.agents.AgentJournal;");
-        sb.append("ra:fsm.review.agents.AgentReviewer;");
-        sb.append("rb:fsm.review.agents.AgentReviewer;");
-        sb.append("rc:fsm.review.agents.AgentReviewer;");
+        // name the agents
+        StringBuilder sb = new StringBuilder("a:fsm.review.agents.AuthorAgent;");
+        sb.append("j:fsm.review.agents.JournalAgent;");
+        sb.append("ra:fsm.review.agents.ReviewerAgent;");
+        sb.append("rb:fsm.review.agents.ReviewerAgent;");
+        sb.append("rc:fsm.review.agents.ReviewerAgent;");
         prop.setProperty(Profile.AGENTS, sb.toString());
-        // creer le profile pour le conteneur principal
+        // create the jade profile
         ProfileImpl profMain = new ProfileImpl(prop);
-        // lancer le conteneur principal
+        // launch the main jade container
         Runtime rt = Runtime.instance();
         rt.createMainContainer(profMain);
     }

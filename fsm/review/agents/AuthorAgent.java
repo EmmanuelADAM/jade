@@ -21,7 +21,7 @@ import static java.lang.System.out;
  *
  * @author eadam
  */
-public class AgentAuteur extends AgentWindowed {
+public class AuthorAgent extends AgentWindowed {
 
     final String SUBMIT = "submission";
     final String WAITRESULT = "wait_decision";
@@ -132,7 +132,7 @@ public class AgentAuteur extends AgentWindowed {
                 ACLMessage msg = null;
                 while ((msg = blockingReceive(mt)) == null) block();
                 evaluation = Integer.parseInt(msg.getContent().split(":")[0]);
-                println("I received this evaluation : " + msg.getContent());
+                println("---> I received this evaluation: \"" + msg.getContent() + "\"");
             }
 
             @Override
@@ -166,7 +166,7 @@ public class AgentAuteur extends AgentWindowed {
                 msg.addReceiver(new AID("j", AID.ISLOCALNAME));
                 if (Math.random() < 0.3) {
                     msg.setPerformative(ACLMessage.CANCEL);
-                    msg.setContent("I propose to stop and cancel the submission...");
+                    msg.setContent("I propose to stop and cancel the submission...regards.");
                     println("I decided to stop and cancel the submission...");
                     decision = 0;
                 } else {
@@ -201,7 +201,7 @@ public class AgentAuteur extends AgentWindowed {
 
             @Override
             public void action() {
-                println("I decide to stop and try other thing, see you !");
+                println("Courage and try again later...");
                 println("~".repeat(40));
             }
         };
