@@ -1,6 +1,7 @@
 package fsm.review.agents;
 
 
+import jade.core.AID;
 import jade.core.AgentServicesTools;
 import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.FSMBehaviour;
@@ -105,7 +106,7 @@ public class JournalAgent extends AgentWindowed {
                 ds.put("article", msg);
                 ds.put("key", msg.getConversationId());
 
-                println("---> from %s, I received this '%s' with the key %s".formatted(msg.getSender().getLocalName(),
+                println("---> from %s, I received this \"%s\" with the key %s".formatted(msg.getSender().getLocalName(),
                         msg.getContent(), msg.getConversationId()));
             }
         };
@@ -132,7 +133,8 @@ public class JournalAgent extends AgentWindowed {
                 forward.addReceivers(reviewers);
                 forward.setConversationId(key);
                 myAgent.send(forward);
-                println("I've sent the article to evaluate (with the key " + key + ") to  " + Arrays.toString(reviewers));
+                var localNames = Arrays.stream(reviewers).map(AID::getLocalName).toArray(String[]::new);
+                println("I've sent the article to evaluate (with the key " + key + ") to  " + Arrays.toString(localNames));
             }
         };
         return b;
@@ -254,7 +256,7 @@ public class JournalAgent extends AgentWindowed {
             public void action() {
                 ACLMessage msg = blockingReceive(mt);
                 if (msg != null) {
-                    println("I received this: " + msg.getContent());
+                    println("I received this: \"" + msg.getContent()+"\"");
                     if (msg.getPerformative() == ACLMessage.CANCEL) {
                         println("--> The author does not wish to continue  ...");
                         val = 0;

@@ -6,8 +6,7 @@
 
 Jade Agent-Oriented Programming Course Materials
 
-- [AgentHelloEuropeenFSM](https://github.com/EmmanuelADAM/jade/blob/english/fsm/salutations/AgentHelloEuropeenFSM.
-  java) :
+- [AgentHelloEuropeenFSM](https://github.com/EmmanuelADAM/jade/blob/english/fsm/salutations/) :
   code for an agent that organizes 6 greeting behaviors according to a finite state machine.
     - it starts performing behavior A (initial state), then performs B or C depending on the result of A.
     - according to the return of B, executes D or E

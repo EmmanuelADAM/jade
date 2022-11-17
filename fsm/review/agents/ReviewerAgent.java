@@ -22,10 +22,7 @@ import java.util.Random;
 public class ReviewerAgent extends AgentWindowed {
 
     ACLMessage message;
-    boolean busy;
     Random random;
-
-    Behaviour bReception;
 
     /**
      * a reviewer agent declares itself to the yellow pages (DFAgent) and adds a cyclic listening behaviour
@@ -36,16 +33,17 @@ public class ReviewerAgent extends AgentWindowed {
         window.setButtonActivated(true);
         window.setBackgroundTextColor(Color.CYAN);
         random = new Random();
+        //Yellow Pages registration as a journal reviewer
         AgentServicesTools.register(this, "journal", "reviewer");
         var dfd = AgentServicesTools.getAgentDescription(this, "journal", "reviewer");
-//        addBehaviour(new BehaviourReviewer());
-        addBehaviour(new ReceiverBehaviour(this, -1, null, true, (a,m)->{
+        //add a behaviour that wait for messages
+        Behaviour bReception = new ReceiverBehaviour(this, -1, null, true, (a,m)->{
             message = m;
             println("---> I received a new content to evaluate: \"" + message.getContent() + "\"");
             println("click to send a random evaluation... ");
-            busy = true;
             window.setButtonActivated(true);
-        }));
+        });
+        addBehaviour(bReception);
         window.setButtonActivated(false);
     }
 
@@ -60,9 +58,8 @@ public class ReviewerAgent extends AgentWindowed {
             println("I send this evaluation %s with the key %s ".formatted(reply.getContent(), reply.getConversationId()));
             println("-".repeat(40));
             send(reply);
-            busy = false;
-            addBehaviour(new BehaviourReviewer());
             window.setButtonActivated(false);
+            message = null;
         }
     }
 
@@ -72,18 +69,4 @@ public class ReviewerAgent extends AgentWindowed {
         AgentServicesTools.deregisterAll(this);
     }
 
-    class BehaviourReviewer extends CyclicBehaviour {
-        @Override
-        public void action() {
-            if (!busy) {
-                message = receive();
-                if (message != null) {
-                    println("j'ai recu ce contenu � reviewer : " + message.getContent());
-                    println("cliquez pour envoyer une evaluation... ");
-                    busy = true;
-                    window.setButtonActivated(true);
-                } else block();
-            }
-        }
-    }
 }
