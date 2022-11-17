@@ -53,5 +53,5 @@ J:Reception <-- A:ReSubmission
 @enduml```
 -->
 
-<img src="fsmReview.png" alt="reseau v2" height="400"/>
+<img src="fsmReview.png" alt="reseau v2" height="500"/>
 
