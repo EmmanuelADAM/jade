@@ -74,7 +74,7 @@ _The following codes need, thus, this library and Java >= 17._
 
 - [helloWorldService](https://github.com/EmmanuelADAM/jade/tree/master/helloWorldService) : Codes for agents each 
   linked to a window. These agents discover each other by searching for services and send each other simple messages
-- [attenteServices](https://github.com/EmmanuelADAM/jade/tree/master/attenteServices) :  Some agents register to the 
+- [serviceDetection](https://github.com/EmmanuelADAM/jade/tree/master/serviceDetection) :  Some agents register to the 
   yellow pages (DF) for a given service; little by little.
   Another agent has subscribed to (DF) to be notified when an agent registers or unsubscribes from this service.
 

@@ -1,4 +1,4 @@
-package attenteServices.launch;
+package serviceDetection.launch;
 
 import jade.core.Profile;
 import jade.core.ProfileImpl;
@@ -14,9 +14,9 @@ public class LaunchAgents {
         // -- add a control/debug window
         prop.setProperty(Profile.GUI, "true");
         // -- add the agents
-        StringBuilder sb = new StringBuilder("a:radio.agents.ScribeAgent;");
+        StringBuilder sb = new StringBuilder("a:serviceDetection.agents.ScribeAgent;");
         for (int i = 1; i < 10; i++)
-            sb.append("sim").append(i).append(":attenteServices.agents.IncomingAgent;");
+            sb.append("sim").append(i).append(":serviceDetection.agents.IncomingAgent;");
         prop.setProperty(Profile.AGENTS, sb.toString());
         // create the jade profile
         ProfileImpl profMain = new ProfileImpl(prop);

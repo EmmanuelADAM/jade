@@ -4,10 +4,8 @@ import agencesVoyages.comportements.ContractNetVente;
 import agencesVoyages.data.Journey;
 import agencesVoyages.data.JourneysList;
 import agencesVoyages.launch.LaunchSimu;
-import com.opencsv.CSVReader;
 import jade.core.AID;
 import jade.core.AgentServicesTools;
-import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.ReceiverBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
@@ -17,8 +15,10 @@ import jade.gui.GuiEvent;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
-import java.io.FileReader;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.util.List;
 import java.util.logging.Level;
 
 /**
@@ -111,30 +111,35 @@ public class AgenceAgent extends GuiAgent {
      * @param file name of the cvs file
      */
     private void fromCSV2Catalog(final String file) {
-        try (var cvsReader = new CSVReader(new FileReader(file), ',', '\'', 1)) {
-            String[] nextLine;
-            while ((nextLine = cvsReader.readNext()) != null) {
-                String origine = nextLine[0].trim().toUpperCase();
-                String destination = nextLine[1].trim().toUpperCase();
-                String means = nextLine[2].trim();
-                int departureDate = Integer.parseInt(nextLine[3].trim());
-                int duration = Integer.parseInt(nextLine[4].trim());
-                double cost = Double.parseDouble(nextLine[5].trim());
-                int co2 = Integer.parseInt(nextLine[6].trim());
-                int confort = Integer.parseInt(nextLine[7].trim());
-                int nbRepetitions = (nextLine.length == 9) ? 0 : Integer.parseInt(nextLine[8].trim());
-                int frequence = (nbRepetitions == 0) ? 0 : Integer.parseInt(nextLine[9].trim());
-                Journey firstJourney = new Journey(origine, destination, means, departureDate, duration, cost,
-                        co2, confort);
-                firstJourney.setProposedBy(this.getLocalName());
-                window.println(firstJourney.toString());
-                catalog.addJourney(firstJourney);
-                if (nbRepetitions > 0) {
-                    repeatJourney(departureDate, nbRepetitions, frequence, firstJourney);
+        List<String> lines = null;
+        try {lines = Files.readAllLines(new File(file).toPath());}
+        catch (IOException e) {
+            window.println("fichier " + file + " non trouve !!!");
+        }
+        if(lines!=null)
+        {
+            int nbLines = lines.size();
+            for(int i=1; i<nbLines; i++){
+            String[] nextLine = lines.get(i).split(",");
+            String origine = nextLine[0].trim().toUpperCase();
+            String destination = nextLine[1].trim().toUpperCase();
+            String means = nextLine[2].trim();
+            int departureDate = Integer.parseInt(nextLine[3].trim());
+            int duration = Integer.parseInt(nextLine[4].trim());
+            double cost = Double.parseDouble(nextLine[5].trim());
+            int co2 = Integer.parseInt(nextLine[6].trim());
+            int confort = Integer.parseInt(nextLine[7].trim());
+            int nbRepetitions = (nextLine.length == 9) ? 0 : Integer.parseInt(nextLine[8].trim());
+            int frequence = (nbRepetitions == 0) ? 0 : Integer.parseInt(nextLine[9].trim());
+            Journey firstJourney = new Journey(origine, destination, means, departureDate, duration, cost,
+                    co2, confort);
+            firstJourney.setProposedBy(this.getLocalName());
+            window.println(firstJourney.toString());
+            catalog.addJourney(firstJourney);
+            if (nbRepetitions > 0) {
+                repeatJourney(departureDate, nbRepetitions, frequence, firstJourney);
                 }
             }
-        } catch (NumberFormatException | IOException e) {
-            window.println(e.getMessage());
         }
     }
 

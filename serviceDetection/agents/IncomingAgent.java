@@ -1,4 +1,4 @@
-package attenteServices.agents;
+package serviceDetection.agents;
 
 
 import jade.core.AID;
@@ -9,7 +9,7 @@ import jade.gui.AgentWindowed;
 import jade.gui.SimpleWindow4Agent;
 
 /**
- * agent lié à une fenêtre qui ecoute en boucle des messages sur un topic
+ * agent that register to a service in "some" time and display the message received
  *
  * @author eadam
  */
@@ -20,23 +20,29 @@ public class IncomingAgent extends AgentWindowed {
     protected void setup() {
         window = new SimpleWindow4Agent(getAID().getName(), this);
         println("Hello! Agent  " + getAID().getName() + " is ready. ");
-        AgentServicesTools.register(this, "unServiceQuelconque", "unTypedeService");
 
-        //s'inscrire au service de passage au bout de quelques temps
+        //regisration to any service
+        AgentServicesTools.register(this, "anyTypeOfService", "anyNameOfService");
+
+        //regisration to the service
         addBehaviour(new WakerBehaviour(this, (long)(Math.random()*10000d),
-                a->AgentServicesTools.register(a, "balladeur", "ouvert")));
+                a->AgentServicesTools.register(a, "traveller", "quiet")));
 
 
-        //ecoute cyclique de message sans limite de duree, de tout type, en continu
+        //Wait limitless(-1) for all message types(null), cyclically (true)
         addBehaviour(new ReceiverBehaviour(this, -1, null, true,
-                (a,msg)-> println("recu de " + msg.getSender().getLocalName() + ", ceci : \n" + msg.getContent() +
+                (a,msg)-> println("received ftom \"" + msg.getSender().getLocalName() + "\", ceci : \n" + msg.getContent() +
                         "\n" + "-".repeat(20))));
     }
 
+
+
+    /**deregister from all services when leaving*/
     @Override
     public void takeDown() {
         AgentServicesTools.deregisterAll(this);
-        System.err.println("moi " + this.getLocalName() + ", je quitte la plateforme...");
+        System.err.println("I'm leaving the platform...("+getLocalName()+")");
+        window.dispose();
     }
 
 

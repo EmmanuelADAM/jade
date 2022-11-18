@@ -2,6 +2,8 @@
 
 ## Exemple d'inscription à un service et d'utilisation des Pages Jaunes
 
+### Jade Agent-Oriented Programming Course Materials
+
 ---
 
 - [HelloAgent](https://github.com/EmmanuelADAM/jade/blob/english/HelloWorldService/agents/HelloAgent.java) : is a 
