@@ -1,4 +1,4 @@
-package testComportement;
+package behaviorTests;
 
 import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
@@ -21,8 +21,8 @@ public class AgentHelloSalut extends Agent {
     public static void main(String[] args) {
         String[] jadeArgs = new String[2];
         StringBuilder sbAgents = new StringBuilder();
-        sbAgents.append("a1:testComportement.AgentHelloSalut").append(";");
-        sbAgents.append("a2:testComportement.AgentHelloSalut").append(";");
+        sbAgents.append("a1:behaviorTests.AgentHelloSalut").append(";");
+        sbAgents.append("a2:behaviorTests.AgentHelloSalut").append(";");
         jadeArgs[0] = "-gui";
         jadeArgs[1] = sbAgents.toString();
         jade.Boot.main(jadeArgs);
@@ -35,13 +35,13 @@ public class AgentHelloSalut extends Agent {
     protected void setup() {
         out.println("Me, Agent " + getLocalName() + ", my address is " + getAID());
 
-        // add an "eternal" behavior which, on each pass, displays hello and pauses for at most 200 ms
+        // add an "eternal" behavior which, on each pass, displays hello and pauses for at most 300 ms
         //(should be replaced by cyclic behavior, see next behavior)
         addBehaviour(new Behaviour(this) {
             public void action() {
                 println("From agent " + getLocalName() + " : Hello everybody and especially you!");
-                //pause at most for 200ms, or less if the agent receives a message
-                block(200);
+                //pause at most for 300ms, or less if the agent receives a message
+                block(300);
             }
 
             /**this behavior never ends*/
@@ -50,11 +50,11 @@ public class AgentHelloSalut extends Agent {
             }
         });
 
-        // add a cyclic behavior that on each pass displays hi and pauses for 300ms
-        addBehaviour(new TickerBehaviour(this, 300, a->{println("From agent " + a.getLocalName() + " : Hi !!!");}));
+        // add a cyclic behavior that on each pass displays hi and pauses for 500ms
+        addBehaviour(new TickerBehaviour(this, 500, a->{println("From agent " + a.getLocalName() + " : Hi !!!");}));
 
-        // add a delayed behavior that demands the platform to remove the agent in 1000 ms
-        addBehaviour(new WakerBehaviour(this, 1000, a->{
+        // add a delayed behavior that demands the platform to remove the agent in 2000 ms
+        addBehaviour(new WakerBehaviour(this, 2000, a->{
             out.println("From agent " + a.getLocalName() + " : well, I'm leaving...");
             a.doDelete();
         }));

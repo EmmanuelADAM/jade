@@ -4,11 +4,11 @@
 
 ---
 
-- [AgentHelloSalut](https://github.com/EmmanuelADAM/jade/blob/english/testComportement/AgentHelloSalut.java) : code for an 
+- [AgentHelloSalut](https://github.com/EmmanuelADAM/jade/blob/english/behaviorTests/AgentHelloSalut.java) : code for an 
   agent that owns 3 behaviors:
-    - a behavior displaying "hello" every 200ms, endlessly
-    - a cyclic behavior with activation every 300ms
-    - a delayed behavior causing the removal of the agent after 1000ms
+    - a behavior displaying "hello" every 300ms, endlessly
+    - a cyclic behavior with activation every 500ms
+    - a delayed behavior causing the removal of the agent after 2000ms
     - initially, 2 agents are launched.
 <!--
 ```
@@ -21,20 +21,20 @@ if (activatable behavior ?) then ([select next behavior])
     partition "Behaviour" {
       partition "action" {
           ::display "Hello everybody";
-          :pause 200ms;
+          :pause 300ms;
       }
       partition "done" {
           :return False;
       }
     }
     fork again
-    partition "CyclicBehaviour: each 300ms" {
+    partition "CyclicBehaviour: each 500ms" {
       partition "onTick" {
           ::display "Hi !";
       }
     }
     fork again
-    partition "WakerBehaviour: in 1000ms" {
+    partition "WakerBehaviour: in 2000ms" {
       partition "onWake" {
           ::delete Agent;
       }
@@ -50,7 +50,7 @@ stop
 
 ![](helloSalut.png)
 
-- [AgentHelloEuropeenParallel](https://github.com/EmmanuelADAM/jade/blob/english/testComportement/AgentHelloEuropeenParallel.java) :
+- [AgentHelloEuropeenParallel](https://github.com/EmmanuelADAM/jade/blob/english/behaviorTests/AgentHelloEuropeenParallel.java) :
   code that launches 2 agents that owns behaviors executing in **parallel**. These behaviors can be activated 3 
   times and display greetings in European languages..
 - The results shown that JADE share ressources between agents and their behaviors receive the same priority.
@@ -142,7 +142,7 @@ a2 -> buenos dias (2/3)
 ...
 ```
 
-- [AgentHelloEuropeenSequentiel](https://github.com/EmmanuelADAM/jade/blob/english/testComportement/AgentHelloEuropeenSequentiel.java) :
+- [AgentHelloEuropeenSequentiel](https://github.com/EmmanuelADAM/jade/blob/english/behaviorTests/AgentHelloEuropeenSequentiel.java) :
   code that launches 2 agents that owns behaviors executing in **sequence**. These behaviors can be activated 3
   times and display greetings in European languages..
 - The results shown that JADE share ressources between agents and their behaviors receive the same priority. This time, for each agent, the same behavior is called until it completes, with the other behaviors executing in the order of their declarations.

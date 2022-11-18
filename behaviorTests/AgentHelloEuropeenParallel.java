@@ -1,4 +1,4 @@
-package testComportement;
+package behaviorTests;
 
 import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
@@ -22,8 +22,8 @@ public class AgentHelloEuropeenParallel extends Agent {
     public static void main(String[] args) {
         String[] jadeArgs = new String[2];
         StringBuilder sbAgents = new StringBuilder();
-        sbAgents.append("a1:testComportement.AgentHelloEuropeenParallel").append(";");
-        sbAgents.append("a2:testComportement.AgentHelloEuropeenParallel").append(";");
+        sbAgents.append("a1:behaviorTests.AgentHelloEuropeenParallel").append(";");
+        sbAgents.append("a2:behaviorTests.AgentHelloEuropeenParallel").append(";");
         jadeArgs[0] = "-gui";
         jadeArgs[1] = sbAgents.toString();
         jade.Boot.main(jadeArgs);

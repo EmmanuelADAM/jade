@@ -5,15 +5,22 @@ platform. Materials for Jade Tutorial : communication, protocols, votes, service
 
 [(version web)](https://emmanueladam.github.io/jade/)
 
-Set of source code or the course/tutorial about multiagent programming with the JADE platform. 
+Set of source codes for the course/tutorial on multi-agent programming with the JADE platform. 
 
 To run these codes, it is necessary to import the library "[JadeUPHF.jar](https://github.com/EmmanuelADAM/JadeUPHF/blob/master/JadeUPHF.jar)". 
-This library is a update, with JAVA 17, of the last official version of  [Jade]
+This library is an update, with JAVA 17, of the last official version of  [Jade]
 (https://jade.tilab.com) of Tilab and add functionalities to easier the implementation of agents.
 
-The source code of these new version, the library and notes about it are accessible from here : [JadeUPHF](https://emmanueladam.github.io/JadeUPHF/)".
+The source of this new version, the library and notes, can be accessed from here : [JadeUPHF](https://emmanueladam.github.io/JadeUPHF/)".
 
 _The following codes need, thus, this library and Java >= 17._
+
+><small>*NB. if you get this error in your prefered IDE while launching an example :*
+>>*SEVERE: Communication failure while joining agent platform: No ICP active*
+> 
+>*The reason is that you have not closed the previous jade instance. Completely stop/close a jade run before 
+> launching another one*</small>
+
 
 ----
 
@@ -30,11 +37,11 @@ _The following codes need, thus, this library and Java >= 17._
 ### Agents with behaviors
 
 - Add simple behaviors to an agent, examples
-    - [AgentHelloSalut](https://github.com/EmmanuelADAM/jade/tree/english/testComportement) : code for an agent with 
+    - [AgentHelloSalut](https://github.com/EmmanuelADAM/jade/tree/english/behaviorTests) : code for an agent with 
       simple behaviors
-    - [AgentHelloEuropeenSequentiel](https://github.com/EmmanuelADAM/jade/tree/english/testComportement) : code pour deux
+    - [AgentHelloEuropeenSequentiel](https://github.com/EmmanuelADAM/jade/tree/english/behaviorTests) : code pour deux
       agents dotés de comportements simples s'exécutant séquentiellement
-    - [AgentHelloEuropeenParallel](https://github.com/EmmanuelADAM/jade/tree/english/testComportement) : code pour deux
+    - [AgentHelloEuropeenParallel](https://github.com/EmmanuelADAM/jade/tree/english/behaviorTests) : code pour deux
       agents dotés de comportements simples s'exécutant en parallèle
 
 ### Communicating Agents
