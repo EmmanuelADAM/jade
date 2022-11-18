@@ -3,6 +3,8 @@
 # Programmation d'agents en Jade
 
 [(version web)](https://emmanueladam.github.io/jade/)
+[(english version)](https://github.com/EmmanuelADAM/jade/tree/english/)
+
 
 Liste de supports pour le cours de programmation orientée agent en JADE. 
 Pour l'ensemble de ces codes, il est nécessaire de disposer dans vos projet de la librairie "[JadeUPHF.jar](https://github.com/EmmanuelADAM/JadeUPHF/blob/master/JadeUPHF.jar)". 
@@ -11,6 +13,15 @@ com) de Tilab et y ajoute des fonctionnalités pour un codage simplifié.
 Le code de cette nouvelle version et les notes de version sont accessibles ici : [JadeUPHF](https://emmanueladam.github.io/JadeUPHF/)".
 
 Les codes suivants nécessitent donc cette librairie ainsi que Java 17 ou supérieur.
+
+<small>
+
+> *NB. Si vous rencontrez cette erreur en lançant les sources dans votre IDE préféré :* <br>
+>> SEVERE: Communication failure while joining agent platform: No ICP active
+> 
+> *La raison est qu'une insstance de JADE est encore active. Fermez complètement toute instance de JADE avant 
+> d'en lancer une nouvelle*
+</small>
 
 ----
 
@@ -47,12 +58,16 @@ Les codes suivants nécessitent donc cette librairie ainsi que Java 17 ou supér
   types différents ; un agent les reçoit et les traite différemment selon leurs types. L'agent "decompte" envoie des
   msgs "tictac" taggés "CLOCK" toutes les secondes, puis un msg taggé "BOOM" au bout de 10s à l'agent "agentPiege"
 
+----
+
 ## Agents interactifs et communicants
 
 - Utilisation d'une petite interface graphique pour faciliter le dialogue avec l'utilisateur
     - [fenetre](https://github.com/EmmanuelADAM/jade/tree/master/fenetre) : codes pour des agents liés à des fenêtres
     - [radio](https://github.com/EmmanuelADAM/jade/tree/master/radio) : codes qui illustrent la communication par
       broadcast. Un agent ne cible plus des destinataires, mais un canal qu'écoutent d'autres agents
+
+----
 
 ## Agents avec comportements de type FSM
 
@@ -61,6 +76,8 @@ Deux exemples sont donnés :
   - [salutations](https://github.com/EmmanuelADAM/jade/tree/master/fsm/salutations) : enchaînements de comportement de salutations européennes au sein d'un agent,
   - [review](https://github.com/EmmanuelADAM/jade/tree/master/fsm/review) : processus de soumission et de review d'un article entre un agent auteur, un agent journal et trois agents reviewers
 
+----
+
 ## Gestion de services : déclaration et recherche
 
 - [helloWorldService](https://github.com/EmmanuelADAM/jade/tree/master/helloWorldService) : codes pour des agents liés
@@ -68,6 +85,8 @@ Deux exemples sont donnés :
 - [attenteServices](https://github.com/EmmanuelADAM/jade/tree/master/attenteServices) : codes pour des agents liés
   chacun à une fenêtre. Des agents se déclarent auprès des pages jaunes pour un service donné. 
   Un agent a demandé aux pages jaunes (DF) d'être averti en cas d'inscription/desinsciption à ce service.
+
+----
 
 ## Protocoles d'interactions entre agents
 
@@ -86,6 +105,8 @@ Deux exemples sont donnés :
   tour.
 - [Negociation](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/negociation) : codes à compléter 
   pour coder la négociation 1-1.
+
+----
 
 ## Exemple complet, support à développements :
 
