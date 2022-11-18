@@ -3,7 +3,8 @@ platform. Materials for Jade Tutorial : communication, protocols, votes, service
 
 # Programming agents in Jade
 
-[(version web)](https://emmanueladam.github.io/jade/)
+[(web version)](https://emmanueladam.github.io/jade/)
+[(french version)](https://github.com/EmmanuelADAM/jade/tree/master/)
 
 Set of source codes for the course/tutorial on multi-agent programming with the JADE platform. 
 
