@@ -19,7 +19,7 @@
 - [LaunchAgents](https://https://github.com/EmmanuelADAM/jade/blob/english/helloWorldService/launch/LaunchAgents.java)
   : **main class**, launch Jade et creates the agents
 
-- At launch, 10 agents are launched, the number is not limited except by the capacity of the machine. 
+- At launch, 10 agents are created, the number is not limited except by the capacity of the machine. 
 
 Here are an example of msg exchanged between the agents:
 

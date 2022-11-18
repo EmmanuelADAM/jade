@@ -78,6 +78,7 @@ _The following codes need, thus, this library and Java >= 17._
   yellow pages (DF) for a given service; little by little.
   Another agent has subscribed to (DF) to be notified when an agent registers or unsubscribes from this service.
 
+---
 ## Protocoles d'interactions entre agents
 
 - [Requete](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/requetes) : codes illustrant la communication
