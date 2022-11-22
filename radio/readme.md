@@ -3,6 +3,10 @@
 ## Example of information dissemination by broadcast
 
 ---
+### Jade Agent-Oriented Programming Course Materials
+
+
+---
 
 - [BroadcasterAgent](https://github.com/EmmanuelADAM/jade/blob/english/radio/agents/BroadcasterAgent.java) : class for an 
   agent who broadcasts information on a radio channel

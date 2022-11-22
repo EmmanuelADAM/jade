@@ -1,6 +1,9 @@
-# Jade : Agents
+# Jade : Agents and behaviors
 
-## Exemple de comportements sur un agent "Hello World"
+## FMS normal, sequential and parallel behaviors
+
+---
+### Jade Agent-Oriented Programming Course Materials
 
 ---
 

@@ -89,20 +89,21 @@ _The following codes need, thus, this library and Java >= 17._
 ---
 ## Protocoles d'interactions entre agents
 
-- [Requete](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/requetes) : codes illustrant la communication
-  entre agents par le protocole AchieveRE.
-- [Enchere](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/anglaisesscellees) : codes illustrant la
+- [Requests](https://github.com/EmmanuelADAM/jade/tree/english/protocols/requests) : codes for communication of 
+  requests using the AchieveRE protocol.
+- *(the following codes will be translated soon)*
+- [Enchere](https://github.com/EmmanuelADAM/jade/tree/english/protocols/anglaisesscellees) : codes illustrant la
   communication entre agents par le protocole ContractNet pour une enchère anglaise à un tour (simple appel d'offres).
-- [Enchere de Vickrey](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/vickrey) : codes 
+- [Enchere de Vickrey](https://github.com/EmmanuelADAM/jade/tree/english/protocols/vickrey) : codes 
   illustrant la communication entre agents par le protocole ContractNet pour une enchère de Vickrey.
-- [Vote Borda](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/voteBorda) : codes illustrant la
+- [Vote Borda](https://github.com/EmmanuelADAM/jade/tree/english/protocols/voteBorda) : codes illustrant la
   communication entre agents par le protocole ContractNet pour un vote de Borda.
-- [Vote DoubleBorda](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/voteDoubleBorda) : codes illustrant la
+- [Vote DoubleBorda](https://github.com/EmmanuelADAM/jade/tree/english/protocols/voteDoubleBorda) : codes illustrant la
   communication entre agents par le protocole ContractNet pour un vote de Borda augmenté pour être effectué en 1 tour.
-- [Vote Condorcet](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/voteCondorcet) : codes illustrant la 
+- [Vote Condorcet](https://github.com/EmmanuelADAM/jade/tree/english/protocols/voteCondorcet) : codes illustrant la 
   communication entre agents par le protocole ContractNet pour un vote de Condorcet augmenté pour être effectué en 1 
   tour.
-- [Negociation](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/negociation) : codes à compléter 
+- [Negociation](https://github.com/EmmanuelADAM/jade/tree/english/protocols/negociation) : codes à compléter 
   pour coder la négociation 1-1.
 
 ## Exemple complet, support à développements :
