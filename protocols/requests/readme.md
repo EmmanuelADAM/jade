@@ -12,7 +12,7 @@
 Here you will find an example of communication via the [FIPA Request Interaction](http://www.fipa.org/specs/fipa00026/SC00026H.html) protocol.
 
 - A 
-[AgentRequestSender](https://github.com/EmmanuelADAM/jade/blob/english/protocoles/requests/agents/AgentRequestSender.java)
+[AgentRequestSender](https://github.com/EmmanuelADAM/jade/blob/english/protocols/requests/agents/AgentRequestSender.java)
   agent (a sum : "34+12+45" for example)
 sends a requests to  [AgentRequestResponder](https://github.com/EmmanuelADAM/jade/blob/english/protocols/requests/agents/AgentRequestResponder.java) agents that agree to answer 
   or refuse.
