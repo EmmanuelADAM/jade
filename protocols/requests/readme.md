@@ -11,10 +11,10 @@
 
 Here you will find an example of communication via the [FIPA Request Interaction](http://www.fipa.org/specs/fipa00026/SC00026H.html) protocol.
 
-- A 
+- An 
 [AgentRequestSender](https://github.com/EmmanuelADAM/jade/blob/english/protocols/requests/agents/AgentRequestSender.java)
-  agent (a sum : "34+12+45" for example)
-sends a requests to  [AgentRequestResponder](https://github.com/EmmanuelADAM/jade/blob/english/protocols/requests/agents/AgentRequestResponder.java) agents that agree to answer 
+  agent
+sends a requests  (a sum : "34+12+45" for example) to  [AgentRequestResponder](https://github.com/EmmanuelADAM/jade/blob/english/protocols/requests/agents/AgentRequestResponder.java) agents that agree to answer 
   or refuse.
 - The AchieveRE  protocol obliges the recipients to respond (refusal, error, agreement) and to inform of a result 
   in case of agreement.
