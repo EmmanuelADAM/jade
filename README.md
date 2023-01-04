@@ -16,10 +16,10 @@ The source of this new version, the library and notes, can be accessed from here
 
 _The following codes need, thus, this library and Java >= 17._
 
-><small>*NB. if you get this error in your prefered IDE while launching an example :*
->>*SEVERE: Communication failure while joining agent platform: No ICP active*
+><small>*NB. if you get this error in your prefered IDE while launching an example :*</small>
+>><small>*SEVERE: Communication failure while joining agent platform: No ICP active*</small>
 > 
->*The reason is that you have not closed the previous jade instance. Completely stop/close a jade run before 
+><small>*The reason is that you have not closed the previous jade instance. Completely stop/close a jade run before 
 > launching another one*</small>
 
 
@@ -60,12 +60,21 @@ _The following codes need, thus, this library and Java >= 17._
 
 ---
 
-## Interactive and communicative agents
+## Interactive agents
 
 - Use of a small graphical interface to facilitate dialogue with the user
     - [window](https://github.com/EmmanuelADAM/jade/tree/english/window) : codes for agents linked to windows
     - [radio](https://github.com/EmmanuelADAM/jade/tree/english/radio) : codes that illustrate broadcast 
       communication. An agent no longer targets recipients, but a channel that other agents are listening to
+
+---
+## Service Management
+
+- [helloWorldService](https://github.com/EmmanuelADAM/jade/tree/english/helloWorldService) : Codes for agents each
+  linked to a window. These agents discover each other by searching for services and send each other simple messages
+- [serviceDetection](https://github.com/EmmanuelADAM/jade/tree/english/serviceDetection) :  Some agents register to the
+  yellow pages (DF) for a given service; little by little.
+  Another agent has subscribed to (DF) to be notified when an agent registers or unsubscribes from this service.
 
 ---
 ## Agents with FSM behaviors
@@ -77,32 +86,25 @@ _The following codes need, thus, this library and Java >= 17._
   - [review](https://github.com/EmmanuelADAM/jade/tree/english/fsm/review) : process of submitting and reviewing an 
     article between an author agent, a journal agent and three reviewer agents
 
----
-## Service Management: Reporting and Research
-
-- [helloWorldService](https://github.com/EmmanuelADAM/jade/tree/english/helloWorldService) : Codes for agents each 
-  linked to a window. These agents discover each other by searching for services and send each other simple messages
-- [serviceDetection](https://github.com/EmmanuelADAM/jade/tree/english/serviceDetection) :  Some agents register to the 
-  yellow pages (DF) for a given service; little by little.
-  Another agent has subscribed to (DF) to be notified when an agent registers or unsubscribes from this service.
 
 ---
-## Protocoles d'interactions entre agents
+## Interaction protocols
 
-- [Requete](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/requetes) : codes illustrant la communication
-  entre agents par le protocole AchieveRE.
-- [Enchere](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/anglaisesscellees) : codes illustrant la
-  communication entre agents par le protocole ContractNet pour une enchère anglaise à un tour (simple appel d'offres).
-- [Enchere de Vickrey](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/vickrey) : codes 
+- [Requests](https://github.com/EmmanuelADAM/jade/tree/english/protocols/requests) : codes for communication of 
+  requests using the AchieveRE protocol.
+- *<yellow>(the following codes will be translated soon)*</yellow>
+- [English Auction](https://github.com/EmmanuelADAM/jade/tree/english/protocols/sealedEnglishAuction): codes 
+  using the  communication protocol ContractNet to simulate a sealed english auction (1 round).
+- [Enchere de Vickrey](https://github.com/EmmanuelADAM/jade/tree/english/protocols/vickrey) : codes 
   illustrant la communication entre agents par le protocole ContractNet pour une enchère de Vickrey.
-- [Vote Borda](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/voteBorda) : codes illustrant la
+- [Vote Borda](https://github.com/EmmanuelADAM/jade/tree/english/protocols/voteBorda) : codes illustrant la
   communication entre agents par le protocole ContractNet pour un vote de Borda.
-- [Vote DoubleBorda](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/voteDoubleBorda) : codes illustrant la
+- [Vote DoubleBorda](https://github.com/EmmanuelADAM/jade/tree/english/protocols/voteDoubleBorda) : codes illustrant la
   communication entre agents par le protocole ContractNet pour un vote de Borda augmenté pour être effectué en 1 tour.
-- [Vote Condorcet](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/voteCondorcet) : codes illustrant la 
+- [Vote Condorcet](https://github.com/EmmanuelADAM/jade/tree/english/protocols/voteCondorcet) : codes illustrant la 
   communication entre agents par le protocole ContractNet pour un vote de Condorcet augmenté pour être effectué en 1 
   tour.
-- [Negociation](https://github.com/EmmanuelADAM/jade/tree/master/protocoles/negociation) : codes à compléter 
+- [Negociation](https://github.com/EmmanuelADAM/jade/tree/english/protocols/negociation) : codes à compléter 
   pour coder la négociation 1-1.
 
 ## Exemple complet, support à développements :
