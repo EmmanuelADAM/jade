@@ -14,35 +14,22 @@ import java.util.Properties;
 import static java.lang.System.out;
 
 /**
- * Agent class to allows exchange of messages between an agent named ping, that initiates the 'dialog', and an agent
+ * Agent class to allow exchange of messages between an agent named ping, that initiates the 'dialog', and an agent
  * named 'pong'
  *
  * @author emmanueladam
  */
 public class AgentPingPong extends Agent {
-    public static void main(String[] args) {
-        // prepare argument for the JADE container
-        Properties prop = new ExtendedProperties();
-        // display a control/debug window
-        prop.setProperty(Profile.GUI, "true");
-        // declare the agents
-        prop.setProperty(Profile.AGENTS, "ping:pingPong.AgentPingPong;pong:pingPong.AgentPingPong");
-        // create the ain container
-        ProfileImpl profMain = new ProfileImpl(prop);
-        // launch it !
-        Runtime rt = Runtime.instance();
-        rt.createMainContainer(profMain);
-    }
 
     /**
-     * Initialisation de l'agent
+     * agent setup, adds its behaviours
      */
     @Override
     protected void setup() {
 
         println(getLocalName() + " -> Hello, my address is " + getAID());
-        // si l'agent s'appelle ping,
-        // ajout d'un comportement qui enverra le texte 'balle' à l'agent pong dans 10 secondes
+        // if the agent names "ping"
+        // add a behaviour that will send the first "ball" msg in 10 sec. to "pong" agent
         if (getLocalName().equals("ping")) {
             long temps = 10000;
             out.println(getLocalName() + " -> I start in" + temps + " ms");
@@ -61,7 +48,7 @@ public class AgentPingPong extends Agent {
         var modele = MessageTemplate.and(
                 MessageTemplate.MatchConversationId("SPORT"),
                 MessageTemplate.MatchPerformative(ACLMessage.INFORM));
-        // add a behavior, with 20 iterations, tha wait for a 'INFORM' msg about 'SPORT' and replies to it after 300ms
+        // add a behavior, with 20 iterations, that wait for a 'INFORM' msg about 'SPORT' and replies to it after 300ms
         addBehaviour(new Behaviour(this) {
             int step = 0;
 
@@ -87,15 +74,29 @@ public class AgentPingPong extends Agent {
         });
 
         var modele2 = MessageTemplate.MatchPerformative(ACLMessage.FAILURE);
-        // ajout d'un comportement à 30 itérations qui attend un msg contenant la balle et la retourne à l'envoyeur après 300ms
+        // add a behaviour that wait for an eventual failure msg
         addBehaviour(new ReceiverBehaviour(this,  -1, modele2,true, (a, msg) ->
             println(getLocalName() + " -> I received an error msg from " + msg.getSender().getLocalName() + " : " + msg.getContent())
         ));
     }
 
-    // 'Nettoyage' de l'agent
+    /**I inform the user when I leave the platform*/
     @Override
     protected void takeDown() {
         out.println(getLocalName() + " -> I leave the plateform ! ");
+    }
+
+    public static void main(String[] args) {
+        // prepare argument for the JADE container
+        Properties prop = new ExtendedProperties();
+        // display a control/debug window
+        prop.setProperty(Profile.GUI, "true");
+        // declare the agents
+        prop.setProperty(Profile.AGENTS, "ping:pingPong.AgentPingPong;pong:pingPong.AgentPingPong");
+        // create the ain container
+        ProfileImpl profMain = new ProfileImpl(prop);
+        // launch it !
+        Runtime rt = Runtime.instance();
+        rt.createMainContainer(profMain);
     }
 }

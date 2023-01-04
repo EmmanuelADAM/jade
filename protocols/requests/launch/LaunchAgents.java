@@ -9,19 +9,19 @@ import java.util.Properties;
 
 public class LaunchAgents {
     public static void main(String[] args) {
-        // preparer les arguments pout le conteneur JADE
+        // prepare arguments for the Jade container
         Properties prop = new ExtendedProperties();
-        // demander la fenetre de controle
+        // -- add a control/debug window
         prop.setProperty(Profile.GUI, "true");
-        // nommer les agents
+        // -- add the agents
         StringBuilder sb = new StringBuilder("a:protocols.requests.agents.AgentRequestSender;");
         String typeAgent = ":protocols.requests.agents.AgentRequestResponder;";
         for (int i = 0; i < 10; i++)
             sb.append((char) (98 + i)).append(typeAgent);
         prop.setProperty(Profile.AGENTS, sb.toString());
-        // creer le profile pour le conteneur principal
+        // create the jade profile
         ProfileImpl profMain = new ProfileImpl(prop);
-        // lancer le conteneur principal
+        // launch the main jade container
         Runtime rt = Runtime.instance();
         rt.createMainContainer(profMain);
     }

@@ -7,6 +7,7 @@ import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.ReceiverBehaviour;
 import jade.core.behaviours.WakerBehaviour;
 import jade.lang.acl.ACLMessage;
+import jade.lang.acl.MessageTemplate;
 import jade.util.ExtendedProperties;
 
 import java.util.Properties;
@@ -14,72 +15,63 @@ import java.util.Properties;
 import static java.lang.System.out;
 
 /**
- * classe d'agent pour échange entre 2 agents de cette classe. l'un s'appelle ping et initie un échange avec l'agent pong.
- *
+ * Agent class to allow exchange of messages between an agent named ping, that initiates the 'dialog', and an agent
+ * named 'tzoing'; the problem being that this agent doesn't exist *
  * @author emmanueladam
  */
 public class AgentPingPlouf extends Agent {
 
     /**
-     * Initialisation de l'agent
-     */
+     * agent setup, adds its behaviours
+     * */
     @Override
     protected void setup() {
-        String texteHello = "Bonjour a toutezetatousse";
-        println("De l'agent " + getLocalName() + " : " + texteHello);
-        println("Mon adresse est " + getAID());
+        println(getLocalName() + " -> Hello, my address is " + getAID());
 
-        println("J'envoie un message a une mauvaise adresse. ");
-        println("En multiagent, ca ne plante pas..  ");
-        println("Mais si je veux, je peux etre a l'ecoute de l'agent AMS pour verifier s'il n'y a pas d'erreur d'adressage  ");
-
-        println("Envoie dans 15 seconde....");
-
-        //envoi d'un message a un agent n'existant pas dans 1 seconde
-        addBehaviour(new WakerBehaviour(this, 15000){
-            @Override
-            public void onWake() {
-                // envoie du texte 'texteHello' à l'agent tzoing
-                String nameOther = "tzoing";
-                println("agent " + getLocalName() + " : j'envoie un message a " + nameOther);
-                var msg = new ACLMessage(ACLMessage.INFORM);
-                msg.addReceiver("tzoing");
-                msg.setContent(texteHello);
-                send(msg);
-            }});
-
-        // ajout d'un comportement qui attend des messages et les affiche le cas échéant
-        addBehaviour(new CyclicBehaviour(this){
-            @Override
-            public void action() {
-                ACLMessage msg = receive();
-                if(msg != null) {
-                    println("j'ai recu ceci de la part de " + msg.getSender().getLocalName() + " : ");
-                    println(msg.toString());
-                    println("je suis donc au courant par les pages blanches du mauvais adressage ....");
+        // if the agent names "ping"
+        // add a behaviour that will send the first "ball" msg in 10 sec. to "pong" agent that doesn't exist
+        if (getLocalName().equals("ping")) {
+            println(getLocalName() + " -> I send a message to a bad address. ");
+            println(getLocalName() + " -> In good multiagent platform, there is no crash..  ");
+            println(getLocalName() + " -> I can listen if the AMS agent inform me about an eventual problem.");
+            long temps = 15000;
+            out.println(getLocalName() + " -> I start in " + temps + " ms");
+            addBehaviour(new WakerBehaviour(this, temps) {
+                protected void onWake() {
+                    var msg = new ACLMessage(ACLMessage.INFORM);
+                    msg.addReceiver("tzoing"); //BAD AGENT NAME
+                    msg.setContent("ball");
+                    myAgent.send(msg);
+                    println(getLocalName() + " -> I launch the ball to tzoing.");
                 }
-                else block();
-            }
-        });
+            });
+        }
+
+
+        // add a behaviour that wait for an eventual failure msg
+        var failureMsgTemplate = MessageTemplate.MatchPerformative(ACLMessage.FAILURE);
+        addBehaviour(new ReceiverBehaviour(this,  -1, failureMsgTemplate,true, (a, msg) ->
+                println(getLocalName() + " -> I received an error msg from " + msg.getSender().getLocalName() + " : " + msg.getContent())
+        ));
 
     }
 
-    // 'Nettoyage' de l'agent
+    /**I inform the user when I leave the platform*/
     @Override
     protected void takeDown() {
         println("Moi, Agent " + getLocalName() + " je quitte la plateforme ! ");
     }
 
     public static void main(String[] args) {
-        // preparer les arguments pout le conteneur JADE
+        // prepare argument for the JADE container
         Properties prop = new ExtendedProperties();
-        // demander la fenetre de controle
+        // display a control/debug window
         prop.setProperty(Profile.GUI, "true");
-        // nommer les agents
-        prop.setProperty(Profile.AGENTS, "ping:pingPlouf.AgentPingPlouf");
-        // creer le profile pour le conteneur principal
+        // declare the agents
+        prop.setProperty(Profile.AGENTS, "ping:pingPlouf.AgentPingPlouf;pong:pingPlouf.AgentPingPlouf");
+        // create the ain container
         ProfileImpl profMain = new ProfileImpl(prop);
-        // lancer le conteneur principal
+        // launch it !
         Runtime rt = Runtime.instance();
         rt.createMainContainer(profMain);
     }
