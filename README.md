@@ -93,7 +93,7 @@ _The following codes need, thus, this library and Java >= 17._
 - [Requests](https://github.com/EmmanuelADAM/jade/tree/english/protocols/requests) : codes for communication of 
   requests using the AchieveRE protocol.
 - *<yellow>(the following codes will be translated soon)*</yellow>
-- [English Auction](https://github.com/EmmanuelADAM/jade/tree/english/protocols/sealedEnglishAuction]): codes 
+- [English Auction](https://github.com/EmmanuelADAM/jade/tree/english/protocols/sealedEnglishAuction): codes 
   using the  communication protocol ContractNet to simulate a sealed english auction (1 round).
 - [Enchere de Vickrey](https://github.com/EmmanuelADAM/jade/tree/english/protocols/vickrey) : codes 
   illustrant la communication entre agents par le protocole ContractNet pour une enchère de Vickrey.
