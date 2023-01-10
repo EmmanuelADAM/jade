@@ -10,8 +10,7 @@
 
 --- 
 
-Here, you can find an example of communication through the well known Contract-Net protocol [FIPA Contract Net]
-(http://www.fipa.org/specs/fipa00029/SC00029H.html).
+Here, you can find an example of communication through the well known Contract-Net protocol [FIPA Contract Net](http://www.fipa.org/specs/fipa00029/SC00029H.html).
 A ``first-price sealed-bid'' is an english auction with only 1 round; it is in fact just a simple call for proposal.
 The participant who proposed the most interesting offer wins the auction.<br>
 It is up to you to define what a "best" proposition is.

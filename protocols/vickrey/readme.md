@@ -1,8 +1,9 @@
-# Jade : Agents, protocole et services
+# Jade : Agents and protocols
 
-## Exemple : FIPA Contract Net Protocole en Jade
+##  FIPA Contract-Net Protocol example
 
-### Utilisation pour une enchère
+---
+### Jade Agent-Oriented Programming Course Materials
 
 ---
 

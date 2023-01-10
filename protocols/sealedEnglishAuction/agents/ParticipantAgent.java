@@ -46,17 +46,17 @@ public class ParticipantAgent extends AgentWindowed {
                 ACLMessage reponse = cfp.createReply();
                 println("'%s' proposes the object '%s' for bidding...".formatted(cfp.getSender().getLocalName(),
                         cfp.getContent()));
-                int offre = hasard.nextInt(0, 100);
-                //ici l'agent refuse 1 fois sur 3 (lorsque la valeur aleatoire offre est < a 33)
-                if (offre < 33) {
+                int offer = hasard.nextInt(0, 100);
+                //here, the agent refuses to bid 1 times on 3 (when the random offer<33)
+                if (offer < 33) {
                     window.setBackgroundTextColor(Color.LIGHT_GRAY);
                     println("I decide to not bid for this object.");
                     reponse.setPerformative(ACLMessage.REFUSE);
                 } else {
-                    println(String.format("I propose %d to buy '%s' to the agent : '%s'", offre, cfp.getContent(),
+                    println(String.format("I propose %d to buy '%s' to the agent : '%s'", offer, cfp.getContent(),
                             cfp.getSender().getLocalName()));
                     reponse.setPerformative(ACLMessage.PROPOSE);
-                    reponse.setContent(String.valueOf(offre));
+                    reponse.setContent(String.valueOf(offer));
                 }
                 println("-".repeat(30));
                 return reponse;
@@ -84,10 +84,10 @@ public class ParticipantAgent extends AgentWindowed {
                 return msg;
             }
 
-            //function triggered by a ACCEPT_PROPOSAL msg : the auctioneer accept my offer
+            //function triggered by a REJECT_PROPOSAL msg : the auctioneer rejected my offer
             //@param cfp : the initial cfp message
             //@param propose : the proposal I sent
-            //@param accept : the acceptation sent by the auctioneer
+            //@param accept : the reject sent by the auctioneer
             @Override
             protected void handleRejectProposal(ACLMessage cfp, ACLMessage propose, ACLMessage reject) {
                 window.setBackgroundTextColor(Color.RED);
@@ -112,7 +112,7 @@ public class ParticipantAgent extends AgentWindowed {
     public void takeDown() {
         //before leaving, the agent unsubscribe from its services
         AgentServicesTools.deregisterAll(this);
-        System.err.println("moi " + this.getLocalName() + ", je quitte la plateforme...");
+        System.err.println(this.getLocalName() + ", I leave the platform...");
     }
 
 }

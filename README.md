@@ -92,13 +92,11 @@ _The following codes need, thus, this library and Java >= 17._
 
 - [Requests](https://github.com/EmmanuelADAM/jade/tree/english/protocols/requests) : codes for communication of 
   requests using the AchieveRE protocol.
-- *<yellow>(the following codes will be translated soon)*</yellow>
 - [English Auction](https://github.com/EmmanuelADAM/jade/tree/english/protocols/sealedEnglishAuction): codes 
   using the  communication protocol ContractNet to simulate a sealed english auction (1 round).
-- [Enchere de Vickrey](https://github.com/EmmanuelADAM/jade/tree/english/protocols/vickrey) : codes 
-  illustrant la communication entre agents par le protocole ContractNet pour une enchère de Vickrey.
-- [Vote Borda](https://github.com/EmmanuelADAM/jade/tree/english/protocols/voteBorda) : codes illustrant la
-  communication entre agents par le protocole ContractNet pour un vote de Borda.
+- [Vote Borda](https://github.com/EmmanuelADAM/jade/tree/english/protocols/bordaCount) : codes illustrating 
+  communication between agents by the ContractNet protocol for vote by Borda count.
+- *<yellow>(the following codes will be translated soon)*</yellow>
 - [Vote DoubleBorda](https://github.com/EmmanuelADAM/jade/tree/english/protocols/voteDoubleBorda) : codes illustrant la
   communication entre agents par le protocole ContractNet pour un vote de Borda augmenté pour être effectué en 1 tour.
 - [Vote Condorcet](https://github.com/EmmanuelADAM/jade/tree/english/protocols/voteCondorcet) : codes illustrant la 

@@ -1,4 +1,4 @@
-package protocols.voteBorda.agents;
+package protocols.bordaCount.agents;
 
 
 import jade.core.AID;
@@ -16,14 +16,14 @@ import java.util.List;
 import java.util.*;
 
 /**
- * classe d'un agent qui soumet un appel au vote a d'autres agents  par le protocole ContractNet
+ * class of an agent that proposes a call for proposal using the ContractNet protocol
  *
  * @author eadam
  */
-public class AgentBureauVote extends AgentWindowed {
+public class PollingStationAgent extends AgentWindowed {
 
     /**
-     * ajout du suivi de protocole AchieveRE
+     * setup the gui
      */
     protected void setup() {
         window = new SimpleWindow4Agent(getAID().getName(), this);
@@ -33,25 +33,25 @@ public class AgentBureauVote extends AgentWindowed {
     }
 
     /**
-     * add a ContractNet protocol to launch a vote
+     * add a ContractNet protocol to launch a call for proposal for each vote
      */
-    private void createVote(String id, String objet) {
+    private void createVote(String id, String object) {
 
         println("_/ \\".repeat(20));
         println("/ \\_".repeat(20));
-        println("debut d'un vote pour les options " + objet);
+        println("Strat a vote for this options " + object);
         HashMap<String, Integer> votes = new HashMap<>();
-        for (Resto r : Resto.values()) votes.put(r.toString(), 0);
-        votes.forEach((k, v) -> println("nb votes pour " + k + " = " + v));
+        for (Restaurant r : Restaurant.values()) votes.put(r.toString(), 0);
+        votes.forEach((k, v) -> println("nb votes for " + k + " = " + v));
         println("-".repeat(40));
 
         ACLMessage msg = new ACLMessage(ACLMessage.CFP);
         msg.setConversationId(id);
-        msg.setContent(objet);
+        msg.setContent(object);
 
         var adresses = AgentServicesTools.searchAgents(this, "vote", "participant");
         msg.addReceivers(adresses);
-        println("destinataires trouves : " + Arrays.stream(adresses).map(AID::getLocalName).toList().toString());
+        println("Participants found : " + Arrays.stream(adresses).map(AID::getLocalName).toList());
         println("-".repeat(40));
 
         msg.setProtocol(FIPANames.InteractionProtocol.FIPA_CONTRACT_NET);
@@ -59,66 +59,71 @@ public class AgentBureauVote extends AgentWindowed {
 
 
         ContractNetInitiator init = new ContractNetInitiator(this, msg) {
-            /**fonction lancee a chaque proposition*/
+            //function triggered by a PROPOSE msg
+            // @param propose     the received propose message
+            // @param acceptances the list of ACCEPT/REJECT_PROPOSAL to be sent back.
+            //                    list that can be modified here or at once when all the messages are received
             @Override
             public void handlePropose(ACLMessage propose, List<ACLMessage> acceptations) {
-                println("l'agent %s propose %s ".formatted(propose.getSender().getLocalName(), propose.getContent()));
+                println("Agent %s proposes %s ".formatted(propose.getSender().getLocalName(), propose.getContent()));
             }
 
-            /**fonction lancee quand un participant refuse de continuer*/
+            //function triggered by a REFUSE msg
             @Override
             protected void handleRefuse(ACLMessage refuse) {
-                println("REFUS ! j'ai recu un refus  de " + refuse.getSender().getLocalName());
+                println("REFUSE ! I received a refuse from " + refuse.getSender().getLocalName());
             }
 
-            /**fonction lancee quand toutes les reponses ont ete recues*/
+            //function triggered when all the responses are received (or after the waiting time)
+            //@param theirVotes the list of message sent by the voters
+            //@param myAnswers the list of answers for each voter
             @Override
-            protected void handleAllResponses(List<ACLMessage> leursVotes, List<ACLMessage> mesRetours) {
-                ArrayList<ACLMessage> listeVotes = new ArrayList<>(leursVotes);
-                //on ne garde que les propositions
+            protected void handleAllResponses(List<ACLMessage> theirVotes, List<ACLMessage> myAnswers) {
+                ArrayList<ACLMessage> listeVotes = new ArrayList<>(theirVotes);
+                //we keep only the proposals only
                 listeVotes.removeIf(v -> v.getPerformative() != ACLMessage.PROPOSE);
 
-                List<ACLMessage> retours = new ArrayList<>();
+                List<ACLMessage> answers = new ArrayList<>();
 
                 for (ACLMessage vote : listeVotes) {
-                    //par defaut, on accepte tout vote
-                    var retour = vote.createReply();
-                    retour.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
-                    retours.add(retour);
+                    //by default, we build a accept answer for each vote
+                    var answer = vote.createReply();
+                    answer.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
+                    answers.add(answer);
                     var content = vote.getContent();
-                    //analyse du contenu sous la forme resto1>resto2>,...
-                    String[] sesVotes = content.split(">");
-                    int[] points = {sesVotes.length};
-                    for (String s : sesVotes) {
-                        //on ajoute la valeur du vote de chaque resto dans la map des votes
+                    //read the content resto1>resto2>,...
+                    String[] itsVotes = content.split(">");
+                    int[] points = {itsVotes.length};
+                    for (String s : itsVotes) {
+                        //We add the value of the vote of each restaurant in the map of votes
                         votes.computeIfPresent(s, (k, v) -> v + points[0]);
                         points[0]--;
                     }
                 }
 
                 println("-".repeat(40));
-                //affichage du total des votes
-                votes.forEach((k, v) -> println(k + " a obtenu " + v + " points"));
-                //r�cup�ration du plus haut score
+                //Viewing total votes
+                votes.forEach((k, v) -> println(k + " obtained " + v + " points"));
+                //Recovery of the highest score
                 int highScore = Collections.max(votes.values());
-                //r�cuperation des elus
+                //Recovery of elected options
                 StringBuffer best = new StringBuffer();
                 votes.forEach((k, v) -> {
                     if (v == highScore) best.append(k).append(",");
                 });
                 println("-".repeat(40));
-                println("R�sultat du vote " + best);
+                println("Result of the vote :  " + best);
                 println("-".repeat(40));
 
-                //placement du nom des elus dans les messages � retourner
-                for (ACLMessage m : retours)
+                //Adding the names of the elected options in the messages to be returned
+                for (ACLMessage m : answers)
                     m.setContent(best.toString());
-                mesRetours.addAll(retours);
+                myAnswers.addAll(answers);
 
-                //si ex-aequo, on relance un vote avec ceux-ci
+                //If tied, we relaunch a vote with them
                 if ((best.toString()).split(",").length > 1) {
                     println("-".repeat(30));
-                    println("un nouveau tour va etre lance ces choix : " + best);
+                    println("A new round will be launched these choices : " + best);
                     println("-".repeat(30));
                     myAgent.addBehaviour(new WakerBehaviour(myAgent, 100) {
                         @Override
@@ -129,10 +134,10 @@ public class AgentBureauVote extends AgentWindowed {
                 }
             }
 
-            /**fonction lancee quand le meilleur offreur confirme son intention*/
-            @Override
+            //function triggered by a INFORM msg : a voter accept the result
+            // @Override
             protected void handleInform(ACLMessage inform) {
-                println("le vote a bien ete accepte par " + inform.getSender().getLocalName());
+                println("the vote is accepted by " + inform.getSender().getLocalName());
             }
 
 
@@ -150,7 +155,7 @@ public class AgentBureauVote extends AgentWindowed {
 
     public void launchRequest() {
         StringBuilder sb = new StringBuilder();
-        for (Resto r : Resto.values()) sb.append(r).append(",");
+        for (Restaurant r : Restaurant.values()) sb.append(r).append(",");
         createVote("voteNo1", sb.toString());
     }
 
