@@ -40,10 +40,9 @@ _The following codes need, thus, this library and Java >= 17._
 - Add simple behaviors to an agent, examples
     - [AgentHelloSalut](https://github.com/EmmanuelADAM/jade/tree/english/behaviorTests) : code for an agent with 
       simple behaviors
-    - [AgentHelloEuropeenSequentiel](https://github.com/EmmanuelADAM/jade/tree/english/behaviorTests) : code pour deux
-      agents dotés de comportements simples s'exécutant séquentiellement
-    - [AgentHelloEuropeenParallel](https://github.com/EmmanuelADAM/jade/tree/english/behaviorTests) : code pour deux
-      agents dotés de comportements simples s'exécutant en parallèle
+    - [AgentHelloEuropeenSequentiel](https://github.com/EmmanuelADAM/jade/tree/english/behaviorTests) :  code that 
+      launches 2 agents that owns behaviors executing in sequential. 
+    - [AgentHelloEuropeenParallel](https://github.com/EmmanuelADAM/jade/tree/english/behaviorTests) : code that launches 2 agents that owns behaviors executing in parallel.
 
 ### Communicating Agents
 
