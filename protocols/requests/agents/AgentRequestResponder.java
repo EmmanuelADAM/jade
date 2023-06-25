@@ -54,7 +54,8 @@ public class AgentRequestResponder extends AgentWindowed {
                     window.setBackgroundTextColor(Color.PINK);
                     println("I'm ok to answer...");
                     println("-".repeat(40));
-                } else {
+                } else
+                {
                     answer.setPerformative(ACLMessage.REFUSE);
                     window.setBackgroundTextColor(Color.LIGHT_GRAY);
                     println("I refuse the request !");

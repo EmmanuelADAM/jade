@@ -20,7 +20,7 @@ import java.util.stream.IntStream;
  *
  * @author eadam
  */
-public class AgentBureauVote extends AgentWindowed {
+public class PollingStationAgentOld extends AgentWindowed {
 
     /**
      * ajout du suivi de protocole AchieveRE

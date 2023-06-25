@@ -22,7 +22,7 @@ import java.util.List;
  *
  * @author eadam
  */
-public class AgentCommissairePriseur extends AgentWindowed {
+public class AuctioneerAgent extends AgentWindowed {
 
     /**
      * ajout du suivi de protocole AchieveRE
@@ -43,16 +43,16 @@ public class AgentCommissairePriseur extends AgentWindowed {
         msg.setConversationId(id);
         msg.setContent(objet);
 
-        var adresses = AgentServicesTools.searchAgents(this, "enchere", "participant");
+        var adresses = AgentServicesTools.searchAgents(this, "auction", "participant");
         msg.addReceivers(adresses);
         println("(o)".repeat(30));
 
-        println("destinataires trouves : " + Arrays.stream(adresses).map(AID::getLocalName).toList().toString());
+        println("bidders found: " + Arrays.stream(adresses).map(AID::getLocalName).toList().toString());
 
         msg.setProtocol(FIPANames.InteractionProtocol.FIPA_CONTRACT_NET);
         msg.setReplyByDate(new Date(System.currentTimeMillis() + 1000));
 
-        println("je lance les encheres pour " + msg.getContent());
+        println("I launch an auction for  " + msg.getContent());
 
 
         ContractNetInitiator init = new ContractNetInitiator(this, msg) {
@@ -65,7 +65,7 @@ public class AgentCommissairePriseur extends AgentWindowed {
             /**fonction lancee quand un participant refuse de continuer*/
             @Override
             protected void handleRefuse(ACLMessage refuse) {
-                println("REFUS ! j'ai recu un refus  de " + refuse.getSender().getLocalName());
+                println("REFUSE ! I receive a refuse from " + refuse.getSender().getLocalName());
             }
 
             /**fonction lancee quand toutes les reponses ont ete recues*/
@@ -76,18 +76,18 @@ public class AgentCommissairePriseur extends AgentWindowed {
                 ACLMessage msgPourMeilleurOffreur = null;
                 List<ACLMessage> listeOffres = new ArrayList<>(leursOffres);
 
-                //on ne garde que les propositions
+                //we keep only the proposals
                 listeOffres.removeIf(msg -> msg.getPerformative() != ACLMessage.PROPOSE);
                 List<ACLMessage> listeReponses = new ArrayList<>(listeOffres.size());
 
-                StringBuilder sb = new StringBuilder("En resume : \n");
+                StringBuilder sb = new StringBuilder("To summarize: \n");
                 for (ACLMessage offre : listeOffres) {
-                    //par d�faut on rejette, on gardera la meilleure ensuite
+                    //by default, we build a reject answer for each proposal; we go back to the best offer later
                     var retour = offre.createReply();
                     retour.setPerformative(ACLMessage.REJECT_PROPOSAL);
                     listeReponses.add(retour);
                     int valeurProposition = Integer.parseInt(offre.getContent());
-                    sb.append("\trecu cette proposition de ").append(offre.getSender().getLocalName()).append(" :: ").append(valeurProposition).append("\n");
+                    sb.append("\treceived this proposal from  ").append(offre.getSender().getLocalName()).append(" :: ").append(valeurProposition).append("\n");
                     if (valeurProposition > presqueMaxi) {
                         if (valeurProposition > maxi) {
                             presqueMaxi = maxi;
@@ -98,37 +98,38 @@ public class AgentCommissairePriseur extends AgentWindowed {
                     }
                 }
                 sb.append("~".repeat(30)).append("\n");
-                sb.append("meilleur offre = ").append(maxi).append("\n");
-                sb.append("meilleur offre la plus proche = ").append(presqueMaxi).append("\n");
+                sb.append("best bidding = ").append(maxi).append("\n");
+                sb.append("nearest best bidding = ").append(presqueMaxi).append("\n");
                 println(sb.toString());
 
                 int finalMaxi = maxi;
-                listeReponses.forEach(msg -> msg.setContent("Refus�, dsl, votre offre n'a pas �t� retenue"));
+                listeReponses.forEach(msg -> msg.setContent("Refuse, sorry, your bidding as not been kept..."));
                 //on avait garde un pointeur vers le message envoye a la meilleure offre, qu'un accepte finalement
                 if (msgPourMeilleurOffreur != null) {
                     msgPourMeilleurOffreur.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
-                    msgPourMeilleurOffreur.setContent("ADJUGE VENDU pour " + presqueMaxi);
+                    msgPourMeilleurOffreur.setContent("**Auctioned-sold** for " + presqueMaxi);
                 }
                 mesRetours.addAll(listeReponses);
             }
 
-            /**fonction lancee quand le meilleur offreur confirme son intention*/
+
+            //function triggered by a INFORM msg : the best bidder confirm the sale
             @Override
             protected void handleInform(ACLMessage inform) {
                 println("_".repeat(30));
-                println("la vente a bien eu lieu aupres de " + inform.getSender().getLocalName());
+                println("Sale confirmed with  " + inform.getSender().getLocalName());
                 println("_".repeat(30));
                 println("");
             }
 
             @Override
+            //function triggered by a FAILURE msg : the best bidder cancel the sale
             protected void handleFailure(ACLMessage failure) {
                 println("_".repeat(30));
-                println("la vente n'a finalement pas pu avoir lieu aupres de " + failure.getSender().getLocalName());
+                println("PB : Sale cancelled with  " + failure.getSender().getLocalName());
                 println("_".repeat(30));
                 println("");
             }
-
         };
 
         addBehaviour(init);

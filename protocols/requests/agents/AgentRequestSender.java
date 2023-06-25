@@ -80,8 +80,12 @@ public class AgentRequestSender extends AgentWindowed {
                 println("~".repeat(40));
                 StringBuilder sb = new StringBuilder("ok! I received all the responses... " +
                         "To resume: \n");
-                for (ACLMessage msg : responses) {
-                    sb.append("\t-from ").append(msg.getSender().getLocalName()).append(" : ").append(msg.getContent()).append("\n");
+                if(responses!=null && responses.size()>0)
+                    for (ACLMessage msg : responses) {
+                        sb.append("\t-from ").append(msg.getSender().getLocalName()).append(" : ").append(msg.getContent()).append("\n");
+                    }
+                else {
+                    sb.append("\t-no one accept your request !!!");
                 }
                 println(sb.toString());
                 println("(o)".repeat(20));

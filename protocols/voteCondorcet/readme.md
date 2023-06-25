@@ -1,30 +1,32 @@
-# Jade : Agents, protocole et services
+# Jade : Agents and protocols
 
-## Exemple : FIPA Contract Net Protocole en Jade
+##  FIPA Contract-Net Protocol example
 
-### Utilisation pour un vote de Concorcet
+---
+### Jade Agent-Oriented Programming Course Materials
+#### Condorcet vote
 
 ---
 
-Ici, vous trouverez un exemple de communication via le
-protocole [FIPA Contract Net](http://www.fipa.org/specs/fipa00029/SC00029H.html) pour un vote de Condorcet (les 
-votants classent les options en les notant, un calcul du nombre de duels gagné est effectué)
+Here, you can find an example of communication through the well known Contract-Net protocol [FIPA Contract Net]
+(http://www.fipa.org/specs/fipa00029/SC00029H.html) for a
+Condorcet vote (Voters rank the options by evaluating them, a calculation of the nb of duels (head-to-head election) won is made)
 
 
-- *Principe du vote "de Condorcet"* ***en un tour***
-  - a1 propose o6 > o4 > o5 > o7 > o1 > o3 > o2
-  - a2 propose o7 > o6 > o3 > o1 > o4 > o2 > o5
-  - a3 propose o1 > o2 > o3 > o4 > o6 > o7 > o5
-  - a4 propose o4 > o7 > o2 > o1 > o6 > o5 > o3
-  - a5 propose o1 > o2 > o4 > o3 > o5 > o7 > o6
+- *Method "de Condorcet"* ***in a single ballot***
+  - a1 proposes o6 > o4 > o5 > o7 > o1 > o3 > o2
+  - a2 proposes o7 > o6 > o3 > o1 > o4 > o2 > o5
+  - a3 proposes o1 > o2 > o3 > o4 > o6 > o7 > o5
+  - a4 proposes o4 > o7 > o2 > o1 > o6 > o5 > o3
+  - a5 proposes o1 > o2 > o4 > o3 > o5 > o7 > o6
 
 
-- le bureau de vote affecte des valeurs sur le nombre de duels gagnés-nombre de duels perdus.
-    - Ex. : option1 est classée 4 fois devant option2 et 1 fois derrière, donc la valeur duel(option1, option2)=3 
-      et ici inversement duel(option2, option1)=-3 (dans la proposition initiale de Condorcet, on ne compte pas les 
-      duels perdus)
-    - ci-dessous la matrice des décomptes des duels.
-      - option1, option4 et option7 ont chacune gagné devant 5 autres options
+- The polling station assigns values on the number of duels won-number of duels lost.
+    - Ex. : option1 is preferred 4 times  to option2 and 1 one time behind, thus value of the duel(option1, 
+      option2)=3 
+      and here, in return duel(option2, option1)=-3 (in Condorcet's initial proposal, we do not count the lost duels )
+    - bellow the matrix of the duels values.
+      - option1, option4 and option7 wons against 5 other options
 
 
 |   - | o1  | o2  | o3  | o4  | o5  | o6  | o7  | duels gagnés | points |
@@ -39,14 +41,14 @@ votants classent les options en les notant, un calcul du nombre de duels gagné 
 
    
 
-- Selon le principe du vote de Condorcet, l'option gagnante est celle qui remporté le plus de séries de duels 
-  devant chacune des autres options.
-- En cas d'ex-aequo, on les départagent par rapport au nombre de points (nb de duels gagnés-nb de duels perdus) 
-  - Ici, l'option 1 et l'option 4 ont toutes deux 10 points, l'option 7 n'en recolte que 2. Il faut alors départager 
-    les deux premières.
+- According to the principle of the Condorcet vote, the winning option is the one that wins the most series of duels 
+  in front of each of the other options.
+- In case of a tie, the winners are decided according to the number of points (number of duels won-number of duels lost)
+  - Here, option1 and option4 have both 10 points, option 7 only gets 2. 
+  - It is then necessary to decide between the first two.
 
-- Il existe, dans la littérature, de nombreuses propositions pour tenter de résoudre ce type de cas
-    - ici, on crée une nouvelle matrice de gain basé uniquement sur les options retenues (ici option 1 & option 4).
+- In the literature, many proposals  try to solve this kind of cases
+- Here, we create a new gain matrix based solely on the selected options (here option 1 & option 4).
 
 | -   | o1  | o2  | o3  | o4  | o5  | o6  | o7  | duels gagnés | points |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:------------:|:------:|
@@ -58,32 +60,30 @@ votants classent les options en les notant, un calcul du nombre de duels gagné 
 | o6  |  0  |  0  |  0  |  0  |  0  |  0  |  0  |      0       |   0    |
 | o7  |  0  |  0  |  0  |  0  |  0  |  0  |  0  |      0       |   0    |
 
-  - option1 reporte le plus de série de duels (1 contre option4 (on a 3x o1>o4 et 2x o4>o1)), c'est donc cette option 
-    qui est finalement déclarée élue.
+  - Option1 wins the most series of duels (1 against option4 (one has 3x o1>o4 and 2x o4>o1)), it is therefore this 
+    option that is finally declared elected.
 
-- Si un ex-aequo subsiste encore entre des options après cette 2e phase, un tirage aléatoire est réalisé entre 
-  celles-ci.
+- If a tie still exists between options after this 2nd phase, a random draw is made between them.
 
 ----
 ### Codage
 
-- un agent de
-  type [AgentBureauVote](https://github.com/EmmanuelADAM/jade/blob/master/protocoles/voteBorda/agents/AgentBureauVote.java)
-  émet un appel à vote sur des noms de restaurants : pizzeria, legumes, sushi, ...
-- auprès d'agents de
-  type [AgentParticipant](https://github.com/EmmanuelADAM/jade/blob/master/protocoles/voteBorda/agents/AgentParticipant.java)
-- Le protocole oblige :
-    - les destinataires à répondre (refus, erreur, accord), si accord, la réponse est de la forme : 
+- an agent [PollingStationAgent](https://github.com/EmmanuelADAM/jade/blob/master/protocoles/voteCondorcet/agents/PollingStationAgent.java)
+   calls for a vote on restaurants : pizzeria, vegetables, sushi, ...
+- to agents [ParticipantAgent](https://github.com/EmmanuelADAM/jade/blob/master/protocoles/voteCondorcet/agents/ParticipantAgent.java)
+- The protocole obliges :
+    - the receivers : to respond (refuse, error, agree), if agreement, the answer has this form : 
       legumes>pizzeria>sushi>...
-    - au bureau de vote :
-      - de créer la matrice des duels
-          - d'envoyer le choix gagnant à tous les votants (ou les choix si ex-aequo)
-          - chaque votant confirme la reception et l'acceptation du résultat du vote
-    - si ex-aequo (en nb de duels et nb de points), le vote est relancé pour les choix non départagés
+    - the polling station :
+      - creates the duels' matrix :
+          - It sends the winning choice to all voters (or the choices if tied)
+          - each voter confirms receipt and acceptance of the result of the vote
+    - If tied (in number of duels and number of points), the vote is restarted for the choices not decided
 
-- [LaunchAgents](https://https://github.com/EmmanuelADAM/jade/blob/master/protocoles/voteBorda/launch/LaunchAgents.java) : **
-  classe principale**, lançant Jade et créant les agents
-    - Au lancement, 1 bureau et 5 participants sont lancés.
-    - Le bureau de votes lance un vote à chaque clic sur 'go'..
+- [LaunchAgents](https://https://github.com/EmmanuelADAM/jade/blob/master/protocoles/anglaisesscellees/launch
+  /LaunchAgents.java) : **main class**
+    - 1 polling station and 5 voting agent are created.
+    - The polling station launches call for voting for each activation of the 'go' button...
+
 
  ---

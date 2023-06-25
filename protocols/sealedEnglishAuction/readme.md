@@ -4,8 +4,8 @@
 
 ---
 ### Jade Agent-Oriented Programming Course Materials
+#### Sealed English Auction
 
----
 
 
 --- 

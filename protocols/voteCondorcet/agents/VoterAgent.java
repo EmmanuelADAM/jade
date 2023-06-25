@@ -21,7 +21,7 @@ import java.util.List;
  *
  * @author eadam
  */
-public class AgentParticipant extends AgentWindowed {
+public class VoterAgent extends AgentWindowed {
 
     /**
      * ajout du suivi de protocole AchieveRE

@@ -14,9 +14,9 @@ public class LaunchAgents {
         // demander la fenetre de controle
         prop.setProperty(Profile.GUI, "true");
         // nommer les agents
-        StringBuilder sb = new StringBuilder("bureau:protocols.voteCondorcet.agents.AgentBureauVoteGood;");
+        StringBuilder sb = new StringBuilder("pollingStation:protocols.voteCondorcet.agents.PollingStationAgent;");
         for (int i = 0; i < 5; i++)
-            sb.append("votant_").append(i).append(":protocols.voteCondorcet.agents.AgentParticipant;");
+            sb.append("voter_").append(i).append(":protocols.voteCondorcet.agents.VoterAgent;");
         prop.setProperty(Profile.AGENTS, sb.toString());
         // creer le profile pour le conteneur principal
         ProfileImpl profMain = new ProfileImpl(prop);
