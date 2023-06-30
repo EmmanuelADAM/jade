@@ -104,7 +104,13 @@ _The following codes need, thus, this library and Java >= 17._
 - [Negociation](https://github.com/EmmanuelADAM/jade/tree/english/protocols/negociation) : codes à compléter 
   pour coder la négociation 1-1.
 
-## Exemple complet, support à développements :
+<!--## Exemple complet, support à développements :
 
 - [agentsVoyage](https://github.com/EmmanuelADAM/jade/tree/master/agencesVoyages) : codes pour des agents simulant des
   agences de voyages
+-->
+---
+
+## ISSIA 23 - Scenario
+
+A (very) little scenario based on a true project about circular economy : [here](https://github.com/EmmanuelADAM/jade/tree/english/issia23)
