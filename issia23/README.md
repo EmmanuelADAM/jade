@@ -37,31 +37,35 @@ We can add these specification for a simple scenario :
   - 2 (can understand and repair breakdown level up to 2,
   - 3 (can understand and repair breakdown level up to 3,
 
-- repair coffee have only 4 items of elt 1,2 or 3 and do not have elt4
+- repair coffees have no items; they advise the user about the elt to find/buy
 - spare parts stores have only 10 items of elt 1,2 or 3 and do not have elt4
 - distributors have not pb of elt
 
-- repair coffee have a cost of 10€/elt (second hand)
+- repair coffees have a cost of 5€/elt (the drink you buy)
 - spare parts stores  have a cost of 30€/elt
 - distributors have a cost of 60€/elt
 
-- a user has a limited amount of money. 
-  - we suppose he/she chooses to go to repair coffee and if the reparation is impossible here : 
+- a user has a limited amount of money, and time. 
+  - we suppose he/she chooses to go to repair coffees and if the reparation is impossible (no more time, enough money)  : 
     - he/she go the  higher level (a spare parts store)
     - or stop and let the elt of her/his product to the repair coffee..
 
 ---
-Draw and build some agents using the new Jade Library to simulate this behaviour.
+### Design
+1. Define the agents and draw the diagrams (sequences diagram,  activities (optional for the moment), states(optional for the moment), ...) with Plant-UML 
+to simulate the behaviour in several use cases you choose (ask for a repair, ....).
+
+2. Build some agents using the new Jade Library to simulate this behaviour.
 - Generate a random object for the user agents, 
 - and random elt in the store and coffee.
 - 
 ---
-Next repair coffee can interact between them to exchange piece.
- - this has a cost in time..1 day/elt
+Next repair coffee can interact between them to exchange information.
+ - this has a cost in time..1/2 day/elt
 
 We add a second criteria, the time:
-- repair coffee have a cost of 2 days/elt (they teach you how to repair, and the ele doesn't fit very much)
-- spare parts stores  have a cost of 1 day (they have the specific piece well adapt but you need 1 day to install it)
+- repair coffee have a cost of 3 days/elt (you have to plan a 'rendez-vous', they teach you how to repair, and they do not have elt, only tools)
+- spare parts stores  have a cost of 2 day (they have the specific piece well adapt, 1 day to send, but you need 1 day to install it)
 - distributors have a cost of 1 day (they simply exchange the elt)
 
 ---
