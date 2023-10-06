@@ -6,7 +6,7 @@ platform. Materials for Jade Tutorial : communication, protocols, votes, service
 [(web version)](https://emmanueladam.github.io/jade/)
 [(french version)](https://github.com/EmmanuelADAM/jade/tree/master/)
 
-Case study on the Cirdular Economy.
+Case study on the Circular Economy.
 
 ----
 ## Circular economy
