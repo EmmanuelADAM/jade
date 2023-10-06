@@ -6,7 +6,7 @@ platform. Materials for Jade Tutorial : communication, protocols, votes, service
 [(web version)](https://emmanueladam.github.io/jade/)
 [(french version)](https://github.com/EmmanuelADAM/jade/tree/master/)
 
-Case study for ISSIA'23.
+Case study on the Cirdular Economy.
 
 ----
 ## Circular economy
@@ -42,13 +42,16 @@ We can add these specification for a simple scenario :
 - distributors have not pb of elt
 
 - repair coffees have a cost of 5€/elt (the drink you buy)
-- spare parts stores  have a cost of 30€/elt
+- spare parts stores have a cost of 30€/elt
+- spare parts stores specialised on second-hand material have a cost of 15€/elt
 - distributors have a cost of 60€/elt
 
 - a user has a limited amount of money, and time. 
   - we suppose he/she chooses to go to repair coffees and if the reparation is impossible (no more time, enough money)  : 
     - he/she go the  higher level (a spare parts store)
     - or stop and let the elt of her/his product to the repair coffee..
+
+- a user can have preference, and different level on confidence about the repair coffees, spare parts stores (less confidence in second hand product), distributors.
 
 ---
 ### Design
