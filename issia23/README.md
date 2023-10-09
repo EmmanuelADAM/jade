@@ -27,6 +27,8 @@ region, and finally to the distributors.
 - Solutions can exist on web, but the user can need a repair coffee to understand, to fix its product.
 
 We can add these specification for a simple scenario : 
+- <span style="color:red">there are type of products : mouse, screen,  coffeeMaker, washingMachine, dishwasher,  vacuumCleaner</span>
+- <span style="color:red">the price of each product is (=- 15%): mouse (30€), screen(150€),  coffeeMaker(50€), washingMachine(300€), dishwasher(300€),  vacuumCleaner(100€)</span>
 - a product have from 1 to 4 removable/fixable elements, we name them el1, el2,el3,el4.
 - a breakdown is focused on 1 elt.
 - a breakdown can be very light (0), easy(1), average (2), difficult(3), definitive (4)
@@ -44,7 +46,7 @@ We can add these specification for a simple scenario :
 - repair coffees have a cost of 5€/elt (the drink you buy)
 - spare parts stores have a cost of 30€/elt
 - spare parts stores specialised on second-hand material have a cost of 15€/elt
-- distributors have a cost of 60€/elt
+- <span style="color:red">for distributors the replacement is the price of the product (generated randomly from the specification)</span>
 
 - a user has a limited amount of money, and time. 
   - we suppose he/she chooses to go to repair coffees and if the reparation is impossible (no more time, enough money)  : 
@@ -60,15 +62,27 @@ to simulate the behaviour in several use cases you choose (ask for a repair, ...
 
 2. Build some agents using the new Jade Library to simulate this behaviour.
 - Generate a random object for the user agents, 
-- and random elt in the store and coffee.
-- 
+- and random elt in the store and <span style="color:red">random specialities in repair</span> coffee.
+
+<span style="color:red">
+3.A user agent launch a CFP to find the best appropriate repair coffee.</span>
+
+- <span style="color:red">a repair coffee </span>
+  - can accept if the product correspond to one of its specialities
+  - propose a date (from the current date + 1 to 3 days (see LocalDate from Java)
+- <span style="color:red">the user </span>
+  - choose the repair coffee with the nearest date
+- <span style="color:red">THE repair coffee </span>
+  - help the user to find which part to buy
+- <span style="color:red">the user </span>
+  - launch a CFP to find the appropriate part and choose 
+  - repair by her/him self if he/she has capability
+  - or ask for a rendez-vous to a repair cafee
 ---
-Next repair coffee can interact between them to exchange information.
- - this has a cost in time..1/2 day/elt
 
 We add a second criteria, the time:
 - repair coffee have a cost of 3 days/elt (you have to plan a 'rendez-vous', they teach you how to repair, and they do not have elt, only tools)
 - spare parts stores  have a cost of 2 day (they have the specific piece well adapt, 1 day to send, but you need 1 day to install it)
-- distributors have a cost of 1 day (they simply exchange the elt)
+- distributors have a cost of 1 day (they simply exchange the object)
 
 ---
