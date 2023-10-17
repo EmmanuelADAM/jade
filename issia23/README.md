@@ -27,8 +27,8 @@ region, and finally to the distributors.
 - Solutions can exist on web, but the user can need a repair coffee to understand, to fix its product.
 
 We can add these specification for a simple scenario : 
-- <span style="color:red">there are type of products : mouse, screen,  coffeeMaker, washingMachine, dishwasher,  vacuumCleaner</span>
-- <span style="color:red">the price of each product is (=- 15%): mouse (30€), screen(150€),  coffeeMaker(50€), washingMachine(300€), dishwasher(300€),  vacuumCleaner(100€)</span>
+- there are type of products : mouse, screen,  coffeeMaker, washingMachine, dishwasher,  vacuumCleaner
+- the price of each product is (= ± 15%): mouse  (30€), screen(150€),  coffeeMaker(50€), washingMachine(300€), dishwasher(300€),  vacuumCleaner(100€)
 - a product have from 1 to 4 removable/fixable elements, we name them el1, el2,el3,el4.
 - a breakdown is focused on 1 elt.
 - a breakdown can be very light (0), easy(1), average (2), difficult(3), definitive (4)
@@ -46,7 +46,7 @@ We can add these specification for a simple scenario :
 - repair coffees have a cost of 5€/elt (the drink you buy)
 - spare parts stores have a cost of 30€/elt
 - spare parts stores specialised on second-hand material have a cost of 15€/elt
-- <span style="color:red">for distributors the replacement is the price of the product (generated randomly from the specification)</span>
+- for distributors the replacement is the price of the product (generated randomly from the specification)
 
 - a user has a limited amount of money, and time. 
   - we suppose he/she chooses to go to repair coffees and if the reparation is impossible (no more time, enough money)  : 
@@ -57,27 +57,37 @@ We can add these specification for a simple scenario :
 
 ---
 ### Design
-1. Define the agents and draw the diagrams (sequences diagram,  activities (optional for the moment), states(optional for the moment), ...) with Plant-UML 
-to simulate the behaviour in several use cases you choose (ask for a repair, ....).
+1. Define the agents and draw the diagrams (sequences diagram, use at least on activities diagram, or a state diagram to precise a part of your algorithm (ex. process of choice to repair to rebuy)) with Plant-UML 
+to simulate the behaviour in several use cases you choose (ask for a repair, ....). **[8 points]**
+    - elaborate all the different cases according to the description of this subject
 
-2. Build some agents using the new Jade Library to simulate this behaviour.
-- Generate a random object for the user agents, 
-- and random elt in the store and <span style="color:red">random specialities in repair</span> coffee.
+2. Build some agents (2 users, 4 repair coffee, 3 part stores, 3 distributors) using the new Jade Library to simulate this behaviour.
+   - Generate a random objects for the user agents and distributors, 
+   - random parts for the spare part stores.
+   - and random specialities in repair coffee.
+   - propose some gui **[5 points]**
 
-<span style="color:red">
-3.A user agent launch a CFP to find the best appropriate repair coffee.</span>
+3. A user agent launch a CFP to find the best appropriate repair coffee.
+   -  a repair coffee:
+        - can accept if the product correspond to one of its specialities
+        - propose a date (from the current date + 1 to 3 days (see LocalDate from Java)
+   - the user:
+     - choose the repair coffee with the nearest date
+   - THE repair coffee 
+     - help the user to find which part to buy, *if it's repairable*. 
+       - if it's not repairable, the user
+           - launches a CFP to find a new product
+           - and chooses according to the price and its confidence to 2nde hand product or not
+   - the user:
+     - decides if he/she prefers build a new product (or a second-hand product) or repair the product.
+     - if he/she wants to repair:
+       - launches a CFP to find the appropriate part and choose
+       - repairs by her/him self if he/she has capability
+       - or asks for a rendez-vous to a repair coffee
+     - if he/she wants to build a new one, the user launch a CFP to the distributors
 
-- <span style="color:red">a repair coffee </span>
-  - can accept if the product correspond to one of its specialities
-  - propose a date (from the current date + 1 to 3 days (see LocalDate from Java)
-- <span style="color:red">the user </span>
-  - choose the repair coffee with the nearest date
-- <span style="color:red">THE repair coffee </span>
-  - help the user to find which part to buy
-- <span style="color:red">the user </span>
-  - launch a CFP to find the appropriate part and choose 
-  - repair by her/him self if he/she has capability
-  - or ask for a rendez-vous to a repair cafee
+     **[7 points]**
+
 ---
 
 We add a second criteria, the time:
