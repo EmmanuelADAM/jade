@@ -6,7 +6,10 @@ platform. Materials for Jade Tutorial : communication, protocols, votes, service
 [(web version)](https://emmanueladam.github.io/jade/)
 [(french version)](https://github.com/EmmanuelADAM/jade/tree/master/)
 
-Case study on the Circular Economy.
+**Practical work : Case study on the Circular Economy.**
+- by 2 persons max.
+- no copy/paste between groups
+- to provide : the source code, and a report containing explanation and uml diagrams
 
 ----
 ## Circular economy
@@ -27,7 +30,7 @@ region, and finally to the distributors.
 - Solutions can exist on web, but the user can need a repair coffee to understand, to fix its product.
 
 We can add these specification for a simple scenario : 
-- there are type of products : mouse, screen,  coffeeMaker, washingMachine, dishwasher,  vacuumCleaner
+- there are type of products : mouse :computer_mouse:, screen,  coffeeMaker, washingMachine, dishwasher,  vacuumCleaner
 - the price of each product is (= ± 15%): mouse  (30€), screen(150€),  coffeeMaker(50€), washingMachine(300€), dishwasher(300€),  vacuumCleaner(100€)
 - a product have from 1 to 4 removable/fixable elements, we name them el1, el2,el3,el4.
 - a breakdown is focused on 1 elt.
@@ -79,12 +82,12 @@ to simulate the behaviour in several use cases you choose (ask for a repair, ...
            - launches a CFP to find a new product
            - and chooses according to the price and its confidence to 2nde hand product or not
    - the user:
-     - decides if he/she prefers build a new product (or a second-hand product) or repair the product.
+     - decides if he/she prefers buy a new product (or a second-hand product) or repair the product.
      - if he/she wants to repair:
        - launches a CFP to find the appropriate part and choose
        - repairs by her/him self if he/she has capability
        - or asks for a rendez-vous to a repair coffee
-     - if he/she wants to build a new one, the user launch a CFP to the distributors
+     - if he/she wants to buy a new one, the user launch a CFP to the distributors
 
      **[7 points]**
 
