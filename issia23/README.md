@@ -30,7 +30,7 @@ region, and finally to the distributors.
 - Solutions can exist on web, but the user can need a repair coffee to understand, to fix its product.
 
 We can add these specification for a simple scenario : 
-- there are type of products : mouse :computer_mouse:, screen,  coffeeMaker, washingMachine, dishwasher,  vacuumCleaner
+- there are type of products : mouse :computer_mouse:,  :desktop_computer:,  coffeeMaker :coffee:, washingMachine :dress: :jeans:, dishwasher :plate_with_cutlery:,  vacuumCleaner :tornado:
 - the price of each product is (= ± 15%): mouse  (30€), screen(150€),  coffeeMaker(50€), washingMachine(300€), dishwasher(300€),  vacuumCleaner(100€)
 - a product have from 1 to 4 removable/fixable elements, we name them el1, el2,el3,el4.
 - a breakdown is focused on 1 elt.
