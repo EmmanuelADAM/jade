@@ -58,7 +58,7 @@ public class SellerAgent extends Agent {
         var modele = MessageTemplate.MatchPerformative(ACLMessage.PROPOSE);
 
         addBehaviour(new ReceiverBehaviour(this, -1, modele,true, (a,msg)->{
-        /**A FAIRE*/ */
+        /**A FAIRE*/ 
         }));
 
         //wait for a accept proposal msg
