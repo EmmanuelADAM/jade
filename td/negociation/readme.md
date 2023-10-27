@@ -32,4 +32,5 @@ Définissez les échanges de message sachant que le vendeur initie la négociati
 
 Regardez les classes proposées, et lancez le `main` de la classe `Main`.
 
+![diagramme d'états du principe de négociation](negociation.png)
 ---
