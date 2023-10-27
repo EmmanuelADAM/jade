@@ -58,28 +58,7 @@ public class SellerAgent extends Agent {
         var modele = MessageTemplate.MatchPerformative(ACLMessage.PROPOSE);
 
         addBehaviour(new ReceiverBehaviour(this, -1, modele,true, (a,msg)->{
-            nbTours[0]++;
-            double receivedPrice = Double.parseDouble(msg.getContent());
-            println("%s\t-> I've received %.2f\tround(%d/%d)".formatted(getLocalName(),receivedPrice,nbTours[0], maxRounds));
-            var myAnswer = msg.createReply();
-            if (receivedPrice>= this.proposedPrice*(1-coef)){
-                println("\t"+getLocalName() + " -> I accept!");
-                myAnswer.setPerformative(ACLMessage.ACCEPT_PROPOSAL);}
-            else
-            if (receivedPrice<threshold){
-                println("\t"+getLocalName() + " -> I refuse!");
-                myAnswer.setPerformative(ACLMessage.REJECT_PROPOSAL);}
-            else
-            if (nbTours[0]>maxRounds){
-                println("\t"+getLocalName() + " -> I don't have time to negotiate anymore, I refuse and I stop there.");
-                myAnswer.setPerformative(ACLMessage.REJECT_PROPOSAL);}
-            else{
-                this.proposedPrice = this.proposedPrice *(1-coef);
-                myAnswer.setPerformative(ACLMessage.PROPOSE);
-                myAnswer.setContent(String.valueOf(this.proposedPrice));
-                println("\t%s\t-> I propose %.2f".formatted(getLocalName(), this.proposedPrice));
-            }
-            a.send(myAnswer);
+        /**A FAIRE*/ */
         }));
 
         //wait for a accept proposal msg
