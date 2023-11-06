@@ -41,3 +41,11 @@ Organiser -> Bidder4: sold to Bidder 2 for 150
 </div>
 
 ![FistPriceOpenCry](FPOC.png)
+
+### Guide
+Plusieurs possibités !
+- Au plus simple, utilisez un canal de diffusion (*"MarketPlace"* par exemple).
+Ainsi chaque agent reçoit tous les messages diffusé sur ce canal. Ce qui correspond le plus à l'OpenCry...
+
+- Une autre solution aurait été que l'enchère arrive à l'organisateur qui en informe les autres enchérisseurs potentiels.
+
