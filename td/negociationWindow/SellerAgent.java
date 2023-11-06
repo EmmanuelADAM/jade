@@ -38,6 +38,8 @@ public class SellerAgent extends AgentWindowed {
     protected void setup() {
         window = new SimpleWindow4Agent(getLocalName(),this);
         window.setButtonActivated(true);
+        println("~".repeat(30));
+        println("Click for a new negociation");
 
         addBehaviour(buildNegociationBehaviour());
 
@@ -54,15 +56,24 @@ public class SellerAgent extends AgentWindowed {
             var myAnswer = msg.createReply();
             if (receivedPrice>= this.proposedPrice*(1-coef)){
                 println("\t"+getLocalName() + " -> I accept!");
-                myAnswer.setPerformative(ACLMessage.ACCEPT_PROPOSAL);}
+                myAnswer.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
+                println("~".repeat(30));
+                println("Click for a new negociation");
+            }
             else
             if (receivedPrice<threshold){
                 println( " -> I refuse!");
-                myAnswer.setPerformative(ACLMessage.REJECT_PROPOSAL);}
+                myAnswer.setPerformative(ACLMessage.REJECT_PROPOSAL);
+                println("~".repeat(30));
+                println("Click for a new negociation");
+            }
             else
             if (nbTours[0]>maxRounds){
                 println(" -> I don't have time to negotiate anymore, I refuse and I stop there.");
-                myAnswer.setPerformative(ACLMessage.REJECT_PROPOSAL);}
+                myAnswer.setPerformative(ACLMessage.REJECT_PROPOSAL);
+                println("~".repeat(30));
+                println("Click for a new negociation");
+            }
             else{
                 this.proposedPrice = this.proposedPrice *(1-coef);
                 myAnswer.setPerformative(ACLMessage.PROPOSE);
@@ -74,11 +85,20 @@ public class SellerAgent extends AgentWindowed {
 
         //wait for a accept proposal msg
         modele = MessageTemplate.MatchPerformative(ACLMessage.ACCEPT_PROPOSAL);
-        parab.addSubBehaviour(new ReceiverBehaviour(this, -1, modele, (a,msg)-> println(" -> seller accept !!!")));
+        parab.addSubBehaviour(new ReceiverBehaviour(this, -1, modele, (a,msg)-> {
+            println(" -> seller accept !!!");
+            println("~".repeat(30));
+            println("Click for a new negociation");
+        }));
 
         //wait for a reject proposal msg
         modele = MessageTemplate.MatchPerformative(ACLMessage.REJECT_PROPOSAL);
-        parab.addSubBehaviour(new ReceiverBehaviour(this, -1, modele, (a,msg)-> println( " -> seller reject !!!")));
+        parab.addSubBehaviour(new ReceiverBehaviour(this, -1, modele, (a,msg)-> {
+            println( " -> seller reject !!!");
+            println("~".repeat(30));
+            println("Click for a new negociation");
+        }));
+        
 
         //wait for a reject proposal msg
         modele = MessageTemplate.MatchPerformative(ACLMessage.FAILURE);
@@ -94,6 +114,8 @@ public class SellerAgent extends AgentWindowed {
         proposedPrice = 250 + (int)(Math.random()*50); //[250 - 300[
 
         nbTours[0] = 0;
+        println("X".repeat(30));
+        println("X".repeat(30));
         println("""
         -> I am ready.
             I accept %d max rounds of negociation.

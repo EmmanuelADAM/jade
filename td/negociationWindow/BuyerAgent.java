@@ -78,7 +78,9 @@ public class BuyerAgent extends AgentWindowed {
         threshold = 280 + (int)(Math.random()*40); //[280 - 320[
         proposedPrice = 100 + (int)(Math.random()*40); //[100 - 140[
         nbTours[0] = 0;
-        println("""
+        println("X".repeat(30));
+        println("X".repeat(30));
+        println("""        
         -> I am ready.
             I accept %d max rounds of negotiation.
             I start with a proposal of %.2f.
