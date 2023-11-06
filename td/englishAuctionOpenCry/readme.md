@@ -49,3 +49,5 @@ Ainsi chaque agent reçoit tous les messages diffusé sur ce canal. Ce qui corre
 
 - Une autre solution aurait été que l'enchère arrive à l'organisateur qui en informe les autres enchérisseurs potentiels.
 
+- Une ébauche de code est proposée, vous pouvez la compléter..
+

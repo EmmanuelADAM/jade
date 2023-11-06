@@ -98,7 +98,7 @@ public class SellerAgent extends AgentWindowed {
             println("~".repeat(30));
             println("Click for a new negociation");
         }));
-        
+
 
         //wait for a reject proposal msg
         modele = MessageTemplate.MatchPerformative(ACLMessage.FAILURE);

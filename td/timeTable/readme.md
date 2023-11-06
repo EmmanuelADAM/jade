@@ -1,4 +1,5 @@
-# Gestion d'un Emploi Du Temps (benchmark asa)
+# Jade : TD2 - Gestion d'un Emploi Du Temps 
+*(benchmark asa)*
 
 Trois enseignants ($e_1$, $e_2$ et $e_3$) doivent proposer chacun deux enseignements de deux heures, répartis sur deux jours ($j_1$ et $j_2$), à trois groupes d'étudiants ($g_1$, $g_2$ et $g_3$).
 
@@ -22,7 +23,7 @@ Idéalement les contraintes posées par les enseignants doivent être respectée
 Si p1 et p2 sont les poids associés aux respects des contraintes sur les jours (avec $p1 + p2 = 1$ et $p1 > p2$), 
 le degré de satisfaction d’un enseignant e est défini par la fonction utilité :
 
-$u(e) = (p_1 \times ok_{contrainte_1} + p2 \times ok_{contrainte_2}$ avec $ok_{contrainte_i} =$ 0 ou 1 si la contrainte (i) est respectée ou non.
+$u(e) = (p_1 \times ok_{contrainte_1} + p2 \times ok_{contrainte_2})$ avec $ok_{contrainte_i} =$ 0 ou 1 si la contrainte (i) est respectée ou non.
 
 Mais il se peut que ce ne soit pas possible.
 
