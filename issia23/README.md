@@ -70,7 +70,7 @@ to simulate the behaviour in several use cases you choose (ask for a repair, ...
    - random parts for the spare part stores.
    - and random specialities in repair coffee.
    - propose some gui **[5 points]**
-   - (some examples are given, see the agents, data and gui packages)
+   - <span style="background-color:yellow">*(some examples are given, see the ``agents``, ``data`` and ``gui`` packages; launch the ``LauchSimu`` class)*</span>
 
 3. A user agent launch a CFP to find the best appropriate repair coffee.
    -  a repair coffee:
