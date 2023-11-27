@@ -10,6 +10,7 @@ platform. Materials for Jade Tutorial : communication, protocols, votes, service
 - by 2 persons max.
 - no copy/paste between groups
 - to provide : the source code, and a report containing explanation and uml diagrams
+- detail about the report : **see your moodle group**
 
 ----
 ## Circular economy
@@ -17,7 +18,7 @@ platform. Materials for Jade Tutorial : communication, protocols, votes, service
 Here is a scenario:
  
  - some users have products
- - some product can be broken or become obsolescent 
+ - some products can be broken or become obsolescent 
  - several solutions exists:
    - tuto on website
    - repair coffees
@@ -69,6 +70,7 @@ to simulate the behaviour in several use cases you choose (ask for a repair, ...
    - random parts for the spare part stores.
    - and random specialities in repair coffee.
    - propose some gui **[5 points]**
+   - (some examples are given, see the agents, data and gui packages)
 
 3. A user agent launch a CFP to find the best appropriate repair coffee.
    -  a repair coffee:

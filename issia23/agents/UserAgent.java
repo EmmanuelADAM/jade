@@ -1,21 +1,49 @@
 package issia23.agents;
 
+import issia23.data.Product;
+import issia23.data.ProductType;
+import issia23.gui.UserAgentWindow;
 import jade.core.AID;
 import jade.core.AgentServicesTools;
-import jade.gui.AgentWindowed;
+import jade.gui.GuiAgent;
 import jade.gui.GuiEvent;
-import jade.gui.SimpleWindow4Agent;
 
-public class UserAgent extends AgentWindowed {
+import java.util.*;
+
+/**class related to the user, owner of products to repair
+ * @author emmanueladam
+ * */
+public class UserAgent extends GuiAgent {
+    /**list of products to repair*/
+    List<Product> products;
+    /**general skill of repairing*/
     int skill;
+    /**gui window*/
+    UserAgentWindow window;
     @Override
     public void setup()
     {
-        this.window = new SimpleWindow4Agent(getLocalName(),this);
+        this.window = new UserAgentWindow(getLocalName(),this);
         window.setButtonActivated(true);
-
-        skill = (int)(Math.random()*4);
+        //add a random skill
+        Random hasard = new Random();
+        skill = hasard.nextInt(5);
         println("hello, I have a skill = "+ skill);
+        //add some products choosen randomly in the list Product.getListProducts()
+        products = new ArrayList<>();
+        int nbTypeOfProducts = ProductType.values().length;
+        int nbPoductsByType = Product.NB_PRODS / nbTypeOfProducts;
+        var existingProducts = Product.getListProducts();
+        //add products
+        for(int i=0; i<nbTypeOfProducts; i++)
+            if(hasard.nextBoolean())
+               products.add(existingProducts.get(hasard.nextInt(nbPoductsByType) + (i*nbPoductsByType)));
+        //we need at least one pooduct
+        if(products.isEmpty())  products.add(existingProducts.get(hasard.nextInt(nbPoductsByType*nbTypeOfProducts)));
+        window.addProductsToCombo(products);
+        println("Here are my objects : ");
+        products.forEach(p->println("\t"+p));
+
     }
 
     @Override
@@ -29,6 +57,8 @@ public class UserAgent extends AgentWindowed {
             println("found this repair coffee : " + aid.getLocalName());
         println("-".repeat(30));
     }
+
+    public void println(String s){window.println(s);}
 
     @Override
     public void takeDown(){println("bye !!!");}
