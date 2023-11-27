@@ -46,16 +46,21 @@ public class UserAgent extends GuiAgent {
 
     }
 
+    /**the window sends an evt to the agent*/
     @Override
     public void onGuiEvent(GuiEvent evt)
     {
-        //I suppose there is only one type of event, clic on go
-        //search about repair coffee
-        var coffees = AgentServicesTools.searchAgents(this, "repair", "coffee");
-        println("-".repeat(30));
-        for(AID aid:coffees)
-            println("found this repair coffee : " + aid.getLocalName());
-        println("-".repeat(30));
+        //if it is the OK button
+        if(evt.getType()==UserAgentWindow.OK_EVENT)
+        {
+            //search about repair coffee
+            var coffees = AgentServicesTools.searchAgents(this, "repair", "coffee");
+            println("-".repeat(30));
+            for(AID aid:coffees)
+                println("found this repair coffee : " + aid.getLocalName());
+            println("-".repeat(30));
+            //TODO: Up to you to omplete the project....
+        }
     }
 
     public void println(String s){window.println(s);}

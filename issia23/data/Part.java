@@ -33,6 +33,12 @@ public class Part{
         this.standardPrice = standardPrice;
     }
 
+    public Part(Part p){
+        this.name = p.name;
+        this.type = p.type;
+        this.standardPrice = p.standardPrice;
+    }
+
     /**
      * create the list of parts if it does not exist.
      * for build the list,  it creates it from the details in the ProductType enum
@@ -62,6 +68,17 @@ public class Part{
         return String.format("Part{ %s - %s - %.2f€}", name, type, standardPrice);
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public Double getStandardPrice() {
+        return standardPrice;
+    }
+
+    public ProductType getType() {
+        return type;
+    }
 
     /**check the creation of the list of parts (used by the part stores).
      * (you can store the creation in a file and reload it later)*/
