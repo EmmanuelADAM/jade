@@ -42,7 +42,7 @@ public class UserAgent extends GuiAgent {
         for(int i=0; i<nbTypeOfProducts; i++)
             if(hasard.nextBoolean())
                products.add(existingProducts.get(hasard.nextInt(nbPoductsByType) + (i*nbPoductsByType)));
-        //we need at least one pooduct
+        //we need at least one product
         if(products.isEmpty())  products.add(existingProducts.get(hasard.nextInt(nbPoductsByType*nbTypeOfProducts)));
         window.addProductsToCombo(products);
         println("Here are my objects : ");

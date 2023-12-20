@@ -62,8 +62,8 @@ We can add these specification for a simple scenario :
 - distributors have not pb of elt
 
 - repair coffees have a cost of 5€/elt (the drink you buy)
-- spare parts stores have a cost of 30€/elt
-- spare parts stores specialised on second-hand material have a cost of 15€/elt
+- spare parts stores add a cost of at most 30% / elt
+- spare parts stores specialised on second-hand material have a cost of at most 30% / elt but the cost of an elt is divided / 2
 - for distributors the replacement is the price of the product (generated randomly from the specification)
 
 - a user has a limited amount of money, and time.
