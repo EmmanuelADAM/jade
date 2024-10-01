@@ -7,7 +7,7 @@
 Sur base du code sur le [PingPong](https://github.com/EmmanuelADAM/jade/blob/master/pingPong/), deux agents 
 vendeur et acheteur négocient autour d'un prix.
 
-Définissez les échanges de message sachant que le vendeur initie la négociation en proposant un prix.
+Voici les échanges de message sachant que le vendeur initie la négociation en proposant un prix.
  - Le vendeur dispose : 
    - d'un prix qu'il propose
    - d'une seuil sous lequel il met fin à la négociation
@@ -31,6 +31,9 @@ Définissez les échanges de message sachant que le vendeur initie la négociati
   - si le prix est entre le prix proposé et le seuil, le vendeur baisse sa poposition initiale de x%
 
 Regardez les classes proposées, et lancez le `main` de la classe `Main`.
+
+**Question :** Modifier le code existant pour que l'utilisateur joue le rôle de l'acheteur; l'acheteur reste l'agent.
+- Ajoutez ensuite des fenêtres de dialogues (cf. les autres exemples).
 
 ![diagramme d'états du principe de négociation](negociation.png)
 ---
