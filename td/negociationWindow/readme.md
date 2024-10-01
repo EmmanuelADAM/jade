@@ -32,4 +32,11 @@ Définissez les échanges de message sachant que le vendeur initie la négociati
 
 Regardez les classes proposées, et lancez le `main` de la classe `Main`.
 
+**Question 1:** l'acheteur est un humain, modifiez la fenêtre du Buyer pour pouvoir saisir et proposer un prix. -1 arrêtera la négociation.
+
+**Question 2:** le vendeur doit être paramétrable (prix proposé, prix min, nb de cycles).
+
+
+
+
 ---
