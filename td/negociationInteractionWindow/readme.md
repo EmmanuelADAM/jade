@@ -42,10 +42,31 @@ Regardez les classes proposées, et lancez le `main` de la classe `Main`.
     - rejet : seul l'acheteur ayant fait la dernière offre est retiré
     - acceptation : la vente est stoppée
 
+<!--
+```
+@startuml multiNegociation
+participant seller
+actor buyer1
+actor buyer2
+seller -> buyer1 : Propose:100
+seller -> buyer2 : Propose:100
+seller <- buyer1 : Propose:40
+seller -> buyer1 : Propose:90, 40
+seller -> buyer2 : Propose:90, 40
+seller <- buyer1 : Propose:45
+seller -> buyer1 : Propose:80, 45
+seller -> buyer2 : Propose:80, 45
+seller <- buyer2 : Propose:50
+seller -[#red]> buyer1 : Reject
+seller -[#blue]> buyer2 : Accept:50
+@enduml
+```
+-->
+<img src="multiNegociation.png" alt="multiNegociation" width="200"/>
+
+
 ---
 **Question 3:** le vendeur doit être paramétrable (prix proposé, prix min, nb de cycles).
-
-
 
 
 ---
