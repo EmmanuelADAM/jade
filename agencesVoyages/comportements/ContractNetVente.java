@@ -30,6 +30,7 @@ public class ContractNetVente extends ContractNetResponder {
      */
     private final JourneysList catalog;
 
+
     /**
      * agent gui
      */
@@ -96,8 +97,18 @@ public class ContractNetVente extends ContractNetResponder {
             liste.forEach(j -> window.println(j.toString()));
             window.println("  !!!!");
             inform.setContent("ok pour ces " + liste.size() + " tickets...");
+            //for each ticket bought, remove 1 place
+            liste.forEach(this::removeTicket);
         }
         return inform;
+    }
+
+
+    /**get in the catalog the journey corresponding to j and remove one place*/
+    private void removeTicket(Journey j) {
+        ArrayList<Journey> list = catalog.getJourneysFrom(j.getStart());
+        list.stream().filter(journey -> (journey.getStop().equals(j.getStop()) && journey.getDepartureDate() == j.getDepartureDate()))
+                .forEach(journey -> journey.setPlaces(journey.getPlaces() - 1));
     }
 
     /**

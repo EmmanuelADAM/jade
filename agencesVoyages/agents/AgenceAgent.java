@@ -18,6 +18,7 @@ import jade.lang.acl.MessageTemplate;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
@@ -131,9 +132,15 @@ public class AgenceAgent extends GuiAgent {
             int confort = Integer.parseInt(nextLine[7].trim());
             int nbRepetitions = (nextLine.length == 9) ? 0 : Integer.parseInt(nextLine[8].trim());
             int frequence = (nbRepetitions == 0) ? 0 : Integer.parseInt(nextLine[9].trim());
-            Journey firstJourney = new Journey(origine, destination, means, departureDate, duration, cost,
-                    co2, confort);
+            Journey firstJourney = new Journey(origine, destination, means, departureDate, duration, cost, co2, confort);
             firstJourney.setProposedBy(this.getLocalName());
+            int nbPlaces = switch (means) {
+                case "car" -> 3;
+                case "bus" -> 50;
+                case "train" -> 200;
+                default -> 0;
+            };
+            firstJourney.setPlaces(nbPlaces);
             window.println(firstJourney.toString());
             catalog.addJourney(firstJourney);
             if (nbRepetitions > 0) {
@@ -162,6 +169,11 @@ public class AgenceAgent extends GuiAgent {
             catalog.addJourney(cloneJ);
         }
     }
+
+    /**remove in the catalog 1 place for the journey that corresponds to the journey j*/
+
+
+
 
     /**
      * display a msg on the window
