@@ -96,25 +96,26 @@ _The following codes need, thus, this library and Java >= 17._
 - [Vote Borda](https://github.com/EmmanuelADAM/jade/tree/english/protocols/bordaCount) : codes illustrating 
   communication between agents by the ContractNet protocol for vote by Borda count.
 - *<yellow>(the following codes will be translated soon)*</yellow>
-- [Vote DoubleBorda](https://github.com/EmmanuelADAM/jade/tree/english/protocols/voteDoubleBorda) : codes illustrant la
-  communication entre agents par le protocole ContractNet pour un vote de Borda augmenté pour être effectué en 1 tour.
+- [Vote DoubleBorda](https://github.com/EmmanuelADAM/jade/tree/english/protocols/voteDoubleBorda) : codes illustrating
+  communication between agents by the ContractNet protocol for vote by using Borda count twice if needed.
+<!--- 
 - [Vote Condorcet](https://github.com/EmmanuelADAM/jade/tree/english/protocols/voteCondorcet) : codes illustrant la 
   communication entre agents par le protocole ContractNet pour un vote de Condorcet augmenté pour être effectué en 1 
   tour.
 - [Negociation](https://github.com/EmmanuelADAM/jade/tree/english/protocols/negociation) : codes à compléter 
   pour coder la négociation 1-1.
 
-<!--## Exemple complet, support à développements :
+## Exemple complet, support à développements :
 
 - [agentsVoyage](https://github.com/EmmanuelADAM/jade/tree/master/agencesVoyages) : codes pour des agents simulant des
   agences de voyages
--->
 ---
 
 ## Tutorials
 
 Some tutorial : [here](https://github.com/EmmanuelADAM/jade/tree/english/td/)
 
+-->
 ---
 
 ## ISSIA 23 - Scenario

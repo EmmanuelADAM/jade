@@ -21,7 +21,7 @@ import java.util.List;
  *
  * @author eadam
  */
-public class AgentParticipant extends AgentWindowed {
+public class ParticipantAgent extends AgentWindowed {
 
     /**
      * ajout du suivi de protocole AchieveRE
@@ -40,7 +40,7 @@ public class AgentParticipant extends AgentWindowed {
             @Override
             protected ACLMessage handleCfp(ACLMessage cfp) throws RefuseException, FailureException, NotUnderstoodException {
                 println("~".repeat(40));
-                println(cfp.getSender().getLocalName() + " propose les choix : " + cfp.getContent());
+                println(cfp.getSender().getLocalName() + " propose these preferences : " + cfp.getContent());
                 ACLMessage reponse = cfp.createReply();
                 reponse.setPerformative(ACLMessage.PROPOSE);
                 String choix = faireSonChoix(cfp.getContent());
@@ -57,10 +57,10 @@ public class AgentParticipant extends AgentWindowed {
                 ArrayList<String> choix = new ArrayList<>(List.of(offres.split(",")));
                 Collections.shuffle(choix);
                 StringBuilder sb = new StringBuilder();
-                String pref = ">";//pour eviter de recreer une chaine ',' a chaque vote
+                String pref = ">";
                 for (String s : choix) sb.append(s).append(pref);
                 String proposition  = sb.substring(0, sb.length()-1);
-                println("j'ai propose ceci " + proposition);
+                println("I proposed this " + proposition);
                 return proposition;
             }
 
@@ -68,9 +68,9 @@ public class AgentParticipant extends AgentWindowed {
             @Override
             protected ACLMessage handleAcceptProposal(ACLMessage cfp, ACLMessage propose, ACLMessage accept) throws FailureException {
                 println("=".repeat(10));
-                println(cfp.getSender().getLocalName() + " a lance un vote pour " + cfp.getContent());
-                println(" j'ai propose " + propose.getContent());
-                println(cfp.getSender().getLocalName() + " a accepte avec ce message " + accept.getContent());
+                println(cfp.getSender().getLocalName() + " launched a vote among " + cfp.getContent());
+                println(" I proposed " + propose.getContent());
+                println(cfp.getSender().getLocalName() + " accepted with this message " + accept.getContent());
                 ACLMessage msg = accept.createReply();
                 msg.setPerformative(ACLMessage.INFORM);
                 msg.setContent("ok !");
@@ -82,9 +82,9 @@ public class AgentParticipant extends AgentWindowed {
             protected void handleRejectProposal(ACLMessage cfp, ACLMessage propose, ACLMessage reject) {
                 println("=".repeat(10));
                 println("VOTE REJETE");
-                println(cfp.getSender().getLocalName() + " a lance un vote pour " + cfp.getContent());
-                println(" j'ai propose " + propose.getContent());
-                println(cfp.getSender().getLocalName() + " a refuse ! avec ce message " + reject.getContent());
+                println(cfp.getSender().getLocalName() + " launched a vote among " + cfp.getContent());
+                println(" I proposed " + propose.getContent());
+                println(cfp.getSender().getLocalName() + " accepted with this message " + reject.getContent());
             }
 
 
@@ -97,7 +97,7 @@ public class AgentParticipant extends AgentWindowed {
     @Override
     public void takeDown() {
         AgentServicesTools.deregisterAll(this);
-        System.err.println("moi " + this.getLocalName() + ", je quitte la plateforme...");
+        System.err.println("I, " + this.getLocalName() + ", I leave the platform...");
     }
 
 }
