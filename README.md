@@ -117,6 +117,11 @@ Some tutorial : [here](https://github.com/EmmanuelADAM/jade/tree/english/td/)
 
 -->
 ---
+## LLM ?
+- [AgentLLM](https://github.com/EmmanuelADAM/jade/tree/english/ollama) : an agent that connect to your local llm to discuss
+
+
+---
 
 ## ISSIA 23 - Scenario
 
