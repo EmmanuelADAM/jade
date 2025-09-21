@@ -37,11 +37,15 @@ Regardez les classes proposées, et lancez le `main` de la classe `Main`.
   - cf. dans [negociationInteractionWindow](https://github.com/EmmanuelADAM/jade/tree/english/td/negociationInteractionWindow) comment créer une fenêtre et la lier à son agent.
   - Il suffit alors de reprendre les classes `BuyerAgent` et la classe  `BuyerGui4Agent`.
 
-**Question 2:** 
-- Le vendeur doit être paramétrable (prix proposé, prix min, nb de cycles).
-  - il faut alors créer une fenêtre spécifiquement pour le vendeur et la relier à l'agent.
+**Question 2:**
+- 1 seul acheteur est un humain, les autres sont des agents.
+- ajoutez la classe permettant de lancer plusieurs acheteurs (1 humain et n agents).
 
-**Question 3:** les pourcentages $\epsilon$ pour la diminution et l'augmentation du prix sont calculés en fonction du prix proposé initialement, du prix seuil et du nombre de cycles autorisés.
+- **Question 3** 
+- Le vendeur doit être paramétrable (prix proposé, prix min, nb de cycles).
+  - il faut alors créer une fenêtre spécifiquement pour le vendeur et la relier à l'agent. 
+
+**Question 4** les pourcentages $\epsilon$ pour la diminution et l'augmentation du prix sont calculés en fonction du prix proposé initialement, du prix seuil et du nombre de cycles autorisés.
 - ex. prix de base = 100, prix max = 200, nb de cycles = 10, alors $\epsilon$ = 8% : 
   - 100, 108, 116, 124, 132, 140, 148, 156, 164, 172, 180, 188, 196
 
