@@ -37,7 +37,7 @@ Regardez les classes proposées, et lancez le `main` de la classe `Main`.
 - ajoutez la classe permettant de lancer plusieurs acheteurs (1 humain et n agents).
 
 **Question 2** 
-- Les agents acheteurs doivent être paramétrables (prix proposé, prix min, nb de cycles, coef).
+- Les agents acheteurs doivent être paramétrables (prix proposé, prix max, nb de cycles, coef).
   - il faut alors créer une fenêtre spécifiquement pour l'agent acheteur et la relier à l'agent. 
 
 **Question 3** 
