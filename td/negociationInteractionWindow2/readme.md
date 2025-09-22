@@ -66,7 +66,12 @@ seller -[#blue]> buyer2 : Accept:50
 
 
 ---
-**Question 3:** le vendeur doit être paramétrable (prix proposé, prix min, nb de cycles).
+**Question 3:** un acheteur est une personne, les autres acheteurs sont des agents.
+- il y a pour chaque agent une "urgence" (utilité) à remporter la négociation.
+- cette utilité (basée sur un nb de cycles max) et sur le montant des échanges en cours joue sur le prix proposé.
+
+---
+**Question 4:** le vendeur doit être paramétrable (prix proposé, prix min, nb de cycles).
 
 
 ---
