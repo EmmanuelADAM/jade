@@ -36,14 +36,19 @@ Regardez les classes proposées, et lancez le `main` de la classe `Main`.
 - 1 seul acheteur est un humain, les autres sont des agents.
 - ajoutez la classe permettant de lancer plusieurs acheteurs (1 humain et n agents).
 
-- **Question 2** 
-- Le vendeur doit être paramétrable (prix proposé, prix min, nb de cycles).
-  - il faut alors créer une fenêtre spécifiquement pour le vendeur et la relier à l'agent. 
+**Question 2** 
+- Les agents acheteurs doivent être paramétrables (prix proposé, prix min, nb de cycles, coef).
+  - il faut alors créer une fenêtre spécifiquement pour l'agent acheteur et la relier à l'agent. 
 
-**Question 3** les pourcentages $\epsilon$ pour la diminution et l'augmentation du prix sont calculés en fonction du prix proposé initialement, du prix seuil et du nombre de cycles autorisés.
-- ex. prix de base = 100, prix max = 200, nb de cycles = 10, alors $\epsilon$ = 8% : 
+**Question 3** 
+- Les pourcentages $\epsilon$ pour la diminution et l'augmentation du prix sont calculés en fonction du prix proposé initialement, du prix seuil et du nombre de cycles autorisés.
+  - ex. prix de base = 100, prix max = 200, nb de cycles = 10, alors $\epsilon$ = 8% : 
   - 100, 108, 116, 124, 132, 140, 148, 156, 164, 172, 180, 188, 196
 
+**Question 4** 
+- Il y a au maximum 4 objets à acheter, pour un montant fixe de 250€ pour tous les agents acheteurs et pour la personne qui achète.
+- Les objets mis à la vente à un prix de base de 100€.
+- Le but est de maximiser le nb de produits achetés, et la somme restante si ex-aequo. 
 
 
 ---
