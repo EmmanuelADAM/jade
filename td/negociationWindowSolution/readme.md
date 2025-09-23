@@ -35,6 +35,40 @@ Regardez les classes proposées, et lancez le `main` de la classe `Main`.
 **Question 1:**
 - 1 seul acheteur est un humain, les autres sont des agents.
 - ajoutez la classe permettant de lancer plusieurs acheteurs (1 humain et n agents).
+Exemple de diagramme de séquence pour 2 acheteurs (1 humain et 1 agent) :
+![](seqagtVagtApersA.png)
+
+<!--
+```
+@startuml pinpong
+!pragma teoz true
+participant  AVendeur
+actor PAcheteur 
+participant  AAcheteur
+AVendeur -> PAcheteur: 100
+& AVendeur -> AAcheteur: 100
+PAcheteur ->o AVendeur++: 50
+PAcheteur --> AAcheteur: 50
+AVendeur -> AAcheteur: 90
+&AVendeur -> PAcheteur--: 90
+PAcheteur ->o AVendeur++: 60
+PAcheteur --> AAcheteur: 60
+AVendeur -> AAcheteur: 80
+&AVendeur -> PAcheteur--: 80
+AAcheteur ->o AVendeur++: 65
+AAcheteur --> PAcheteur: 65
+AVendeur -> PAcheteur: 80
+&AVendeur -> AAcheteur--: 80
+AAcheteur ->o AVendeur++: Accepte 80
+AAcheteur --> PAcheteur: Accepte 80
+AVendeur -> AAcheteur--: Confirm ok pour 80 pour AAcheteur
+AVendeur --> PAcheteur: Confirm ok pour 80 pour AAcheteur
+
+...
+
+@enduml```
+-->
+
 
 **Question 2** 
 - Les agents acheteurs doivent être paramétrables (prix proposé, prix max, nb de cycles, coef).
