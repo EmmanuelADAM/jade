@@ -1,4 +1,4 @@
-## TD Open Cry First Price
+## TD Negociation entre agents et humain
 
 Sur base du code sur le [PingPong](https://github.com/EmmanuelADAM/jade/blob/master/pingPong/), deux agents
 vendeur et acheteur négocient autour d'un prix.
