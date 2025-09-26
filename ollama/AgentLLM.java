@@ -24,7 +24,6 @@ public class AgentLLM  extends AgentWindowed {
         String[] jadeArgs = new String[2];
         StringBuilder sbAgents = new StringBuilder();
         sbAgents.append("blablaAgent:ollama.AgentLLM;");
-        sbAgents.append("blablaAgent2:ollama.AgentLLM;");
         jadeArgs[0] = "-gui";
         jadeArgs[1] = sbAgents.toString();
         jade.Boot.main(jadeArgs);
@@ -210,6 +209,44 @@ public class AgentLLM  extends AgentWindowed {
 
     public void onGuiEvent(jade.gui.GuiEvent gev) {
 
+        sample2();
+
+    }
+
+    private void sample2()
+    {
+        try {
+            // Test chat avec historique
+            println("\n=== Test chat avec historique ===");
+            println("(patientez quelques secondes si le modèle est volumineux)");
+            String[] history = {
+                    "que manger quand il fait froid ?", "Je  propose du cassoulet ou de la choucroute, mais c'est un peu lourd et long à préparer.",
+                    "de la raclette ?", "oui, de la raclette est aussi un plat préféré quand il fait froid et il est rapide à préparer.",
+                    "que manger quand il fait très chaud ?", "pourquoi pas une salade garnie d'oeufs, tomates ?", "oui, les tomates j'aime bien.",
+                    "alors du gazpacho manger froid est très bon l'été", "Je suis dans le nord de la france.", "Alors un pojtelevech : morceaux de viande de poule, lapin, porc et parfois veau consommés froids et pris dans de la gelée culinaire légèrement vinaigrée.",
+                    "C'est le début de l'automne, que manger ?", "S'il fait frais, une carbonade flamande réchauffe; ou un lapin au pruneau et pain d'épice."
+            };
+            println("System: Tu es un assistant sympathique");
+            println("Historique forcée :");
+            for(int i=0; i<history.length; i+=2)
+                println("User: %s  --> Assistant: %s".formatted(history[i], history[i+1]));
+            println("---".repeat(20));
+            println("prompt: il fait 12° et nuageux. que cuisiner ? et comment ?");
+            println("?".repeat(20));
+            String historyResponse = chatWithHistory(modelName,
+                    "Tu es un assistant sympathique",
+                    "Comment cuisiner le repas ?",
+                    history);
+            println( historyResponse);
+            println("~".repeat(50));
+        }
+        catch (Exception e) {e.printStackTrace();}
+    }
+
+    /**
+     * * Exemple d'utilisation des différentes méthodes
+     * */
+    private void sample1() {
         println("~".repeat(50));
         // Test génération simple
         println("\n=== Test génération simple ===");
@@ -267,7 +304,6 @@ public class AgentLLM  extends AgentWindowed {
             println("~".repeat(50));
         }
         catch (Exception e) {e.printStackTrace();}
-
     }
 
 
