@@ -10,8 +10,9 @@ To allow an agent to use a LLM to interact with the user, one good way is to use
 
 1. Download [ollama](https://ollama.com/) from the main page
 2. Choose a LLM to download on your computer (ex. ``ollama pull llama3.1``)
+   *list of models :* [Ollama Models](https://github.com/ollama/ollama)
 3. Start ollama as a server ``ollama serve``
- 
+
 You can try the agent ``AgentLLM`` that just make a connection to your llm via ollama to chat..
   - the first execution is always long (depending on the llm and the computer) due to the loading of the llm
 
