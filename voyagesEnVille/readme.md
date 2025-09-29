@@ -1,6 +1,6 @@
 # Jade : Agents
 
-## Agence de voyages
+## Voyages en ville
 
 ---
 
@@ -9,7 +9,7 @@ Ces codes illustrent un petit cas d'étude permettant de manipuler le protocole 
 Un voyageur souhaite aller d'un point `a` à un point `b` :
 
 - il lance un appel d'offre à plusieurs agences de voyages,
-- certaines sont spécialisées dans les bus, les trains ou les voitures.
+- certaines sont spécialisées dans les vélos, les bus, les trains ou les voitures.
 - ces agences envoient leurs catalogues de voyages possibles
 - le client fait son choix et peut combiner différentes offres selon ses critères (coûts, temps, émission de CO2, ...)
 
@@ -38,11 +38,12 @@ Un voyageur souhaite aller d'un point `a` à un point `b` :
 - Dans le package [voyagesEnVille.gui](https://github.com/EmmanuelADAM/jade/tree/master/voyagesEnVille/gui) se trouvent
   les classes qui consruisent les feneêtre de dialogue avec les voyagesEnVille.agents.
 
+  
 Le code utilise
-
-- la librairie opencsv ([http://opencsv.sourceforge.net](http://opencsv.sourceforge.net)) version 3.9 attachée à ce
-  dossier.
-- la librairie jadeUPHF.jar à télécharger ici :  "[JadeUPHF.jar](https://github.com/EmmanuelADAM/JadeUPHF/blob/master/JadeUPHF.jar)".
+- la librairie opencsv
+- la librairie json
+- la librairie jadeUPHF.
+- Ces librairies sont dans le répertoire [external-libraries](https://github.com/EmmanuelADAM/jade/tree/english/external-libraries)
 
 -----
 Le code s'exécute tel quel, mais le client ne peut effectuer qu'un choix par durée la plus courte parmi les voyages

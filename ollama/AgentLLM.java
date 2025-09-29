@@ -1,10 +1,11 @@
 package ollama;
 
-import jade.core.Agent;
-import jade.gui.AgentWindowed;
-import jade.gui.SimpleWindow4Agent;
+import jade.gui.GuiAgent;
+import jade.gui.GuiEvent;
+import ollama.gui.GuiOllamaAgent;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import td.negociationInteractionWindow2.gui.BuyerGui4Agent;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -12,10 +13,11 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 
-public class AgentLLM  extends AgentWindowed {
+public class AgentLLM  extends GuiAgent {
     private HttpClient httpClient;
     private  String baseUrl;
     String modelName;
+    GuiOllamaAgent window;
 
     /**
      * this main launch JADE plateforme and asks it to create an agent
@@ -34,9 +36,8 @@ public class AgentLLM  extends AgentWindowed {
      */
     @Override
     protected void setup() {
-        window = new SimpleWindow4Agent(getAID().getName(), this);
-        window.setButtonActivated(true);
-        println("Hello! I'm an agent able to use LLM models. My name is " + getLocalName() + ". ");
+        window = new GuiOllamaAgent( this);
+        window.println("Hello! I'm an agent able to use LLM models. My name is " + getLocalName() + ". ");
 
         try {
         this.baseUrl = "http://localhost:11434";
@@ -47,10 +48,10 @@ public class AgentLLM  extends AgentWindowed {
         String texteHello = "Hello everybody and especially you !";
 
         // Lister les modèles disponibles
-        println("=== Available LLM models  ===");
+        window.println("=== Available LLM models  ===");
         String[] models = listModels();
         for (String model : models) {
-            println("- " + model);
+            window.println("- " + model);
         }
             modelName = models[0];
         } catch (Exception e) {e.printStackTrace();}
@@ -204,21 +205,15 @@ public class AgentLLM  extends AgentWindowed {
     // 'clean-up' of the agent
     @Override
     protected void takeDown() {
-        println("Me, Agent " + getLocalName() + " I leave the platform ! ");
-    }
-
-    public void onGuiEvent(jade.gui.GuiEvent gev) {
-
-        sample2();
-
+        window.println("Me, Agent " + getLocalName() + " I leave the platform ! ");
     }
 
     private void sample2()
     {
         try {
             // Test chat avec historique
-            println("\n=== Test chat avec historique ===");
-            println("(patientez quelques secondes si le modèle est volumineux)");
+            window.println("\n=== Test chat avec historique ===");
+            window.println("(patientez quelques secondes si le modèle est volumineux)");
             String[] history = {
                     "que manger quand il fait froid ?", "Je  propose du cassoulet ou de la choucroute, mais c'est un peu lourd et long à préparer.",
                     "de la raclette ?", "oui, de la raclette est aussi un plat préféré quand il fait froid et il est rapide à préparer.",
@@ -226,19 +221,49 @@ public class AgentLLM  extends AgentWindowed {
                     "alors du gazpacho manger froid est très bon l'été", "Je suis dans le nord de la france.", "Alors un pojtelevech : morceaux de viande de poule, lapin, porc et parfois veau consommés froids et pris dans de la gelée culinaire légèrement vinaigrée.",
                     "C'est le début de l'automne, que manger ?", "S'il fait frais, une carbonade flamande réchauffe; ou un lapin au pruneau et pain d'épice."
             };
-            println("System: Tu es un assistant sympathique");
-            println("Historique forcée :");
+            window.println("System: Tu es un assistant sympathique");
+            window.println("Historique forcée :");
             for(int i=0; i<history.length; i+=2)
-                println("User: %s  --> Assistant: %s".formatted(history[i], history[i+1]));
-            println("---".repeat(20));
-            println("prompt: il fait 12° et nuageux. que cuisiner ? et comment ?");
-            println("?".repeat(20));
+                window.println("User: %s  --> Assistant: %s".formatted(history[i], history[i+1]));
+            window.println("---".repeat(20));
+            window.println("prompt: il fait 12° et nuageux. que cuisiner ? et comment ?");
+            window.println("?".repeat(20));
             String historyResponse = chatWithHistory(modelName,
                     "Tu es un assistant sympathique",
                     "Comment cuisiner le repas ?",
                     history);
-            println( historyResponse);
-            println("~".repeat(50));
+            window.println( historyResponse);
+            window.println("~".repeat(50));
+        }
+        catch (Exception e) {e.printStackTrace();}
+    }
+    private void sample3(String query)
+    {
+        try {
+            // Test chat avec historique
+            window.println("\n=== Test chat avec historique ===", true);
+            window.println("(patientez quelques secondes si le modèle est volumineux)", true);
+            String[] history = {
+                    "que manger quand il fait froid ?", "Je  propose du cassoulet ou de la choucroute, mais c'est un peu lourd et long à préparer.",
+                    "de la raclette ?", "oui, de la raclette est aussi un plat préféré quand il fait froid et il est rapide à préparer.",
+                    "que manger quand il fait très chaud ?", "pourquoi pas une salade garnie d'oeufs, tomates ?",
+                    "oui, les tomates j'aime bien.", "alors du gazpacho manger froid est très bon l'été",
+                    "Je suis dans le nord de la france.", "Alors un pojtelevech : morceaux de viande de poule, lapin, porc et parfois veau consommés froids et pris dans de la gelée culinaire légèrement vinaigrée.",
+                    "C'est le début de l'automne, que manger ?", "S'il fait frais, une carbonade flamande réchauffe; ou un lapin au pruneau et pain d'épice."
+            };
+            window.println("System: Tu es un assistant sympathique", true);
+            window.println("Historique forcée :", true);
+            for(int i=0; i<history.length; i+=2)
+                window.println("User: %s  --> Assistant: %s".formatted(history[i], history[i+1]), true);
+            window.println("---".repeat(20), true);
+            window.println("->" + query, true);
+            window.println("?".repeat(20), true);
+            String historyResponse = chatWithHistory(modelName,
+                    "Tu es un assistant inventif et sympathique. Tu proposes des recettes de cuisine en fonction du temps. l'utilisateur est dans le nord de la france.",
+                    query,
+                    history);
+            window.println( historyResponse, true);
+            window.println("~".repeat(50), true);
         }
         catch (Exception e) {e.printStackTrace();}
     }
@@ -247,9 +272,9 @@ public class AgentLLM  extends AgentWindowed {
      * * Exemple d'utilisation des différentes méthodes
      * */
     private void sample1() {
-        println("~".repeat(50));
+        window.println("~".repeat(50));
         // Test génération simple
-        println("\n=== Test génération simple ===");
+        window.println("\n=== Test génération simple ===");
         String texte = """ 
                         during a vote for a restaurant, the following results were obtained :
                         ----------------------------------------
@@ -263,48 +288,58 @@ public class AgentLLM  extends AgentWindowed {
                 """;
         try {
             var prompt = "give a summary of this vote : the top 3 results, and the winner choice: " + texte;
-            println(prompt);
+            window.println(prompt,true);
             String response = generateResponse(modelName, prompt);
-            println("?".repeat(20));
-            println("Réponse: " + response);
+            window.println("?".repeat(20), true);
+            window.println("Réponse: " + response, true);
 
-            println("~".repeat(50));
+            window.println("~".repeat(50), true);
 
             // Test chat simple
-            println("\n=== Test chat simple ===");
-            println("(patientez quelques secondes si le modèle est volumineux)");
-            println("System: Tu es un assistant utile et concis");
-            println("User: Salut ! Il est tard, donne moi une idée de repas à faire..");
-            println("?".repeat(20));
+            window.println("\n=== Test chat simple ===", true);
+            window.println("(patientez quelques secondes si le modèle est volumineux)", true);
+            window.println("?".repeat(20));
             String chatResponse = simpleChat(modelName,
                     "Tu es un assistant utile et concis",
                     "Salut ! Il est tard, donne moi une idée de repas à faire..");
-            println("Chat: " + chatResponse);
+            window.println("Chat: " + chatResponse);
 
-            println("~".repeat(50));
+            window.println("~".repeat(50));
             // Test chat avec historique
-            println("\n=== Test chat avec historique ===");
-            println("(patientez quelques secondes si le modèle est volumineux)");
+            window.println("\n=== Test chat avec historique ===");
+            window.println("(patientez quelques secondes si le modèle est volumineux)");
             String[] history = {
                     "Donne moi une idée de diner rapide", "Je te propose des pates au pesto.",
                     "Je n'ai pas de pates, j'aime les oeufs", "Je te propose une omelette."
             };
-            println("System: Tu es un assistant sympathique");
-            println("Historique forcée :");
-            println("User: Donne moi une idée de diner rapide --> Assistant: Je te propose des pates au pesto.");
-            println("User: Je n'ai pas de pates, j'aime les oeufs --> Assistant: Je te propose une omelette.");
-            println("---".repeat(20));
-            println("prompt: Comment cuisiner le repas ?");
-            println("?".repeat(20));
+            window.println("System: Tu es un assistant sympathique");
+            window.println("Historique forcée :");
+            window.println("User: Donne moi une idée de diner rapide --> Assistant: Je te propose des pates au pesto.");
+            window.println("User: Je n'ai pas de pates, j'aime les oeufs --> Assistant: Je te propose une omelette.");
+            window.println("---".repeat(20));
+            window.println("prompt: Comment cuisiner le repas ?");
+            window.println("?".repeat(20));
             String historyResponse = chatWithHistory(modelName,
                     "Tu es un assistant sympathique",
                     "Comment cuisiner le repas ?",
                     history);
-            println( historyResponse);
-            println("~".repeat(50));
+            window.println( historyResponse);
+            window.println("~".repeat(50));
         }
         catch (Exception e) {e.printStackTrace();}
     }
 
+    @Override
+    protected void onGuiEvent(GuiEvent ev) {
+        switch (ev.getType()) {
+            case BuyerGui4Agent.SENDOFFER -> sample3(window.lowTextArea.getText());
+            case BuyerGui4Agent.QUITCODE ->
+                    {
+                        window.dispose();
+                        doDelete();
+                        System.exit(0);
+                    }
+        }
+    }
 
 }
