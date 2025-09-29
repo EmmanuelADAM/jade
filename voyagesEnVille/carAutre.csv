@@ -1,0 +1,5 @@
+origine,destination,means,departureTime,duration,financial cost,co2,confort,nbRepetitions(optional),frequence(optional)
+a      ,e          ,car  ,700          ,30      ,15            ,400,4      ,2                      ,120
+e      ,a          ,car  ,1400         ,30      ,15            ,400,4      ,2                      ,120
+b      ,f          ,car  ,730          ,40      ,18            ,420,4      ,2                      ,120
+f      ,b          ,car  ,1300         ,40      ,18            ,420,4      ,2                      ,120

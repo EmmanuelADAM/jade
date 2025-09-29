@@ -127,14 +127,9 @@ public class TravellerGui extends JFrame {
                 // END SEND AN GUI EVENT TO THE AGENT !!!
             }
         });
-
         setResizable(true);
     }
 
-    public static void main(String[] args) {
-        TravellerGui test = new TravellerGui(null);
-        test.setVisible(true);
-    }
 
     /**
      * add a string to the text area
@@ -150,4 +145,8 @@ public class TravellerGui extends JFrame {
         jTextArea.setBackground(color);
     }
 
+    public static void main(String[] args) {
+        TravellerGui test = new TravellerGui(null);
+        test.setVisible(true);
+    }
 }

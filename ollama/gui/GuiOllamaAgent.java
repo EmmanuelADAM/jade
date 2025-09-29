@@ -23,7 +23,7 @@ public class GuiOllamaAgent extends JFrame implements ActionListener {
     /**
      * code associated to the "send to lobby" button
      */
-    public static final int SENDOFFER = 1;
+    public static final int SENDQUERY = 1;
     /**
      * string associated to the Quit button
      */

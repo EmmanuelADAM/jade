@@ -1,15 +1,15 @@
 origine,destination,means,departureTime,duration,financial cost,co2,confort
-a      ,b          ,bike  ,0,20,1,30,1
-b      ,a          ,bike  ,0,20,1,30,1
-b      ,c          ,bike  ,0,20,1,30,1
-c      ,b          ,bike  ,0,20,1,30,1
-b      ,d          ,bike  ,0,30,1,30,1
-d      ,b          ,bike  ,0,30,1,30,1
-c      ,d          ,bike  ,0,20,1,30,1
-d      ,c          ,bike  ,0,20,1,30,1
-c      ,e          ,bike  ,0,30,1,30,1
-e      ,c          ,bike  ,0,30,1,30,1
-d      ,e          ,bike  ,0,40,1,30,1
-e      ,d          ,bike  ,0,40,1,30,1
-e      ,f          ,bike  ,0,30,1,30,1
-f      ,e          ,bike  ,0,30,1,30,1
+a,b,bike,0,25,1,0,1
+b,a,bike,0,25,1,0,1
+b,c,bike,0,25,1,0,1
+c,b,bike,0,25,1,0,1
+b,d,bike,0,35,1,0,1
+d,b,bike,0,35,1,0,1
+c,d,bike,0,25,1,0,1
+d,c,bike,0,25,1,0,1
+c,e,bike,0,35,1,0,1
+e,c,bike,0,35,1,0,1
+d,e,bike,0,45,1,0,1
+e,d,bike,0,45,1,0,1
+e,f,bike,0,35,1,0,1
+f,e,bike,0,35,1,0,1

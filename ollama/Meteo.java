@@ -20,7 +20,7 @@ import org.json.JSONObject;
  */
 public class Meteo {
 
-    private static final String API_KEY = "1234567ab0a12a1234ab12a1234ab12a"; // Remplacez par votre clé API
+    private static final String API_KEY = "1772774eb0d72f5314fe46f6355cd59e"; // Remplacez par votre clé API
     private static final String BASE_URL = "http://api.openweathermap.org/data/2.5/weather";
     private static final Logger logger = Logger.getLogger(Meteo.class.getName());
 
@@ -64,7 +64,7 @@ public class Meteo {
         }
 
         try {
-            String encodedCityName = URLEncoder.encode(cleanedCityName, StandardCharsets.UTF_8.toString());
+            String encodedCityName = URLEncoder.encode(cleanedCityName, StandardCharsets.UTF_8);
             String urlString = String.format("%s?q=%s&appid=%s&units=metric&lang=fr",
                     BASE_URL, encodedCityName, API_KEY);
 
@@ -237,7 +237,7 @@ public class Meteo {
 
             // Conditions météo
             JSONArray weatherArray = json.optJSONArray("weather");
-            if (weatherArray != null && weatherArray.length() > 0) {
+            if (weatherArray != null && !weatherArray.isEmpty()) {
                 JSONObject weather = weatherArray.getJSONObject(0);
                 weatherData.setDescription(weather.optString("description", "N/A"));
                 weatherData.setMainCondition(weather.optString("main", "N/A"));
@@ -462,14 +462,14 @@ public class Meteo {
         }
 
         if (weather.getWindSpeed() > 15) {
-            advice.append("💨 Vent fort (" + String.format("%.1f", weather.getWindSpeedKmh()) + " km/h). ");
+            advice.append("💨 Vent fort (").append(String.format("%.1f", weather.getWindSpeedKmh())).append(" km/h). ");
         }
 
         if (weather.getHumidity() > 80) {
-            advice.append("💧 Humidité élevée (" + weather.getHumidity() + "%). ");
+            advice.append("💧 Humidité élevée (").append(weather.getHumidity()).append("%). ");
         }
 
-        if (advice.length() == 0) {
+        if (advice.isEmpty()) {
             advice.append(" Conditions météo stables !");
         }
 
@@ -504,8 +504,8 @@ public class Meteo {
         }
 
         // Exemple avec des coordonnées (Paris)
-        System.out.println("\n--- Test avec coordonnées (Paris) ---");
-        WeatherData parisWeather = service.getWeatherByCoordinates(48.8566, 2.3522);
+        System.out.println("\n--- Test avec coordonnées (Queenstown, Tasmanie) ---");
+        WeatherData parisWeather = service.getWeatherByCoordinates(-42.0450, 145.4580);
         if (parisWeather != null && parisWeather.isValid()) {
             System.out.println(parisWeather);
         } else {

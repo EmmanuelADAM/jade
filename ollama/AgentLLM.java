@@ -5,7 +5,6 @@ import jade.gui.GuiEvent;
 import ollama.gui.GuiOllamaAgent;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import td.negociationInteractionWindow2.gui.BuyerGui4Agent;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -295,36 +294,6 @@ public class AgentLLM  extends GuiAgent {
 
             window.println("~".repeat(50), true);
 
-            // Test chat simple
-            window.println("\n=== Test chat simple ===", true);
-            window.println("(patientez quelques secondes si le modèle est volumineux)", true);
-            window.println("?".repeat(20));
-            String chatResponse = simpleChat(modelName,
-                    "Tu es un assistant utile et concis",
-                    "Salut ! Il est tard, donne moi une idée de repas à faire..");
-            window.println("Chat: " + chatResponse);
-
-            window.println("~".repeat(50));
-            // Test chat avec historique
-            window.println("\n=== Test chat avec historique ===");
-            window.println("(patientez quelques secondes si le modèle est volumineux)");
-            String[] history = {
-                    "Donne moi une idée de diner rapide", "Je te propose des pates au pesto.",
-                    "Je n'ai pas de pates, j'aime les oeufs", "Je te propose une omelette."
-            };
-            window.println("System: Tu es un assistant sympathique");
-            window.println("Historique forcée :");
-            window.println("User: Donne moi une idée de diner rapide --> Assistant: Je te propose des pates au pesto.");
-            window.println("User: Je n'ai pas de pates, j'aime les oeufs --> Assistant: Je te propose une omelette.");
-            window.println("---".repeat(20));
-            window.println("prompt: Comment cuisiner le repas ?");
-            window.println("?".repeat(20));
-            String historyResponse = chatWithHistory(modelName,
-                    "Tu es un assistant sympathique",
-                    "Comment cuisiner le repas ?",
-                    history);
-            window.println( historyResponse);
-            window.println("~".repeat(50));
         }
         catch (Exception e) {e.printStackTrace();}
     }
@@ -332,8 +301,8 @@ public class AgentLLM  extends GuiAgent {
     @Override
     protected void onGuiEvent(GuiEvent ev) {
         switch (ev.getType()) {
-            case BuyerGui4Agent.SENDOFFER -> sample3(window.lowTextArea.getText());
-            case BuyerGui4Agent.QUITCODE ->
+            case GuiOllamaAgent.SENDQUERY -> sample3(window.lowTextArea.getText());
+            case GuiOllamaAgent.QUITCODE ->
                     {
                         window.dispose();
                         doDelete();

@@ -138,9 +138,10 @@ public class JourneysList implements Serializable {
         var list = catalog.get(start.toUpperCase());
         if (list == null) return false;
         for (Journey j : list) {
+            if (!via.contains(j.stop.toUpperCase())) {
             if ((j.departureDate >= date && j.departureDate <= Journey.addTime(date, late))
                     || j.means.equalsIgnoreCase("bike")) // bike can be taken anytime
-                if (j.stop.equalsIgnoreCase(stop)) {
+                if (j.stop.equalsIgnoreCase(stop)) {//end of the journey
                     if (j.means.equalsIgnoreCase("bike"))
                         copyJ = new Journey(j);
                     else copyJ = j;
@@ -151,8 +152,7 @@ public class JourneysList implements Serializable {
                     compo.addJourneys((ArrayList<Journey>) currentJourney.clone());
                     results.add(compo);
                     currentJourney.removeLast();
-                } else {
-                    if (!via.contains(j.stop.toUpperCase())) {
+                } else {//juste an intermediate stop
                         if (j.means.equalsIgnoreCase("bike")) {
                             copyJ = new Journey(j);
                             copyJ.departureDate = date; // bike can be taken anytime
@@ -162,9 +162,9 @@ public class JourneysList implements Serializable {
                         currentJourney.add(copyJ);
                         findIndirectJourney(copyJ.stop.toUpperCase(), stop.toUpperCase(), copyJ.arrivalDate, late, currentJourney, via, results);
                         via.remove(copyJ.stop.toUpperCase());
-                        currentJourney.remove(j);
-                    }
+                        currentJourney.remove(copyJ);
                 }
+            }
         }
         result = !results.isEmpty();
         return result;
