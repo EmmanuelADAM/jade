@@ -20,7 +20,7 @@ import org.json.JSONObject;
  */
 public class Meteo {
 
-    private static final String API_KEY = "1772774eb0d72f5314fe46f6355cd59e"; // Remplacez par votre clé API
+    private static final String API_KEY = "1234567ab1a12a1234ab12a1234ab12a"; // Remplacez par votre clé API
     private static final String BASE_URL = "http://api.openweathermap.org/data/2.5/weather";
     private static final Logger logger = Logger.getLogger(Meteo.class.getName());
 
