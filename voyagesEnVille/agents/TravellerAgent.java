@@ -47,6 +47,11 @@ public class TravellerAgent extends GuiAgent {
     private JourneysList catalogs;
 
     /**
+     * delay in minute between two rides in a junction (in minutes)
+     * */
+    int delay = 90;
+
+    /**
      * the journey chosen by the agent
      */
     private ComposedJourney myJourney;
@@ -76,7 +81,7 @@ public class TravellerAgent extends GuiAgent {
 
         topic = AgentServicesTools.generateTopicAID(this, "TRAFFIC NEWS");
         //ecoute des messages radio
-        addBehaviour(new ReceiverBehaviour(this, -1, MessageTemplate.MatchTopic(topic), true, (a, m)->{
+        addBehaviour(new ReceiverBehaviour(this, -1, MessageTemplate.MatchTopic(topic), true, (a, m) -> {
             println("Message recu sur le topic " + topic.getLocalName() + ". Contenu " + m.getContent()
                     + " emis par :  " + m.getSender().getLocalName());
         }));
@@ -109,12 +114,17 @@ public class TravellerAgent extends GuiAgent {
 
     }
 
-
-
+    /**
+     * compute a composed journey from a departure to an arrival point
+     * @param from       departure point
+     * @param to         arrival point
+     * @param departure  desired departure time (in hhmm)
+     * @param preference preference for the choice of the journey (cost, confort, duration, duration-cost)
+     * */
     public void computeComposedJourney(final String from, final String to, final int departure,
                                        final String preference) {
         final List<ComposedJourney> journeys = new ArrayList<>();
-        //recherche de trajets ac tps d'attentes entre via = 60mn
+
         final boolean result = catalogs.findIndirectJourney(from, to, departure, 60, new ArrayList<>(),
                 new ArrayList<>(), journeys);
 
@@ -122,17 +132,20 @@ public class TravellerAgent extends GuiAgent {
             println("no journey found !!!");
         }
         if (result) {
-            //oter les voyages demarrant trop tard (1h30 apres la date de depart souhaitee)
-            journeys.removeIf(j -> j.getJourneys().getFirst().getDepartureDate() - departure > 90);
+            //oter les voyages demarrant trop tard
+            journeys.removeIf(j -> j.getJourneys().getFirst().getDepartureDate() - departure > delay);
             switch (preference) {
                 case "duration" -> {
-                    //TODO: replace below to make a selection by fstest journey
-                    journeys.sort(Comparator.comparingDouble(ComposedJourney::getCost));                }
+                    journeys.sort(Comparator.comparingDouble(ComposedJourney::getDuration));
+                }
                 case "confort" -> journeys.sort(Comparator.comparingInt(ComposedJourney::getConfort).reversed());
                 case "cost" -> journeys.sort(Comparator.comparingDouble(ComposedJourney::getCost));
                 case "duration-cost" ->
-                    //TODO: replace below to make a compromise between cost and confort...
-                        journeys.sort(Comparator.comparingDouble(ComposedJourney::getCost));
+                //        journeys.sort(Comparator.comparingDouble(ComposedJourney::getCost));
+                journeys.sort((j1, j2) -> {
+                    var difDuration = j1.getDuration() - j2.getDuration() / Math.max(j2.getDuration(),j1.getDuration());
+                    var difCost = j1.getCost() - j2.getCost() / Math.max(j2.getCost(),j1.getCost());
+                    return (int)(10*(difDuration + difCost));});
                 default -> journeys.sort(Comparator.comparingDouble(ComposedJourney::getCost));
             }
             myJourney = journeys.getFirst();
@@ -158,9 +171,9 @@ public class TravellerAgent extends GuiAgent {
     // 'Nettoyage' de l'agent
     @Override
     protected void takeDown() {
-        if(window!=null) {
+        if (window != null) {
             window.dispose();
-            System.out.println(getLocalName() +   ">>> I leave the platform. ");
+            System.out.println(getLocalName() + ">>> I leave the platform. ");
         }
     }
 
