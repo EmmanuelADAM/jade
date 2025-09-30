@@ -53,7 +53,7 @@ proposés.
   - on pose 3 places par trajet en voiture, 20 vélos disponibles dans chaque zone, 50 places dans un bus, et 200 places dans un tram,
   - lorsqu'un voyage est choisi, le nombre de places disponibles est décrémenté,
   - si le nombre de places disponibles est nul, le voyage n'est plus proposé. 
-  - cas particulier des vélos : à l'utilisation d'un vélo, le nombre de vélos dans la ville de départ est décrémenté, et il est incrémenté dans la ville d'arrivée **après la date d'arrivée (il sera rendu accessible après la date d'arrivée prévue)** *(+5 points pour cette fonctionnalité)*.
+  - cas particulier des vélos : à l'utilisation d'un vélo, le nombre de vélos dans la zone de départ est décrémenté, et il est incrémenté dans la zone d'arrivée **après la date d'arrivée (il sera rendu accessible après la date d'arrivée prévue)** *(+5 points pour cette fonctionnalité)*.
 - Prise en compte de la météo : 
   - si pluie et/ou vent très fort, les trajets à vélo ne sont pas proposés,
   - si vent fort, les trajets à vélo sont proposés avec un temps majoré de 50%,
