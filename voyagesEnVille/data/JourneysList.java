@@ -142,10 +142,11 @@ public class JourneysList implements Serializable {
             if ((j.departureDate >= date && j.departureDate <= Journey.addTime(date, late))
                     || j.means.equalsIgnoreCase("bike")) // bike can be taken anytime
                 if (j.stop.equalsIgnoreCase(stop)) {//end of the journey
-                    if (j.means.equalsIgnoreCase("bike"))
+                    if (j.means.equalsIgnoreCase("bike")) {
                         copyJ = new Journey(j);
+                        copyJ.departureDate = date; // bike can be taken anytime
+                    }
                     else copyJ = j;
-                    copyJ.departureDate = date; // bike can be taken anytime
                     copyJ.arrivalDate = Journey.addTime(copyJ.departureDate, j.duration);
                     currentJourney.add(copyJ);
                     ComposedJourney compo = new ComposedJourney();
