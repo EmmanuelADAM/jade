@@ -9,8 +9,9 @@ Jade Agent-Oriented Programming Course Materials
 To allow an agent to use a LLM to interact with the user, one good way is to use OLLAMA.
 
 1. Download [ollama](https://ollama.com/) from the main page
-2. Choose a LLM to download on your computer (ex. ``ollama pull llama3.1``)
-   *list of models :* [Ollama Models](https://github.com/ollama/ollama)
+2. Choose a LLM to download on your computer (ex. ``ollama pull granite.3.``) 
+   - *list of models :* [Ollama Models](https://github.com/ollama/ollama)*
+   - [granite3.3](https://ollama.com/library/granite3.3) is a good one (free)
 3. Start ollama as a server ``ollama serve``
 
 You can try the agent ``AgentLLM`` that just make a connection to your llm via ollama to chat..
