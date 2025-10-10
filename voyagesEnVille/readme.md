@@ -46,31 +46,23 @@ Le code utilise
 - Ces librairies sont dans le répertoire [external-libraries](https://github.com/EmmanuelADAM/jade/tree/english/external-libraries)
 
 -----
-Le code s'exécute tel quel, mais le client ne peut effectuer qu'un choix par durée la plus courte parmi les voyages
-proposés.
+Le code s'exécute tel quel, mais le client ne peut effectuer qu'un choix par durée la plus courte parmi les voyages proposés.
 
-- **Proposez et codez** la décrémentation du nb de places par voyage : 
-  - on pose 3 places par trajet en voiture, 20 vélos disponibles dans chaque zone, 50 places dans un bus, et 200 places dans un tram,
+Code pouvant etre amélioré :
+- la décrémentation du nb de places par voyage : 
+  - on peut poser 3 places par trajet en voiture, 20 vélos disponibles dans chaque zone, 50 places dans un bus, et 200 places dans un tram,
   - lorsqu'un voyage est choisi, le nombre de places disponibles est décrémenté,
   - si le nombre de places disponibles est nul, le voyage n'est plus proposé. 
-  - cas particulier des vélos : à l'utilisation d'un vélo, le nombre de vélos dans la zone de départ est décrémenté, et il est incrémenté dans la zone d'arrivée **après la date d'arrivée (il sera rendu accessible après la date d'arrivée prévue)** *(+5 points pour cette fonctionnalité)*.
+  - cas particulier des vélos : à l'utilisation d'un vélo, le nombre de vélos dans la zone de départ est décrémenté, et il est incrémenté dans la zone d'arrivée **après la date d'arrivée (il sera rendu accessible après la date d'arrivée prévue)** 
 - Prise en compte de la météo : 
   - si pluie et/ou vent très fort, les trajets à vélo ne sont pas proposés,
   - si vent fort, les trajets à vélo sont proposés avec un temps majoré de 50%,
   - si neige, les trajets en voiture sont proposés avec un temps majoré de 50% et un coût majoré de 20%.
-  - **utilisez l'[api openweathermap](https://openweathermap.org/)** :inscription gratuite ici : [home.openweathermap.org/users/sign_up](https://home.openweathermap.org/users/sign_up) (60 utilisations / minute gratuites). Voir le détail des champs récupérables ici : [openweathermap.org/current](https://openweathermap.org/current). Voir l'exemple dans la classe [Meteo.java](https://github.com/EmmanuelADAM/jade/blob/english/ollama/Meteo.java) (indiquez votre clé dans le code).
-    - **Selon la météo** de la ville, les propositions de l'agent traveller doivent être adaptées. *(+5 points pour cette fonctionnalité)*
-    
-- **Améliorer le texte** : utilisez [Ollama] (https://ollama.com/) pour améliorer le texte des messages échangés entre l'agent traveller et l'humain. Voir l'exemple d'[un agent utilisant Ollama ici](https://github.com/EmmanuelADAM/jade/tree/english/ollama) - *(+5 points pour cette fonctionnalité)*
-
-- **Améliorer la demande** : utilisez le llm de votre choix pour que l'utilisateur puisse formuler sa demande de voyage en"
-  langage naturel (ex. "je veux aller de 'a' à 'd' avant 15h avec un budget de 20€ et en émettant le moins de CO2 possible"). *(+5 points pour cette fonctionnalité)*
-
-- Proposez et codez le comportement de **réaction suite à la réception d'un message d'alerte** sur un tronçon donné - *(+5 points pour cette fonctionnalité)* : 
+    - **Selon la météo** de la ville, les propositions de l'agent traveller doivent être adaptées.
+- proposition d'un comportement de **réaction suite à la réception d'un message d'alerte** sur un tronçon donné : 
     - pour les agences (disparition des trajets impactés),
     - pour le client (relance d'une demande de trajet si impacté, achat des billets permettant de compléter le trajet).
-
-
+- ou d'autres améliorations  ...
 -----
 
 ### Réseau de transport
@@ -120,17 +112,6 @@ E <-- > F
 -->
 
 <img src="trajetsV1.png" alt="reseau v1" height="300"/>
-
-
----
-### Rapport à rendre
-
-Vous associerez votre remise de codes d'un court rapport contenant :
-- un diagramme de classes, contenant les classes sur les agents et leurs comportements
-- de diagrammes de séquences détaillant la recherche de voyages, les appels à l'api meteo et au llm 
-
-Vous pouvez vous baser sur les exemples de diagrammes illustrant les codes dans ce dépôt github ; ainsi que sur les codes [PlantUML](https://plantuml.com/fr/) associé si vous souhaitez utiliser cet outil pour la création de diagrammes (attention au site de PlantUML, *beaucoup de pubs*, utilisez un outil tel que ghostery ou autres anti-pub sur votre navigateur).
-
 
 
 ---
