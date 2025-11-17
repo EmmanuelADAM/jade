@@ -12,6 +12,14 @@ Voici les échanges de message sachant que le vendeur initie la négociation en 
    - d'un prix qu'il propose
    - d'un seuil sous lequel il met fin à la négociation
    - d'un nombre de tours avant de mettre fin à la négociation
+   - utilisez simplement la classe Scanner pour lire les entrées du clavier : 
+   - ```java
+       Scanner scanner = new Scanner(System.in);
+       System.out.print("Entrez votre proposition de prix : ");
+       int prixPropose = scanner.nextInt();
+     //utiliser un reel ou une chaine si vous preferez
+     ```
+     
 
  - L'acheteur dispose :
    - d'un prix qu'il propose
@@ -32,7 +40,7 @@ Voici les échanges de message sachant que le vendeur initie la négociation en 
 
 Regardez les classes proposées, et lancez le `main` de la classe `Main`.
  
-**Question :** Modifier le code existant pour que l'utilisateur joue le rôle de l'acheteur; l'acheteur reste l'agent.
+**Question :** Modifier le code existant pour que l'utilisateur joue le rôle de l'acheteur; le vendeur reste un agent.
 - Ajoutez ensuite des fenêtres de dialogues (cf. les autres exemples).
 
 
