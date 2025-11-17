@@ -23,6 +23,11 @@ You can try the agent ``AgentLLM`` that just make a connection to your llm via o
    - the agent will ask to a weather agent about the weather (see Meteo class)
    - in parallel the blabla agent ask about taste preferences
    - the blabla agent will propose a restaurant according to the weather, and the taste preferences, and some advices regarding the clothes.
+   
+**For Meteo**: 
+   - Use [OpenWeatherMap API](https://openweathermap.org/api)
+   - create our own key (free access with limitations) here : [Get API Key](https://home.openweathermap.org/users/sign_up)
+   - and replace the key in the Meteo class
  
 
 ---
