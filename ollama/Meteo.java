@@ -20,12 +20,13 @@ import org.json.JSONObject;
  */
 public class Meteo {
 
-    private static final String API_KEY = "1234567ab1a12a1234ab12a1234ab12a"; // Remplacez par votre clé API
+    private static final String API_KEY = "1234567891346579"; // Remplacez par votre clé API
     private static final String BASE_URL = "http://api.openweathermap.org/data/2.5/weather";
     private static final Logger logger = Logger.getLogger(Meteo.class.getName());
 
     /**
      * Nettoie et valide le nom d'une ville
+     *
      * @param cityName nom de la ville à nettoyer
      * @return nom nettoyé ou null si invalide
      */
@@ -53,6 +54,7 @@ public class Meteo {
 
     /**
      * Récupère les données météo pour une ville donnée
+     *
      * @param cityName nom de la ville
      * @return WeatherData ou null en cas d'erreur
      */
@@ -82,6 +84,7 @@ public class Meteo {
 
     /**
      * Récupère les données météo par coordonnées
+     *
      * @param lat latitude
      * @param lon longitude
      * @return WeatherData ou null en cas d'erreur
@@ -109,6 +112,7 @@ public class Meteo {
 
     /**
      * Effectue la requête HTTP avec validation d'URL
+     *
      * @param urlString URL à interroger
      * @return réponse JSON ou null en cas d'erreur
      */
@@ -191,6 +195,7 @@ public class Meteo {
 
     /**
      * Parse les données JSON de l'API météo avec org.json
+     *
      * @param jsonResponse réponse JSON de l'API
      * @return WeatherData ou null en cas d'erreur
      */
@@ -295,59 +300,149 @@ public class Meteo {
         private long sunset;
 
         // Getters et Setters
-        public String getCityName() { return cityName; }
-        public void setCityName(String cityName) { this.cityName = cityName; }
+        public String getCityName() {
+            return cityName;
+        }
 
-        public String getCountry() { return country; }
-        public void setCountry(String country) { this.country = country; }
+        public void setCityName(String cityName) {
+            this.cityName = cityName;
+        }
 
-        public double getTemperature() { return temperature; }
-        public void setTemperature(double temperature) { this.temperature = temperature; }
+        public String getCountry() {
+            return country;
+        }
 
-        public double getFeelsLike() { return feelsLike; }
-        public void setFeelsLike(double feelsLike) { this.feelsLike = feelsLike; }
+        public void setCountry(String country) {
+            this.country = country;
+        }
 
-        public double getTempMin() { return tempMin; }
-        public void setTempMin(double tempMin) { this.tempMin = tempMin; }
+        public double getTemperature() {
+            return temperature;
+        }
 
-        public double getTempMax() { return tempMax; }
-        public void setTempMax(double tempMax) { this.tempMax = tempMax; }
+        public void setTemperature(double temperature) {
+            this.temperature = temperature;
+        }
 
-        public int getHumidity() { return humidity; }
-        public void setHumidity(int humidity) { this.humidity = humidity; }
+        public double getFeelsLike() {
+            return feelsLike;
+        }
 
-        public int getPressure() { return pressure; }
-        public void setPressure(int pressure) { this.pressure = pressure; }
+        public void setFeelsLike(double feelsLike) {
+            this.feelsLike = feelsLike;
+        }
 
-        public String getDescription() { return description; }
-        public void setDescription(String description) { this.description = description; }
+        public double getTempMin() {
+            return tempMin;
+        }
 
-        public String getMainCondition() { return mainCondition; }
-        public void setMainCondition(String mainCondition) { this.mainCondition = mainCondition; }
+        public void setTempMin(double tempMin) {
+            this.tempMin = tempMin;
+        }
 
-        public double getWindSpeed() { return windSpeed; }
-        public void setWindSpeed(double windSpeed) { this.windSpeed = windSpeed; }
+        public double getTempMax() {
+            return tempMax;
+        }
 
-        public int getWindDirection() { return windDirection; }
-        public void setWindDirection(int windDirection) { this.windDirection = windDirection; }
+        public void setTempMax(double tempMax) {
+            this.tempMax = tempMax;
+        }
 
-        public int getVisibility() { return visibility; }
-        public void setVisibility(int visibility) { this.visibility = visibility; }
+        public int getHumidity() {
+            return humidity;
+        }
 
-        public double getLatitude() { return latitude; }
-        public void setLatitude(double latitude) { this.latitude = latitude; }
+        public void setHumidity(int humidity) {
+            this.humidity = humidity;
+        }
 
-        public double getLongitude() { return longitude; }
-        public void setLongitude(double longitude) { this.longitude = longitude; }
+        public int getPressure() {
+            return pressure;
+        }
 
-        public long getTimestamp() { return timestamp; }
-        public void setTimestamp(long timestamp) { this.timestamp = timestamp; }
+        public void setPressure(int pressure) {
+            this.pressure = pressure;
+        }
 
-        public long getSunrise() { return sunrise; }
-        public void setSunrise(long sunrise) { this.sunrise = sunrise; }
+        public String getDescription() {
+            return description;
+        }
 
-        public long getSunset() { return sunset; }
-        public void setSunset(long sunset) { this.sunset = sunset; }
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public String getMainCondition() {
+            return mainCondition;
+        }
+
+        public void setMainCondition(String mainCondition) {
+            this.mainCondition = mainCondition;
+        }
+
+        public double getWindSpeed() {
+            return windSpeed;
+        }
+
+        public void setWindSpeed(double windSpeed) {
+            this.windSpeed = windSpeed;
+        }
+
+        public int getWindDirection() {
+            return windDirection;
+        }
+
+        public void setWindDirection(int windDirection) {
+            this.windDirection = windDirection;
+        }
+
+        public int getVisibility() {
+            return visibility;
+        }
+
+        public void setVisibility(int visibility) {
+            this.visibility = visibility;
+        }
+
+        public double getLatitude() {
+            return latitude;
+        }
+
+        public void setLatitude(double latitude) {
+            this.latitude = latitude;
+        }
+
+        public double getLongitude() {
+            return longitude;
+        }
+
+        public void setLongitude(double longitude) {
+            this.longitude = longitude;
+        }
+
+        public long getTimestamp() {
+            return timestamp;
+        }
+
+        public void setTimestamp(long timestamp) {
+            this.timestamp = timestamp;
+        }
+
+        public long getSunrise() {
+            return sunrise;
+        }
+
+        public void setSunrise(long sunrise) {
+            this.sunrise = sunrise;
+        }
+
+        public long getSunset() {
+            return sunset;
+        }
+
+        public void setSunset(long sunset) {
+            this.sunset = sunset;
+        }
 
         /**
          * Méthode utilitaire pour formater la direction du vent
@@ -405,6 +500,7 @@ public class Meteo {
 
     /**
      * Méthode utilitaire pour obtenir des informations météo formatées
+     *
      * @param cityName nom de la ville
      * @return String formaté avec les données météo ou message d'erreur
      */
@@ -419,6 +515,7 @@ public class Meteo {
 
     /**
      * Vérifie si les conditions sont favorables (pour un agent)
+     *
      * @param cityName nom de la ville
      * @return true si favorables, false sinon ou en cas d'erreur
      */
@@ -438,6 +535,7 @@ public class Meteo {
 
     /**
      * Obtient un conseil météo pour un agent
+     *
      * @param cityName nom de la ville
      * @return conseil sous forme de String
      */
@@ -476,10 +574,11 @@ public class Meteo {
         return advice.toString().trim();
     }
 
+
     /**
-     * Méthode principale pour tester le service
+     * Méthode pour tester les services de l'API météo
      */
-    public static void main(String[] args) {
+    static void testComplet() {
         Meteo service = new Meteo();
         Scanner scanner = new Scanner(System.in);
 
@@ -505,7 +604,7 @@ public class Meteo {
 
         // Exemple avec des coordonnées (Paris)
         System.out.println("\n--- Test avec coordonnées (Queenstown, Tasmanie) ---");
-        WeatherData parisWeather = service.getWeatherByCoordinates(-42.0450, 145.4580);
+        WeatherData parisWeather = service.getWeatherByCoordinates(-49.92937296986032, -73.4428738818008);
         if (parisWeather != null && parisWeather.isValid()) {
             System.out.println(parisWeather);
         } else {
@@ -513,5 +612,39 @@ public class Meteo {
         }
 
         scanner.close();
+    }
+
+
+    static String getNatureTemperature(String town) {
+        Meteo service = new Meteo();
+        WeatherData weather = service.getWeatherByCity(town);
+        if (weather != null && weather.isValid()) {
+            double temp = weather.getTemperature();
+            if (temp < 0) {
+                return "très froid";
+            } else if (temp < 10) {
+                return "froid";
+            } else if (temp < 17) {
+                return "tempéré";
+            } else if (temp < 26) {
+                return "chaud";
+            } else if (temp < 35) {
+                return "très chaud";
+            } else {
+                return "extrêmement chaud";
+            }
+        } else {
+            return "données météo non disponibles";
+        }
+    }
+
+
+    public static void main(String[] args) {
+        String town = "Valenciennes";
+        System.out.println("meteo de " + town + " : " + getNatureTemperature(town));
+        town = "Belém";
+        System.out.println("meteo de " + town + " : " + getNatureTemperature(town));
+        town = "Alep";
+        System.out.println("meteo de " + town + " : " + getNatureTemperature(town));
     }
 }
