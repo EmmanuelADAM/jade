@@ -1,7 +1,11 @@
 package ollama;
 
+import jade.core.behaviours.ReceiverBehaviour;
+import jade.core.behaviours.WakerBehaviour;
 import jade.gui.GuiAgent;
 import jade.gui.GuiEvent;
+import jade.lang.acl.ACLMessage;
+import jade.lang.acl.MessageTemplate;
 import ollama.gui.GuiOllamaAgent;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,6 +21,7 @@ public class AgentLLM  extends GuiAgent {
     private  String baseUrl;
     String modelName;
     GuiOllamaAgent window;
+    String laMeteo = "tempere, 18°C";
 
     /**
      * this main launch JADE plateforme and asks it to create an agent
@@ -52,7 +57,7 @@ public class AgentLLM  extends GuiAgent {
         for (String model : models) {
             window.println("- " + model);
         }
-            modelName = models[0];
+            modelName = models[2];
         } catch (Exception e) {e.printStackTrace();}
 
 
@@ -238,33 +243,65 @@ public class AgentLLM  extends GuiAgent {
     }
     private void sample3(String query)
     {
-        try {
-            // Test chat avec historique
-            window.println("\n=== Test chat avec historique ===", true);
-            window.println("(patientez quelques secondes si le modèle est volumineux)", true);
-            String[] history = {
-                    "que manger quand il fait froid ?", "Je  propose du cassoulet ou de la choucroute, mais c'est un peu lourd et long à préparer.",
-                    "de la raclette ?", "oui, de la raclette est aussi un plat préféré quand il fait froid et il est rapide à préparer.",
-                    "que manger quand il fait très chaud ?", "pourquoi pas une salade garnie d'oeufs, tomates ?",
-                    "oui, les tomates j'aime bien.", "alors du gazpacho manger froid est très bon l'été",
-                    "Je suis dans le nord de la france.", "Alors un pojtelevech : morceaux de viande de poule, lapin, porc et parfois veau consommés froids et pris dans de la gelée culinaire légèrement vinaigrée.",
-                    "C'est le début de l'automne, que manger ?", "S'il fait frais, une carbonade flamande réchauffe; ou un lapin au pruneau et pain d'épice."
-            };
-            window.println("System: Tu es un assistant sympathique", true);
-            window.println("Historique forcée :", true);
-            for(int i=0; i<history.length; i+=2)
-                window.println("User: %s  --> Assistant: %s".formatted(history[i], history[i+1]), true);
-            window.println("---".repeat(20), true);
-            window.println("->" + query, true);
-            window.println("?".repeat(20), true);
-            String historyResponse = chatWithHistory(modelName,
-                    "Tu es un assistant inventif et sympathique. Tu proposes des recettes de cuisine en fonction du temps. l'utilisateur est dans le nord de la france.",
-                    query,
-                    history);
-            window.println( historyResponse, true);
-            window.println("~".repeat(50), true);
+        demanderMeteo("Valenciennes");
+        addBehaviour(new WakerBehaviour(this, 100)
+        { public void onWake()
+        {
+            try {
+                // Test chat avec historique
+                window.println("\n=== Test chat avec historique ===", true);
+                window.println("(patientez quelques secondes si le modèle est volumineux)", true);
+                String[] history = {
+                        "que manger quand il fait froid ?", "Je  propose du cassoulet ou de la choucroute, mais c'est un peu lourd et long à préparer.",
+                        "de la raclette ?", "oui, de la raclette est aussi un plat préféré quand il fait froid et il est rapide à préparer.",
+                        "que manger quand il fait très chaud ?", "pourquoi pas une salade garnie d'oeufs, tomates ?",
+                        "oui, les tomates j'aime bien.", "alors du gazpacho manger froid est très bon l'été",
+                        "Je suis dans le nord de la france.", "Alors un pojtelevech : morceaux de viande de poule, lapin, porc et parfois veau consommés froids et pris dans de la gelée culinaire légèrement vinaigrée.",
+                        "C'est le début de l'automne, que manger ?", "S'il fait frais, une carbonade flamande réchauffe; ou un lapin au pruneau et pain d'épice."
+                };
+                String caracteristiques = "Tu es un assistant inventif et sympathique. Tu proposes des recettes de cuisine en fonction du temps. l'utilisateur est dans le nord de la france.";
+                caracteristiques += " La météo actuelle est : " + laMeteo + ".";
+//            String caracteristiques = "Tu es un assistant strict et autoritaire. L'utilisateur parle le Chti, dialecte du nord de la france.";
+                window.println("System: " + caracteristiques, true);
+
+                window.println("Historique forcée :", true);
+                for (int i = 0; i < history.length; i += 2)
+                    window.println("User: %s  --> Assistant: %s".formatted(history[i], history[i + 1]), true);
+                window.println("---".repeat(20), true);
+                String response = "";
+                response = chatWithHistory(modelName,
+                        caracteristiques,
+                        query,
+                        history);
+                window.println("->" + query, true);
+                window.println("?".repeat(20), true);
+//            String response = chatWithHistory(modelName, caracteristiques, query,  null);
+                window.println(response, true);
+                window.println("~".repeat(50), true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }}
+        });
+    }
+
+    private String demanderMeteo(String ville) {
+        var content = "meteo in " + ville;
+        var msg = new ACLMessage(ACLMessage.REQUEST);
+        msg.setConversationId("METEO");
+        msg.setContent(content);
+        msg.addReceiver("meteoAgent");
+        send(msg);
+        var modele = MessageTemplate.and(
+                MessageTemplate.MatchConversationId("METEO"),
+                MessageTemplate.MatchPerformative(ACLMessage.INFORM));
+        // add a behaviour that wait for an eventual failure msg
+        addBehaviour(new ReceiverBehaviour(this,  -1, modele,false, (a, retour) -> {
+            laMeteo = retour.getContent();
+            window.println(" -> I received a msg from  " + retour.getSender().getLocalName() + " with content: " + laMeteo, true);
         }
-        catch (Exception e) {e.printStackTrace();}
+        ));
+        // Simule une demande de météo pour une ville donnée
+        return laMeteo;
     }
 
     /**
