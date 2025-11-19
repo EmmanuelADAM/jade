@@ -34,7 +34,7 @@ public class AgentMeteo extends AgentWindowed {
         out.println(getLocalName() + " -> I start in" + temps + " ms");
         addBehaviour(new WakerBehaviour(this, temps) {
             protected void onWake() {
-                //TODO: chercher la meteo
+                laMeteo = getNatureTemperature("Belém");
                 println("I have this information about the weather : " + laMeteo);
             }
         });
@@ -51,6 +51,30 @@ public class AgentMeteo extends AgentWindowed {
             println(" -> I send a msg to " + msg.getSender().getLocalName() + " with content: " + laMeteo);
         }
         ));
+    }
+
+
+     String getNatureTemperature(String town) {
+        Meteo service = new Meteo();
+        Meteo.WeatherData weather = service.getWeatherByCity(town);
+        if (weather != null && weather.isValid()) {
+            double temp = weather.getTemperature();
+            if (temp < 0) {
+                return "très froid";
+            } else if (temp < 10) {
+                return "froid";
+            } else if (temp < 17) {
+                return "tempéré";
+            } else if (temp < 26) {
+                return "chaud";
+            } else if (temp < 35) {
+                return "très chaud";
+            } else {
+                return "extrêmement chaud";
+            }
+        } else {
+            return "données météo non disponibles";
+        }
     }
 
     /**I inform the user when I leave the platform*/
