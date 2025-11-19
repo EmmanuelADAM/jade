@@ -17,12 +17,14 @@ To allow an agent to use a LLM to interact with the user, one good way is to use
 You can try the agent ``AgentLLM`` that just make a connection to your llm via ollama to chat..
   - the first execution is always long (depending on the llm and the computer) due to the loading of the llm
 
-- TODO :
+- **TODO** :
 - A human discuss with a BlaBla agent that uses a LLM to answer
  - the discussion will be about going to a restaurant 
-   - the agent will ask to a weather agent about the weather (see Meteo class)
-   - in parallel the blabla agent ask about taste preferences
-   - the blabla agent will propose a restaurant according to the weather, and the taste preferences, and some advices regarding the clothes.
+   - the BlaBla agent will ask to a weather agent (that you have to build) about the weather (see Meteo class)
+     - the weather agent will use an API to get the weather (see below)
+     - by default, the city of Paris is used. You can change it in the weather agent.
+     - the weather agent will answer to the BlaBla agent with the weather nature (very cold, cold, temperate, hot, very hot) and the temperature
+   - blabla agent get the question of the user and ask to a LLM to answer, with the weather information
    
 **For Meteo**: 
    - Use [OpenWeatherMap API](https://openweathermap.org/api)
