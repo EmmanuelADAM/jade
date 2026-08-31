@@ -51,11 +51,18 @@ receives. **No change to that agent's code is needed**, and it works even
 for agents you did not write, or agents running on a remote container.
 Click the agent's chip (`name  ×`) to stop watching it (sends `SniffOff`).
 
+> **This only works for agents whose class extends `jade.core.Agent` directly**
+> (e.g. `pingPong.AgentPingPong`). It does **not** work for agents extending
+> `jade.gui.GuiAgent`/`jade.gui.AgentWindowed` - i.e. most of this
+> repository's windowed examples (`AuctioneerAgent`, `ParticipantAgent`,
+> `AgenceAgent`, ...). For those, use `Monitor.send`/`Monitor.received`
+> below instead. See "Known limitations" for details.
+
 ## Plugging the Sniffer into your own agent (in-process alternative)
 
-If you would rather not depend on the platform's AMS forwarding (or want to
-watch an agent whose container the AMS cannot reach), an agent can report
-its own messages directly: replace `send(msg)` with `Monitor.send(this, msg)`,
+If you would rather not depend on the platform's AMS forwarding, or you are
+watching a `GuiAgent`/`AgentWindowed`-based agent (see above), an agent can
+report its own messages directly: replace `send(msg)` with `Monitor.send(this, msg)`,
 and report every message you `receive()`/`blockingReceive()` with
 `Monitor.received(this, msg)`.
 
@@ -88,6 +95,21 @@ prop.setProperty(Profile.AGENTS,
 
 ## Known limitations
 
+- **"Watch an agent" (zero instrumentation) does not work for agents whose
+  class extends `jade.gui.GuiAgent` or `jade.gui.AgentWindowed`** - which is
+  most of the windowed examples in this repository (`AuctioneerAgent`,
+  `ParticipantAgent`, `AgenceAgent`, `TravellerAgent`, ...). In this JadeUPHF
+  build, the platform's own `SniffOn`/`ToolNotifier` mechanism never
+  delivers a `SentMessage`/`PostedMessage` event for these agents, even
+  though their messages are actually sent/received correctly - this was
+  confirmed experimentally (a plain `jade.core.Agent` sending the exact same
+  `ContractNetInitiator`-based CFP is sniffed correctly; a `GuiAgent`-based
+  one sending the identical CFP is not, regardless of how long you wait
+  after confirming the watch). For any `GuiAgent`/`AgentWindowed`-based
+  agent, use the in-process alternative below (`Monitor.send`/`Monitor.received`)
+  instead - it does not depend on this platform mechanism and works
+  unconditionally, for any agent class. It only works for agents whose class
+  extends `jade.core.Agent` directly (e.g. `pingPong.AgentPingPong`).
 - The "Watch an agent" field resolves a local name on the sniffer's own
   platform; it does not (yet) offer a live tree of every agent/container
   currently running, unlike the original Sniffer's agent tree.
