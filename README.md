@@ -67,6 +67,13 @@ _The following codes need, thus, this library and Java >= 17._
       communication. An agent no longer targets recipients, but a channel that other agents are listening to
 
 ---
+## Monitoring tools
+
+- [monitoring](https://github.com/EmmanuelADAM/jade/tree/english/monitoring) : modern-looking replacements for the
+  historical `jade.tools.DummyAgent.DummyAgent` and `jade.tools.sniffer.Sniffer` windows (`ModernDummyAgent`,
+  `ModernSnifferAgent`) - same features, restyled.
+
+---
 ## Service Management
 
 - [helloWorldService](https://github.com/EmmanuelADAM/jade/tree/english/helloWorldService) : Codes for agents each
