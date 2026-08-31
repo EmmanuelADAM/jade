@@ -63,7 +63,12 @@ public final class MessageBus {
         HISTORY.clear();
     }
 
-    static void publish(String owner, Direction direction, ACLMessage message) {
+    /**
+     * Records one exchange and notifies subscribers. Called by {@link Monitor}
+     * for agents instrumented in-process, and by {@code monitoring.agents.ModernSnifferAgent}
+     * for messages it decoded from a real platform {@code SniffOn} subscription.
+     */
+    public static void publish(String owner, Direction direction, ACLMessage message) {
         Trace trace = new Trace(LocalDateTime.now(), direction, owner, message);
         HISTORY.add(trace);
         while (HISTORY.size() > MAX_HISTORY) {

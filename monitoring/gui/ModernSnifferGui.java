@@ -29,6 +29,9 @@ public class ModernSnifferGui extends JFrame {
 
     public static final int CLEAR = 1;
     public static final int TOGGLE_THEME = 2;
+    public static final int WATCH = 3;
+    public static final int UNWATCH = 4;
+    public static final int SAVE_LOG = 5;
     public static final int QUIT = -1;
 
     private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("HH:mm:ss.SSS");
@@ -44,6 +47,8 @@ public class ModernSnifferGui extends JFrame {
     private SequenceCanvas canvas;
     private JLabel titleLabel;
     private JTabbedPane tabs;
+    private JTextField watchField;
+    private JPanel watchedChips;
 
     public ModernSnifferGui(GuiAgent agent) {
         super(agent == null ? "Modern Sniffer" : "Modern Sniffer");
@@ -70,7 +75,13 @@ public class ModernSnifferGui extends JFrame {
         getContentPane().setLayout(new BorderLayout(10, 10));
         ((JComponent) getContentPane()).setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
 
-        getContentPane().add(buildHeader(), BorderLayout.NORTH);
+        JPanel north = new JPanel();
+        north.setOpaque(false);
+        north.setLayout(new BoxLayout(north, BoxLayout.Y_AXIS));
+        north.add(buildHeader());
+        north.add(Box.createVerticalStrut(6));
+        north.add(buildWatchBar());
+        getContentPane().add(north, BorderLayout.NORTH);
 
         tabs = new JTabbedPane();
         tabs.setFont(ModernTheme.FONT_BASE);
@@ -115,15 +126,73 @@ public class ModernSnifferGui extends JFrame {
         theme.addActionListener(e -> postEvent(TOGGLE_THEME));
         ModernButton clear = new ModernButton("Clear", ModernButton.Variant.GHOST);
         clear.addActionListener(e -> postEvent(CLEAR));
+        ModernButton saveLog = new ModernButton("Save log...", ModernButton.Variant.GHOST);
+        saveLog.addActionListener(e -> postEvent(SAVE_LOG));
         ModernButton quit = new ModernButton("Quit", ModernButton.Variant.DANGER);
         quit.addActionListener(e -> postEvent(QUIT));
         actions.add(pauseButton);
         actions.add(theme);
         actions.add(clear);
+        actions.add(saveLog);
         actions.add(quit);
         header.add(actions, BorderLayout.EAST);
 
         return header;
+    }
+
+    private JComponent buildWatchBar() {
+        RoundedPanel bar = new RoundedPanel(new BorderLayout(8, 4));
+
+        JPanel left = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 0));
+        left.setOpaque(false);
+        JLabel label = new JLabel("Watch an agent (zero instrumentation - no code change needed):");
+        label.setForeground(ModernTheme.muted());
+        label.setFont(ModernTheme.FONT_SMALL);
+        watchField = new JTextField(14);
+        watchField.putClientProperty("JTextField.placeholderText", "agent local name...");
+        Runnable submit = () -> {
+            String name = watchField.getText().trim();
+            if (!name.isEmpty()) {
+                postWatch(WATCH, name);
+                watchField.setText("");
+            }
+        };
+        watchField.addActionListener(e -> submit.run());
+        ModernButton watchButton = new ModernButton("Watch", ModernButton.Variant.PRIMARY);
+        watchButton.addActionListener(e -> submit.run());
+        left.add(label);
+        left.add(watchField);
+        left.add(watchButton);
+        bar.add(left, BorderLayout.WEST);
+
+        watchedChips = new JPanel(new FlowLayout(FlowLayout.LEFT, 6, 0));
+        watchedChips.setOpaque(false);
+        bar.add(watchedChips, BorderLayout.CENTER);
+
+        return bar;
+    }
+
+    /** Adds a chip for a newly watched agent; click the chip to stop watching it. */
+    public void addWatchedAgent(String name) {
+        ModernButton chip = new ModernButton(name + "  ×", ModernButton.Variant.SUCCESS);
+        chip.setToolTipText("Click to stop watching " + name);
+        chip.addActionListener(e -> {
+            watchedChips.remove(chip);
+            watchedChips.revalidate();
+            watchedChips.repaint();
+            postWatch(UNWATCH, name);
+        });
+        watchedChips.add(chip);
+        watchedChips.revalidate();
+        watchedChips.repaint();
+    }
+
+    private void postWatch(int code, String name) {
+        if (myAgent != null) {
+            GuiEvent ev = new GuiEvent(this, code);
+            ev.addParameter(name);
+            myAgent.postGuiEvent(ev);
+        }
     }
 
     private JComponent buildTable() {
@@ -193,6 +262,15 @@ public class ModernSnifferGui extends JFrame {
     public void clearAll() {
         allTraces.clear();
         refresh();
+    }
+
+    /** Exposes the currently recorded traces, e.g. to save them to a file. */
+    public List<MessageBus.Trace> traces() {
+        return List.copyOf(allTraces);
+    }
+
+    public void showError(String message) {
+        JOptionPane.showMessageDialog(this, message, "Modern Sniffer", JOptionPane.ERROR_MESSAGE);
     }
 
     private void refresh() {

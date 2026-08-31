@@ -1,6 +1,5 @@
 package monitoring.agents;
 
-import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.gui.GuiAgent;
 import jade.gui.GuiEvent;
@@ -55,19 +54,10 @@ public class ModernDummyAgent extends GuiAgent {
     }
 
     private void sendComposedMessage() {
-        String receiver = gui.getReceiver();
-        if (receiver.isEmpty()) {
+        ACLMessage msg = gui.getComposedMessage();
+        if (!msg.getAllReceiver().hasNext()) {
             return;
         }
-        int performative = ACLMessage.getInteger(gui.getPerformative());
-        ACLMessage msg = new ACLMessage(performative);
-        msg.addReceiver(new AID(receiver, AID.ISLOCALNAME));
-        String conversationId = gui.getConversationId();
-        if (!conversationId.isEmpty()) {
-            msg.setConversationId(conversationId);
-        }
-        msg.setContent(gui.getContent());
-
         Monitor.send(this, msg);
         gui.addMessage("SENT", msg);
     }
