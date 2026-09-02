@@ -79,62 +79,59 @@ public class PollingStationAgent extends AgentWindowed {
             //@param myAnswers the list of answers for each voter
             @Override
             protected void handleAllResponses(List<ACLMessage> theirVotes, List<ACLMessage> myAnswers) {
-                //we keep only the proposals, and tally each one into the votes map
-                List<ACLMessage> proposals = theirVotes.stream()
-                        .filter(v -> v.getPerformative() == ACLMessage.PROPOSE)
-                        .toList();
-                for (ACLMessage vote : proposals) addBordaPoints(vote.getContent());
+                ArrayList<ACLMessage> listeVotes = new ArrayList<>(theirVotes);
+                //we keep only the proposals only
+                listeVotes.removeIf(v -> v.getPerformative() != ACLMessage.PROPOSE);
 
-                println("-".repeat(40));
-                votes.forEach((k, v) -> println(k + " obtained " + v + " points"));
-                List<String> winners = winningOptions();
-                String winnersList = String.join(",", winners);
-                println("-".repeat(40));
-                println("Result of the vote :  " + winnersList);
-                println("-".repeat(40));
+                List<ACLMessage> answers = new ArrayList<>();
 
-                //accept every proposal, telling each voter the winning option(s)
-                for (ACLMessage vote : proposals) {
-                    ACLMessage answer = vote.createReply();
+                for (ACLMessage vote : listeVotes) {
+                    //by default, we build a accept answer for each vote
+                    var answer = vote.createReply();
                     answer.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
-                    answer.setContent(winnersList);
-                    myAnswers.add(answer);
+                    answers.add(answer);
+                    var content = vote.getContent();
+                    //read the content resto1>resto2>,...
+                    String[] itsVotes = content.split(">");
+                    int[] points = {itsVotes.length};
+                    for (String s : itsVotes) {
+                        //We add the value of the vote of each restaurant in the map of votes
+                        votes.computeIfPresent(s, (k, v) -> v + points[0]);
+                        points[0]--;
+                    }
                 }
 
+                println("-".repeat(40));
+                //Viewing total votes
+                votes.forEach((k, v) -> println(k + " obtained " + v + " points"));
+                //Recovery of the highest score
+                int highScore = Collections.max(votes.values());
+                //Recovery of elected options
+                StringBuffer best = new StringBuffer();
+                votes.forEach((k, v) -> {
+                    if (v == highScore) best.append(k).append(",");
+                });
+                println("-".repeat(40));
+                println("Result of the vote :  " + best);
+                println("-".repeat(40));
+
+                //Adding the names of the elected options in the messages to be returned
+                for (ACLMessage m : answers)
+                    m.setContent(best.toString());
+                myAnswers.addAll(answers);
+
                 //If tied, we relaunch a vote with them
-                if (winners.size() > 1) {
+                if ((best.toString()).split(",").length > 1) {
                     println("-".repeat(30));
-                    println("A new round will be launched these choices : " + winnersList);
+                    println("A new round will be launched these choices : " + best);
                     println("-".repeat(30));
                     myAgent.addBehaviour(new WakerBehaviour(myAgent, 100) {
                         @Override
                         protected void onWake() {
-                            createVote("voteNo1", winnersList);
+                            createVote("voteNo1", best.toString());
                         }
                     });
                 }
-            }
-
-            //reads one voter's ranking ("resto1>resto2>...") and adds its Borda points into the votes map:
-            //n points to the 1st choice, n-1 to the 2nd, ..., 1 to the last
-            private void addBordaPoints(String ranking) {
-                String[] ranked = ranking.split(">");
-                int points = ranked.length;
-                for (String option : ranked) {
-                    if (votes.containsKey(option)) {
-                        votes.put(option, votes.get(option) + points);
-                    }
-                    points--;
-                }
-            }
-
-            //returns the option(s) with the highest score in the votes map (more than one if tied)
-            private List<String> winningOptions() {
-                int highScore = Collections.max(votes.values());
-                return votes.entrySet().stream()
-                        .filter(e -> e.getValue() == highScore)
-                        .map(Map.Entry::getKey)
-                        .toList();
             }
 
             //function triggered by a INFORM msg : a voter accept the result
