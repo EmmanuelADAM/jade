@@ -9,14 +9,17 @@ platform. Materials for Jade Tutorial : communication, protocols, votes, service
 Set of source codes for the course/tutorial on multi-agent programming with the JADE platform. 
 
 To run these codes, it is necessary to import the library "[JadeUPHF.jar](https://github.com/EmmanuelADAM/JadeUPHF/blob/master/JadeUPHF.jar)". 
-This library is an update, with JAVA 17, of the last official version of  [Jade]
-(https://jade.tilab.com) of Tilab and add functionalities to easier the implementation of agents.
+This library is an update, with JAVA 25, of the last official version of  [Jade]
+(https://jade.tilab.com) of Tilab and add functionalities to easier the implementation of agents.  
+Virtual threads are used to run the agents and their behaviors, which allows to run a large number of agents on a single machine (10000).
 
-The source of this new version, the library and notes, can be accessed from here : [JadeUPHF](https://emmanueladam.github.io/JadeUPHF/)".
+The source of this new version, and notes, can be accessed from here : [JadeUPHF](https://emmanueladam.github.io/JadeUPHF/).
 
-_The following codes need, thus, this library and Java >= 17._
+*The library is available here : [JadeUPHF.jar](https://github.com/EmmanuelADAM/jade/blob/english/external-libraries/JadeUPHF.jar).*
 
-><small>*NB. if you get this error in your prefered IDE while launching an example :*</small>
+_The following codes need, thus, this library and Java >= 25._
+
+><small>*NB. if you get this error in your preferred IDE while launching an example :*</small>
 >><small>*SEVERE: Communication failure while joining agent platform: No ICP active*</small>
 > 
 ><small>*The reason is that you have not closed the previous jade instance. Completely stop/close a jade run before 
