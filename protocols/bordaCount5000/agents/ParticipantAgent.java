@@ -1,4 +1,4 @@
-package protocols.bordaCount.agents;
+package protocols.bordaCount5000.agents;
 
 
 import jade.core.Agent;
@@ -6,8 +6,6 @@ import jade.core.AgentServicesTools;
 import jade.domain.FIPAAgentManagement.FailureException;
 import jade.domain.FIPAAgentManagement.NotUnderstoodException;
 import jade.domain.FIPAAgentManagement.RefuseException;
-import jade.gui.AgentWindowed;
-import jade.gui.SimpleWindow4Agent;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.proto.ContractNetResponder;
@@ -22,8 +20,9 @@ import java.util.List;
  * use AgentWindowed to display the messages in a window if few agents are used, otherwise use Agent to avoid too many windows (nb agents between 100 and 10000...)
  * @author eadam
  */
-public class ParticipantAgent extends AgentWindowed { // extends Agent {
+public class ParticipantAgent extends Agent  { // extends Agent {
 
+    String myName = null;
     /**
      * agent setup
      * - registration to the service "vote"-"participant"
@@ -31,8 +30,7 @@ public class ParticipantAgent extends AgentWindowed { // extends Agent {
      * - create the gui
      */
     protected void setup() {
-        window = new SimpleWindow4Agent(getAID().getName(), this);
-        window.println("Hello! Agent  " + getLocalName() + " is ready, my address is " + this.getAID().getName());
+        myName = this.getLocalName();
 
         AgentServicesTools.register(this, "vote", "participant");
 
@@ -43,8 +41,8 @@ public class ParticipantAgent extends AgentWindowed { // extends Agent {
             //function triggered by a PROPOSE msg : send back the ranking
             @Override
             protected ACLMessage handleCfp(ACLMessage cfp) throws RefuseException, FailureException, NotUnderstoodException {
-                println("~".repeat(40));
-                println(cfp.getSender().getLocalName() + " proposes this options: " + cfp.getContent());
+//                println(myName + " ~".repeat(40));
+//                println(myName + " " + cfp.getSender().getLocalName() + " proposes this options: " + cfp.getContent());
                 ACLMessage answer = cfp.createReply();
                 answer.setPerformative(ACLMessage.PROPOSE);
                 String choice = makeItsChoice(cfp.getContent());
@@ -64,7 +62,7 @@ public class ParticipantAgent extends AgentWindowed { // extends Agent {
                 String pref = ">";
                 for (String s : choice) sb.append(s).append(pref);
                 String proposition  = sb.substring(0, sb.length()-1);
-                println("I propose this ranking: " + proposition);
+  //              println(myName + " : I propose this ranking: " + proposition);
                 return proposition;
             }
 
@@ -74,11 +72,10 @@ public class ParticipantAgent extends AgentWindowed { // extends Agent {
             //@param accept : the acceptation sent by the auctioneer
             @Override
             protected ACLMessage handleAcceptProposal(ACLMessage cfp, ACLMessage propose, ACLMessage accept) throws FailureException {
-                println("=".repeat(15));
-                println("END OF ROUND");
-                println(cfp.getSender().getLocalName() + " started a vote between " + cfp.getContent());
-                println(" I proposed " + propose.getContent());
-                println(cfp.getSender().getLocalName() + " accepted my vote and sent the result:  " + accept.getContent());
+    //            println(myName + " : =".repeat(15));
+    //            println(myName + " : " + cfp.getSender().getLocalName() + " started a vote between " + cfp.getContent());
+    //            println(myName + " : I proposed " + propose.getContent());
+    //            println(myName + " : " + cfp.getSender().getLocalName() + " has analyzed the votes and sent the result:  " + accept.getContent());
                 ACLMessage msg = accept.createReply();
                 msg.setPerformative(ACLMessage.INFORM);
                 msg.setContent("ok !");
@@ -91,11 +88,11 @@ public class ParticipantAgent extends AgentWindowed { // extends Agent {
             //@param accept : the reject sent by the auctioneer
             @Override
             protected void handleRejectProposal(ACLMessage cfp, ACLMessage propose, ACLMessage reject) {
-                println("=".repeat(10));
-                println("VOTE REJECTED");
-                println(cfp.getSender().getLocalName() + " started a vote between " + cfp.getContent());
-                println(" I proposed " + propose.getContent());
-                println(cfp.getSender().getLocalName() + " refused ! with this message: " + reject.getContent());
+                //                println(myName + " : =".repeat(10));
+                //                println(myName + " : VOTE REJECTED");
+                //                println(myName + " : " + cfp.getSender().getLocalName() + " started a vote between " + cfp.getContent());
+                //                println(myName + " : I proposed " + propose.getContent());
+                //                println(myName + " : " + cfp.getSender().getLocalName() + " refused ! with this message: " + reject.getContent());
             }
 
 

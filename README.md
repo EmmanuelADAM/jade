@@ -89,13 +89,10 @@ _The following codes need, thus, this library and Java >= 17._
 ---
 ## Interaction protocols
 
-- [Requests](https://github.com/EmmanuelADAM/jade/tree/english/protocols/requests) : codes for communication of 
-  requests using the AchieveRE protocol.
-- [English Auction](https://github.com/EmmanuelADAM/jade/tree/english/protocols/sealedEnglishAuction): codes 
-  using the  communication protocol ContractNet to simulate a sealed english auction (1 round).
-- [Vote Borda](https://github.com/EmmanuelADAM/jade/tree/english/protocols/bordaCount) : codes illustrating 
-  communication between agents by the ContractNet protocol for vote by Borda count.
-- *<yellow>(the following codes will be translated soon)*</yellow>
+- [Requests](https://github.com/EmmanuelADAM/jade/tree/english/protocols/requests) : codes for communication of requests using the AchieveRE protocol.
+- [English Auction](https://github.com/EmmanuelADAM/jade/tree/english/protocols/sealedEnglishAuction): codes  using the  communication protocol ContractNet to simulate a sealed english auction (1 round).
+- [Vote Borda](https://github.com/EmmanuelADAM/jade/tree/english/protocols/bordaCount) : codes illustrating  communication between agents by the ContractNet protocol for vote by Borda count.
+- [Vote Borda 5000](https://github.com/EmmanuelADAM/jade/tree/english/protocols/bordaCount5000) : codes illustrating  communication between agents by the ContractNet protocol for vote by Borda count, **for 5000 agents**.
 - [Vote DoubleBorda](https://github.com/EmmanuelADAM/jade/tree/english/protocols/voteDoubleBorda) : codes illustrating
   communication between agents by the ContractNet protocol for vote by using Borda count twice if needed.
 <!--- 

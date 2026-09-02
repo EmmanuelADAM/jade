@@ -1,4 +1,4 @@
-package protocols.bordaCount.agents;
+package protocols.bordaCount5000.agents;
 
 
 import jade.core.AID;
