@@ -41,8 +41,11 @@ Voici les échanges de message sachant que le vendeur initie la négociation en 
 Regardez les classes proposées, et lancez le `main` de la classe `Main`.
  
 **Question :** Modifier le code existant pour que l'utilisateur joue le rôle de l'acheteur; le vendeur reste un agent.
-- Ajoutez ensuite des fenêtres de dialogues (cf. les autres exemples).
 
+Un code avec des fenêtres de dialogues est présent ici : [negociationInteractionWindow](https://github.com/EmmanuelADAM/jade/tree/english/td/negociationInteractionWindow)
+
+Utilisez maintenant des principes d'évolution des prix plus riches, comme ceux décrits dans la page [negociation-strategies-prix](https://github.com/EmmanuelADAM/jade/blob/english/td/negociation/negociation-strategies-prix.md)
+et comparez les.
 
 ![diagramme d'états du principe de négociation](negociation.png)
 ---
