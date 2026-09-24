@@ -9,18 +9,18 @@ Deux agents vendeur et acheteur négocient autour d'un prix.
 Définissez les échanges de message sachant que le vendeur initie la négociation en proposant un prix.
  - L'acheteur et le vendeur disposent : 
    - d'une offre initiale, 
-   - d'un seuil (prix sous ou au-dessus duquel l'agent stoppe la négociaton)
+   - d'un seuil (prix sous ou au-dessus duquel l'agent stoppe la négociation)
    - d'un nombre de tours avant de mettre fin à la négociation
 
  - pour l'acheteur : 
    - si le nb de tours dépasse le nb max, il répond avec un rejet ;
    - si le prix reçu est au-dessus du seuil haut, il répond avec un rejet ;
-   - si le prix est entre le prix proposé et le seuil, l'acheteur augmente sa poposition  selon une stratégie choisie.
+   - si le prix est entre le prix proposé et le seuil, l'acheteur augmente sa proposition selon une stratégie choisie.
 
 - pour le vendeur :
   - si le nb de tours dépasse le nb max, il répond avec un rejet ;
   - si le prix reçu est sous le seuil bas, il répond avec un rejet ;
-  - si le prix est entre le prix proposé et le seuil, le vendeur baisse sa poposition selon une stratégie choisie.
+  - si le prix est entre le prix proposé et le seuil, le vendeur baisse sa proposition selon une stratégie choisie.
 
 ---
 
@@ -29,7 +29,12 @@ Définissez les échanges de message sachant que le vendeur initie la négociati
  - ``behaviour`` : contient le comportement ``NegociationBehaviour`` et la liste des strategies (package ) ``behaviour.strategies``
  - ``gui`` : leurs interfaces pour fixer le prix initial, le prix seuil et le nombre de tour.
     - cliquer sur ``start`` en premier sur seller, puis ``send`` sur buyer pour démarrer la négociation
-Chaque agent charge le comportement dans son setup; l'affectation des valeurs et de la strategie se fait suite aux clics sur start et send (cf. le code)
+Chaque agent charge le comportement dans son setup; l'affectation des valeurs et de la stratégie se fait suite aux clics sur start et send (cf. le code).
+ 
+> Le code fournit est fonctionnel
+> Dans la fenêtre du ``Buyer``, entrez : ``Initial Price`` = 100, ``Maximal Price`` = 220, ``Nb rounds max`` = 5, puis cliquez sur (``Start``)
+> Dans la fenêtre du ``Seller``, entrez : ``Initial Price`` = 200, ``Maximal Price`` = 80, ``Nb rounds max`` = 5, puis cliquez sur (``Send Offer``)
+> Les deux agents vont adapter leurs prix pour se mettre d'accord sur 156,80 €
 
 ---
 
