@@ -29,12 +29,16 @@ import java.util.stream.Stream;
  *
  */
 public class AgentLLM extends GuiAgent {
+    /**http client to ask ollama*/
     private HttpClient httpClient;
+    /**ollama url*/
     private String baseUrl;
+    /**name of the model to interact with*/
     String modelName;
+    /**graphical user interface dedicated to this agent*/
     GuiOllamaAgent window;
     /**
-     * ville de l'utilisateur, modifiable dans la fenêtre
+     * city of the user
      */
     String ville = "Valenciennes";
     /**
@@ -67,7 +71,7 @@ public class AgentLLM extends GuiAgent {
             for (String model : models) {
                 window.println("- " + model);
             }
-            // choix par defaut du premier modele nom embedded
+            // choix par defaut du premier modele nom embedding
             modelName = chooseModel(models);
             window.println("modèle utilisé : " + modelName);
             // les modèles d'embedding ne savent pas discuter, ils ne sont pas proposés
@@ -75,11 +79,9 @@ public class AgentLLM extends GuiAgent {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         // météo de la ville par défaut
         window.setCity(ville);
         demanderMeteo(ville);
-
     }
 
     /**
@@ -89,8 +91,7 @@ public class AgentLLM extends GuiAgent {
      */
     public String[] listModels() throws Exception {
         JSONArray modelsArray = getModels(baseUrl + "/api/tags");
-        Set<String> activeCloudModels = null; // chargé seulement s'il y a des modèles cloud
-
+        Set<String> activeCloudModels = null;
         List<String> modelNames = new ArrayList<>();
         for (int i = 0; i < modelsArray.length(); i++) {
             JSONObject model = modelsArray.getJSONObject(i);
@@ -99,6 +100,7 @@ public class AgentLLM extends GuiAgent {
                 if (activeCloudModels == null) activeCloudModels = listActiveCloudModels();
                 if (!activeCloudModels.contains(remoteModel)) continue; // modèle cloud retiré
             }
+            //on est ici si le modele cloud est toujours actif, on l'ajoute à la liste
             modelNames.add(model.getString("name"));
         }
         return modelNames.toArray(new String[0]);
@@ -122,6 +124,7 @@ public class AgentLLM extends GuiAgent {
 
     /**
      * interroge une API /api/tags et retourne le tableau "models" de la réponse
+     * retourne les modèles présents ou référencés par ollama installé sur la machine
      */
     private JSONArray getModels(String url) throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
@@ -136,13 +139,14 @@ public class AgentLLM extends GuiAgent {
     }
 
     /**
-     * choisit de préférence un modèle local de chat (les modèles cloud listés sont actifs, mais dépendent du réseau)
-     * les modèles d'embedding ne savent pas discuter
+     * choisit de préférence un modèle de chat qui ne soit pas
+     * un modèle d'embedding (ils ne savent pas discuter)
      */
     private String chooseModel(String[] models) {
         for (String m : models)
             if (!m.contains("embed")) // && !m.contains("cloud"))
                 return m;
+        //au pire, tant pis, on retoure le 1er de la liste
         return models[0];
     }
 
@@ -307,13 +311,16 @@ public class AgentLLM extends GuiAgent {
                     window.println("\n=== Test chat avec historique ===", true);
                     window.println("(patientez quelques secondes si le modèle est volumineux)", true);
                     String[] history = {
-                            "que manger quand il fait froid ?", "Je  propose du cassoulet ou de la choucroute, mais c'est un peu lourd et long à préparer.",
-                            "de la raclette ?", "oui, de la raclette est aussi un plat préféré quand il fait froid et il est rapide à préparer.",
-                            "que manger quand il fait très chaud ?", "pourquoi pas une salade garnie d'oeufs, tomates ?",
-                            "oui, les tomates j'aime bien.", "alors du gazpacho manger froid est très bon l'été",
-                            "Je suis originaire du nord de la france.", "Alors un pojtelevech : morceaux de viande de poule, lapin, porc et parfois veau consommés froids et pris dans de la gelée culinaire légèrement vinaigrée.",
-                            "Parfois l'automne je ne sais que que manger ?", "S'il fait frais, une carbonade flamande réchauffe; ou un lapin au pruneau et pain d'épice.",
-                            "Au printemps, j'adore les asperges", "oui, à la saison asperges vertes ou blanches..  il existe de nombreuses façon de les cuisiner"
+                            "Bonjour, je cherche des idées de repas pour cette semaine.",
+                            "Avec plaisir ! Dites-moi vos goûts et vos contraintes.",
+                            "Je suis originaire du Nord, j'adore la cuisine flamande.",
+                            "Parfait : carbonade, potjevleesch, waterzooi, welsh… je garde ça en tête.",
+                            "J'aime découvrir les spécialités locales.",
+                            "D'accord, je regarderai les légumes, viandes, plats et desserts proche de ta ville et du moment pour faciliter le circuit court.",
+                            "Attention, je suis allergique aux choux.",
+                            "C'est noté : ni choux rouges, ni choux fleurs, ni brocolis.",
+                            "Et je n'ai pas de four, seulement des plaques.",
+                            "D'accord, je ne proposerai que des recettes à la poêle ou en cocotte."
                     };
                     // météo actuelle de la ville au moment de la question
                     demanderMeteo(ville);
@@ -374,6 +381,7 @@ public class AgentLLM extends GuiAgent {
                     natureTemperature(weather.getTemperature()), weather.getTemperature(), weather.getFeelsLike(),
                     weather.getDescription(), weather.getHumidity(), weather.getWindSpeedKmh());
             window.println("météo à " + ville + " : " + laMeteo);
+            window.println("La saison est " + saison(latitude, LocalDate.now()));
         } else {
             window.println("données météo non disponibles pour " + nouvelleVille + " (on garde " + ville + ")");
             window.setCity(ville);

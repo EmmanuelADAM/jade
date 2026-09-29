@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
  * a simple window for a Jade GuiAgent with two texts areas to display
  * informations
  *
- * @author emmanuel adam
+ * @author emmanuel adam & claude
  * @version 1
  */
 public class GuiOllamaAgent extends JFrame implements ActionListener {
@@ -130,7 +130,7 @@ public class GuiOllamaAgent extends JFrame implements ActionListener {
         this();
         myAgent = agent;
         setTitle(myAgent.getLocalName());
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     /**
@@ -223,7 +223,7 @@ public class GuiOllamaAgent extends JFrame implements ActionListener {
      * the markdown text being received is finished : it is converted once for all in html
      */
     private void closeMarkdown() {
-        if (markdown.length() > 0) {
+        if (!markdown.isEmpty()) {
             htmlDone.append(MarkdownToHtml.convert(markdown.toString()));
             markdown.setLength(0);
         }

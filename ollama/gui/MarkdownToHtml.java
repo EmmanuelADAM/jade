@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  * (titles, bold, italic, code, lists, tables, quotes, links),
  * the HTML produced can be displayed by a JEditorPane (HTML 3.2)
  *
- * @author emmanuel adam
+ * @author claude asked by emmanuel adam
  * @version 1
  */
 public class MarkdownToHtml {
