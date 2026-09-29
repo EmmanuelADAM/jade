@@ -43,14 +43,35 @@ public class AgentMeteo extends AgentWindowed {
                 MessageTemplate.MatchConversationId("METEO"),
                 MessageTemplate.MatchPerformative(ACLMessage.REQUEST));
         // add a behaviour that wait for an eventual failure msg
+        // the content of the request is "meteo in <town>" (or only "<town>")
         addBehaviour(new ReceiverBehaviour(this,  -1, modele,true, (a, msg) -> {
+            String town = msg.getContent().replaceFirst("^\\s*meteo in\\s+", "").trim();
             var reply = msg.createReply();
-            reply.setPerformative(ACLMessage.INFORM);
-            reply.setContent(laMeteo);
+            String weather = getWeatherDescription(town);
+            if (weather != null) {
+                reply.setPerformative(ACLMessage.INFORM);
+                reply.setContent(weather);
+            } else {
+                reply.setPerformative(ACLMessage.FAILURE);
+                reply.setContent("données météo non disponibles pour " + town);
+            }
             a.send(reply);
-            println(" -> I send a msg to " + msg.getSender().getLocalName() + " with content: " + laMeteo);
+            println(" -> I send a msg to " + msg.getSender().getLocalName() + " with content: " + reply.getContent());
         }
         ));
+    }
+
+    /**
+     * current weather of a town, in a short text for a LLM
+     * ex. "chaud, 22,3°C (ressenti 21,8°C), ciel dégagé, humidité 60%, vent 12 km/h"
+     * @return the description, or null if the town is unknown or the service is not available
+     */
+    String getWeatherDescription(String town) {
+        Meteo.WeatherData weather = new Meteo().getWeatherByCity(town);
+        if (weather == null || !weather.isValid()) return null;
+        return "%s, %.1f°C (ressenti %.1f°C), %s, humidité %d%%, vent %.0f km/h".formatted(
+                getNature(weather.getTemperature()), weather.getTemperature(), weather.getFeelsLike(),
+                weather.getDescription(), weather.getHumidity(), weather.getWindSpeedKmh());
     }
 
 
@@ -58,22 +79,26 @@ public class AgentMeteo extends AgentWindowed {
         Meteo service = new Meteo();
         Meteo.WeatherData weather = service.getWeatherByCity(town);
         if (weather != null && weather.isValid()) {
-            double temp = weather.getTemperature();
-            if (temp < 0) {
-                return "très froid";
-            } else if (temp < 10) {
-                return "froid";
-            } else if (temp < 17) {
-                return "tempéré";
-            } else if (temp < 26) {
-                return "chaud";
-            } else if (temp < 35) {
-                return "très chaud";
-            } else {
-                return "extrêmement chaud";
-            }
+            return getNature(weather.getTemperature());
         } else {
             return "données météo non disponibles";
+        }
+    }
+
+    /** nature of a temperature (froid, tempéré, chaud...) */
+    String getNature(double temp) {
+        if (temp < 0) {
+            return "très froid";
+        } else if (temp < 10) {
+            return "froid";
+        } else if (temp < 17) {
+            return "tempéré";
+        } else if (temp < 26) {
+            return "chaud";
+        } else if (temp < 35) {
+            return "très chaud";
+        } else {
+            return "extrêmement chaud";
         }
     }
 
