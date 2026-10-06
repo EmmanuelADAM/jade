@@ -117,8 +117,8 @@ Some tutorial : [here](https://github.com/EmmanuelADAM/jade/tree/english/td/)
 
 -->
 ---
-## LLM ?
-- [AgentLLM](https://github.com/EmmanuelADAM/jade/tree/english/ollama) : an agent that connect to your local llm to discuss
+## LLM
+- [Ollama](https://github.com/EmmanuelADAM/jade/tree/english/ollama) : examples of small projects that combines Agent JADE and agent LLM...
 
 
 ---

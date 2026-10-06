@@ -18,7 +18,7 @@ To allow an agent to use a LLM to interact with the user, one good way is to use
 
 ## International Cuisine
 
-You can try the agent ``AgentLLM`` that make a connection to your llm via ollama to chat..
+You can try the agent [AgentLLM](https://github.com/EmmanuelADAM/jade/blob/english/ollama/internationalCuisine/agents/AgentLLM.java) that make a connection to your llm via ollama to chat..
   - choose the model you want try
   - choose the city where you plan to have a diner
   - the discussion will be about going to a restaurant (in french for the moment) 
@@ -37,8 +37,9 @@ You can try the agent ``AgentLLM`` that make a connection to your llm via ollama
 
 ## LLM votes
 
-A Borda vote is done between agent that use their own personality to mak a choice, via a LLM, among a list of restaurant.
-See  [ollamaVotes](ollamaVotes) and launch [LanceurVote](LanceurVote)
+A Borda vote is done between agent that use their own personality to mak a choice, via a LLM, among a list of restaurant.  
+
+See  [ollamaVotes](https://github.com/EmmanuelADAM/jade/tree/english/ollama/ollamaVotes) and launch [LanceurVote](https://github.com/EmmanuelADAM/jade/blob/english/ollama/ollamaVotes/launch/LanceurVote.java)
 
 
 ---
