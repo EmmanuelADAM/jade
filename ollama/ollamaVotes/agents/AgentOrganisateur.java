@@ -1,4 +1,4 @@
-package td.ollamaVotes.agents;
+package ollama.ollamaVotes.agents;
 
 import jade.core.AID;
 import jade.core.Agent;
@@ -45,6 +45,9 @@ public class AgentOrganisateur extends Agent {
             return;
         }
         System.out.println("Organisateur -> " + votants.size() + " votants, sujet : " + SUJET);
+        System.out.println("Voici les options possibles :");
+        OPTIONS.forEach((key, value) -> {System.out.println(key + ": " + value);});
+        System.out.println("~".repeat(20));
 
         var cfp = new ACLMessage(ACLMessage.CFP);
         votants.forEach(cfp::addReceiver);
@@ -69,20 +72,19 @@ public class AgentOrganisateur extends Agent {
                 int n = OPTIONS.size();
                 List<ACLMessage> propositions = new ArrayList<>();
 
-                System.out.println("\n===== Bulletins =====");
+//                System.out.println("\n===== Bulletins =====");
                 for (ACLMessage msg : reponses) {
                     if (msg.getPerformative() != ACLMessage.PROPOSE) continue;
                     var vote = new JSONObject(msg.getContent());
                     var classement = vote.getJSONArray("classement");
                     // Borda : n-1 points pour le 1er, n-2 pour le 2e, ..., 0 pour le dernier
-                    var lisible = new StringJoiner(">");
+//                    var lisible = new StringJoiner(">");
                     for (int rang = 0; rang < classement.length(); rang++) {
                         String c = classement.getString(rang);
                         scores.merge(c, n - 1 - rang, Integer::sum);
-                        lisible.add(c);
+//                        lisible.add(c);
                     }
-                    System.out.printf("%-8s %s  \"%s\"%n", msg.getSender().getLocalName(),
-                            lisible, vote.getString("justification"));
+//                    System.out.printf("%-8s %s  \"%s\"%n", msg.getSender().getLocalName(),lisible, vote.getString("justification"));
                     propositions.add(msg);
                 }
 

@@ -1,4 +1,4 @@
-package td.ollamaVotes.tools;
+package ollama.ollamaVotes.tools;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

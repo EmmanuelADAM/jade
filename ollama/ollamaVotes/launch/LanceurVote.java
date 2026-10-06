@@ -1,12 +1,12 @@
-package td.ollamaVotes.launch;
+package ollama.ollamaVotes.launch;
 
 import jade.core.Profile;
 import jade.core.ProfileImpl;
 import jade.core.Runtime;
 import jade.util.ExtendedProperties;
 import jade.wrapper.StaleProxyException;
-import td.ollamaVotes.agents.AgentOrganisateur;
-import td.ollamaVotes.agents.AgentVotant;
+import ollama.ollamaVotes.agents.AgentOrganisateur;
+import ollama.ollamaVotes.agents.AgentVotant;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -24,7 +24,9 @@ public class LanceurVote {
                 "karim", "Tu es Karim, 21 ans, gamer pro qui reste concentré, tu préfères des sucres lents.",
                 "ines",  "Tu es Ines, 20 ans, étudiante boursière, tu fais très attention à chaque euro dépensé.",
                 "hugo",  "Tu es Hugo, 23 ans, sportif pro lanceur de poids, tu privilégie les apports en glucides et protéines.",
+//                "raoul",  "Tu es Raoul, 20 ans, maraicher, tu adores la cuisine du nord de france.",
                 "zoe",   "Tu es Zoe, 22 ans, gourmande et curieuse, tu adores découvrir des cuisines épicées."));
+//decommentez raoul pour voir d'autres résultats
 
         for (var e : personnalites.entrySet())
             conteneur.createNewAgent(e.getKey(), AgentVotant.class.getName(), new Object[]{e.getValue()}).start();

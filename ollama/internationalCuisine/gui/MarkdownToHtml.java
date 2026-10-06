@@ -1,4 +1,4 @@
-package ollama.gui;
+package ollama.internationalCuisine.gui;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

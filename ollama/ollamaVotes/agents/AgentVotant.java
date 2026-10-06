@@ -1,4 +1,4 @@
-package td.ollamaVotes.agents;
+package ollama.ollamaVotes.agents;
 
 import jade.core.Agent;
 import jade.core.behaviours.ThreadedBehaviourFactory;
@@ -15,7 +15,7 @@ import jade.proto.ContractNetResponder;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import td.ollamaVotes.tools.OllamaClient;
+import ollama.ollamaVotes.tools.OllamaClient;
 
 import java.util.*;
 
@@ -27,7 +27,7 @@ import java.util.*;
  */
 public class AgentVotant extends Agent {
     private static final int NB_ESSAIS = 3;
-    private static final int MOTS_MAX = 15;
+    private static final int MOTS_MAX = 150;
 
     /**personnalité propre de l'agent..*/
     private String personnalite;

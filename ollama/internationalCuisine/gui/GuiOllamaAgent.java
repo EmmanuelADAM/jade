@@ -1,4 +1,4 @@
-package ollama.gui;
+package ollama.internationalCuisine.gui;
 
 import jade.gui.GuiAgent;
 import jade.gui.GuiEvent;
