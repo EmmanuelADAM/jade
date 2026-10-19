@@ -1,0 +1,48 @@
+{
+  "ctf": "CTF des agents - edition locale",
+  "regle": "un flag a toujours la forme CTF{...}",
+  "defis": [
+    {
+      "id": "d1",
+      "titre": "Echauffement",
+      "points": 50,
+      "enonce": "Un agent a laisse ce message dans les pages jaunes : Q1RGe2IwbmpvdXJfbGVzX2FnZW50c30= . Retrouvez le flag.",
+      "donnees": "Q1RGe2IwbmpvdXJfbGVzX2FnZW50c30="
+    },
+    {
+      "id": "d2",
+      "titre": "Deux couches",
+      "points": 100,
+      "enonce": "Ce message a ete encode deux fois : d'abord par un decalage de 13 lettres, puis en hexadecimal. Retrouvez le flag.",
+      "donnees": "5047537b7172686b5f706268707572665f696e797261675f7a7672686b7d"
+    },
+    {
+      "id": "d3",
+      "titre": "Nuit agitee",
+      "points": 150,
+      "enonce": "Dans le journal de connexions (fichier journal_connexions.csv), quelle adresse IP a cumule le plus d'echecs de connexion entre 02:00 et 02:59 ? Le flag est CTF{adresse_ip}.",
+      "donnees": "journal_connexions.csv"
+    },
+    {
+      "id": "d4",
+      "titre": "Cle perdue",
+      "points": 150,
+      "enonce": "Ce message en francais a ete chiffre par un decalage de lettres (cle inconnue) : wp oclaplf pde npdlc ltxp wpd lrpyed . Le flag est CTF{...} ou ... est la suite des mots qui suivent le mot 'est', relies par des _ .",
+      "donnees": "wp oclaplf pde npdlc ltxp wpd lrpyed"
+    },
+    {
+      "id": "d5",
+      "titre": "Puzzle reparti",
+      "points": 250,
+      "enonce": "Le flag est decoupe en 3 fragments, detenus par 3 agents archivistes. Chacun ne donne son fragment qu'en echange d'une preuve : un flag deja valide par l'arbitre. Assemblez les fragments dans l'ordre de leur numero.",
+      "donnees": "service DF : ctf / archiviste"
+    },
+    {
+      "id": "d7",
+      "titre": "Codage inconnu",
+      "points": 300,
+      "enonce": "Ce message a ete intercepte ; on ne sait pas comment il a ete code, peut-etre plusieurs fois : 65576c365a5777734947393249485676656e5167646d686e4946684856587476656c393162475a76646c3933646d6866656e52326257646f58337066615870796147787466513d3d . Soumettez-le a TOUS les decodeurs automatiques, choisissez la proposition qui a du sens et recommencez tant qu'elle semble encore codee. Attention : un decodeur n'est peut-etre pas fiable.",
+      "donnees": "65576c365a5777734947393249485676656e5167646d686e4946684856587476656c393162475a76646c3933646d6866656e52326257646f58337066615870796147787466513d3d"
+    }
+  ]
+}
