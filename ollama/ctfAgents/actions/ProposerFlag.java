@@ -106,7 +106,7 @@ public class ProposerFlag extends ActionAgent {
         List<AID> arbitres = Ctf.chercherAID(agent, Ctf.ARBITRE);
         if (arbitres.isEmpty()) throw new Exception("pas d'arbitre dans les pages jaunes");
 
-        ACLMessage prop = Ctf.message(ACLMessage.PROPOSE, arbitres.get(0), new JSONObject().put("defi", defi).put("flag", flag));
+        ACLMessage prop = Ctf.message(ACLMessage.PROPOSE, arbitres.getFirst(), new JSONObject().put("defi", defi).put("flag", flag));
         ACLMessage rep = envoyerEtAttendre(prop, DELAI);
         JSONObject c = Ctf.contenu(rep);
         boolean accepte = rep.getPerformative() == ACLMessage.ACCEPT_PROPOSAL;

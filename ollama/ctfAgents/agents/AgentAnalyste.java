@@ -113,7 +113,7 @@ public class AgentAnalyste extends Agent {
     private void charger(Path chemin) {
         try {
             List<String> texte = Files.readAllLines(chemin);
-            colonnes = List.of(texte.get(0).split(";"));
+            colonnes = List.of(texte.getFirst().split(";"));
             List<Map<String, String>> l = new ArrayList<>();
             for (String ligne : texte.subList(1, texte.size())) {
                 if (ligne.isBlank()) continue;

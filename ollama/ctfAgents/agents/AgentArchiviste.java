@@ -106,7 +106,7 @@ public class AgentArchiviste extends Agent {
             send(Ctf.repondre(requete, ACLMessage.FAILURE, new JSONObject().put("ok", false).put("erreur", "pas d'arbitre pour vérifier")));
             return;
         }
-        AID arbitre = arbitres.get(0);
+        AID arbitre = arbitres.getFirst();
         ACLMessage question = Ctf.message(ACLMessage.QUERY_IF, arbitre, new JSONObject()
                 .put("equipe", requete.getSender().getLocalName())
                 .put("defi", preuve.getString("defi"))

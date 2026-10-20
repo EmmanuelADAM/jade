@@ -120,6 +120,7 @@ public class BoucleAgentique {
                     messages.add(Protocole.message("user",
                             "{\"type\":\"consigne\",\"texte\":\"plus d'appel d'outil possible, donne maintenant ta reponse_finale\"}"));
                 //on reboucle pour envoyer les nouveaux messages au LLM
+                i++;
             }
         }
         if (!reponseOk)  reponse =  "Désolé, je n'ai pas réussi à répondre en " + maxEtapes + " étapes.";

@@ -13,7 +13,7 @@
       "id": "d2",
       "titre": "Deux couches",
       "points": 100,
-      "enonce": "Ce message a ete encode deux fois 5047537b7172686b5f706268707572665f696e797261675f7a7672686b7d : d'abord par un decalage de 13 lettres, puis en hexadecimal. Retrouvez le flag.",
+      "enonce": "Ce message a ete encode deux fois 5047537b7172686b5f706268707572665f696e797261675f7a7672686b7d. Retrouvez le flag.",
       "donnees": "5047537b7172686b5f706268707572665f696e797261675f7a7672686b7d"
     },
     {

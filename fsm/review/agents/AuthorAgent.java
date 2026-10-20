@@ -201,7 +201,7 @@ public class AuthorAgent extends AgentWindowed {
 
             @Override
             public void action() {
-                println("Courage and try again later...");
+                println("I will try later in another journal...");
                 println("~".repeat(40));
             }
         };

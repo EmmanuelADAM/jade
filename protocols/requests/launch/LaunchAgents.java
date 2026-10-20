@@ -17,7 +17,7 @@ public class LaunchAgents {
         StringBuilder sb = new StringBuilder("a:protocols.requests.agents.AgentRequestSender;");
         String typeAgent = ":protocols.requests.agents.AgentRequestResponder;";
         for (int i = 0; i < 10; i++)
-            sb.append((char) (98 + i)).append(typeAgent);
+            sb.append("calcul-").append(i).append("-").append(typeAgent);
         prop.setProperty(Profile.AGENTS, sb.toString());
         // create the jade profile
         ProfileImpl profMain = new ProfileImpl(prop);
