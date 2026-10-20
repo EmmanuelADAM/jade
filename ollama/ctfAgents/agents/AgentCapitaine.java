@@ -15,19 +15,22 @@ import ollama.internationalCuisine.tools.OllamaTools;
 import ollama.toolAgent.llm.BoucleAgentique;
 import ollama.toolAgent.llm.ClientLLM;
 import ollama.toolAgent.outils.BoiteAOutils;
+import ollama.toolAgent.outils.Outil;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.List;
 
 /**
- * Le CAPITAINE : agent JADE piloté par un LLM (Ollama), qui dirige une équipe dans le CTF.
+ * Le CAPITAINE d'equipe : agent JADE piloté par un LLM (Ollama), qui dirige une équipe dans le CTF.
  * <p>
  * L'utilisateur pose une question dans la fenêtre (ex. « résous d1 », « fais le plus de points possible »).
  * Le LLM raisonne, puis agit en envoyant des messages ACL aux autres agents : décodeurs, analyste,
  * archivistes et arbitre. Le nom local du capitaine sert de nom d'équipe auprès de l'arbitre.
  *
- * <h2>Réutilisation de toolAgent</h2>
+ * Le raisonnement LLM est défini par le long prompt que vous pouvez modifier
+ *
+ * <h2>Réutilisation de toolAgent vu en TD</h2>
  * La {@link BoucleAgentique} de toolAgent est réutilisée <b>telle quelle</b> : seuls les « outils » changent.
  * Ce sont maintenant des actions d'agent, rangées dans une {@link BoiteAOutils} :
  * <ul>
@@ -54,8 +57,9 @@ import java.util.List;
  *
  * <h2>Démarrage</h2>
  * Après 1,5 s (le temps que les autres agents s'inscrivent au DF), le capitaine demande la liste
- * des défis à l'arbitre (attente de 5 s au plus). Il s'abonne ensuite au tableau des scores, et chaque
- * flag validé par une équipe s'affiche dans la fenêtre. À l'arrêt, il se désabonne ({@code CANCEL}).
+ * des défis à l'arbitre (attente de 5 s au plus).
+ * Il s'abonne ensuite au tableau des scores, et chaque flag validé par une équipe s'affiche dans la fenêtre.
+ * À l'arrêt, il se désabonne ({@code CANCEL}).
  *
  * <h2>Paramètres</h2>
  * <ul>
@@ -91,12 +95,12 @@ public class AgentCapitaine extends GuiAgent {
         proposerFlag.setReputation(reputation);
         ConsulterTous consulterTous = new ConsulterTous(this, reputation);
         BoiteAOutils actions = new BoiteAOutils()
-                .ajouter(new ChercherAgents(this))
-                .ajouter(new Demander(this))
-                .ajouter(new AppelOffres(this))
-                .ajouter(consulterTous)
-                .ajouter(new Retenir(this, consulterTous, reputation))
-                .ajouter(proposerFlag);
+                .ajouter((Outil)new ChercherAgents(this))
+                .ajouter((Outil)new Demander(this))
+                .ajouter((Outil)new AppelOffres(this))
+                .ajouter((Outil)consulterTous)
+                .ajouter((Outil)new Retenir(this, consulterTous, reputation))
+                .ajouter((Outil)proposerFlag);
         window.println("actions disponibles : " + actions.noms());
 
         // 2. le LLM

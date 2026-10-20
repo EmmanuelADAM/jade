@@ -9,7 +9,7 @@ import jade.wrapper.StaleProxyException;
 import ollama.ctfAgents.agents.*;
 
 /**
- * Lance le CTF : crée un conteneur principal JADE, les agents « purs », puis le ou les capitaines.
+ * Lance le CTF : crée un conteneur principal JADE, les agents « purs », puis le ou les capitaines d"équipes.
  *
  * <h2>Agents créés</h2>
  * <table border="1">
@@ -20,7 +20,7 @@ import ollama.ctfAgents.agents.*;
  *         <td>rapide (200 ms) mais incomplet : base64, hex, rot13, cesar</td></tr>
  *     <tr><td>{@code decodeur2}</td><td>{@link AgentDecodeur}</td>
  *         <td>complet mais lent (3000 ms) : seul à savoir faire {@code cesar_toutes_cles}.
- *         Ce contraste fait tout l'intérêt de l'appel d'offres (d4).</td></tr>
+ *         Differentes capacités pour tester l'appel d'offres (d4).</td></tr>
  *     <tr><td>{@code analyste}</td><td>{@link AgentAnalyste}</td><td>fichier {@code journal_connexions.csv} (d3)</td></tr>
  *     <tr><td>{@code archiviste1} à {@code archiviste3}</td><td>{@link AgentArchiviste}</td>
  *         <td>les 3 fragments du flag de d5</td></tr>
@@ -36,13 +36,8 @@ import ollama.ctfAgents.agents.*;
  * Le premier mot des arguments choisit le mode :
  * <ul>
  *     <li>{@code test} : l'agent {@code testeur}, <b>sans LLM</b> (scénario écrit à la main, trace en console) ;</li>
- *     <li>{@code duel} : deux capitaines LLM, {@code rouge} et {@code bleu}, en concurrence. Les mots suivants
- *         sont leurs modèles, ex. {@code duel llama3.2:3b qwen3:4b} ;</li>
  *     <li>autre chose : un seul {@code capitaine} LLM, avec sa fenêtre de dialogue.</li>
  * </ul>
- * <b>Attention</b> : dans la version actuelle, les arguments de la ligne de commande sont ignorés.
- * Le mode et les modèles sont fixés dans le code ({@code "duel gemma4:31b-cloud gpt-oss:120b-cloud"}).
- * Pour utiliser la ligne de commande, il faut rétablir la ligne en commentaire au début de {@code main}.
  *
  * <h2>Options (propriétés système)</h2>
  * <ul>
@@ -87,6 +82,7 @@ public class LanceurCTF {
         if (!"false".equals(System.getProperty("ctf.menteur")))
             c.createNewAgent("auto_xor", AgentDecodeurAuto.class.getName(), new Object[]{"menteur"}).start();
 
+        //un mode duel pourra être ajouté en fonction de l'avancée du TP.
         switch (mode) {
             case "test" -> c.createNewAgent("testeur", AgentTesteur.class.getName(), null).start();
             default -> c.createNewAgent("capitaine", AgentCapitaine.class.getName(), null).start();

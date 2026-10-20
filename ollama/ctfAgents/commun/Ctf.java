@@ -2,6 +2,7 @@ package ollama.ctfAgents.commun;
 
 import jade.core.AID;
 import jade.core.Agent;
+import jade.core.AgentServicesTools;
 import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.Property;
@@ -130,9 +131,7 @@ public final class Ctf {
      * @return les AID des agents trouvés ; liste vide si aucun
      */
     public static List<AID> chercherAID(Agent agent, String service) {
-        List<AID> res = new ArrayList<>();
-        for (DFAgentDescription d : chercher(agent, service)) res.add(d.getName());
-        return res;
+        return List.of(AgentServicesTools.searchAgents(agent, TYPE, service));
     }
 
     /**
@@ -144,7 +143,7 @@ public final class Ctf {
         var res = new JSONObject();
         List<ServiceDescription> services = fiche.getAllServices();
         if (!services.isEmpty()) {
-            Iterator<Property> props = services.get(0).getAllProperties();
+            Iterator<Property> props = services.getFirst().getAllProperties();
             while (props.hasNext()) {
                 Property p = props.next();
                 res.put(p.getName(), String.valueOf(p.getValue()));

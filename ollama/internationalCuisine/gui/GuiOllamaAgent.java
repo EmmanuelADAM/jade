@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 /**
  * a simple window for a Jade GuiAgent with two texts areas to display
@@ -66,13 +67,21 @@ public class GuiOllamaAgent extends JFrame implements ActionListener {
      */
     private static final String STYLE = """
             <style>
-            body { font-family: SansSerif; font-size: 11pt; margin: 6px; }
-            .log { font-family: Monospaced; font-size: 10pt; color: #555555; }
+            body { font-family: SansSerif; font-size: %dpt; margin: 6px; }
+            .log { font-family: Monospaced; font-size: %dpt; color: #555555; }
             pre  { font-family: Monospaced; background-color: #f0f0f0; padding: 4px; }
             code { font-family: Monospaced; color: #a0306a; }
             blockquote { color: #555555; margin-left: 10px; }
             th { background-color: #e8e8e8; }
             </style>""";
+    /**
+     * font size of the main area (in pt), changed with Ctrl + mouse wheel
+     */
+    private int fontSize = 11;
+    /**
+     * min and max font size
+     */
+    private static final int MIN_FONT = 6, MAX_FONT = 40;
     /**
      * html of the texts already displayed
      */
@@ -142,6 +151,7 @@ public class GuiOllamaAgent extends JFrame implements ActionListener {
         mainPane.setEditable(false);
         JScrollPane jScrollPane = new JScrollPane(mainPane);
         getContentPane().add(BorderLayout.CENTER, jScrollPane);
+        addZoom(jScrollPane);
         lowTextArea = new JTextField();
         jScrollPane = new JScrollPane(lowTextArea);
         // bottom : an animated bar (hidden by default) above the text field
@@ -186,6 +196,56 @@ public class GuiOllamaAgent extends JFrame implements ActionListener {
         northPanel.add(BorderLayout.NORTH, jpanel);
         northPanel.add(BorderLayout.SOUTH, cityPanel);
         getContentPane().add(BorderLayout.NORTH, northPanel);
+    }
+
+    /**
+     * zoom of the main area :
+     * Ctrl + mouse wheel enlarges / reduces the font, the wheel alone still scrolls the text ;
+     * Ctrl + '+', Ctrl + '-' and Ctrl + '0' (reset) do the same with the keyboard
+     * @param scrollPane the scroll pane containing the main area
+     */
+    private void addZoom(JScrollPane scrollPane) {
+        mainPane.addMouseWheelListener(e -> {
+            if (e.isControlDown()) {
+                // wheel up (negative rotation) : bigger font
+                changeFontSize(fontSize - e.getWheelRotation());
+                e.consume();
+            } else {
+                // a listener on the pane hides the wheel from the scroll pane : the event is passed on to it
+                scrollPane.dispatchEvent(SwingUtilities.convertMouseEvent(mainPane, e, scrollPane));
+            }
+        });
+        InputMap keys = getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap actions = getRootPane().getActionMap();
+        int ctrl = Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx();
+        keys.put(KeyStroke.getKeyStroke(KeyEvent.VK_ADD, ctrl), "zoomIn");
+        keys.put(KeyStroke.getKeyStroke(KeyEvent.VK_PLUS, ctrl), "zoomIn");
+        keys.put(KeyStroke.getKeyStroke(KeyEvent.VK_EQUALS, ctrl), "zoomIn");
+        keys.put(KeyStroke.getKeyStroke(KeyEvent.VK_SUBTRACT, ctrl), "zoomOut");
+        keys.put(KeyStroke.getKeyStroke(KeyEvent.VK_MINUS, ctrl), "zoomOut");
+        keys.put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD0, ctrl), "zoomReset");
+        keys.put(KeyStroke.getKeyStroke(KeyEvent.VK_0, ctrl), "zoomReset");
+        actions.put("zoomIn", new AbstractAction() {
+            public void actionPerformed(ActionEvent e) { changeFontSize(fontSize + 1); }
+        });
+        actions.put("zoomOut", new AbstractAction() {
+            public void actionPerformed(ActionEvent e) { changeFontSize(fontSize - 1); }
+        });
+        actions.put("zoomReset", new AbstractAction() {
+            public void actionPerformed(ActionEvent e) { changeFontSize(11); }
+        });
+    }
+
+    /**
+     * change the font size of the main area (and of the input field), then redisplay the texts
+     * @param size new size in pt (bounded between MIN_FONT and MAX_FONT)
+     */
+    public synchronized void changeFontSize(int size) {
+        int newSize = Math.max(MIN_FONT, Math.min(MAX_FONT, size));
+        if (newSize == fontSize) return;
+        fontSize = newSize;
+        lowTextArea.setFont(lowTextArea.getFont().deriveFont((float) fontSize + 2));
+        planRefresh();
     }
 
     /**
@@ -240,7 +300,7 @@ public class GuiOllamaAgent extends JFrame implements ActionListener {
             String html;
             synchronized (this) {
                 refreshPlanned = false;
-                html = "<html><head>" + STYLE + "</head><body>" + htmlDone
+                html = "<html><head>" + STYLE.formatted(fontSize, Math.max(MIN_FONT, fontSize - 1)) + "</head><body>" + htmlDone
                         + MarkdownToHtml.convert(markdown.toString()) + "</body></html>";
             }
             mainPane.setText(html);

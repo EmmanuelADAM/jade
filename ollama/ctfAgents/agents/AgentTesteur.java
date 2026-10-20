@@ -4,6 +4,7 @@ import jade.core.Agent;
 import jade.core.behaviours.WakerBehaviour;
 import ollama.ctfAgents.actions.*;
 import ollama.toolAgent.outils.BoiteAOutils;
+import ollama.toolAgent.outils.Outil;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -59,12 +60,12 @@ public class AgentTesteur extends Agent {
         proposer.setReputation(reputation);
         var consulter = new ConsulterTous(this, reputation);
         actions = new BoiteAOutils()
-                .ajouter(new ChercherAgents(this))
-                .ajouter(new Demander(this))
-                .ajouter(new AppelOffres(this))
-                .ajouter(consulter)
-                .ajouter(new Retenir(this, consulter, reputation))
-                .ajouter(proposer);
+                .ajouter((Outil) new ChercherAgents(this))
+                .ajouter((Outil) new Demander(this))
+                .ajouter((Outil) new AppelOffres(this))
+                .ajouter((Outil) consulter)
+                .ajouter((Outil) new Retenir(this, consulter, reputation))
+                .ajouter((Outil) proposer);
         addBehaviour(new WakerBehaviour(this, 1500) {
             @Override
             protected void onWake() {
