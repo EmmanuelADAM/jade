@@ -98,7 +98,8 @@ _The following codes need, thus, this library and Java >= 25._
 - [Vote Borda 5000](https://github.com/EmmanuelADAM/jade/tree/english/protocols/bordaCount5000) : codes illustrating  communication between agents by the ContractNet protocol for vote by Borda count, **for 5000 agents**.
 - [Vote DoubleBorda](https://github.com/EmmanuelADAM/jade/tree/english/protocols/voteDoubleBorda) : codes illustrating
   communication between agents by the ContractNet protocol for vote by using Borda count twice if needed.
-<!--- 
+
+<!--
 - [Vote Condorcet](https://github.com/EmmanuelADAM/jade/tree/english/protocols/voteCondorcet) : codes illustrant la 
   communication entre agents par le protocole ContractNet pour un vote de Condorcet augmenté pour être effectué en 1 
   tour.
@@ -116,9 +117,13 @@ _The following codes need, thus, this library and Java >= 25._
 Some tutorial : [here](https://github.com/EmmanuelADAM/jade/tree/english/td/)
 
 -->
+
 ---
 ## LLM
 - [Ollama](https://github.com/EmmanuelADAM/jade/tree/english/ollama) : examples of small projects that combines Agent JADE and agent LLM...
+  - _international cuisine_: an agent use a LLM to answer question about cuisine, regarding the place and the meteo
+  - _ollamaVote_: agents use each a LLM to give their preferences on restaurants; a pooling station agent use borad to determine the choice and a LLM to display it
+  - _toolAgent_: jade agents are used as tool for a LLM agent. 
 
 
 ---

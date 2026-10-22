@@ -41,5 +41,14 @@ A Borda vote is done between agent that use their own personality to mak a choic
 
 See  [ollamaVotes](https://github.com/EmmanuelADAM/jade/tree/english/ollama/ollamaVotes) and launch [LanceurVote](https://github.com/EmmanuelADAM/jade/blob/english/ollama/ollamaVotes/launch/LanceurVote.java)
 
+---
+
+## Agent LLM outillé (tool calling)
+
+Le LLM ne se contente plus de répondre : il **décide d'appeler des outils** (date, météo, calendrier scolaire de la zone B...)
+via un petit protocole JSON ; l'agent exécute les outils et lui renvoie les résultats jusqu'à la réponse finale.
+C'est le principe du *function calling* et de MCP, en version minimale et entièrement visible.
+
+See [toolAgent](toolAgent/readme.md) and launch [AgentOutille](toolAgent/agents/AgentOutille.java)
 
 ---

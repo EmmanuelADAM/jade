@@ -25,13 +25,13 @@ public class IncomingAgent extends AgentWindowed {
         AgentServicesTools.register(this, "anyTypeOfService", "anyNameOfService");
 
         //regisration to the service
-        addBehaviour(new WakerBehaviour(this, (long)(Math.random()*10000d) + 10000,
+        addBehaviour(new WakerBehaviour(this, (long)(Math.random()*10000d) + 20000,
                 a->AgentServicesTools.register(a, "traveller", "quiet")));
 
 
         //Wait limitless(-1) for all message types(null), cyclically (true)
         addBehaviour(new ReceiverBehaviour(this, -1, null, true,
-                (a,msg)-> println("received ftom \"" + msg.getSender().getLocalName() + "\", ceci : \n" + msg.getContent() +
+                (a,msg)-> println("received from \"" + msg.getSender().getLocalName() + "\", ceci : \n" + msg.getContent() +
                         "\n" + "-".repeat(20))));
     }
 

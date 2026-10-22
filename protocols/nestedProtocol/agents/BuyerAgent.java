@@ -1,4 +1,4 @@
-package protocols.reseller.agents;
+package protocols.nestedProtocol.agents;
 
 import jade.core.AgentServicesTools;
 import jade.core.behaviours.WakerBehaviour;
@@ -14,7 +14,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
-import static protocols.reseller.agents.SellerAgent.reply;
+import static protocols.nestedProtocol.agents.SellerAgent.reply;
 
 /**
  * A buyer : it launches a call for proposals to the sellers of the market and accepts the cheapest croissant.

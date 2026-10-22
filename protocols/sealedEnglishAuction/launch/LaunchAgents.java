@@ -15,10 +15,9 @@ public class LaunchAgents {
         prop.setProperty(Profile.GUI, "true");
         // -- add the agents
         StringBuilder sb = new StringBuilder("auctioneer:protocols.sealedEnglishAuction.agents.AuctioneerAgent;");
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 50; i++)
             sb.append("bidder_").append(i).append(":protocols.sealedEnglishAuction.agents.ParticipantAgent;");
-        prop.setProperty(Profile.AGENTS, sb.toString());
-        // create the jade profile
+        prop.setProperty(Profile.AGENTS,sb.toString());
         ProfileImpl profMain = new ProfileImpl(prop);
         // launch the main jade container
         Runtime rt = Runtime.instance();

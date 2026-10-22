@@ -1,4 +1,4 @@
-package protocols.reseller.launch;
+package protocols.nestedProtocol.launch;
 
 import jade.core.Profile;
 import jade.core.ProfileImpl;

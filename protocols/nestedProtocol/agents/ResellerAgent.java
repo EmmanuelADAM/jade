@@ -1,4 +1,4 @@
-package protocols.reseller.agents;
+package protocols.nestedProtocol.agents;
 
 import jade.core.AID;
 import jade.core.AgentServicesTools;
@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static protocols.reseller.agents.SellerAgent.reply;
+import static protocols.nestedProtocol.agents.SellerAgent.reply;
 
 /**
  * A reseller : it is on the market, but it has no croissant.

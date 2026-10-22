@@ -1,4 +1,4 @@
-package protocols.reseller.agents;
+package protocols.nestedProtocol.agents;
 
 import jade.core.AgentServicesTools;
 import jade.core.behaviours.Behaviour;
